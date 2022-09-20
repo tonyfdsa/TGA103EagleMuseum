@@ -1,0 +1,54 @@
+.pageBtn{
+    margin-left: 20px;
+    width: 10%;
+    text-align: center;
+    
+    background-color: rgba(128, 128, 128, 0.285);
+    cursor: pointer;
+}
+
+.pageBtn button{
+    background-color: transparent;
+}
+
+.show{
+  background-color: white
+  
+}
+
+
+.SR{
+    display: none;
+}
+
+
+#show{
+    display: block;
+    position: relative;
+    width: 100%;
+    background-color: white;
+}
+
+.searchbar{
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.search{
+    height: -1px;
+
+}
+.search:hover{
+    background-color: red;
+    color: white;
+}
+.column{
+    margin-top: 0px;
+    height: 50px;
+    background-color: #F1D395;
+}
+
+.column span{
+    margin-left: 10px;
+}
