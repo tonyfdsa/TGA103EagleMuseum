@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Context>
+ 
+	<Resource name="jdbc/TGA103eagleMuseum" type="javax.sql.DataSource"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		jdbcUrl="jdbc:mysql://localhost:3306/eagleMuseum_schema"
+		username="root"
+		password="password"
+		factory="com.zaxxer.hikari.HikariJNDIFactory"
+		minimumIdle="5"
+		maximumPoolSize="10"
+		connectionTimeout="30000"
+   />
+</Context>
