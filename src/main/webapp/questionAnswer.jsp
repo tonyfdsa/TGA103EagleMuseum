@@ -68,7 +68,7 @@
 					<td>${questions.memberId}</td>
 					<td>${questions.questionTypeID}</td>
 					<td>${questions.questionContent}</td>
-					<td>${questions.answerContent}</td>
+					<td><button>回覆</button>${questions.answerContent}</td>
 					<td>${questions.answered}</td>
 					<td>${questions.lastUpdateTime}</td>
 				</tr>
