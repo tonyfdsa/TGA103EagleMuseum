@@ -14,4 +14,6 @@ public interface ProductServicein {
 	public Result update(productVO productVO);
 	
 	public Result updateStatus(productVO productVO);
+	
+	public Result insertTag(String prodType);
 }

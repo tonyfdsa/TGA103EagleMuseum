@@ -1,4 +1,79 @@
+      var prodName= document.querySelector(".prodName").value;
+      var prodTypeID= document.querySelector(".prodTypeID").value;
+      var prodPrice= document.querySelector(".prodPrice").value;
+      var prodDescription= document.querySelector(".prodDescription").value;
+      var prodInStock = document.querySelector(".prodInStock").value;
+      // 開啟彈跳視窗
+      $(".insertTag").on("click", function(){
+        $(".overlayTag").fadeIn();
+      });
 
+      $(".insertProd").on("click", function(){
+        $(".overlayProd").fadeIn();
+      });
+
+      // 關閉 標籤
+      $(".btnClose, div.overlayTag").on("click", function(e){
+        $("div.overlayTag").fadeOut();
+      });
+
+      $(".btnClose, div.overlayProd , .prodSubmit").on("click", function(e){
+        $("div.overlayProd").fadeOut();
+      });
+
+
+      $("div.overlayTag > article").on("click", function(e){
+        e.stopPropagation();
+      });
+
+      $("div.overlayProd > article").on("click", function(e){
+        e.stopPropagation();
+      });
+
+      //新增商品
+      $(".prodSubmit").click(function(){
+        let prodStatusURL = 'http://localhost:8080/TGA103eagleMuseum/ProdInsert'
+        console.log(prodName);
+        console.log( prodTypeID);
+        console.log(prodPrice);
+        console.log(prodDescription);
+        console.log(prodInStock);
+
+        fetch(prodStatusURL, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            prodName,
+            prodTypeID,
+            prodPrice,
+            prodDescription,
+            prodInStock
+          })
+        })
+        .then(resp => resp.json())
+        .then(R => {  
+          console.log(R)
+        })  
+      })
+
+      //新增標籤
+      $(".tagSubmit").click(function(){
+        let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/ProdTagInsert'
+        let prodType = document.querySelector(".ProdType").value;
+        console.log(prodType);
+
+        fetch(TagInsertURL, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            prodType
+          })
+        })
+        .then(resp => resp.json())
+        .then(R => {  
+          console.log(R)
+        })  
+      })
    
       $(document).on("click", ".headerBtn", function (){
         let val  = $(this).val()
@@ -91,7 +166,7 @@
           $(".searchBtn").click(function(){
             let prodName = document.querySelector("#prodName").value
             let prodserchname = 'http://localhost:8081/TGA103_EagleMuseum/ProductGetName'
-            fetch('http://localhost:8081/TGA103_EagleMuseum/ProductGetName', {
+            fetch('http://localhost:8080/TGA103eagleMuseum/ProductGetName', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -168,7 +243,7 @@
           $(document).on("click", ".status", function (){
             let productID = $(this).attr("data-ID");
             let prodStatus = $(this).attr("data-value");
-            let prodStatusURL = 'http://localhost:8081/TGA103_EagleMuseum/ProdStatusUpdate'
+            let prodStatusURL = 'http://localhost:8080/TGA103eagleMuseum/ProdStatusUpdate'
             console.log(prodStatus);
               fetch(prodStatusURL, {
                   method: 'POST',

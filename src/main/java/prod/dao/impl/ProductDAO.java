@@ -83,10 +83,6 @@ public class ProductDAO implements ProductDAO_interface {
 			System.out.println("有連線喽");
 			try (ResultSet rs = pstmt.executeQuery()) {
 
-//			"UPDATE productlist set prodName=? , prodTypeID=? , "
-//			+ "discountID=? , prodDescription=? , prodStatus=? , sellQuantity=? , prodInStock=? ,"
-//			+ " bestSeller=? , lastUpdateTime=NOW()";
-
 				pstmt.setString(1, productVO.getProdName());
 				pstmt.setInt(2, productVO.getProdTypeID());
 				pstmt.setInt(3, productVO.getDiscountID());
@@ -175,6 +171,17 @@ public class ProductDAO implements ProductDAO_interface {
 			}
 		
 		return null;
+	}
+	//Insert Tag
+	@Override
+	public Integer insertTag(String prodType) throws SQLException {
+		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.InsertTag);) {
+			System.out.println("有連線喽");
+//			"INSERT INTO producttype(prodType) VALUES(?)";
+			pstmt.setString(1, prodType);
+			pstmt.executeUpdate();
+			return 1;
+		}
 	}
 
 }

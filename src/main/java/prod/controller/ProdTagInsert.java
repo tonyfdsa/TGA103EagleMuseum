@@ -14,12 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import prod.common.Result;
 import prod.service.impl.ProductServicelm;
+import prod.vo.ProdTypeVO;
 import prod.vo.productVO;
 
-@WebServlet("/ProdInsert")
-public class Prodinsert extends HttpServlet{
+@WebServlet("/ProdTagInsert")
+public class ProdTagInsert extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	public static final Gson GSON = new GsonBuilder().create();
 	private ProductServicelm service = new ProductServicelm();
@@ -27,13 +27,14 @@ public class Prodinsert extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		setHeaders(response);
 		request.setCharacterEncoding("UTF-8");
-
-		productVO productVO = json2Vo(request, productVO.class);	
-		service.insert(productVO);
+		String ProdType = json2Vo(request, ProdTypeVO.class).getProdType();	
+		System.out.println(ProdType);
+		service.insertTag(ProdType);
 	
 	}
 
 	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		setHeaders(resp);
 	}
+
 }

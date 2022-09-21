@@ -58,11 +58,7 @@ public class ProductServicelm implements ProductServicein {
 			String  ProdDescription = productVO.getProdDescription();
 			int  ProdInStock = productVO.getProdInStock();
 //			
-//			System.out.println(ProdName);
-//			System.out.println(ProdTypeID);
-//			System.out.println(ProdPrice);
-//			System.out.println(ProdDescription);
-//			System.out.println(ProdTypeID);
+
 			if (ProdName != null && ProdTypeID != 0 && ProdInStock != 0 && ProdName != null && ProdDescription != null) {
 				System.out.println(R.success(DAO.insert(productVO)));
 				return R.success(DAO.insert(productVO));
@@ -81,6 +77,17 @@ public class ProductServicelm implements ProductServicein {
 		try {
 			System.out.println(R.success(DAO.updateStatus(productVO)));
 			return R.success(DAO.insert(productVO));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+
+	@Override
+	public Result insertTag(String prodType) {
+		try {
+			System.out.println(R.success(DAO.insertTag(prodType)));
+			return R.success(DAO.insertTag(prodType));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return R.fail(e.toString());

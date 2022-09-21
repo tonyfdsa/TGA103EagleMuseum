@@ -24,4 +24,8 @@ public interface ProductDAO_interface {
     
   //更新商品狀態
     public Integer updateStatus(productVO productVO) throws Exception;
+    
+  //新增商品標籤    
+    public Integer insertTag(String prodType) throws Exception;
+  
 }
