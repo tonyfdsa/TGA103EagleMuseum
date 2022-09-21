@@ -1,10 +1,10 @@
 package collection.vo;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import core.pojo.Core;
 
 public class CollectionVO extends Core{
+	private static final long serialVersionUID = 1L;
 	private Integer collectionID;
 	private String collectionTitle;
 	private String collectionEar;	

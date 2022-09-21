@@ -18,9 +18,25 @@ public class CollectionServiceImpl implements CollectionService {
 
 	@Override
 	public CollectionVO add(CollectionVO collection) {
-
+		
+		if (collection.getCollectionTitle() == null) {
+			collection.setMessage("名稱未輸入");
+			collection.setSuccessful(false);
+			return collection;
+		}
+		
 		if (collection.getCollectionText() == null) {
 			collection.setMessage("說明未輸入");
+			collection.setSuccessful(false);
+			return collection;
+		}
+		if (collection.getCollectionEar() == null) {
+			collection.setMessage("朝代未輸入");
+			collection.setSuccessful(false);
+			return collection;
+		}
+		if (collection.getCollectionMaterial() == null) {
+			collection.setMessage("類別未輸入");
 			collection.setSuccessful(false);
 			return collection;
 		}
@@ -44,8 +60,6 @@ public class CollectionServiceImpl implements CollectionService {
 			collection.setSuccessful(false);
 			return collection;
 		}
-//	 	mem = dao.selectByUsername(mem.getMemUsername());
-
 		collection.setMessage("資料更改成功");
 		collection.setSuccessful(true);
 		return collection;
@@ -53,7 +67,6 @@ public class CollectionServiceImpl implements CollectionService {
 
 	@Override
 	public CollectionVO findByPrimaryKey(Integer collectionVO) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

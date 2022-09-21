@@ -20,7 +20,7 @@ public class CollectionDaoimpl implements CollectionDaointf {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eagleMuseum_schema");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TGA103eagleMuseum");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -34,7 +34,6 @@ public class CollectionDaoimpl implements CollectionDaointf {
 		PreparedStatement pstmt = null;
 
 		try {
-
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SQL.INSERT_STMT);
 			System.out.println("連線成功");
@@ -112,7 +111,9 @@ public class CollectionDaoimpl implements CollectionDaointf {
 				while(rs.next()) {
 					CollectionVO collection = new CollectionVO();
 					collection.setCollectionID(rs.getInt("collectionID"));
-					collection.setCollectionText(rs.getString("collectionText"));
+					collection.setCollectionTitle(rs.getString("collectionTitle"));
+					collection.setCollectionText(rs.getString("collectionText")); 
+					collection.setCollectionEar(rs.getString("collectionEar")); 
 					collection.setCollectionMaterial(rs.getString("collectionMaterial"));
 					collection.setCollectionStatus(rs.getBoolean("collectionStatus"));
 					collection.setLastUpdateTime(rs.getTimestamp("LastUpdateTime"));
