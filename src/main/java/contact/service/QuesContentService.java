@@ -6,7 +6,7 @@ import contact.vo.QuesContent;
 
 public interface QuesContentService {
 
-	Boolean submitAnswer(QuesContent ansContent); 
+	Boolean submitAnswer(String ansContent, Integer questionContentID); 
 	Boolean submitQuestion(QuesContent questionContent); 
 	List<QuesContent> findAllQs();
 	List<QuesContent> getByMemberId(Integer memberId);

@@ -42,10 +42,22 @@ public class QuestAnsServlet extends HttpServlet {
 		final String lastUpdateDate1 = req.getParameter("lastUpdateDate1");
 		final String lastUpdateDate2 = req.getParameter("lastUpdateDate2");
 		final String ansContent = req.getParameter("ansContent");
+		final String quesIdStr = req.getParameter("quesId");
 		Integer memberId = null;
+		Integer quesId = null;
+
+		if (StringUtils.isAllBlank()) {
+			final List<QuesContent> list = service.findAllQs();
+			req.setAttribute("questionList", list);
+		}
 		
-		if(StringUtils.isNotBlank(ansContent)) {
-			
+		// 第一次進入此頁，使用者尚未選擇memberId，故先不進行字串轉Int
+		if (StringUtils.isNotBlank(ansContent) && StringUtils.isNotBlank(quesIdStr)) {
+			quesId = Integer.parseInt(quesIdStr);
+			final boolean result = service.submitAnswer(ansContent, quesId);
+			req.setAttribute("result", result ? "答覆已送出" : "答覆失敗");
+			final List<QuesContent> list = service.findAllQs();
+			req.setAttribute("questionList", list);
 		}
 
 		if (StringUtils.isNotBlank(memberIdStr) && StringUtils.isNotBlank(lastUpdateDate1)
@@ -55,7 +67,7 @@ public class QuestAnsServlet extends HttpServlet {
 			req.setAttribute("questionList", list);
 		}
 
-		// 第一次進入此頁，使用者尚未選擇memberId，故先不進行字串轉Int
+		
 		if (StringUtils.isNotBlank(memberIdStr) && (StringUtils.isBlank(lastUpdateDate1))
 				&& (StringUtils.isBlank(lastUpdateDate1))) {
 			memberId = Integer.parseInt(memberIdStr);

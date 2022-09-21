@@ -1,0 +1,90 @@
+div.container {
+    background-color: #fffbdd;
+}
+
+.page_sign {
+    margin-top: 0;
+    padding-top: 1%;
+    display: block;
+}
+
+.page_sign p {
+    margin: 5px 5% 5% 0%;
+    font-size: 15px;
+    display: inline;
+    color: black;
+}
+
+.page_sign a {
+    margin-left: 5%;
+    font-size: 15px;
+    display: inline;
+    text-decoration: none;
+    color: black;
+}
+
+.page_sign a:hover {
+    border-bottom: 4px solid #d16647;
+}
+
+#commonProblem {
+    margin: 0 25% 3% 25%;
+    font-size: 30px;
+    text-align: center;
+}
+
+div.questionTypeSearch1 {
+    text-align: right;
+    font-size: 24px;
+}
+
+div.questionTypeSearch1 select {
+    font-size: 18px;
+    border: 1px black solid;
+    border-radius: 100px;
+    padding: 0 2px;
+}
+
+div.questionTypeSearch2 {
+    font-size: 24px;
+}
+
+div.questionTypeSearch2 input {
+    font-size: 18px;
+    border: 1px black solid;
+    border-radius: 100px;
+    padding: 0 5px;
+}
+
+div.questionTypeSearch2 button {
+    font-size: 18px;
+    border-radius: 100px;
+    padding: 0 5px;
+    color: black;
+    background-color: #d16647;
+}
+
+a.otherQuestion {
+    margin: 0 ;
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
+    background-color: #d16647;
+    border-radius: 100px;
+    padding: 5px;
+}
+
+div.content {
+    margin: 0;
+    padding-top: 5%;
+    font-size: 24px;
+
+}
+div.content span{
+    margin: 0 0 0 40%;
+}
+
+
+div.lastDiv {
+    padding-bottom: 100px;
+}

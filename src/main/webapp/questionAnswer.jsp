@@ -36,12 +36,16 @@
 		<label for="lastUpdateDate1">從:</label> <input name="lastUpdateDate1"
 			id="f_date1" type="text"> <label for="lastUpdateDate2">到:</label>
 		<input name="lastUpdateDate2" id="f_date2" type="text"> <br>
-		<label for="memberId">搜尋會員帳號：</label>  <br> <input name="memberId">
-		<br>
-		<!-- <textarea id="questionContent" name="questionContent"></textarea> -->
+		<label for="memberId">搜尋會員帳號：</label> <br> <input name="memberId">
+		<br> <input type="submit">
+	</form>
+	<hr>
+	<form>
+		<div>指定要答覆的問題：</div>
+		<input name="quesId"> <br>
+		<div>請輸入答覆內容：</div>
+		<textarea id="ansContent" name="ansContent"></textarea> <br>
 		<input type="submit">
-		
-<!-- 		<textarea id="ansContent" name="ansContent"></textarea> -->
 	</form>
 	<div>${result}</div>
 	<hr>

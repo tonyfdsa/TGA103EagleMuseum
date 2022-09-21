@@ -6,11 +6,11 @@ import contact.vo.QuesContent;
 
 public interface QuesContentDao {
 	
-	void insertAns(QuesContent ansContent);
 	Integer insert(QuesContent questionContent);
 	List<QuesContent> selectAll();
 	List<QuesContent> findByMemberId(Integer memberId);
 	List<QuesContent> findByDate(String lastUpdateDate1, String lastUpdateDate2);
 	List<QuesContent> findByIdAndDate(Integer memberId, String lastUpdateDate1, String lastUpdateDate2);
+	void updateAns(String ansContent, Integer questionContentID);
 
 }

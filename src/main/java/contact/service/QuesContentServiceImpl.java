@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import contact.dao.QuesContentDao;
 import contact.dao.QuesContentDaoImpl;
 import contact.vo.QuesContent;
@@ -14,27 +16,6 @@ public class QuesContentServiceImpl implements QuesContentService {
 
 	public QuesContentServiceImpl() throws NamingException {
 		dao = new QuesContentDaoImpl();
-	}
-
-	//還沒寫好
-	@Override
-	public Boolean submitAnswer(QuesContent ansContent) {
-		final Integer questionType = ansContent.getQuestionTypeID();
-		final String answerContent = ansContent.getAnswerContent();
-
-		if (questionType == null) {
-			// final String pickType = "請選擇問題類型";
-			return false;
-		}
-
-		if (answerContent.isEmpty()) {
-			// final String inputQ = "請輸入問題內容";
-			return false;
-		}
-
-		dao.insertAns(ansContent);
-
-		return true;
 	}
 
 	@Override
@@ -79,5 +60,24 @@ public class QuesContentServiceImpl implements QuesContentService {
 	public List<QuesContent> getByIdAndDate(Integer memberId, String lastUpdateDate1, String lastUpdateDate2) {
 		return dao.findByIdAndDate(memberId, lastUpdateDate1, lastUpdateDate2);
 	}
+
+	@Override
+	public Boolean submitAnswer(String ansContent, Integer questionContentID) {
+
+		if (StringUtils.isBlank(ansContent)) {
+			// final String pickType = "請輸入答覆內容";
+			return false;
+		}
+
+		if (questionContentID == null) {
+			// final String inputQ = "請輸入問題內容";
+			return false;
+		}
+
+		dao.updateAns(ansContent, questionContentID);
+
+		return true;
+	}
+
 
 }

@@ -158,23 +158,19 @@ public class QuesContentDaoImpl implements QuesContentDao {
 	}
 
 	@Override
-	public void insertAns(QuesContent ansContent) {
-		String sql = "insert questionContent(memberId, answerContent, answered) " + "values(?, ?, ?)";
+	public void updateAns(String ansContent, Integer questionContentID) {
+		String sql = "update questionContent set answerContent = ?, answered = true where questionContentID = ?";
 		try (Connection connection = dataSource.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
-			// 假裝從session取得memberid
-			int memberId = 4;
-//			pstmt.setInt(1, questionContent.getMemberId());
-			pstmt.setInt(1, memberId);
-			pstmt.setString(2, ansContent.getAnswerContent());
-			pstmt.setBoolean(3, ansContent.getAnswered());
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
+				PreparedStatement pstmt = connection.prepareStatement(sql);){
+			pstmt.setString(1, ansContent);
+			pstmt.setInt(2, questionContentID);
+			pstmt.executeUpdate();			
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 	}
+
+	
 
 }

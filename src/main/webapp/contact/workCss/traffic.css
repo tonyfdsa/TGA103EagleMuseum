@@ -1,0 +1,175 @@
+/* icon */
+.min_picture {
+    background-size: 60px auto;
+    height: 60px;
+    width: 60px;
+    border-radius: 50px;
+}
+
+/* .menu {
+    display: flex;
+} */
+
+.menu li {
+    margin-right: 5px;
+}
+
+.menu li a {
+    padding: 20px 20px;
+    text-decoration: none;
+    display: block;
+    color: #000000;
+    border-bottom: 8px solid transparent;
+}
+
+.menu li a:hover {
+    color: #d16647;
+    border-bottom: 8px solid #d16647;
+}
+
+ul {
+    list-style-type: none;
+    margin-bottom: 0%;
+    float: left;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #2b5275;
+    width: 100%;
+    height: 160px;
+    clear: both;
+}
+
+.content {
+    padding-top: 80px;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* banner樣式 */
+.upperColumn {
+    background-color: #fffbdd;
+    height: 160px;
+}
+
+.upperColumn div {
+    display: none;
+}
+
+/*div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  } */
+
+/*路徑標示*/
+.page_sign {
+    margin-top: 0;
+    display: block;
+}
+
+.page_sign p {
+    margin: 5px 5% 5% 0%;
+    font-size: 30px;
+    display: inline;
+}
+
+.page_sign a {
+    margin-left: 5%;
+    font-size: 30px;
+    display: inline;
+    text-decoration: none;
+}
+
+.page_sign a:hover {
+    border-bottom: 4px solid #d16647;
+}
+
+
+/* 聯絡我們內容 */
+.contactUsContent {
+    width: 100%;
+    max-width: 100%;
+}
+
+.item {
+    height: 250px;
+    width: 250px;
+    background-color: #ffffff;
+    margin: 30px;
+    float: left;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item span {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0px 66px;
+
+}
+
+.item span:hover {
+    cursor: pointer;
+    border-bottom: 4px solid #d16647;
+}
+
+.item ul {
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+
+/* .item li {
+    margin-top: 5px;
+  } */
+.itemPhoto {
+    background-color: #fffbdd;
+    height: 150px;
+    border-radius: 10px;
+}
+
+.itemPhoto:hover {
+    cursor: pointer;
+}
+
+.itemPhoto div {
+    display: none;
+}
+
+div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*地圖部分*/
+
+#parking {
+    width: 500px;
+    height: 400px;
+    /* margin: 1% 10% 1% 40%; */
+}
+
+#parking :hover {
+    /* transform: scale(2, 2); */
+    border: #000000 10px solid;
+    transform: scale(1.5) translateX(-100px);
+}
+
+#parking_sign {
+    margin: 1% 10% 1% 40%;
+}
+
+.maps p {
+    margin: 1% 5% 1% 10%;
+    font-size: 20px;
+}
+
+#googleMap {
+    margin: 1% 5% 1% 10%;
+    mask-border: 1px #2b5275;
+}
