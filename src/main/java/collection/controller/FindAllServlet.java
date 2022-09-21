@@ -16,8 +16,6 @@ import collection.service.CollectionService;
 import collection.service.CollectionServiceImpl.CollectionServiceImpl;
 import collection.vo.CollectionVO;
 
-
-
 @WebServlet("/collectionAll")
 public class FindAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1;
@@ -37,11 +35,6 @@ public class FindAllServlet extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		setHeaders(response);
-
-	}
 	@Override
 	 protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  setHeaders(response);
