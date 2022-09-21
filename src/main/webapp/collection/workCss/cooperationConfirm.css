@@ -1,0 +1,24 @@
+.main {
+    background-color: #fffbdd;
+    height: 100%;
+}
+
+.main p {
+    font-size: 25px;
+    margin: 0% 25% 0% 35%;
+    padding: 15% 0 15% 0;
+}
+
+#proposalText {
+    padding: 1%;
+    border: solid black;
+    border-radius: 100px;
+    background-color: #d16647;
+    font-size: 20px;
+    margin: 0% 25% 0% 35%;
+}
+
+#proposalText:hover {
+    cursor: pointer;
+    background-color: #fffbdd;
+}
