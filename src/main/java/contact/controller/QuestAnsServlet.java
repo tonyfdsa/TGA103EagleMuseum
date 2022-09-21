@@ -87,7 +87,7 @@ public class QuestAnsServlet extends HttpServlet {
 			req.setAttribute("questionList", list);
 		}
 
-		req.getRequestDispatcher("/questionAnswer.jsp").forward(req, resp);
+		req.getRequestDispatcher("/contact/questionAnswer.jsp").forward(req, resp);
 	}
 
 }

@@ -61,7 +61,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 	final List<QuesContent> list = service.findAllQs();
 	req.setAttribute("questionList", list);
 	
-	req.getRequestDispatcher("/questionContent.jsp").forward(req, resp);
+	req.getRequestDispatcher("/contact/questionContent.jsp").forward(req, resp);
 	
 }
 	
