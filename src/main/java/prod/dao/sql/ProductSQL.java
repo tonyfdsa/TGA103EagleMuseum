@@ -21,8 +21,12 @@ public class ProductSQL {
 			+ "discountID=? , prodDescription=? , prodStatus=? , sellQuantity=? , prodInStock=? ,"
 			+ " bestSeller=? , lastUpdateTime=NOW() where prodTypeID=? where prodTypeID=? " ;
 	
-	
+	//更新狀態
 	public static final String UpdateStatus  =
 			"UPDATE productlist set prodStatus=? where productID=?";
+	
+	//新增標籤
+		public static final String InsertTag  =
+				"INSERT INTO producttype(prodType, lastUpdateTime) VALUES(?,NOW())";
 
 }
