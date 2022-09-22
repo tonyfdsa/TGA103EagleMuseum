@@ -3,13 +3,14 @@ package collection.dao.intf;
 import java.util.*;
 
 import collection.vo.CollectionVO;
+import core.dao.CoreDao;
 
-public interface CollectionDaointf {
-	public boolean insert(CollectionVO collectionVO);
-	public boolean update(CollectionVO collectionVO);
+public interface CollectionDaointf extends CoreDao<CollectionVO, Integer> {
+	public boolean insertCol(CollectionVO collectionVO);
+	public boolean updateCol(CollectionVO collectionVO);
 	public boolean delete(Integer collectionID);
 	
-	CollectionVO findByPrimaryKey(String collectionVO);
+	CollectionVO findByPrimaryKey(Integer id);
 	CollectionVO findByName(String collectionVO);
 	CollectionVO findByMaterial(String collectionVO);
 	CollectionVO findByEar(String collectionVO);
