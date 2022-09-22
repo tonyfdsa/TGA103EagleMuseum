@@ -5,7 +5,7 @@ import prod.vo.productVO;
 
 public interface ProductServicein {
 	
-	public Result getAll() throws Exception;
+	public Result getAll() ;
 	
 	public Result getByName(String prodName);
 	
@@ -16,4 +16,8 @@ public interface ProductServicein {
 	public Result updateStatus(productVO productVO);
 	
 	public Result insertTag(String prodType);
+	
+	public Result tagGetAll() ;
+	
+	public Result prodGetByID(int prodID) ;
 }

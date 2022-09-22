@@ -229,8 +229,7 @@
                         商品標籤:
                         <select class="prodTypeID" style="width: 100px;">
                             <!--有value傳value，沒有value就傳包含的文字-->
-                            <option >請選擇</option>
-                            <option value="1">畫</option>
+                            <option value="0" >請選擇</option>
                             
                         </select>
                     </span>
@@ -258,120 +257,10 @@
 
 
 
-    <!-- jquery link -->
+<!--     jquery link -->
     <script src="./vendor/js/jquery3.6.0.js"></script>
 
     <script src="./JS/backtemplete.js"></script>
 
-    <script>
-
-      //  上傳圖片
-       var preview_img = function (file) {
-          var reader = new FileReader(); // 用來讀取檔案
-          reader.readAsDataURL(file); // 讀取檔案
-          reader.addEventListener("load", function () {
-                let img_src =
-                '<img src="' + reader.result + '" class="preview_img">';
-                document.querySelector(".preview").innerHTML = img_src
-          });
-        };
-
-
-
-        // 縮圖上傳
-        var the_file_element = document.querySelector("#upload")
-        the_file_element.addEventListener("change", function (e) {
-          var num=e.target.files.length
-          console.log($(".pic").find(".small").length)
-          let picture_list = document.getElementsByClassName("pic")[0];
-          // console.log(this.files.length);
-          let that = this;
-          if (num > 4 || $(".pic").find(".small").length >= 4){
-            alert("最多上傳4張")
-          }else{
-            for (let i = 0; i < this.files.length; i++) {
-              preview_img(this.files[0]);
-              let reader = new FileReader(); // 用來讀取檔案
-              reader.readAsDataURL(this.files[i]); // 讀取檔案
-              // console.log(this.files.length);
-              reader.addEventListener("load", function (e) {
-                // console.log("load 事件");
-                // console.log(e);
-                let div_html = `
-                    <span class="smallpreview" >
-                      <img src="${reader.result}" class="small"/>
-                    </span>
-                `;
-                picture_list.insertAdjacentHTML("beforeend", div_html); // 加進節點
-                let form_data = new FormData();
-                form_data.append("the_file", that.files[i]);
-                })
-            };
-          }
-        })  
-
-       
-        
-        // 縮圖變預覽圖
-        $(document).on("click", ".small", function (){
-         $(".preview_img").attr("src",$(this).attr("src"))
-        })
-
-        
-
-
-      //click 清除所有縮圖和預覽圖
-      $(document).on("click", ".clear", function (){
-        $(".pic").find(".smallpreview").remove();
-        $(".preview").find(".preview_img").remove();
-      })
-
-      //上傳圖片至後端
-      $(document).on("click", ".input-submit", function (){
-  
-      })
-
-
-      //submit insert
-      $(document).on("click", ".submit", function (){
-        let prodStatusURL = 'http://localhost:8081/TGA103_EagleMuseum/ProdInsert'
-        let prodName= document.querySelector(".prodName").value;
-        let prodTypeID= document.querySelector(".prodTypeID").value;
-        let prodPrice= document.querySelector(".prodPrice").value;
-        let prodDescription= document.querySelector(".prodDescription").value;
-        let prodInStock = document.querySelector(".prodInStock").value;
-        console.log(prodName);
-        console.log( prodTypeID);
-        // console.log(prodPrice);
-        // console.log(prodDescription);
-        // console.log(prodInStock);
-
-        fetch(prodStatusURL, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            prodName,
-            prodTypeID,
-            prodPrice,
-            prodDescription,
-            prodInStock
-          })
-        })
-        .then(resp => resp.json())
-        .then(R => {  
-          console.log(R)
-        })  
-      }); 
-
-
-
-      
-
-
-
-
-
-
-    </script>
-  </body>
+    <script src="./JS/backprodadd.js"></script>
 </html>
