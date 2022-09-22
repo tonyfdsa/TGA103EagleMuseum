@@ -7,8 +7,8 @@ public class ProductSQL {
 	//商品名稱查詢
 	public static final String GET_BY_Name = "SELECT * FROM eaglemuseum_schema.productlist where prodName like ?";
 	
-	//商品名稱查詢
-	public static final String GET_BY_ID = "SELECT * FROM productlist where prodName = ?";
+	//商品ID名稱查詢
+	public static final String GET_BY_ID = "SELECT * FROM productlist where productID = ?";
 
 	//新增商品
 	public static final String Insert  =
@@ -28,5 +28,9 @@ public class ProductSQL {
 	//新增標籤
 		public static final String InsertTag  =
 				"INSERT INTO producttype(prodType, lastUpdateTime) VALUES(?,NOW())";
-
+		
+	//商品標籤GET_ALL
+		public static final String TagGET_ALL = "SELECT * FROM producttype";
+		
+		
 }

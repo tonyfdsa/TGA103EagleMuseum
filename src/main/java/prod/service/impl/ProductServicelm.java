@@ -18,7 +18,7 @@ public class ProductServicelm implements ProductServicein {
 	}
 	
 	@Override
-	public Result getAll() throws Exception {
+	public Result getAll()  {
 		try {
 			return R.success(DAO.getAll());
 		} catch (Exception e) {
@@ -58,7 +58,10 @@ public class ProductServicelm implements ProductServicein {
 			String  ProdDescription = productVO.getProdDescription();
 			int  ProdInStock = productVO.getProdInStock();
 //			
+			System.out.println(ProdName);
+			System.out.println(ProdTypeID);
 
+			
 			if (ProdName != null && ProdTypeID != 0 && ProdInStock != 0 && ProdName != null && ProdDescription != null) {
 				System.out.println(R.success(DAO.insert(productVO)));
 				return R.success(DAO.insert(productVO));
@@ -92,6 +95,27 @@ public class ProductServicelm implements ProductServicein {
 			e.printStackTrace();
 			return R.fail(e.toString());
 		}
+	}
+
+	@Override
+	public Result tagGetAll() {
+		try {
+			return R.success(DAO.prodTagGetAll());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+
+	@Override
+	public Result prodGetByID(int prodID) {
+		try {
+			return R.success(DAO.prodGetByID(prodID));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+		
 	}
 	
 

@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import prod.dao.intf.ProductDAO_interface;
 
 import prod.dao.sql.ProductSQL;
+import prod.vo.ProdTypeVO;
 import prod.vo.productVO;
 
 public class ProductDAO implements ProductDAO_interface {
@@ -33,7 +34,6 @@ public class ProductDAO implements ProductDAO_interface {
 	// 查詢商品
 	public List<productVO> getAll() throws Exception {
 		List<productVO> list = new ArrayList<productVO>();
-//			try with resources
 
 		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_ALL);) {
 			System.out.println("有連線喽");
@@ -130,34 +130,6 @@ public class ProductDAO implements ProductDAO_interface {
 		}
 	}
 
-	@Override
-	public List<productVO> getByProductID(String productID) throws SQLException {
-		List<productVO> list = new ArrayList<productVO>();
-		try (Connection con = ds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_BY_ID);) {
-			System.out.println("有連線喽");
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					productVO productVO = new productVO();
-					productVO.setProductID(rs.getInt("productID"));
-					productVO.setProdName(rs.getString("prodName"));
-					productVO.setProdTypeID(rs.getInt("prodTypeID"));
-					productVO.setProdPrice(rs.getInt("prodPrice"));
-					productVO.setDiscountID(rs.getInt("discountID"));
-					productVO.setProdDescription(rs.getString("prodDescription"));
-					productVO.setProdStatus(rs.getInt("prodStatus"));
-					productVO.setCreatTime(rs.getDate("creatTime"));
-					productVO.setLaunchTime(rs.getDate("launchTime"));
-					productVO.setSellQuantity(rs.getInt("sellQuantity"));
-					productVO.setProdInStock(rs.getInt("prodInStock"));
-					productVO.setBestSeller(rs.getInt("bestSeller"));
-					productVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
-					list.add(productVO); // Store the row in the list
-				}
-			}
-			return list;
-		}
-	}
 
 	// 更新商品狀愛
 	@Override
@@ -181,6 +153,55 @@ public class ProductDAO implements ProductDAO_interface {
 			pstmt.setString(1, prodType);
 			pstmt.executeUpdate();
 			return 1;
+		}
+	}
+
+	@Override
+	public List<ProdTypeVO> prodTagGetAll() throws Exception {
+		List<ProdTypeVO> list = new ArrayList<ProdTypeVO>();
+		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.TagGET_ALL);) {
+			System.out.println("有連線喽");
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					ProdTypeVO prodTypeVO = new ProdTypeVO();
+					prodTypeVO.setProdTypeId(rs.getInt("prodTypeID"));
+					prodTypeVO.setProdType(rs.getString("prodType"));
+					prodTypeVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
+					
+					list.add(prodTypeVO); // Store the row in the list
+				}
+			}
+			return list;
+		}
+	}
+
+	@Override
+	public List<productVO> prodGetByID(Integer productID) throws Exception {
+		List<productVO> list = new ArrayList<productVO>();
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_BY_ID);) {
+			System.out.println("有連線喽");
+			pstmt.setInt(1, productID);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					productVO productVO = new productVO();
+					productVO.setProductID(rs.getInt("productID"));
+					productVO.setProdName(rs.getString("prodName"));
+					productVO.setProdTypeID(rs.getInt("prodTypeID"));
+					productVO.setProdPrice(rs.getInt("prodPrice"));
+					productVO.setDiscountID(rs.getInt("discountID"));
+					productVO.setProdDescription(rs.getString("prodDescription"));
+					productVO.setProdStatus(rs.getInt("prodStatus"));
+					productVO.setCreatTime(rs.getDate("creatTime"));
+					productVO.setLaunchTime(rs.getDate("launchTime"));
+					productVO.setSellQuantity(rs.getInt("sellQuantity"));
+					productVO.setProdInStock(rs.getInt("prodInStock"));
+					productVO.setBestSeller(rs.getInt("bestSeller"));
+					productVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
+					list.add(productVO); // Store the row in the list
+				}
+			}
+			return list;
 		}
 	}
 

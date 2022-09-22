@@ -28,7 +28,7 @@ public class ProdTagInsert extends HttpServlet{
 		setHeaders(response);
 		request.setCharacterEncoding("UTF-8");
 		String ProdType = json2Vo(request, ProdTypeVO.class).getProdType();	
-		System.out.println(ProdType);
+//		System.out.println(ProdType);
 		service.insertTag(ProdType);
 	
 	}

@@ -1,8 +1,3 @@
-      var prodName= document.querySelector(".prodName").value;
-      var prodTypeID= document.querySelector(".prodTypeID").value;
-      var prodPrice= document.querySelector(".prodPrice").value;
-      var prodDescription= document.querySelector(".prodDescription").value;
-      var prodInStock = document.querySelector(".prodInStock").value;
       // 開啟彈跳視窗
       $(".insertTag").on("click", function(){
         $(".overlayTag").fadeIn();
@@ -13,7 +8,7 @@
       });
 
       // 關閉 標籤
-      $(".btnClose, div.overlayTag").on("click", function(e){
+      $(".btnClose, div.overlayTag, .tagSubmit").on("click", function(e){
         $("div.overlayTag").fadeOut();
       });
 
@@ -33,6 +28,11 @@
       //新增商品
       $(".prodSubmit").click(function(){
         let prodStatusURL = 'http://localhost:8080/TGA103eagleMuseum/ProdInsert'
+        let prodName= document.querySelector(".prodName").value;
+        let prodTypeID= document.querySelector(".prodTypeID").value;
+        let prodPrice= document.querySelector(".prodPrice").value;
+        let prodDescription= document.querySelector(".prodDescription").value;
+        let prodInStock = document.querySelector(".prodInStock").value;
         console.log(prodName);
         console.log( prodTypeID);
         console.log(prodPrice);
@@ -52,7 +52,7 @@
         })
         .then(resp => resp.json())
         .then(R => {  
-          console.log(R)
+
         })  
       })
 
@@ -71,14 +71,14 @@
         })
         .then(resp => resp.json())
         .then(R => {  
-          console.log(R)
+
         })  
       })
    
       $(document).on("click", ".headerBtn", function (){
         let val  = $(this).val()
         // console.log($(this).val())
-        console.log($(".searchbar").length)
+
         
        
 
@@ -111,7 +111,7 @@
           .then(R => {
           
             for( i = 0 ; i < R.result["length"] ; i++){
-              console.log(R.result[i])
+
             // console.log(statis);
             let re = (R.result[i].prodStatus === 1 ? "上架" : "下架");
             let text = `
@@ -125,7 +125,7 @@
                             <div class="col-2"  style="text-align:center"> 
                               <span class="icon" >
                                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"
-                                      width="25" height="25" class="fixed" data-ID = ${R.result[i].productID}>
+                                      width="25" height="25" class="fixed" data-ID = ${R.result[i].productID} class="fixed">
                                       <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                       <path d="M9 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"></path>
                                       <path d="M9 15h3l8.5-8.5a1.5 1.5 0 0 0-3-3L9 12v3"></path>
@@ -155,14 +155,12 @@
                         </div>  `;
 
 
-      $(".searchContent").append(text);
-     
-      
-    
-      }
+              $(".searchContent").append(text);
+              }
           });
-          // 抓商品搜尋的資料回傳 
-          
+
+
+          // 抓商品搜尋的資料回傳  
           $(".searchBtn").click(function(){
             let prodName = document.querySelector("#prodName").value
             let prodserchname = 'http://localhost:8081/TGA103_EagleMuseum/ProductGetName'
@@ -179,8 +177,7 @@
                 //清除所有的 $(".searchContent").append(text);
                 $(".searchContent").find(".add").remove();
                 $(".searchContent").find("#searchNAN").remove();
-                console.log(R);
-                console.log($(".searchContent").find("#searchNAN"));
+
                 if(R.result["length"] === 0){
                   
                   $(".searchContent").append("<div style='color: red;' id=searchNAN> 查無結果，請重新輸入 </div>");
@@ -232,14 +229,13 @@
                           </div>
                         </div>  `;
 
-                  console.log(R.result[i])
                   $(".searchContent").append(text);
                 }
             
             }); 
           })
           
-          // update
+          // 更新狀態
           $(document).on("click", ".status", function (){
             let productID = $(this).attr("data-ID");
             let prodStatus = $(this).attr("data-value");
@@ -258,4 +254,33 @@
                 })
             
           })
+
+          //抓資料庫商品標籤類型
+        
+          fetch('http://localhost:8080/TGA103eagleMuseum/ProdTagGetAll')
+          .then(resp => resp.json())
+          .then(R => {
+
+            for( i = 0 ; i < R.result["length"] ; i++){
+              let text = `
+              <option value="${R.result[i].prodTypeId}">${R.result[i].prodType}</option>
+              `
+              $(".prodTypeID").append(text);
+            }
+          });
+
+          $(document).on("click", ".fixed" ,function(){
+            
+            var send_data = {};
+
+            send_data.productId  = $(this).attr("data-id");
+            console.log(send_data);
+
+  
+            sessionStorage.setItem("form_data", JSON.stringify(send_data));
+            console.log(sessionStorage.getItem("form_data"));
+            location.href = "./backprodadd.html";
+          })
+
+        
                 
