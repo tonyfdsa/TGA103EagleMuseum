@@ -20,7 +20,7 @@ import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 
 
-@WebServlet("/collectionUpdate")
+@WebServlet("/collectionGetOne")
 public class FindOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1;
 	private CollectionService service = new CollectionServiceImpl();
