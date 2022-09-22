@@ -2,10 +2,11 @@ package collection.service;
 
 import java.util.*;
 import collection.vo.CollectionVO;
+import core.service.CoreService;
 
-public interface CollectionService {
+public interface CollectionService extends CoreService {
 	CollectionVO add(CollectionVO collection);
 	CollectionVO edit(CollectionVO collection);
-    CollectionVO findByPrimaryKey(Integer collection);
+    CollectionVO findId(CollectionVO collection);
 	public List<CollectionVO> getAll();
 }

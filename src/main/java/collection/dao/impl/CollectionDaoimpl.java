@@ -16,6 +16,7 @@ public class CollectionDaoimpl implements CollectionDaointf {
 
 	private static CollectDaoSQL SQL = null;
 	private static DataSource ds = null;
+	
 
 	static {
 		try {
@@ -27,7 +28,7 @@ public class CollectionDaoimpl implements CollectionDaointf {
 	}
 
 	@Override
-	public boolean insert(CollectionVO collectionVO) {
+	public boolean insertCol(CollectionVO collectionVO) {
 
 		int rowCount = 0;
 		Connection con = null;
@@ -49,11 +50,10 @@ public class CollectionDaoimpl implements CollectionDaointf {
 			e.printStackTrace();
 		}
 		return rowCount != 0;
-
 	}
 
 	@Override
-	public boolean update(CollectionVO collectionVO) {
+	public boolean updateCol(CollectionVO collectionVO) {
 
 		int rowCount = 0;
 		Connection con = null;
@@ -63,11 +63,11 @@ public class CollectionDaoimpl implements CollectionDaointf {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SQL.UPDATE);
 			System.out.println("連線成功");
-
-			pstmt.setString(1, collectionVO.getCollectionText());
-			pstmt.setBoolean(2, collectionVO.getCollectionStatus());
-			pstmt.setString(3, collectionVO.getCollectionMaterial());
-
+			pstmt.setString(1, collectionVO.getCollectionTitle());
+			pstmt.setString(2, collectionVO.getCollectionText());
+			pstmt.setString(3, collectionVO.getCollectionEar());
+			pstmt.setBoolean(4, collectionVO.getCollectionStatus());
+			pstmt.setString(5, collectionVO.getCollectionMaterial());
 			rowCount = pstmt.executeUpdate();
 
 			// Handle any SQL errors
@@ -127,8 +127,34 @@ public class CollectionDaoimpl implements CollectionDaointf {
 	}
 
 	@Override
-	public CollectionVO findByPrimaryKey(String collectionVO) {
+	public CollectionVO findByPrimaryKey(Integer id) {
+		return getSession().load(CollectionVO.class, id);
+	}
+
+	@Override
+	public int insert(CollectionVO pojo) {
 		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int update(CollectionVO pojo) {
+		return 0;
+	}
+
+	@Override
+	public CollectionVO selectById(Integer id) {
+		return null;
+	}
+
+	@Override
+	public List<CollectionVO> selectAll() {
 		return null;
 	}
 
@@ -173,5 +199,4 @@ public class CollectionDaoimpl implements CollectionDaointf {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
