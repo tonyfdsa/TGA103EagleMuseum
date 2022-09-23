@@ -1,6 +1,7 @@
 package contact.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import contact.common.MailService;
+import contact.common.QuesConfirmMail;
 import contact.service.QuesContentService;
 import contact.service.QuesContentServiceImpl;
 import contact.vo.QuesContent;
@@ -41,6 +44,9 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 	req.setCharacterEncoding("UTF-8");
 	
 	final String questionTypeIDStr = req.getParameter("questionTypeID");
+//	final String quesIdStr = req.getParameter("quesId");
+//	Integer quesId = null;
+	
 	//第一次進入此頁，使用者尚未選擇questionTypeID，故先不進行字串轉Int
 	Integer questionTypeID = null;
 	if(StringUtils.isNotBlank(questionTypeIDStr)) {
@@ -56,6 +62,13 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 	if(quesContent1 != null) {
 		final boolean result = service.submitQuestion(quesContent);
 		req.setAttribute("result", result? "提問已送出" : "提問失敗");
+		
+		final Integer memberId = 2;
+		String memberEmail = service.confirmQues(memberId);
+//		String[] confirmQ = confirmQues.split(",");
+		System.out.println(memberEmail);
+		new QuesConfirmMail(memberEmail).quesConfirmMail();
+		
 	}
 	
 	final List<QuesContent> list = service.findAllQs();

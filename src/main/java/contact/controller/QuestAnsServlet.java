@@ -1,6 +1,9 @@
 package contact.controller;
 
+import static prod.common.setHeaders.setHeaders;
+
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import contact.common.MailService;
 import contact.service.QuesContentService;
 import contact.service.QuesContentServiceImpl;
 import contact.vo.QuesContent;
@@ -19,6 +23,8 @@ import contact.vo.QuesContent;
 @WebServlet("/questionAns")
 public class QuestAnsServlet extends HttpServlet {
 
+
+	private static final long serialVersionUID = 1L;
 	private QuesContentService service;
 
 	public void init() throws ServletException {
@@ -35,6 +41,7 @@ public class QuestAnsServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		setHeaders(resp);
 		resp.setContentType("application/json;charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
 
@@ -58,6 +65,12 @@ public class QuestAnsServlet extends HttpServlet {
 			req.setAttribute("result", result ? "答覆已送出" : "答覆失敗");
 			final List<QuesContent> list = service.findAllQs();
 			req.setAttribute("questionList", list);
+					
+			String memNameAndMailAndQues = service.getMemNameAndMailAndQues(quesId);
+			String[] memNMQ = memNameAndMailAndQues.split(",");
+//			System.out.println(Arrays.toString(memNMQ));
+//			System.out.println("mail = " + xx[0]);
+			new MailService(memNMQ[0], memNMQ[1], memNMQ[2], memNMQ[3]).eagleMail();		
 		}
 
 		if (StringUtils.isNotBlank(memberIdStr) && StringUtils.isNotBlank(lastUpdateDate1)
@@ -86,6 +99,7 @@ public class QuestAnsServlet extends HttpServlet {
 			final List<QuesContent> list = service.findAllQs();
 			req.setAttribute("questionList", list);
 		}
+
 
 		req.getRequestDispatcher("/contact/questionAnswer.jsp").forward(req, resp);
 	}

@@ -10,20 +10,22 @@ public class QuesContent {
 	private String questionContent;
 	private String answerContent;
 	private Boolean answered;
-	private Timestamp lastUpdateTime;
+	private Timestamp quesTime;
+	private Timestamp answerTime;
 	
 	public QuesContent() {
 	}
 
 	public QuesContent(Integer questionContentID, Integer memberId, Integer questionTypeID,
-			String questionContent, String answerContent, Boolean answered, Timestamp lastUpdateTime) {
+			String questionContent, String answerContent, Boolean answered, Timestamp quesTime, 
+			Timestamp answerTime) {
 		this.questionContentID = questionContentID;
 		this.memberId = memberId;
 		this.questionTypeID = questionTypeID;
 		this.questionContent = questionContent;
 		this.answerContent = answerContent;
 		this.answered = answered;
-		this.lastUpdateTime= lastUpdateTime;
+		this.answerTime= answerTime;
 	}
 	
 	
@@ -64,11 +66,22 @@ public class QuesContent {
 	public void setAnswered(Boolean answered) {
 		this.answered = answered;
 	}
-	public Timestamp getLastUpdateTime() {
-		return lastUpdateTime;
+
+	public Timestamp getQuesTime() {
+		return quesTime;
 	}
-	public void setLastUpdateTime(Timestamp lastUpdateTime) {
-		this.lastUpdateTime = lastUpdateTime;
+
+	public void setQuesTime(Timestamp quesTime) {
+		this.quesTime = quesTime;
 	}
+
+	public Timestamp getAnswerTime() {
+		return answerTime;
+	}
+
+	public void setAnswerTime(Timestamp answerTime) {
+		this.answerTime = answerTime;
+	}
+	
 	
 }
