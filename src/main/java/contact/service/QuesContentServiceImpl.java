@@ -79,5 +79,15 @@ public class QuesContentServiceImpl implements QuesContentService {
 		return true;
 	}
 
+	@Override
+	public String getMemNameAndMailAndQues(Integer questionContentID) {
+		return dao.getMemNameAndMailAndQues(questionContentID);
+	}
+
+	@Override
+	public String confirmQues(Integer memberId) {
+		return dao.confirmQues(memberId);
+	}
+
 
 }

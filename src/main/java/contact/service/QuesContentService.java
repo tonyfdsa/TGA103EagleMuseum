@@ -12,4 +12,6 @@ public interface QuesContentService {
 	List<QuesContent> getByMemberId(Integer memberId);
 	List<QuesContent> getByDate(String lastUpdateDate1, String lastUpdateDate2);
 	List<QuesContent> getByIdAndDate(Integer memberId, String lastUpdateDate1, String lastUpdateDate2);
+	String getMemNameAndMailAndQues(Integer questionContentID);
+	String confirmQues(Integer memberId);
 }

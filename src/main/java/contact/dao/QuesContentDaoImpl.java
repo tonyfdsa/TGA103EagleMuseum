@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import contact.vo.Member;
 import contact.vo.QuesContent;
 
 public class QuesContentDaoImpl implements QuesContentDao {
@@ -23,12 +24,12 @@ public class QuesContentDaoImpl implements QuesContentDao {
 
 	@Override
 	public Integer insert(QuesContent questionContent) {
-		String sql = "insert questionContent(memberId, questionTypeID, questionContent, answerContent) "
-				+ "values(?, ?, ?, ?)";
+		String sql = "insert questionContent(memberId, questionTypeID, questionContent, answerContent, quesTime) "
+				+ "values(?, ?, ?, ?, now())";
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql, new String[] { "questionContentID" });) {
 			// 假裝從session取得memberid
-			int memberId = 1;
+			int memberId = 2;
 //			pstmt.setInt(1, questionContent.getMemberId());
 			pstmt.setInt(1, memberId);
 			pstmt.setInt(2, questionContent.getQuestionTypeID());
@@ -62,7 +63,8 @@ public class QuesContentDaoImpl implements QuesContentDao {
 				quesCont.setQuestionContent(rs.getString("questionContent"));
 				quesCont.setAnswerContent(rs.getString("answerContent"));
 				quesCont.setAnswered(rs.getBoolean("answered"));
-				quesCont.setLastUpdateTime(rs.getTimestamp("lastUpdateTime"));
+				quesCont.setQuesTime(rs.getTimestamp("quesTime"));
+				quesCont.setAnswerTime(rs.getTimestamp("answerTime"));			
 				list.add(quesCont);
 			}
 			return list;
@@ -90,7 +92,8 @@ public class QuesContentDaoImpl implements QuesContentDao {
 				quesCont.setQuestionContent(ansrs.getString("questionContent"));
 				quesCont.setAnswerContent(ansrs.getString("answerContent"));
 				quesCont.setAnswered(ansrs.getBoolean("answered"));
-				quesCont.setLastUpdateTime(ansrs.getTimestamp("lastUpdateTime"));
+				quesCont.setQuesTime(ansrs.getTimestamp("quesTime"));
+				quesCont.setAnswerTime(ansrs.getTimestamp("answerTime"));
 				list.add(quesCont);
 			}
 			return list;
@@ -102,7 +105,7 @@ public class QuesContentDaoImpl implements QuesContentDao {
 
 	@Override
 	public List<QuesContent> findByDate(String lastUpdateDate1, String lastUpdateDate2) {
-		String sql = "select * from questionContent where date(lastUpdateTime) between ? and ? ";
+		String sql = "select * from questionContent where date(quesTime) between ? and ? ";
 
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -118,7 +121,8 @@ public class QuesContentDaoImpl implements QuesContentDao {
 				quesCont.setQuestionContent(ansrs.getString("questionContent"));
 				quesCont.setAnswerContent(ansrs.getString("answerContent"));
 				quesCont.setAnswered(ansrs.getBoolean("answered"));
-				quesCont.setLastUpdateTime(ansrs.getTimestamp("lastUpdateTime"));
+				quesCont.setQuesTime(ansrs.getTimestamp("quesTime"));
+				quesCont.setAnswerTime(ansrs.getTimestamp("answerTime"));
 				list.add(quesCont);
 			}
 			return list;
@@ -130,7 +134,7 @@ public class QuesContentDaoImpl implements QuesContentDao {
 
 	@Override
 	public List<QuesContent> findByIdAndDate(Integer memberId, String lastUpdateDate1, String lastUpdateDate2) {
-		String sql = "select * from questionContent " + "where memberId = ? and date(lastUpdateTime) between ? and ? ";
+		String sql = "select * from questionContent " + "where memberId = ? and date(quesTime) between ? and ? ";
 
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -147,7 +151,8 @@ public class QuesContentDaoImpl implements QuesContentDao {
 				quesCont.setQuestionContent(ansrs.getString("questionContent"));
 				quesCont.setAnswerContent(ansrs.getString("answerContent"));
 				quesCont.setAnswered(ansrs.getBoolean("answered"));
-				quesCont.setLastUpdateTime(ansrs.getTimestamp("lastUpdateTime"));
+				quesCont.setQuesTime(ansrs.getTimestamp("quesTime"));
+				quesCont.setAnswerTime(ansrs.getTimestamp("answerTime"));
 				list.add(quesCont);
 			}
 			return list;
@@ -159,7 +164,7 @@ public class QuesContentDaoImpl implements QuesContentDao {
 
 	@Override
 	public void updateAns(String ansContent, Integer questionContentID) {
-		String sql = "update questionContent set answerContent = ?, answered = true where questionContentID = ?";
+		String sql = "update questionContent set answerContent = ?, answered = true, answerTime=now() where questionContentID = ?";
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);){
 			pstmt.setString(1, ansContent);
@@ -169,6 +174,51 @@ public class QuesContentDaoImpl implements QuesContentDao {
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public String getMemNameAndMailAndQues(Integer questionContentID) {
+		String sql = "SELECT memberEmail, memberName, questionContent, answerContent FROM "
+				+ "	member m join questionContent q on m.memberID = q.memberId "
+				+ "	where q.questionContentID = ?;";
+		String retrunString = "";
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(sql);){
+			pstmt.setInt(1, questionContentID);
+			ResultSet ansrs = pstmt.executeQuery();
+			while (ansrs.next()) {
+				retrunString += ansrs.getString(1);
+				retrunString += ",";
+				retrunString += ansrs.getString(2);
+				retrunString += ",";
+				retrunString += ansrs.getString(3);
+				retrunString += ",";
+				retrunString += ansrs.getString(4);
+			}
+			return retrunString;			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return retrunString;
+	}
+
+	@Override
+	public String confirmQues(Integer memberId) {
+		String sql = "SELECT memberEmail FROM "
+				+ "member where memberID = ?;";
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(sql);){
+			pstmt.setInt(1, memberId);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				Member member = new Member();
+				member.setMemberEmail(rs.getString("memberEmail"));
+				return member.getMemberEmail();	
+			}				
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;				
 	}
 
 	
