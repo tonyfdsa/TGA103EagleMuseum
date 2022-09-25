@@ -126,9 +126,9 @@
 				</select>-->
 
 				<div>搜尋發文日期：</div>
-				<label for="lastUpdateDate1">從:</label> <input
-					name="lastUpdateDate1" id="start_date" type="date"> <label
-					for="lastUpdateDate2">到:</label> <input name="lastUpdateDate2"
+				<label for="start_date">從:</label> <input
+					name="start_date" id="start_date" type="date"> <label
+					for="end_date">到:</label> <input name="end_date"
 					id="end_date" type="date"> <br> <label for="memberId">搜尋會員帳號：</label>
 				<br> <input name="memberId"> <br> <input
 					type="submit">
@@ -150,7 +150,7 @@
 						<th>會員ID</th>
 						<th>問題類型</th>
 						<th>問題內容</th>
-						<th>答覆內容</th>
+						<th> </th>
 						<th>答覆狀態</th>
 						<th>提問時間</th>
 						<th>答覆時間</th>
@@ -164,7 +164,7 @@
 							<td>${questions.questionTypeID}</td>
 							<td>${questions.questionContent}</td>
 							<td><button class="replybtn"
-									onclick="openBox(${questions.questionContentID})">回覆</button>${questions.answerContent}</td>
+									onclick="openBox(${questions.questionContentID})">回覆</button></td>
 							<td>${questions.answered}</td>
 							<td>${questions.quesTime}</td>
 							<td>${questions.answerTime}</td>
@@ -175,16 +175,16 @@
 
 		</div>
 
-<!-- 		<div class="overlayTag"> -->
-<!-- 			<article> -->
-<!-- 				<h4>商品標籤新增</h4> -->
-<!-- 				<div style="height: 10px;"></div> -->
-<!-- 				<span>商品標籤: <input type="text" name="" id="" class="ProdType"></span> -->
-<!-- 				<span><input type="submit" class="tagSubmit" -->
-<!-- 					style="margin-top: 10px;" value="送出"></span> <span><input -->
-<!-- 					type="submit" class="btnClose" style="margin-top: 10px;" value="關閉"></span> -->
-<!-- 			</article> -->
-<!-- 		</div> -->
+		<!-- 		<div class="overlayTag"> -->
+		<!-- 			<article> -->
+		<!-- 				<h4>商品標籤新增</h4> -->
+		<!-- 				<div style="height: 10px;"></div> -->
+		<!-- 				<span>商品標籤: <input type="text" name="" id="" class="ProdType"></span> -->
+		<!-- 				<span><input type="submit" class="tagSubmit" -->
+		<!-- 					style="margin-top: 10px;" value="送出"></span> <span><input -->
+		<!-- 					type="submit" class="btnClose" style="margin-top: 10px;" value="關閉"></span> -->
+		<!-- 			</article> -->
+		<!-- 		</div> -->
 
 	</div>
 

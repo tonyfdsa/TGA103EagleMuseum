@@ -21,62 +21,63 @@ import contact.vo.QuesContent;
 
 @WebServlet("/questionContent")
 public class QuesContentServlet extends HttpServlet {
-	
-private static final long serialVersionUID = 1L;
-	
-private QuesContentService service;
 
+	private static final long serialVersionUID = 1L;
 
-public void init() throws ServletException{
-	try {
-		service = new QuesContentServiceImpl();
-	} catch(NamingException e){
-		e.printStackTrace();
-	}
-	super.init();
-}
-protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	this.doPost(req, resp);
-}
+	private QuesContentService service;
 
-protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	resp.setContentType("application/json;charset=UTF-8");
-	req.setCharacterEncoding("UTF-8");
-	
-	final String questionTypeIDStr = req.getParameter("questionTypeID");
-//	final String quesIdStr = req.getParameter("quesId");
-//	Integer quesId = null;
-	
-	//第一次進入此頁，使用者尚未選擇questionTypeID，故先不進行字串轉Int
-	Integer questionTypeID = null;
-	if(StringUtils.isNotBlank(questionTypeIDStr)) {
-		questionTypeID = Integer.parseInt(questionTypeIDStr);
+	public void init() throws ServletException {
+		try {
+			service = new QuesContentServiceImpl();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+		super.init();
 	}
-	final String questionContent = req.getParameter("questionContent");
-	
-	QuesContent quesContent = new QuesContent();
-	quesContent.setQuestionTypeID(questionTypeID);
-	quesContent.setQuestionContent(questionContent);
-	
-	String quesContent1 = quesContent.getQuestionContent();	
-	if(quesContent1 != null) {
-		final boolean result = service.submitQuestion(quesContent);
-		req.setAttribute("result", result? "提問已送出" : "提問失敗");
-		
-		final Integer memberId = 2;
-		String memberEmail = service.confirmQues(memberId);
-//		String[] confirmQ = confirmQues.split(",");
-		System.out.println(memberEmail);
-		new QuesConfirmMail(memberEmail).quesConfirmMail();
-		
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		this.doPost(req, resp);
 	}
-	
-	final List<QuesContent> list = service.findAllQs();
-	req.setAttribute("questionList", list);
-	
-	req.getRequestDispatcher("/contact/questionContent.jsp").forward(req, resp);
-	
-}
-	
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("application/json;charset=UTF-8");
+		req.setCharacterEncoding("UTF-8");
+
+		// 假裝從session取得memberid
+		final Integer memberId = 3;
+
+		final String questionTypeIDStr = req.getParameter("questionTypeID");
+
+		// 第一次進入此頁，使用者尚未選擇questionTypeID，故先不進行字串轉Int
+		Integer questionTypeID = null;
+		if (StringUtils.isNotBlank(questionTypeIDStr)) {
+			questionTypeID = Integer.parseInt(questionTypeIDStr);
+		}
+		final String questionContent = req.getParameter("questionContent");
+
+		QuesContent quesContent = new QuesContent();
+		quesContent.setQuestionTypeID(questionTypeID);
+		quesContent.setQuestionContent(questionContent);
+
+		String getQuesContent = quesContent.getQuestionContent();
+		if (StringUtils.isNotBlank(getQuesContent)) {
+			final boolean result = service.submitQuestion(quesContent);
+
+			if (result) {
+				req.setAttribute("result", "提問已送出");
+				String memberEmail = service.confirmQues(memberId);
+				System.out.println(memberEmail);
+				new QuesConfirmMail(memberEmail).quesConfirmMail();
+			}
+		} else if (StringUtils.isBlank(getQuesContent)) {
+			req.setAttribute("result", "提問失敗，請輸入問題內容。");
+		}
+
+		final List<QuesContent> list = service.getByMemberId(memberId);
+		req.setAttribute("questionList", list);
+
+		req.getRequestDispatcher("/contact/questionContent.jsp").forward(req, resp);
+
+	}
 
 }

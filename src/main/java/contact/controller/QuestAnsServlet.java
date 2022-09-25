@@ -46,8 +46,8 @@ public class QuestAnsServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		final String memberIdStr = req.getParameter("memberId");
-		final String lastUpdateDate1 = req.getParameter("lastUpdateDate1");
-		final String lastUpdateDate2 = req.getParameter("lastUpdateDate2");
+		final String start_date = req.getParameter("start_date");
+		final String end_date = req.getParameter("end_date");
 		final String ansContent = req.getParameter("ansContent");
 		final String quesIdStr = req.getParameter("quesId");
 		Integer memberId = null;
@@ -73,16 +73,16 @@ public class QuestAnsServlet extends HttpServlet {
 			new MailService(memNMQ[0], memNMQ[1], memNMQ[2], memNMQ[3]).eagleMail();		
 		}
 
-		if (StringUtils.isNotBlank(memberIdStr) && StringUtils.isNotBlank(lastUpdateDate1)
-				&& StringUtils.isNotBlank(lastUpdateDate2)) {
+		if (StringUtils.isNotBlank(memberIdStr) && StringUtils.isNotBlank(start_date)
+				&& StringUtils.isNotBlank(end_date)) {
 			memberId = Integer.parseInt(memberIdStr);
-			final List<QuesContent> list = service.getByIdAndDate(memberId, lastUpdateDate1, lastUpdateDate2);
+			final List<QuesContent> list = service.getByIdAndDate(memberId, start_date, end_date);
 			req.setAttribute("questionList", list);
 		}
 
 		
-		if (StringUtils.isNotBlank(memberIdStr) && (StringUtils.isBlank(lastUpdateDate1))
-				&& (StringUtils.isBlank(lastUpdateDate1))) {
+		if (StringUtils.isNotBlank(memberIdStr) && (StringUtils.isBlank(start_date))
+				&& (StringUtils.isBlank(start_date))) {
 			memberId = Integer.parseInt(memberIdStr);
 			final List<QuesContent> list = service.getByMemberId(memberId);
 			req.setAttribute("questionList", list);
@@ -91,9 +91,9 @@ public class QuestAnsServlet extends HttpServlet {
 			req.setAttribute("questionList", list);
 		}
 
-		if ((StringUtils.isBlank(memberIdStr)) && (StringUtils.isNotBlank(lastUpdateDate1))
-				&& (StringUtils.isNotBlank(lastUpdateDate1))) {
-			final List<QuesContent> list = service.getByDate(lastUpdateDate1, lastUpdateDate2);
+		if ((StringUtils.isBlank(memberIdStr)) && (StringUtils.isNotBlank(start_date))
+				&& (StringUtils.isNotBlank(start_date))) {
+			final List<QuesContent> list = service.getByDate(start_date, end_date);
 			req.setAttribute("questionList", list);
 		} else if (StringUtils.isBlank(memberIdStr)) {
 			final List<QuesContent> list = service.findAllQs();
