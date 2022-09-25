@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.hibernate.query.Query;
+
 import collection.dao.intf.CollectionDaointf;
 import collection.dao.sql.CollectDaoSQL;
 import collection.vo.CollectionVO;
@@ -16,7 +18,6 @@ public class CollectionDaoimpl implements CollectionDaointf {
 
 	private static CollectDaoSQL SQL = null;
 	private static DataSource ds = null;
-	
 
 	static {
 		try {
@@ -68,6 +69,8 @@ public class CollectionDaoimpl implements CollectionDaointf {
 			pstmt.setString(3, collectionVO.getCollectionEar());
 			pstmt.setBoolean(4, collectionVO.getCollectionStatus());
 			pstmt.setString(5, collectionVO.getCollectionMaterial());
+			pstmt.setInt(6, collectionVO.getCollectionID());
+
 			rowCount = pstmt.executeUpdate();
 
 			// Handle any SQL errors
@@ -98,22 +101,22 @@ public class CollectionDaoimpl implements CollectionDaointf {
 		return rowCount != 0;
 	}
 
-
 	@Override
 	public List<CollectionVO> getAll() {
 		List<CollectionVO> list = new ArrayList<CollectionVO>();
 
 		try (Connection con = ds.getConnection();
-			 PreparedStatement pstm = con.prepareStatement(SQL.GET_ALL);) {
+			 PreparedStatement pstm = con.prepareStatement(SQL.GET_ALL);)
+		{
 			System.out.println("連線成功");
 
 			try (ResultSet rs = pstm.executeQuery()) {
-				while(rs.next()) {
+				while (rs.next()) {
 					CollectionVO collection = new CollectionVO();
 					collection.setCollectionID(rs.getInt("collectionID"));
 					collection.setCollectionTitle(rs.getString("collectionTitle"));
-					collection.setCollectionText(rs.getString("collectionText")); 
-					collection.setCollectionEar(rs.getString("collectionEar")); 
+					collection.setCollectionText(rs.getString("collectionText"));
+					collection.setCollectionEar(rs.getString("collectionEar"));
 					collection.setCollectionMaterial(rs.getString("collectionMaterial"));
 					collection.setCollectionStatus(rs.getBoolean("collectionStatus"));
 					collection.setLastUpdateTime(rs.getTimestamp("LastUpdateTime"));
@@ -128,7 +131,34 @@ public class CollectionDaoimpl implements CollectionDaointf {
 
 	@Override
 	public CollectionVO findByPrimaryKey(Integer id) {
-		return getSession().load(CollectionVO.class, id);
+//		return getSession().load(CollectionVO.class, id);
+
+//		Query<CollectionVO> query = getSession().createQuery("FROM collection WHERE collectionID = 1", CollectionVO.class);
+//		query.setParameter("collectionID", id);
+//		CollectionVO collection = query.uniqueResult();
+//		return collection;	
+		final String sql = "select * from collection where collectionID = ?";
+		try (Connection con = ds.getConnection();
+			PreparedStatement pstm = con.prepareStatement(sql);) {
+			pstm.setInt(1, id);
+			try (ResultSet rs = pstm.executeQuery()) {
+				if (rs.next()) {
+					CollectionVO collection = new CollectionVO();
+					collection.setCollectionID(rs.getInt("collectionID"));
+					collection.setCollectionTitle(rs.getString("collectionTitle"));
+					collection.setCollectionText(rs.getString("collectionText"));
+					collection.setCollectionEar(rs.getString("collectionEar"));
+					collection.setCollectionMaterial(rs.getString("collectionMaterial"));
+					collection.setCollectionStatus(rs.getBoolean("collectionStatus"));
+					collection.setLastUpdateTime(rs.getTimestamp("LastUpdateTime"));
+					return collection;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 	@Override

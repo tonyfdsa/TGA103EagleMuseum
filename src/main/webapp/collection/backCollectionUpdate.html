@@ -16,110 +16,125 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet" />
 
+
+
   <style>
-    .head {
-      background-color: white;
-      width: 100%;
-      border-bottom: 0.5px rgba(160, 159, 159, 0.5) solid;
-      height: 40px;
-      background-color: white;
+    .input-file-button {
+      border: 1px black solid;
+      background-color: gray;
+      color: white;
+      padding: 0px 5px;
+      cursor: pointer;
+      position: relative;
+      left: 247px;
     }
 
-    .main {
-      background-color: rgba(213, 213, 213, 0.259);
-      height: 1000px
+    .input-file-button:hover {
+      background-color: rgba(106, 241, 9, 0.482);
+      color: rgb(0, 0, 0);
     }
 
-    .searchbar {
-      width: 90%;
-      border: 0px;
-      /* border-left: 1px rgba(160, 159, 159, 0.5) solid; */
-      caret-color: black;
-      /* 指定色 */
-      outline: none;
-      /* 外框效果 */
-    }
-
-    .column {
-      height: 40px;
-      margin-top: 3px;
-      background: white;
-      align-items: center;
-      border-bottom: 0.5px rgba(160, 159, 159, 0.5) solid;
-      overflow-x: hidden;
-    }
-
-    .column:hover {
-
-      background-color: rgba(170, 159, 159, 0.3);
-    }
-
-    .headbar {
-      height: 40px;
-      margin-top: 3px;
-      background: white;
-      align-items: center;
-      border-bottom: 0.5px rgba(160, 159, 159, 0.5) solid;
-      overflow-x: hidden;
-      overflow-y: hidden;
-      width: 100%;
-    }
-
-    .headbar button {
-      width: 80px;
-      padding-top: 8px;
-      padding-bottom: 8px;
-      border: 1px rgba(160, 159, 159, 0.5) solid;
-      background-color: rgba(255, 255, 255, 0.712);
-      /* text-align: center; */
-    }
-
-    .headbar button:hover {
-      background-color: rgba(128, 128, 128, 0.315);
-    }
-
-    .head {
-      height: 40px;
-      /* width: 100% !important; */
-      margin-top: 0px;
-      background: white;
-      align-items: center;
-      border-bottom: 0.5px rgba(160, 159, 159, 0.5) solid;
-      overflow-x: hidden;
-      overflow-y: hidden;
-      display: none;
-    }
-
-    .head input {
-      height: 100%;
-    }
-
-    .searchBtn {
-      width: 80px;
-      height: 40px;
-      border: 0px;
-      border-right: 1px rgba(160, 159, 159, 0.5) solid;
-      background-color: white;
-      text-align: center;
-    }
-
-    .searchBtn:hover {
-      background-color: rgba(128, 128, 128, 0.315);
-    }
-
-    .column {
-      width: 100%;
-    }
-
-    .icon {
+    .submit {
+      border: 1px black solid;
+      background-color: gray;
+      color: white;
+      padding: 0px 5px;
       cursor: pointer;
     }
 
-    .selectEar {
-      height: 30px;
+    .submit:hover {
+      background-color: rgba(106, 241, 9, 0.482);
+      color: rgb(0, 0, 0);
+    }
+
+    .clear {
+      border: 1px black solid;
+      background-color: gray;
+      color: white;
+      padding: 0px 5px;
+      cursor: pointer;
+      position: relative;
+      left: 243px;
+    }
+
+    .clear:hover {
+      background-color: rgba(106, 241, 9, 0.482);
+      color: rgb(0, 0, 0);
+    }
+
+    .preview {
+      height: 250px;
+      max-width: 100%;
+      background-color: rgba(128, 128, 128, 0.268);
+      margin-left: 5px;
+    }
+
+    .preview img.preview_img {
+      width: 100%;
+      height: 100%;
+    }
+
+    /*  */
+    .uploadImage {
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      width: 90px;
+      height: 90px;
+      background: url("../點選上傳.png") no-repeat;
+      background-size: cover;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .uploadImage p {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 10px;
+      font-size: 14px;
+      color: #999999;
+    }
+
+    .uploadImage input#file {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .smallpreview {
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      border: solid 1px rgba(0, 0, 0, 0.138);
+      margin: 0px;
+      width: 96px;
+      height: 90px;
+      background: #e1e6ed;
+
+    }
+
+    .smallpreview img {
+      /* position: relative; */
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .smallpreview img[src=""] {
+      opacity: 0;
+      filter: Alpha(0);
+      /* 相容IE8-9 */
+    }
+
+    .smallpreview img:not([src]) {
+      opacity: 0;
+      filter: Alpha(0);
+      /* 相容IE8-9 */
     }
   </style>
-
 </head>
 
 <body>
@@ -142,7 +157,7 @@
       <li>
         <div class="sideBtn">首頁管理</div>
         <div class="Btn"><a href="#">展覽資訊</a></div>
-        <div class="Btn"><a href="#">商品資訊</a></div>
+        <div class="Btn"><a href="#">館藏資訊</a></div>
         <div class="Btn"><a href="#">館方資訊</a></div>
       </li>
       <li>
@@ -157,7 +172,7 @@
       <li>
         <div class="sideBtn">商城管理</div>
         <div class="Btn"><a href="#">訂單搜尋</a></div>
-        <div class="Btn"><a href="#">商品搜尋</a></div>
+        <div class="Btn"><a href="#">館藏搜尋</a></div>
       </li>
       <li>
         <div class="sideBtn">會員管理</div>
@@ -175,188 +190,154 @@
   </div>
   <!-- main -->
   <div class="main">
-
-
-    <div class="headbar d-flex ">
-      <button class="headerBtn" value="5" data-bs-toggle="modal" data-bs-target="#">編輯館藏</button>
-
-
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">新增館藏</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div>
-              館藏名稱：<br>
-              <input class="selectTitle"></input> <br>
-              分類：<br>
-              <input class="selectEar"></input> <br>  
-              <select class="selectMaterial">
-                <option value="1">ddd</option>
-                <option value="2">ccc</option>
-                <option value="3">aaa</option>
-                <option value="4">qqq</option>
-              </select>
-            </div>
-            <div>
-              <input class="collectText"></input>
-            </div>
-            <div>
-              <input type="radio" class="collectStatus">開放</input>
-
+    <div style="height: 20px"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-auto">
+          <!-- 圖片上傳 -->
+          <div style="width: 400px;;background-color:white ; ">
+            <div class="preview">
+              <span class="text">預覽圖</span>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+          <div class="pic" style="width:400px ; margin-left: 5px;"></div>
+          <label class="input-file-button" for="upload" @click=""> 上傳圖片</label>
+          <input type="file" id="upload" style="display: none;" multiple="multiple" @change="fileSelected" />
+          <input type="submit" class="clear" value="清除上傳">
         </div>
-      </div>
-    </div>
-
-    <div class="head">
-      <button class="searchBtn">搜尋
-      </button>
-      <input type="search" class="searchbar" placeholder=" 請輸入商品名稱">
-    </div>
-
-    <div class="head">
-      <button class="searchBtn">搜尋
-      </button>
-      <input type="search" class="searchbar" placeholder=" 請輸入館藏編號">
-    </div>
-
-    <div class="head">
-      <button class="searchBtn">搜尋
-      </button>
-      <input type="search" class="searchbar" placeholder=" 請輸入商品狀態">
-    </div>
-
-    <div class="head">
-      <button class="searchBtn">搜尋
-      </button>
-      <input type="search" class="searchbar" placeholder=" 請輸入日期 EX:2022.09.03">
-    </div>
-
-
-    <div style="height: 5px;"></div>
-    <div class="container-fluid" id="title">
-      <div class="row d-flex column">
-        <div class="col-1 " style="text-align:center">項次</div>
-        <div class="col-2" style="text-align:center">館藏編號</div>
-        <div class="col-2" style="text-align:center">館藏名稱</div>
-        <div class="col-2" style="text-align:center">館藏狀態</div>
-        <div class="col-2" style="text-align:center">更新時間</div>
-        <div class="col-2" style="text-align:center">商品編輯</div>
-        <div class="col-1"></div>
-      </div>
-    </div>
-    <div class="searchContent"></div>
-    <div class="col-1"></div>
-  </div>
-  </div>
-  </div>
-
-
-
-  </div>
-
-  <!-- jquery link -->
-  <script src="./vendor/js/jquery3.6.0.js"></script>
-
-  <script src="./JS/backtemplete.js"></script>
-
-  <script>
-
-
-    $(document).on("click", ".headerBtn", function () {
-      let val = $(this).val()
-      console.log($(this).val())
-      $(".head").css("display", "none")
-      $(".head").eq(val).slideToggle("slow");
-    })
-
-    $(document).on("click", ".icon", function () {
-      let val = $(this).attr("data-value")
-      if (val == 0) {
-        $(this).closest(".col-2").prevAll('.col-2').eq(1).text("下架")
-      } else if (val == 1) {
-        $(this).closest(".col-2").prevAll('.col-2').eq(1).text("上架")
-      }
-    })
-
-    // fetch('http://localhost:8080/TGA103_EagleMuseum/collectionAll')
-    //  .then((response) => {
-    //     return response.json();
-    // })
-    // .then( (response) => {
-    //     console.log(response);
-    // })
-    // .catch((error) => {
-    //     console.log(`Error: ${error}`);
-    // })
-
-
-
-
-
-    // 接受後端訊息
-
-    fetch('http://localhost:8080/TGA103_EagleMuseum/collectionAll')
-      .then(resp => resp.json())
-      .then(findCollectuins => {
-
-        for (i = 0; i < findCollectuins.length; i++) {
-          console.log(findCollectuins[i])
-          let re = (findCollectuins[i].collectionStatus === true ? "上架中" : "下架");
-          let text = `
-          <div class="container-fluid">
-          <div class="row d-flex  column">
-          <div class="col-1" style="text-align:center">${i + 1}</div>
-          <div class="col-2" style="text-align:center">${findCollectuins[i].collectionID}</div>
-          <div class="col-2" style="text-align:center">${findCollectuins[i].collectionText}</div>
-          <div class="col-2" style="text-align:center" data-stats= ${findCollectuins[i].collectionStatus}>${re}</div>
-          <div class="col-2" style="text-align:center">${findCollectuins[i].collectionMaterial}</div>
-         
-          <div class="col-2" style="text-align:center"> 
-            <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"
-                    width="25" height="25">
-                    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"></path>
-                    <path d="M9 15h3l8.5-8.5a1.5 1.5 0 0 0-3-3L9 12v3"></path>
-                    <path d="M16 5l3 3"></path>
-                    </g>
-                </svg>
-            </span>    
-            <span style="margin-left: 10px; margin-right:10px" class="icon" data-value="1">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="25" height="25">
-                    <path d="M5 18h14v2H5v-2zm4.6-2.7L5 10.7l2-1.9l2.6 2.6L17 4l2 2l-9.4 9.3z" fill="currentColor">    
-                    </path>
-                </svg>
-            </span>
-
+        <div class="col-5">
+          <div>館藏介紹:</div>
+          <textarea class="colText" placeholder="館藏介紹" style="width:100%;height: 80%;"></textarea>
+          <div class="d-flex justify-content-end">
+            <input class=" submit" value="表單送出" type="submit" />
           </div>
-          <div class="col-1"></div>
+          <span id="errMsg" class="error" style="color: red;"></span>
+          <span id="errMsg"></span>
         </div>
-      </div>  `;
-          $(".searchContent").append(text);
 
+      </div>
+      <!-- 分隔 -->
+      <hr>
+      <span class="tag">
+        標籤:
+        <select class="colMt" style="width: 100px;">
+          <!--有value傳value，沒有value就傳包含的文字-->
+          <option>請選擇</option>
+          <option value="1">銅</option>
+
+        </select>
+      </span>
+      <div style="margin-top: 20px;">
+        名稱:
+        <input type='text' class="colTitle">
+      </div>
+      <div style="margin-top: 20px;">
+        朝代:
+        <input class="colEar" type='text' ">
+      </div>
+      <div style=" margin-top: 20px;">
+        狀態:
+        <input type="radio" name="colStatus" class="collectStatus" value=false id="female-input">關閉
+        <input type="radio" name="colStatus" class="collectStatus" value=true id="male-input">開放
+      </div>
+      <div style="height: 30px"></div>
+    </div>
+    <!-- 底部 -->
+    <div style="height: 20px"></div>
+
+    <!-- jquery link -->
+    <script src="./vendor/js/jquery3.6.0.js"></script>
+
+    <script src="./JS/backtemplete.js"></script>
+
+    <script>
+
+      //抓sessionStorage的資料
+
+      var form_data = JSON.parse(sessionStorage.getItem("form_data"));
+      var collectionID = form_data.collectionID
+      // 把ID往下帶
+      fetch("http://localhost:8080/TGA103eagleMuseum/collectionGetOne", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          collectionID: collectionID,
+
+        }),
+
+      })
+        .then(resp => resp.json())
+        .then(collection => {
+          console.log(collection);
+          document.querySelector('.colTitle').value = collection.collectionTitle;
+          document.querySelector('.colEar').value = collection.collectionEar;
+          document.querySelector('.colText').value = collection.collectionText;
+          document.querySelector('.collectStatus').value = collection.collectionStatus;
+          if (document.querySelector('.collectStatus').value == "true") {
+            document.getElementById("male-input").checked = true;
+          } else if (document.querySelector('.collectStatus').value == "false") {
+            document.getElementById("female-input").checked = true;
+          }
+        })
+
+      //submit insert
+      $(document).on("click", ".submit", function () {
+        let collectionTitle = document.querySelector(".colTitle").value;
+        let collectionMaterial = document.querySelector(".colMt").value;
+        let collectionEar = document.querySelector(".colEar").value;
+        let collectionText = document.querySelector(".colText").value;
+        let colStatus = document.getElementsByName("colStatus");
+
+        let errMsg = document.querySelector('#errMsg');
+
+        if (collectionTitle == "") {
+          errMsg.textContent = "名稱不可為空"
+          return;
+        }
+        if (collectionText == "") {
+          errMsg.textContent = "說明不可為空"
+          return;
+        }
+        if (collectionEar == "") {
+          errMsg.textContent = "朝代不可為空"
+          return;
         }
 
+        let selected_colStatus;
+        if (colStatus[0].checked == true) {
+          selected_colStatus = colStatus[0];
+        } else if (colStatus[1].checked == true) {
+          selected_colStatus = colStatus[1];
+        }
+        if (selected_colStatus == null) {
+          errMsg.textContent = "狀態未選"
+          return;
+        }
+        fetch('http://localhost:8080/TGA103eagleMuseum/collectionUpdate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            collectionTitle,
+            collectionMaterial,
+            collectionEar,
+            collectionText,
+            collectionStatus: selected_colStatus.value,
+            collectionID
+          }),
+        })
+          .then(resp => resp.json())
+          .then(body => {
+            errMsg.textContent = '';
+            const { successful, message } = body;
+            if (successful) {
+              location = './backCollection.html';
+            } else {
+              errMsg.textContent = message;
+            }
+          });
       });
 
-
-
-
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
-    crossorigin="anonymous"></script>
+    </script>
 </body>
 
 </html>
