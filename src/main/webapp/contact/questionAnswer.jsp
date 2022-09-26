@@ -26,8 +26,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
 	rel="stylesheet" />
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/prod/workCss/backprodmeau.css">
+<%-- 	href="<%=request.getContextPath()%>/prod/workCss/backprodmeau.css"> --%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/contact/css/quesAns.css">
 
@@ -126,12 +125,11 @@
 				</select>-->
 
 				<div>搜尋發文日期：</div>
-				<label for="start_date">從:</label> <input
-					name="start_date" id="start_date" type="date"> <label
-					for="end_date">到:</label> <input name="end_date"
-					id="end_date" type="date"> <br> <label for="memberId">搜尋會員帳號：</label>
-				<br> <input name="memberId"> <br> <input
-					type="submit">
+				<label for="start_date">從:</label> <input name="start_date"
+					id="start_date" type="date"> <label for="end_date">到:</label>
+				<input name="end_date" id="end_date" type="date"> <br>
+				<label for="memberId">搜尋會員帳號：</label> <br> <input
+					name="memberId"> <br> <input type="submit">
 			</form>
 			<hr>
 			<form action="<%=request.getContextPath()%>/questionAns">
@@ -150,7 +148,7 @@
 						<th>會員ID</th>
 						<th>問題類型</th>
 						<th>問題內容</th>
-						<th> </th>
+						<th></th>
 						<th>答覆狀態</th>
 						<th>提問時間</th>
 						<th>答覆時間</th>
@@ -164,7 +162,8 @@
 							<td>${questions.questionTypeID}</td>
 							<td>${questions.questionContent}</td>
 							<td><button class="replybtn"
-									onclick="openBox(${questions.questionContentID})">回覆</button></td>
+									onclick="prompt('請輸入對第'+${questions.questionContentID}+'號提問的回覆')">回覆</button></td>
+							<!-- 燈箱功能，參考https://www.youtube.com/watch?v=GIN9SCaXc-o -->
 							<td>${questions.answered}</td>
 							<td>${questions.quesTime}</td>
 							<td>${questions.answerTime}</td>

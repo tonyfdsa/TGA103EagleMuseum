@@ -43,7 +43,7 @@ public class QuesContentServlet extends HttpServlet {
 		resp.setContentType("application/json;charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
 
-		// 假裝從session取得memberid
+		// 假裝從session取得memberid（要跟servlet一致）
 		final Integer memberId = 3;
 
 		final String questionTypeIDStr = req.getParameter("questionTypeID");
@@ -76,8 +76,8 @@ public class QuesContentServlet extends HttpServlet {
 		final List<QuesContent> list = service.getByMemberId(memberId);
 		req.setAttribute("questionList", list);
 
-		req.getRequestDispatcher("/contact/questionContent.jsp").forward(req, resp);
-
+		req.getRequestDispatcher("/contact/otherQues.jsp").forward(req, resp);
+//		questionContent
 	}
 
 }

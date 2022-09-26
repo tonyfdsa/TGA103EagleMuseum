@@ -29,7 +29,7 @@ public class QuesContentDaoImpl implements QuesContentDao {
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql, new String[] { "questionContentID" });) {
 			// 假裝從session取得memberid
-			int memberId = 2;
+			int memberId = 3;
 //			pstmt.setInt(1, questionContent.getMemberId());
 			pstmt.setInt(1, memberId);
 			pstmt.setInt(2, questionContent.getQuestionTypeID());

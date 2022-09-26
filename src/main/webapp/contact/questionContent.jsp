@@ -113,7 +113,6 @@
 			<h1>會員提問頁面</h1>
 			<form action="<%=request.getContextPath()%>/questionContent"
 				method="POST">
-				<!-- <input type="text" id="questionTypeID" name="questionTypeID"> -->
 				<select name="questionTypeID">
 					<option value=1>交通問題</option>
 					<option value=2>展覽問題</option>
