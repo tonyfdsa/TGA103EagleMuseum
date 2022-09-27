@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <!-- 後臺模板Css -->
+  <link rel="stylesheet" href="./workCss/backtemplete.css">
+
+  <!-- bootstrapr -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+  <!-- 正黑體字型包 -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet" />
+
+
+
+  <style>
+    .input-file-button {
+      border: 1px black solid;
+      background-color: gray;
+      color: white;
+      padding: 0px 5px;
+      cursor: pointer;
+      position: relative;
+      left: 247px;
+    }
+
+    .input-file-button:hover {
+      background-color: rgba(106, 241, 9, 0.482);
+      color: rgb(0, 0, 0);
+    }
+
+    .submit {
+      border: 1px black solid;
+      background-color: gray;
+      color: white;
+      padding: 0px 5px;
+      cursor: pointer;
+    }
+
+    .submit:hover {
+      background-color: rgba(106, 241, 9, 0.482);
+      color: rgb(0, 0, 0);
+    }
+
+    .clear {
+      border: 1px black solid;
+      background-color: gray;
+      color: white;
+      padding: 0px 5px;
+      cursor: pointer;
+      position: relative;
+      left: 243px;
+    }
+
+    .clear:hover {
+      background-color: rgba(106, 241, 9, 0.482);
+      color: rgb(0, 0, 0);
+    }
+
+    .preview {
+      height: 250px;
+      max-width: 100%;
+      background-color: rgba(128, 128, 128, 0.268);
+      margin-left: 5px;
+    }
+
+    .preview img.preview_img {
+      width: 100%;
+      height: 100%;
+    }
+
+    /*  */
+    .uploadImage {
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      width: 90px;
+      height: 90px;
+      background: url("../點選上傳.png") no-repeat;
+      background-size: cover;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .uploadImage p {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 10px;
+      font-size: 14px;
+      color: #999999;
+    }
+
+    .uploadImage input#file {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .smallpreview {
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      border: solid 1px rgba(0, 0, 0, 0.138);
+      margin: 0px;
+      width: 96px;
+      height: 90px;
+      background: #e1e6ed;
+
+    }
+
+    .smallpreview img {
+      /* position: relative; */
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .smallpreview img[src=""] {
+      opacity: 0;
+      filter: Alpha(0);
+      /* 相容IE8-9 */
+    }
+
+    .smallpreview img:not([src]) {
+      opacity: 0;
+      filter: Alpha(0);
+      /* 相容IE8-9 */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- header -->
+  <header>
+    <div class="header">
+      <div>
+        <img src="./img/eagle2.jpg" alt="" class="headImg" />
+        <span class="user">使用者</span>
+      </div>
+    </div>
+  </header>
+  <!-- aside -->
+
+  <div class="aside">
+    <!-- 頂部留白 -->
+    <div style="height: 20px"></div>
+    <!-- 大標籤 -->
+    <ul>
+      <li>
+        <div class="sideBtn">首頁管理</div>
+        <div class="Btn"><a href="#">展覽資訊</a></div>
+        <div class="Btn"><a href="#">館藏資訊</a></div>
+        <div class="Btn"><a href="#">館方資訊</a></div>
+      </li>
+      <li>
+        <div class="sideBtn">展覽管理</div>
+        <div class="Btn"><a href="#">票卷管理</a></div>
+      </li>
+      </li>
+      <li>
+        <div class="sideBtn">館藏管理</div>
+        <div class="Btn"><a href="#">館藏列表</a></div>
+      </li>
+      <li>
+        <div class="sideBtn">商城管理</div>
+        <div class="Btn"><a href="#">訂單搜尋</a></div>
+        <div class="Btn"><a href="#">館藏搜尋</a></div>
+      </li>
+      <li>
+        <div class="sideBtn">會員管理</div>
+        <div class="Btn"><a href="#">會員搜尋</a></div>
+      </li>
+      <li>
+        <div class="sideBtn">聯絡管理</div>
+        <div class="Btn"><a href="#">常見問題</a></div>
+        <div class="Btn"><a href="#">其他問題</a></div>
+        <div class="Btn"><a href="#">交通資訊</a></div>
+        <div class="Btn"><a href="#">租借場地</a></div>
+      </li>
+      </li>
+    </ul>
+  </div>
+  <!-- main -->
+  <div class="main">
+    <div style="height: 20px"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-auto">
+          <!-- 圖片上傳 -->
+          <div style="width: 400px;;background-color:white ; ">
+            <div class="preview">
+              <span class="text">預覽圖</span>
+            </div>
+          </div>
+          <div class="pic" style="width:400px ; margin-left: 5px;"></div>
+          <label class="input-file-button" for="upload" @click=""> 上傳圖片</label>
+          <input type="file" id="upload" style="display: none;" multiple="multiple" @change="fileSelected" />
+          <input type="submit" class="clear" value="清除上傳">
+        </div>
+        <div class="col-5">
+          <div>館藏介紹:</div>
+          <textarea class="colText" placeholder="館藏介紹" style="width:100%;height: 80%;"></textarea>
+          <div class="d-flex justify-content-end">
+            <input class=" submit" value="表單送出" type="submit" />
+          </div>
+          <span id="errMsg" class="error" style="color: red;"></span>
+          <span id="errMsg"></span>
+        </div>
+
+      </div>
+      <!-- 分隔 -->
+      <hr>
+      <span class="tag">
+        標籤:
+        <select class="colMt" style="width: 100px;">
+          <!--有value傳value，沒有value就傳包含的文字-->
+          <option>請選擇</option>
+          <option value="1">銅</option>
+
+        </select>
+      </span>
+      <div style="margin-top: 20px;">
+        名稱:
+        <input type='text' class="colTitle">
+      </div>
+      <div style="margin-top: 20px;">
+        朝代:
+        <input class="colEar" type='text' ">
+      </div>
+      <div style=" margin-top: 20px;">
+        狀態:
+        <input type="radio" name="colStatus" class="collectStatus" value="false" id="female-input">關閉
+        <input type="radio" name="colStatus" class="collectStatus" value="true" id="male-input">開放
+      </div>
+      <div style="height: 30px"></div>
+    </div>
+    <!-- 底部 -->
+    <div style="height: 20px"></div>
+
+    <!-- jquery link -->
+    <script src="./vendor/js/jquery3.6.0.js"></script>
+
+    <script src="./JS/backtemplete.js"></script>
+
+    <script src="./JS/backCollectionUpdate.js"></script>
+</body>
+
+</html>
