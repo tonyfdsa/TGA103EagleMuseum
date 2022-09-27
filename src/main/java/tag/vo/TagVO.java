@@ -1,48 +1,30 @@
 package tag.vo;
 import java.sql.Timestamp;
 
-import core.pojo.Core;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+import core.pojo.Core;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TagVO extends Core{
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer tagID;
 	private String tag;
 	private Timestamp lastUpdateTime;
-	
-	public TagVO() {
-	}
-	
-	public TagVO(Integer tagID, String tag, Timestamp lastUpdateTime) {
-		this.tagID = tagID;
-		this.tag = tag;
-		this.lastUpdateTime = lastUpdateTime;
-	}
-
-	public Integer getTagID() {
-		return tagID;
-	}
-
-	public void setTagID(Integer tagID) {
-		this.tagID = tagID;
-	}
-
-	public String getTag() {
-		return tag;
-	}
-
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
-
-	public Timestamp getLastUpdateTime() {
-		return lastUpdateTime;
-	}
-
-	public void setLastUpdateTime(Timestamp lastUpdateTime) {
-		this.lastUpdateTime = lastUpdateTime;
-	}
-	
-
 }
 	
 	

@@ -16,7 +16,7 @@ import tag.service.TagServiceImpl.TagServiceImpl;
 import tag.vo.TagVO;
 
 @WebServlet("/tagAll")
-public class FindAllServlet extends HttpServlet {
+public class FindAllTAgServlet extends HttpServlet {
 	private static final long serialVersionUID = 1;
 	private TagService service = new TagServiceImpl();
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
@@ -24,20 +24,13 @@ public class FindAllServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		
+		setHeaders(response);
 		try {
-			List<TagVO> findTags = service.getAll();
-			response.getWriter().print(gson.toJson(findTags));
+			List<TagVO> findAllTags = service.getAll();
+			response.getWriter().print(gson.toJson(findAllTags));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		setHeaders(response);
-
 	}
 
 	private void setHeaders(HttpServletResponse response) {
