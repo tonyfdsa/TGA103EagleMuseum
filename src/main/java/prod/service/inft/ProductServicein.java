@@ -20,4 +20,13 @@ public interface ProductServicein {
 	public Result tagGetAll() ;
 	
 	public Result prodGetByID(int prodID) ;
+	
+	public Result insertProdImg(String img, Integer id);
+	
+	public Result prodGetImg(Integer id);
+	
+	public Result prodUpdate(productVO ProductVO);
+	
+	public Result prodDeImg(Integer id);
+	
 }

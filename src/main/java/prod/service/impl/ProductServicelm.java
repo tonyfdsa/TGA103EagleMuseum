@@ -2,9 +2,14 @@ package prod.service.impl;
 
 
 
+import java.util.Base64;
+import java.util.List;
+
+import prod.common.Global;
 import prod.common.Result;
 import prod.dao.impl.ProductDAO;
 import prod.service.inft.ProductServicein;
+import prod.vo.ProdImgVO;
 import prod.vo.productVO;
 
 public class ProductServicelm implements ProductServicein {
@@ -117,6 +122,58 @@ public class ProductServicelm implements ProductServicein {
 		}
 		
 	}
+
+	@Override
+	public Result insertProdImg(String img, Integer id) {
+		try {
+			return R.success(DAO.insertProdImg(Base64.getDecoder().decode(img), id));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+
+	@Override
+	public Result prodGetImg(Integer id) {
+		try {
+			return R.success(getBase64(DAO.prodGetImg(id)));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
 	
+	public List<ProdImgVO> getBase64(List<ProdImgVO> list) {
+
+		for (ProdImgVO vo : list) {
+			var img = vo.getProductgetimg();
+			if (img != null) {
+				vo.setProductimg(Global.BASE64 + Base64.getEncoder().encodeToString(img));
+				vo.setProductgetimg(null);
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public Result prodUpdate(productVO ProductVO) {
+		try {
+			return R.success(DAO.prodUpdate(ProductVO));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+
+	@Override
+	public Result prodDeImg(Integer id) {
+		try {
+			return R.success(DAO.prodDeImg(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
 
 }
