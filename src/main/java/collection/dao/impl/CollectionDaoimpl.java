@@ -65,8 +65,8 @@ public class CollectionDaoimpl implements CollectionDaointf {
 			pstmt = con.prepareStatement(SQL.UPDATE);
 			System.out.println("連線成功");
 			pstmt.setString(1, collectionVO.getCollectionTitle());
-			pstmt.setString(2, collectionVO.getCollectionText());
-			pstmt.setString(3, collectionVO.getCollectionEar());
+			pstmt.setString(2, collectionVO.getCollectionEar());
+			pstmt.setString(3, collectionVO.getCollectionText());
 			pstmt.setBoolean(4, collectionVO.getCollectionStatus());
 			pstmt.setString(5, collectionVO.getCollectionMaterial());
 			pstmt.setInt(6, collectionVO.getCollectionID());
