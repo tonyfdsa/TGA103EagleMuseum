@@ -15,48 +15,60 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
-	public TagVO add(TagVO Tag) {
-
-		if (Tag.getTag() == null) {
-			Tag.setMessage("說明未輸入");
-			Tag.setSuccessful(false);
-			return Tag;
+	public TagVO addTag(TagVO tag) {
+		try {
+			if (tag.getTag().isEmpty()) {
+				tag.setMessage("類別名稱未輸入");
+				tag.setSuccessful(false);
+				return tag;
+			}
+			
+			if (dao.insert(tag) != 1) {
+				tag.setMessage("新增發生錯誤!");
+				tag.setSuccessful(false);
+				return tag;
+			}
+			tag.setMessage("新增成功");
+			tag.setSuccessful(true);
+			return tag;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		Tag.setMessage("新增成功");
-		Tag.setSuccessful(true);
-		return Tag;
 	}
 
 	@Override
-	public TagVO edit(TagVO tag) {
-		if (dao.update(tag) == false) {
-			tag.setMessage("資料更改出現錯誤，請聯絡管理員!");
-			tag.setSuccessful(false);
-			return tag;
-		}
-//	 	mem = dao.selectByUsername(mem.getMemUsername());
-
-		tag.setMessage("資料更改成功");
-		tag.setSuccessful(true);
+	public TagVO editTag(TagVO tag) {
+//		final TagVO oTag = dao.findByName(tag.getTag());
+		tag.setTag(tag.getTag());
+		final int resultCount = dao.update(tag);
+		tag.setSuccessful(resultCount > 0);
+		tag.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
 		return tag;
 	}
 
 	@Override
-	public TagVO findByPrimaryKey(Integer tag) {
-		// TODO Auto-generated method stub
+	public TagVO findById(TagVO tag) {
 		return null;
+	}
+
+	@Override
+	public TagVO findByName(TagVO tag) {
+		try {
+			return  dao.selectByName(tag.getTag());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public List<TagVO> getAll() {
-		return dao.getAll();
-	}
-
-
-
-	@Override
-	public TagVO findByName(String tag) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return (List<TagVO>) dao.selectAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

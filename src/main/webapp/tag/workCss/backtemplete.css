@@ -1,0 +1,122 @@
+ @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+      body {
+        /* 先套用 Noto Sans TC 這個 思源黑體 */
+        font-family: "Noto Sans TC";
+      }
+      * {
+        padding: 0px;
+        margin: 0px;
+      }
+
+      .main {
+        position: absolute;
+        top: 13%;
+        left: 12%;
+        display: inline;
+        width: 88%;
+
+        background-color: white;
+        /* height: 1000px; */
+        overflow-y: auto;
+        
+      }
+
+      .aside {
+        display: inline-block;
+        position: fixed;
+        top: 13%;
+        width: 12%;
+        color: black;
+        background-color: #fffbdd;
+        overflow-y: auto;
+        font-size: 24px;
+        height: 88%;
+        text-align: center;
+        box-shadow: 0px 4px 10px #231F20;
+        z-index: 99;
+
+      }
+
+      .aside li {
+        cursor: pointer;
+        font-size: 24px;
+        padding-top: 5px;
+        font-family: "Noto Sans TC";
+      }
+      .side {
+        text-align: center;
+        border: 5px;
+        display: none;
+      }
+
+      .side li {
+        font-size: 15px;
+      }
+
+      .side li:hover {
+        font-size: 15px;
+        position: relative;
+      }
+
+      ul,
+      li {
+        list-style: none;
+        color: black;
+      }
+
+      li a {
+        color: black;
+        border-bottom: 0px;
+        text-decoration: none;
+      }
+
+      ol,
+      ul {
+        /* text-align: center; */
+        padding-left: 0 !important;
+      }
+
+      .Btn {
+        color: black;
+        font-size: 16px;
+        display: none;
+      }
+
+      div.Btn :hover {
+        color: white;
+      }
+
+      .Btn:hover{
+        background-color: rgba(128, 128, 128, 0.511);
+      }
+
+      .sideBtn:hover{
+        background-color: rgba(128, 128, 128, 0.511);
+        color: white;
+      }
+
+      header {
+        height: 13%;
+        width: 100%;
+        background-color: #2b5275;
+        position: fixed;
+        top: 0;
+        color: white;
+        z-index: 99;
+      }
+
+      .headImg {
+        position: relative;
+        top: 5px;
+        left: 5px;
+        width: 5%;
+        border-radius: 40px;
+      }
+
+      .user {
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        top: 5px;
+        left: 15px;
+      }
