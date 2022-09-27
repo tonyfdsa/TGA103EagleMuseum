@@ -34,12 +34,6 @@
         let prodPrice= document.querySelector(".prodPrice").value;
         let prodDescription= document.querySelector(".prodDescription").value;
         let prodInStock = document.querySelector(".prodInStock").value;
-        console.log(prodName);
-        console.log( prodTypeID);
-        console.log(prodPrice);
-        console.log(prodDescription);
-        console.log(prodInStock);
-
         fetch(prodStatusURL, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
@@ -72,7 +66,7 @@
         })
         .then(resp => resp.json())
         .then(R => {  
-
+          console.log(R);
         })  
       })
    
@@ -174,7 +168,7 @@
               })
               .then(resp => resp.json())
               .then(R => {
-
+                console.log(Array[0]);
                 //清除所有的 $(".searchContent").append(text);
                 $(".searchContent").find(".add").remove();
                 $(".searchContent").find("#searchNAN").remove();
@@ -280,7 +274,7 @@
   
             sessionStorage.setItem("form_data", JSON.stringify(send_data));
             console.log(sessionStorage.getItem("form_data"));
-            location.href = "./backprodadd.html";
+            location.href = "./backprodupdate.html";
           })
 
         

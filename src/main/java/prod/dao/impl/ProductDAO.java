@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import prod.dao.intf.ProductDAO_interface;
 
 import prod.dao.sql.ProductSQL;
+import prod.vo.ProdImgVO;
 import prod.vo.ProdTypeVO;
 import prod.vo.productVO;
 
@@ -36,7 +37,7 @@ public class ProductDAO implements ProductDAO_interface {
 		List<productVO> list = new ArrayList<productVO>();
 
 		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_ALL);) {
-			System.out.println("有連線喽");
+			
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
 					productVO productVO = new productVO();
@@ -64,7 +65,7 @@ public class ProductDAO implements ProductDAO_interface {
 	@Override
 	public productVO insert(productVO productVO) throws Exception {
 		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.Insert);) {
-			System.out.println("有連線喽");
+			
 			pstmt.setString(1, productVO.getProdName());
 			pstmt.setInt(2, productVO.getProdTypeID());
 			pstmt.setInt(3, productVO.getProdPrice());
@@ -80,7 +81,7 @@ public class ProductDAO implements ProductDAO_interface {
 	@Override
 	public productVO update(productVO productVO) throws Exception {
 		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.Update);) {
-			System.out.println("有連線喽");
+			
 			try (ResultSet rs = pstmt.executeQuery()) {
 
 				pstmt.setString(1, productVO.getProdName());
@@ -105,7 +106,7 @@ public class ProductDAO implements ProductDAO_interface {
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_BY_Name);) {
 			pstmt.setString(1, productName);
-			System.out.println("有連線喽");
+			
 			System.out.println(productName);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
@@ -135,7 +136,7 @@ public class ProductDAO implements ProductDAO_interface {
 	@Override
 	public Integer updateStatus(productVO productVO) throws Exception {
 		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.UpdateStatus);) {
-			System.out.println("有連線喽");
+			
 //		"UPDATE productlist set prodStatus=? where prodTypeID=?";
 				pstmt.setInt(1, productVO.getProdStatus());
 				pstmt.setInt(2, productVO.getProductID());
@@ -148,7 +149,7 @@ public class ProductDAO implements ProductDAO_interface {
 	@Override
 	public Integer insertTag(String prodType) throws SQLException {
 		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.InsertTag);) {
-			System.out.println("有連線喽");
+			
 //			"INSERT INTO producttype(prodType) VALUES(?)";
 			pstmt.setString(1, prodType);
 			pstmt.executeUpdate();
@@ -160,7 +161,7 @@ public class ProductDAO implements ProductDAO_interface {
 	public List<ProdTypeVO> prodTagGetAll() throws Exception {
 		List<ProdTypeVO> list = new ArrayList<ProdTypeVO>();
 		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.TagGET_ALL);) {
-			System.out.println("有連線喽");
+			
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
 					ProdTypeVO prodTypeVO = new ProdTypeVO();
@@ -180,7 +181,7 @@ public class ProductDAO implements ProductDAO_interface {
 		List<productVO> list = new ArrayList<productVO>();
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_BY_ID);) {
-			System.out.println("有連線喽");
+			
 			pstmt.setInt(1, productID);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
@@ -203,6 +204,70 @@ public class ProductDAO implements ProductDAO_interface {
 			}
 			return list;
 		}
+	}
+
+	@Override
+	public Integer insertProdImg(byte[] img, Integer id) throws Exception {
+		List<ProdImgVO> list = new ArrayList<ProdImgVO>();
+		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.InsertProdImg);) {
+			pstmt.setInt(1, id);
+			pstmt.setBytes(2, img);
+
+			
+			
+			pstmt.executeUpdate();
+			return 1;
+		}
+	}
+
+	@Override
+	public List<ProdImgVO> prodGetImg(Integer prodID) throws Exception {
+		List<ProdImgVO> list = new ArrayList<ProdImgVO>();
+		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.GetImgByID);) {
+			pstmt.setInt(1, prodID);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					ProdImgVO VO = new ProdImgVO();
+					VO.setProductgetimg(rs.getBytes("productimg"));
+
+					
+					list.add(VO); // Store the row in the list
+				}
+			}
+			return list;
+		}
+	}
+
+	@Override
+	public int prodUpdate(productVO productVO) throws Exception {
+		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.UpdateProd);) {
+			
+//			UpdateProd = "update productlist set prodName=? , 
+//			prodTypeID=?, prodPrice=?, prodDescription=?, 
+//			prodStatus=?, prodInStock=? lastUpdateTime=now()where productID=?";
+			pstmt.setString(1, productVO.getProdName());
+			pstmt.setInt(2, productVO.getProdTypeID());
+			pstmt.setInt(3, productVO.getProdPrice());
+			pstmt.setString(4, productVO.getProdDescription());
+			pstmt.setInt(5, productVO.getProdStatus());
+			pstmt.setInt(6, productVO.getProdInStock());
+			pstmt.setInt(7, productVO.getProductID());
+			pstmt.executeUpdate();
+			return 1;
+		
+		}
+	}
+
+	@Override
+	public int prodDeImg(Integer prodID) throws Exception {
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(ProductSQL.ProdDeImg);) {
+//			ProdDeImg = "delete from productimg where productID=?"
+			System.out.println(prodID);
+			pstmt.setInt(1, prodID);
+			pstmt.executeUpdate();
+			return 1;
+			}
 	}
 
 }

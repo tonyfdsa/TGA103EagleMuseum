@@ -3,6 +3,7 @@ package prod.dao.intf;
 import java.sql.SQLException;
 import java.util.List;
 
+import prod.vo.ProdImgVO;
 import prod.vo.ProdTypeVO;
 import prod.vo.productVO;
 
@@ -30,5 +31,17 @@ public interface ProductDAO_interface {
     public List<ProdTypeVO> prodTagGetAll() throws Exception;
     
   //查詢商品by編號  
-	List<productVO> prodGetByID(Integer productID) throws Exception;
+	public List<productVO> prodGetByID(Integer productID) throws Exception;
+	
+  //圖片商品上傳
+	public Integer insertProdImg(byte[] decode, Integer id) throws Exception;
+	
+  //商品圖片取得
+	public List<ProdImgVO> prodGetImg(Integer prodID) throws Exception;
+	
+  //商品更新
+	public int prodUpdate(productVO productVO) throws Exception;
+	
+  //刪除圖片
+	public int prodDeImg(Integer prodID) throws Exception;
 }

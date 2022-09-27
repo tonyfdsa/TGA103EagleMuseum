@@ -26,7 +26,7 @@ public class ProdgetById extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		
 		Integer ProdID = json2Vo(request, productVO.class).getProductID();
-		System.out.println(ProdID);
+//		System.out.println(ProdID);
 		Result R  = service.prodGetByID(ProdID);
 		response.getWriter().print(gson.toJson(R));	
 	}
