@@ -237,8 +237,8 @@
       </div>
       <div style=" margin-top: 20px;">
         狀態:
-        <input type="radio" name="colStatus" class="collectStatus" value=false id="female-input">關閉
-        <input type="radio" name="colStatus" class="collectStatus" value=true id="male-input">開放
+        <input type="radio" name="colStatus" class="collectStatus" value="false" id="female-input">關閉
+        <input type="radio" name="colStatus" class="collectStatus" value="true" id="male-input">開放
       </div>
       <div style="height: 30px"></div>
     </div>
@@ -268,8 +268,8 @@
       })
         .then(resp => resp.json())
         .then(collection => {
-          console.log(collection);
           document.querySelector('.colTitle').value = collection.collectionTitle;
+          
           document.querySelector('.colEar').value = collection.collectionEar;
           document.querySelector('.colText').value = collection.collectionText;
           document.querySelector('.collectStatus').value = collection.collectionStatus;
@@ -286,10 +286,10 @@
         let collectionMaterial = document.querySelector(".colMt").value;
         let collectionEar = document.querySelector(".colEar").value;
         let collectionText = document.querySelector(".colText").value;
-        let colStatus = document.getElementsByName("colStatus");
-
+        let collectionStatus = document.getElementsByName("colStatus");
+    
         let errMsg = document.querySelector('#errMsg');
-
+    
         if (collectionTitle == "") {
           errMsg.textContent = "名稱不可為空"
           return;
@@ -302,26 +302,28 @@
           errMsg.textContent = "朝代不可為空"
           return;
         }
-
+    
         let selected_colStatus;
-        if (colStatus[0].checked == true) {
-          selected_colStatus = colStatus[0];
-        } else if (colStatus[1].checked == true) {
-          selected_colStatus = colStatus[1];
+        if (collectionStatus[0].checked == true) {
+          selected_colStatus = false;
+        } else if (collectionStatus[1].checked == true) {
+          selected_colStatus = true;
         }
-        if (selected_colStatus == null) {
-          errMsg.textContent = "狀態未選"
-          return;
-        }
+    
+        /*   if (selected_colStatus == null) {
+            errMsg.textContent = "狀態未選"
+            return;
+          } */
         fetch('http://localhost:8080/TGA103eagleMuseum/collectionUpdate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+    
             collectionTitle,
-            collectionMaterial,
             collectionEar,
             collectionText,
-            collectionStatus: selected_colStatus.value,
+            collectionStatus: selected_colStatus,
+            collectionMaterial,
             collectionID
           }),
         })
@@ -336,8 +338,7 @@
             }
           });
       });
-
-    </script>
+      </script>
 </body>
 
 </html>

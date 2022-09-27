@@ -20,7 +20,7 @@
 .head {
 	background-color: white;
 	width: 100%;
-	border-bottom: 0.5px rgba(160, 159, 159, 0.5) solid;
+	border-bottom: 0.5px rgba(160, 15Ｆ9, 159, 0.5) solid;
 	height: 40px;
 	background-color: white;
 }
@@ -248,8 +248,8 @@
 			<div class="row d-flex column">
 				<div class="col-1 " style="text-align: center">項次</div>
 				<div class="col-1" style="text-align: center">編號</div>
-				<div class="col-3" style="">名稱</div>
-				<div class="col-2" style="">說明</div>
+				<div class="col-2" style="">名稱</div>
+				<div class="col-3" style="">介紹</div>
 				<div class="col-1" style="text-align: center">朝代</div>
 				<div class="col-2" style="text-align: center">類別</div>
 				<div class="col-1" style="text-align: center">狀態</div>
@@ -280,16 +280,6 @@
       $(".head").eq(val).slideToggle("slow");
     })
 
-    $(document).on("click", ".icon", function () {
-      let val = $(this).attr("data-value")
-      if (val == 0) {
-        $(this).closest(".col-2").prevAll('.col-2').eq(1).text("下架")
-      } else if (val == 1) {
-        $(this).closest(".col-2").prevAll('.col-2').eq(1).text("上架")
-      }
-    })
-
-
 
 
     // 接受後端訊息
@@ -297,7 +287,6 @@
     fetch('http://localhost:8080/TGA103eagleMuseum/collectionAll')
       .then(resp => resp.json())
       .then(findCollectuins => {
-console.log(findCollectuins);
         for (i = 0; i < findCollectuins.length; i++) {
           let re = (findCollectuins[i].collectionStatus === true ? "上架中" : "下架");
           let text = `
@@ -305,8 +294,8 @@ console.log(findCollectuins);
           <div class="row d-flex  column">
           <div class="col-1" style="text-align:center">${i + 1}</div>
           <div class="col-1" style="text-align:center">${findCollectuins[i].collectionID}</div>
-          <div class="col-3" style="">${findCollectuins[i].collectionTitle}</div>
-          <div class="col-2" style="">${findCollectuins[i].collectionText}</div>
+          <div class="col-2" style="">${findCollectuins[i].collectionTitle}</div>
+          <div class="col-3" style="">${findCollectuins[i].collectionText}</div>
           <div class="col-1" style="text-align:center">${findCollectuins[i].collectionEar}</div>
           <div class="col-2" style="text-align:center">${findCollectuins[i].collectionMaterial}</div>
           <div class="col-1" style="text-align:center" data-stats= ${findCollectuins[i].collectionStatus}>${re}</div>
