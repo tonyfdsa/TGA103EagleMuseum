@@ -4,6 +4,7 @@ import static contact.common.json2VO.json2Vo;
 import static prod.common.setHeaders.setHeaders;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -17,14 +18,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
 
-import contact.common.MailService;
 import contact.common.Result;
 import contact.service.QuesContentService;
 import contact.service.QuesContentServiceImpl;
 import contact.vo.QuesContent;
 
-@WebServlet("/questionAns")
-public class QuestAnsServlet extends HttpServlet {
+@WebServlet("/quesSearchByIAndDServlet")
+public class QuesSearchByIAndDServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// 跨域
@@ -42,27 +42,21 @@ public class QuestAnsServlet extends HttpServlet {
 		}
 		super.init();
 	}
-
 	private Gson gson = new Gson();
-
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		setHeaders(resp);
 		resp.setContentType("application/json;charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
-
+		
 		QuesContent vo = json2Vo(req, QuesContent.class);
-		String answerContent = vo.getAnswerContent();
-		Integer questionContentID = vo.getQuestionContentID();
-
-		service.submitAnswer(answerContent, questionContentID);
-
-		final Result list = service.findAllQs();
+		Integer memberId = vo.getMemberId();
+		Timestamp quesTime = vo.getQuesTime();
+		Timestamp answerTime = vo.getAnswerTime();
+		System.out.println(quesTime);
+		System.out.println(answerTime);
+		final Result list = service.getByIdAndDate(memberId, quesTime, answerTime);
 		resp.getWriter().print(gson.toJson(list));
 
-		String memNameAndMailAndQues = service.getMemNameAndMailAndQues(questionContentID);
-		String[] memNMQ = memNameAndMailAndQues.split(",");
-		new MailService(memNMQ[0], memNMQ[1], memNMQ[2], memNMQ[3]).eagleMail();
 
 	}
-
-}// class
+}

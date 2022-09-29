@@ -1,17 +1,19 @@
 package contact.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
+import contact.common.Result;
 import contact.vo.QuesContent;
 
 public interface QuesContentService {
 
-	Boolean submitAnswer(String ansContent, Integer questionContentID); 
+	Boolean submitAnswer(String answerContent, Integer questionContentID); 
 	Boolean submitQuestion(QuesContent questionContent); 
-	List<QuesContent> findAllQs();
-	List<QuesContent> getByMemberId(Integer memberId);
-	List<QuesContent> getByDate(String lastUpdateDate1, String lastUpdateDate2);
-	List<QuesContent> getByIdAndDate(Integer memberId, String lastUpdateDate1, String lastUpdateDate2);
+	Result findAllQs();
+	Result getByMemberId(Integer memberId);
+	Result getByDate(Timestamp quesTime, Timestamp answerTime);
+	Result getByIdAndDate(Integer memberId, Timestamp quesTime, Timestamp answerTime);
 	String getMemNameAndMailAndQues(Integer questionContentID);
 	String confirmQues(Integer memberId);
 }
