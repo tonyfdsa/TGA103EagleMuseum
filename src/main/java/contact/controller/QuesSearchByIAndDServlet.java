@@ -52,8 +52,6 @@ public class QuesSearchByIAndDServlet extends HttpServlet {
 		Integer memberId = vo.getMemberId();
 		Timestamp quesTime = vo.getQuesTime();
 		Timestamp answerTime = vo.getAnswerTime();
-		System.out.println(quesTime);
-		System.out.println(answerTime);
 		final Result list = service.getByIdAndDate(memberId, quesTime, answerTime);
 		resp.getWriter().print(gson.toJson(list));
 

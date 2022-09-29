@@ -53,15 +53,17 @@ public class QuestAnsServlet extends HttpServlet {
 		QuesContent vo = json2Vo(req, QuesContent.class);
 		String answerContent = vo.getAnswerContent();
 		Integer questionContentID = vo.getQuestionContentID();
-
-		service.submitAnswer(answerContent, questionContentID);
-
-		final Result list = service.findAllQs();
-		resp.getWriter().print(gson.toJson(list));
-
-		String memNameAndMailAndQues = service.getMemNameAndMailAndQues(questionContentID);
-		String[] memNMQ = memNameAndMailAndQues.split(",");
-		new MailService(memNMQ[0], memNMQ[1], memNMQ[2], memNMQ[3]).eagleMail();
+		
+		if(StringUtils.isNotBlank(answerContent)) {
+			service.submitAnswer(answerContent, questionContentID);
+			
+			final Result list = service.findAllQs();
+			resp.getWriter().print(gson.toJson(list));
+			
+			String memNameAndMailAndQues = service.getMemNameAndMailAndQues(questionContentID);
+			String[] memNMQ = memNameAndMailAndQues.split(",");
+			new MailService(memNMQ[0], memNMQ[1], memNMQ[2], memNMQ[3]).eagleMail();			
+		}
 
 	}
 
