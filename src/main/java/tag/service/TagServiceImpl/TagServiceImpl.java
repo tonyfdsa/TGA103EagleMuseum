@@ -40,16 +40,28 @@ public class TagServiceImpl implements TagService {
 	@Override
 	public TagVO editTag(TagVO tag) {
 //		final TagVO oTag = dao.findByName(tag.getTag());
-		tag.setTag(tag.getTag());
-		final int resultCount = dao.update(tag);
-		tag.setSuccessful(resultCount > 0);
-		tag.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
-		return tag;
+//		tag.setTag(tag.getTag());
+		try {
+			tag.setTagID(tag.getTagID());
+			final int resultCount = dao.update(tag);
+			tag.setSuccessful(resultCount > 0);
+			tag.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+			return tag;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
-
 	@Override
 	public TagVO findById(TagVO tag) {
-		return null;
+		try {
+			tag = dao.selectById(tag.getTagID());
+			tag.setSuccessful(true);
+			return tag;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

@@ -57,15 +57,10 @@
       selected_colStatus = true;
     }
 
-    /*   if (selected_colStatus == null) {
-        errMsg.textContent = "狀態未選"
-        return;
-      } */
     fetch('http://localhost:8080/TGA103eagleMuseum/collectionUpdate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-
         collectionTitle,
         collectionEar,
         collectionText,

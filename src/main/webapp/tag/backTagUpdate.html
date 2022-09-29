@@ -193,21 +193,9 @@
     <div style="height: 20px"></div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-auto">
-          <!-- 圖片上傳 -->
-          <div style="width: 400px;;background-color:white ; ">
-            <div class="preview">
-              <span class="text">預覽圖</span>
-            </div>
-          </div>
-          <div class="pic" style="width:400px ; margin-left: 5px;"></div>
-          <label class="input-file-button" for="upload" @click=""> 上傳圖片</label>
-          <input type="file" id="upload" style="display: none;" multiple="multiple" @change="fileSelected" />
-          <input type="submit" class="clear" value="清除上傳">
-        </div>
         <div class="col-5">
-          <div>館藏介紹:</div>
-          <textarea class="colText" placeholder="館藏介紹" style="width:100%;height: 80%;"></textarea>
+          <div>類別名稱:</div>
+          <textarea class="tagName" placeholder="類別名稱" style="width:100%;height: 80%;"></textarea>
           <div class="d-flex justify-content-end">
             <input class=" submit" value="表單送出" type="submit" />
           </div>
@@ -217,29 +205,7 @@
 
       </div>
       <!-- 分隔 -->
-      <hr>
-      <span class="tag">
-        標籤:
-        <select class="colMt" style="width: 100px;">
-          <!--有value傳value，沒有value就傳包含的文字-->
-          <option>請選擇</option>
-          <option value="1">銅</option>
 
-        </select>
-      </span>
-      <div style="margin-top: 20px;">
-        名稱:
-        <input type='text' class="colTitle">
-      </div>
-      <div style="margin-top: 20px;">
-        朝代:
-        <input class="colEar" type='text' ">
-      </div>
-      <div style=" margin-top: 20px;">
-        狀態:
-        <input type="radio" name="colStatus" class="collectStatus" value="false" id="female-input">關閉
-        <input type="radio" name="colStatus" class="collectStatus" value="true" id="male-input">開放
-      </div>
       <div style="height: 30px"></div>
     </div>
     <!-- 底部 -->
@@ -250,7 +216,8 @@
 
     <script src="./JS/backtemplete.js"></script>
 
-    <script src="./JS/backCollectionUpdate.js"></script>
+    <script src="./JS/backTagUpdate.js"></script>
+
 </body>
 
 </html>

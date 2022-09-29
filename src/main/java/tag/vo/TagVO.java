@@ -1,10 +1,13 @@
 package tag.vo;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import javax.persistence.Table;
 
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
@@ -15,6 +18,7 @@ import lombok.Setter;
 
 @Entity
 @Setter
+@Table(name = "tag")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +28,8 @@ public class TagVO extends Core{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer tagID;
 	private String tag;
-	private Timestamp lastUpdateTime;
+	@Column(insertable = false)
+	private Timestamp lastUpdateTime ;
 }
 	
 	

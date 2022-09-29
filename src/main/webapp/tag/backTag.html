@@ -216,7 +216,7 @@
 					</div>
 					<div class="modal-body">
 						<div>
-							類別名稱：<br> <input class="tagTitle" id="colTitle" type="text"></input> <br> 
+							類別名稱：<br> <input class="tagTitle" id="tagName" type="text"></input> <br>
 						</div>
 						<div id="errMsg" class="error" style="color: red;"></div>
 					</div>
@@ -239,12 +239,6 @@
 			<input type="search" class="searchbar" placeholder=" 請輸入類別名稱">
 		</div>
 
-		<div class="head">
-			<button class="searchBtn">搜尋</button>
-			<input type="search" class="searchbar" placeholder=" 請輸入館藏朝代">
-		</div>
-
-
 		<div style="height: 5px;"></div>
 		<div class="container-fluid" id="title">
 			<div class="row d-flex column">
@@ -259,18 +253,13 @@
 		<div class="searchContent"></div>
 		<div class="col-1"></div>
 	</div>
-	</div>
-	</div>
 
-
-
-	</div>
 
 	<!-- jquery link -->
 	<script src="./vendor/js/jquery3.6.0.js"></script>
 
 	<script src="./JS/backtemplete.js"></script>
-	<script src="./JS/backCollectionAdd.js"></script>
+ 	<script src="./JS/backTagAdd.js"></script>
 	<script>
 
 
@@ -320,11 +309,11 @@
 
 		$(document).on("click", ".fixed", function () {
 			var send_data = {};
-			send_data.collectionID = $(this).attr("data-id");
+			send_data.tagID = $(this).attr("data-id");
 			sessionStorage.setItem("form_data", JSON.stringify(send_data));
 
-			location.href = "./backCollectionUpdate.html";
-		})
+			location.href = "./backTagUpdate.html";
+		}) 
 	</script>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
