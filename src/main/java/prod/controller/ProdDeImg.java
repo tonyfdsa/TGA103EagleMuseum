@@ -19,6 +19,7 @@ import prod.vo.ProdImgVO;
 import prod.vo.productVO;
 @WebServlet("/ProdDeImg")
 public class ProdDeImg extends HttpServlet{
+	private static final long serialVersionUID = 1L;
 	private Gson gson = new Gson();
 	private ProductServicelm service = new ProductServicelm();
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

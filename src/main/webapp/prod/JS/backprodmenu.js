@@ -72,10 +72,6 @@
       $(document).on("click", ".headerBtn", function (){
         let val  = $(this).val()
         // console.log($(this).val())
-
-        
-       
-
         $(".head").css("display","none")
         $(".head").eq(val).slideToggle("slow");
         $(".head").eq(val).find(".searchbar").val("")
@@ -103,7 +99,7 @@
         fetch('http://localhost:8080/TGA103eagleMuseum/ProductGetAll')
           .then(resp => resp.json())
           .then(R => {
-          
+            console.log(R)
             for( i = 0 ; i < R.result["length"] ; i++){
 
             // console.log(statis);
@@ -255,7 +251,7 @@
           .then(resp => resp.json())
           .then(R => {
 
-            for( i = 0 ; i < R.result["length"] ; i++){
+            for( i = 0 ; i < R.result["length"] ; i++){F
               let text = `
               <option value="${R.result[i].prodTypeId}">${R.result[i].prodType}</option>
               `

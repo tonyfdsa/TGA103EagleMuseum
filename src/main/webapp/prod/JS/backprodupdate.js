@@ -87,8 +87,6 @@
 
               //feach 上傳多張圖片(目前只做好單張)
       
-              
-      
       $(".submit").click(function(){
         let form_data = JSON.parse(sessionStorage.getItem("form_data"));
         let productID = form_data.productId

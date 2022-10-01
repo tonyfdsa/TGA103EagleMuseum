@@ -29,8 +29,7 @@ public class ProdTagInsert extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		String ProdType = json2Vo(request, ProdTypeVO.class).getProdType();	
 //		System.out.println(ProdType);
-		service.insertTag(ProdType);
-	
+		response.getWriter().print(GSON.toJson(service.insertTag(ProdType)));	
 	}
 
 	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

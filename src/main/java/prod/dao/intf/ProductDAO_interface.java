@@ -3,6 +3,7 @@ package prod.dao.intf;
 import java.sql.SQLException;
 import java.util.List;
 
+import prod.vo.CartVO;
 import prod.vo.ProdImgVO;
 import prod.vo.ProdTypeVO;
 import prod.vo.productVO;
@@ -44,4 +45,10 @@ public interface ProductDAO_interface {
 	
   //刪除圖片
 	public int prodDeImg(Integer prodID) throws Exception;
+	
+ //取得所有圖片
+	public List<ProdImgVO> prodImgGetAll() throws Exception;
+	
+ //購物車取得商品
+	public CartVO cartgetProd(Integer prodID) throws Exception;
 }
