@@ -10,5 +10,8 @@ Configuration DTD 3.0//EN"
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
 		<property name="hibernate.highlight_sql">true</property>
+
+		<mapping class="collection.vo.CollectionVO" />
+		<mapping class="tag.vo.TagVO" />
 	</session-factory>
 </hibernate-configuration>
