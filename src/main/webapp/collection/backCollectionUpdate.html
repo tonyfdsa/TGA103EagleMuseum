@@ -213,7 +213,7 @@
             <input class=" submit" value="表單送出" type="submit" />
             <span id="errMsg"></span>
           </div>
-        
+
         </div>
 
       </div>
@@ -221,11 +221,8 @@
       <hr>
       <span class="tag">
         標籤:
-        <select class="colMt" style="width: 100px;">
-          <!--有value傳value，沒有value就傳包含的文字-->
-          <option>請選擇</option>
-          <option value="1">銅</option>
-
+        <select class="selectMaterial" style="width: 100px;">
+          <!-- <option class="selectMaterialOption" selected disabled hidden></option> -->
         </select>
       </span>
       <div style="margin-top: 20px;">
@@ -252,6 +249,22 @@
     <script src="./JS/backtemplete.js"></script>
 
     <script src="./JS/backCollectionUpdate.js"></script>
+    <script>
+
+
+      // 抓商品標籤
+      fetch('http://localhost:8080/TGA103eagleMuseum/tagAll')
+        .then(resp => resp.json())
+        .then(findAllTags => {
+          for (i = 0; i < findAllTags.length; i++) {
+            let text = `
+              <option value="${findAllTags[i].tag}" id="${findAllTags[i].tag}">${findAllTags[i].tag}</option>
+              `
+            $(".selectMaterial").append(text);
+          }
+
+        });
+    </script>
 </body>
 
 </html>
