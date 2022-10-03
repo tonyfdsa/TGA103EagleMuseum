@@ -17,7 +17,7 @@
   <!-- 正黑體字型包 -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet" />
-
+  <script src="vendor\calender\js\jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
@@ -32,70 +32,70 @@
   </header>
   <!-- aside -->
 
-	<div class="aside">
-		<!-- 頂部留白 -->
-		<div style="height: 20px"></div>
-		<!-- 大標籤 -->
-		<ul>
-			<li>
-				<div class="sideBtn">首頁管理</div>
-				<div class="Btn">
-					<a href="#">展覽資訊</a>
-				</div>
-				<div class="Btn">
-					<a href="#">商品資訊</a>
-				</div>
-				<div class="Btn">
-					<a href="#">館方資訊</a>
-				</div>
-			</li>
-			<li>
-				<div class="sideBtn">展覽管理</div>
-				<div class="Btn">
-					<a href="#">票卷管理</a>
-				</div>
-			</li>
-			</li>
-			<li>
-				<div class="sideBtn">館藏管理</div>
-				<div class="Btn">
-					<a href="#">館藏列表</a>
-				</div>
-			</li>
-			<li>
-				<div class="sideBtn">商城管理</div>
-				<div class="Btn">
-					<a href="#">訂單搜尋</a>
-				</div>
-				<div class="Btn">
-					<a href="#">商品搜尋</a>
-				</div>
-			</li>
-			<li>
-				<div class="sideBtn">會員管理</div>
-				<div class="Btn">
-					<a href="#">會員搜尋</a>
-				</div>
-			</li>
-			<li>
-				<div class="sideBtn">聯絡管理</div>
-				<div class="Btn">
-					<a href="#">常見問題</a>
-				</div>
-				<div class="Btn">
-					<a href="#">其他問題</a>
-				</div>
-				<div class="Btn">
-					<a href="#">交通資訊</a>
-				</div>
-				<div class="Btn">
-					<a href="#">租借場地</a>
-				</div>
-			</li>
-			</li>
-		</ul>
-	</div>
-	
+  <div class="aside">
+    <!-- 頂部留白 -->
+    <div style="height: 20px"></div>
+    <!-- 大標籤 -->
+    <ul>
+      <li>
+        <div class="sideBtn">首頁管理</div>
+        <div class="Btn">
+          <a href="#">展覽資訊</a>
+        </div>
+        <div class="Btn">
+          <a href="#">商品資訊</a>
+        </div>
+        <div class="Btn">
+          <a href="#">館方資訊</a>
+        </div>
+      </li>
+      <li>
+        <div class="sideBtn">展覽管理</div>
+        <div class="Btn">
+          <a href="#">票卷管理</a>
+        </div>
+      </li>
+      </li>
+      <li>
+        <div class="sideBtn">館藏管理</div>
+        <div class="Btn">
+          <a href="#">館藏列表</a>
+        </div>
+      </li>
+      <li>
+        <div class="sideBtn">商城管理</div>
+        <div class="Btn">
+          <a href="#">訂單搜尋</a>
+        </div>
+        <div class="Btn">
+          <a href="#">商品搜尋</a>
+        </div>
+      </li>
+      <li>
+        <div class="sideBtn">會員管理</div>
+        <div class="Btn">
+          <a href="#">會員搜尋</a>
+        </div>
+      </li>
+      <li>
+        <div class="sideBtn">聯絡管理</div>
+        <div class="Btn">
+          <a href="#">常見問題</a>
+        </div>
+        <div class="Btn">
+          <a href="#">其他問題</a>
+        </div>
+        <div class="Btn">
+          <a href="#">交通資訊</a>
+        </div>
+        <div class="Btn">
+          <a href="#">租借場地</a>
+        </div>
+      </li>
+      </li>
+    </ul>
+  </div>
+
   <!-- main -->
   <div class="main">
     <div class="container">
@@ -108,9 +108,16 @@
           <input type="text" class="form-control" id="exhibitionName" placeholder="請輸入關鍵字" required>
         </div>
         <div class="col-md-5">
-          <label for="daterange" class="form-label">展覽日期區間</label>
-          <input type="text" class="form-control" name="datefilter"  required>
-
+          <label for="" class="form-label">展覽日期區間</label>
+          <div class="row g-10 align-items-center">
+            <div class="col-md-5">
+              <input name="exhibitionStartDate" id="start_date" type="date" class="form-control">
+            </div>
+            ~
+            <div class="col-md-5 ">
+              <input name="exhibitionEndDate" id="end_date" type="date" class="form-control">
+            </div>
+          </div>
         </div>
         <div class="col-md-4">
           <label for="exhibitionType" class="form-label">展覽類型</label>
@@ -147,7 +154,7 @@
           <button class="btn btn-outline-secondary addExhibition" type="button">新增展覽</button>
         </div>
         <div class="col-6">
-          <button class="btn btn-outline-secondary searchBtn" type="submit">搜尋</button>
+          <button class="btn btn-outline-secondary searchBtn" type="button">搜尋</button>
         </div>
         <div class="col-12">
           <div class="row table-line"></div>
@@ -176,7 +183,6 @@
     <!-- <script src="./vendor/js/jquery3.6.0.js"></script> -->
     <script src="JS\exhibition_back.js"></script>
     <script src="./JS/backtemplete.js"></script>
-    <script src="vendor\calender\js\jquery-3.3.1.min.js"></script>
     <script src="vendor\calender\js\daterangepicker.min.js"></script>
     <script src="vendor\calender\js\moment.js"></script>
 
