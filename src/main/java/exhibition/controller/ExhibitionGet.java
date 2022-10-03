@@ -1,6 +1,7 @@
 package exhibition.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +18,8 @@ import exhibition.vo.ExhibitionVO;
 
 import static prod.common.setHeaders.setHeaders;
 
-@WebServlet("/ExhibitionGetByName")
-public class ExhibitionGetByName extends HttpServlet{
+@WebServlet("/ExhibitionGet")
+public class ExhibitionGet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private Gson gson = new Gson();
@@ -29,11 +30,17 @@ public class ExhibitionGetByName extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		setHeaders(response);
 		request.setCharacterEncoding("UTF-8");
-//		String exhibitionName = json2Vo(request, ExhibitionVO.class).getExhibitionName();
-//		exhibitionName = "%" + exhibitionName + "%";
+		PrintWriter out =  response.getWriter();
 		ExhibitionVO vo = gson.fromJson(request.getReader().readLine(), ExhibitionVO.class);
-		System.out.println(vo.getExhibitionName());
-		response.getWriter().print(gson.toJson(service.getByName("%" + vo.getExhibitionName() + "%")));	
+		System.out.println(vo.getExhibitionStartDate());
+		System.out.println(vo.getExhibitionEndDate());
+		if(vo.getExhibitionName() != null && !"".equals(vo.getExhibitionName())) {
+//			System.out.println(1);
+			out.print(gson.toJson(service.getByName("%" + vo.getExhibitionName() + "%")));
+			return;
+		}
+//		System.out.println(2);
+		out.print(gson.toJson(service.getByDate(vo.getExhibitionStartDate(), vo.getExhibitionEndDate())));	
 	}
 
 	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
