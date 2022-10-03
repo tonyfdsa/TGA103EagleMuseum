@@ -16,8 +16,13 @@ import member.vo.Member;
 public class MemberDaoImpl implements MemberDao {
 	private DataSource dataSource;
 
-	public MemberDaoImpl() throws NamingException {
-		dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/eagle_museum");
+	public MemberDaoImpl() {
+		try {
+			dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/TGA103eagleMuseum");
+		} catch (NamingException e) {
+			
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -162,7 +167,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public Member selectForLogin(String email, String password) {
-		final String sql = "select * from member where memberEmail = ? , memberPassword = ? " ;
+		final String sql = "select * from member where memberEmail = ? and memberPassword = ? " ;
 		Member member = null;
 		try (
 			Connection conn = dataSource.getConnection();

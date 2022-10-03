@@ -1,16 +1,11 @@
 package member.controller;
 
-//import java.io.BufferedReader;
-import java.io.IOException;
-//import java.io.PrintWriter;
-
-
-
 import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 import static member.common.MemberConstants.SERVICE;
 
-//import javax.sql.DataSource;
+import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,14 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//import member.service.MemberService;
-//import member.service.impl.MemberServiceImpl;
 import member.vo.Member;
 
-@WebServlet("/member/register")
-public class MemberRegisterServlet extends HttpServlet {
+@WebServlet("/member/login")
+public class MemberLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -53,19 +45,6 @@ public class MemberRegisterServlet extends HttpServlet {
 			session.setAttribute("member", member);
 		}
 		writePojo2Json(resp, member);
-			
 	}
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
