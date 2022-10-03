@@ -52,10 +52,10 @@ public class MemberRegisterServlet extends HttpServlet {
 		member.setMemberQA(memberQA);
 		member.setMemberAns(memberAns);
 		member.setMemberAddress(memberAddress);
-		member.setMemberPhone(memberPhone);
-		member.setMemberGender(memberGender);
-		member.setMemberBirthday(memberBirthday);
-		member.setMemberPermission(memberPermission);
+//		member.setMemberPhone(memberPhone);
+//		member.setMemberGender(memberGender);
+//		member.setMemberBirthday(memberBirthday);
+//		member.setMemberPermission(memberPermission);
 		
 //		final String MemberPhone = req.getParameter("memberPhone");
 		// 第一次進入此頁，使用者尚未選擇questionTypeID，故先不進行字串轉Int

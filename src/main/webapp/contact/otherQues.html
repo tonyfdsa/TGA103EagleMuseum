@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>otherQues</title>
+
+	<link rel="stylesheet" href="css/templete.css">
+
+	<!-- bootstrapr -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+	<!-- 正黑體字型包 -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet" />
+
+	<link rel="stylesheet" href="css/otherQuestions.css">
+
+	<style type="text/css">
+		div.overlayTag {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100vh;
+			background-color: hsla(0, 0%, 0%, .5);
+			display: none;
+		}
+
+		/* 元素 article 置中及基本樣式 */
+		div.overlayTag>article {
+			background-color: white;
+			width: 35%;
+			height: 450px;
+			max-width: 600px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px #ddd;
+			padding: 10px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	</style>
+
+</head>
+
+</html>
+
+<body>
+	<!-- head -->
+	<div class="wrap">
+		<div class="row d-flex">
+			<div class="col-1" alt="大頭貼">
+				<img src="./img/eagleIcon.jpg" class="min_picture"></IMG>
+			</div>
+			<div class="col-5">
+				<h1 style="text-align: center;">Eagle Museum</h1>
+			</div>
+			<div class="col-6 row d-flex menu btn-group" id="meau">
+				<ul class="drop-down-menu d-flex" style="justify-content: end;">
+					<li><a href="#" class="topTag">首頁</a></li>
+					<li><a href="exhibition.html" class="topTag">展覽</a></li>
+					<li><a href="collectionSearch 3.0.html" class="topTag">館藏</a>
+						<ul>
+							<li class="dropMeau"><a href="collectionSearch 3.0.html">館藏資訊</a></li>
+							<li class="dropMeau"><a href="#">館藏地圖</a></li>
+						</ul>
+					</li>
+					<li><a href="#" class="topTag">活動</a></li>
+					<li><a href="#" class="topTag">商城</a>
+						<ul>
+							<li class="dropMeau"><a href="#">商品列表</a></li>
+							<li class="dropMeau"><a href="#">我的購物車</a></li>
+							<li class="dropMeau"><a href="./buyerCheck.html">訂單查詢</a></li>
+							<li class="dropMeau"><a href="#">最愛清單</a></li>
+						</ul>
+					</li>
+					<li><a href="#" class="topTag">會員中心</a>
+						<ul>
+							<li class="dropMeau"><a href="./memberboot.html">會員資料</a></li>
+							<li class="dropMeau"><a href="#">訂單資料</a></li>
+							<li class="dropMeau"><a href="#">我的收藏</a></li>
+						</ul>
+					</li>
+					<li><a href="./contactUs(bootstrap).html" class="topTag">聯絡我們</a>
+						<ul>
+							<li class="dropMeau"><a href="./trafic.html">交通資訊</a></li>
+							<li class="dropMeau"><a href="./memberJoin1.html">合作提案</a></li>
+							<li class="dropMeau"><a href="#">捐款</a></li>
+							<li class="dropMeau"><a href="#">問題回饋</a></li>
+							<li class="dropMeau"><a href="#">租借場地</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<div class="upperColumn" id="topcontent"></div>
+
+	<!-- </div> -->
+
+	<!-- main -->
+	<div class="main">
+		<div class="container">
+			<div>
+				<div class="page_sign">
+					<a href="#">聯絡我們</a>→ <a href="#" style="margin-left: 0;">常見問題</a>
+					<p>→其他問題</p>
+				</div>
+			</div>
+			<form method="POST">
+				<div class="questionTypeSearch1">
+					<span>問題類型</span>
+					<select class="questionTypeID" name="questionTypeID">
+						<option value=1>交通問題</option>
+						<option value=2>展覽問題</option>
+						<option value=3>商品問題</option>
+						<option value=4>失物問題</option>
+						<option value=5>會員問題</option>
+						<option value=6>其他</option>
+					</select>
+				</div>
+				<br>
+				<div class="statement formTextName">
+					<textarea id="questionContent" name="questionContent" class="formContent" rows="10"
+						placeholder="請輸入您的疑問......"></textarea>
+					<div class="needQues">
+						<span class="inputQues">提問失敗，請輸入問題內容</span>
+					</div>
+					<br> <input class="memberId" value="2">
+				</div>
+				<div class="confirm">
+					<button class="btn" type="button" id="submitBtn">提交</button>
+					<!-- <span> -->
+					<!-- <button class="btn" id="clearBtn">清除</button> -->
+					<!-- </span> -->
+					<div class="hint"></div>
+				</div>
+
+			</form>
+			<hr>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>問題編號</th>
+						<th>會員ID</th>
+						<th>問題類型</th>
+						<th>問題內容</th>
+						<th>答覆內容</th>
+						<th>提問時間</th>
+						<th>答覆時間</th>
+					</tr>
+				</thead>
+				<tbody class="quesList">
+
+				</tbody>
+			</table>
+			<div class="overlayTag">
+				<article>
+					<form>
+						<div>問題編號：</div>
+						<input id="quesId" name="quesId" readonly> <br>
+						<div>答覆內容：</div>
+						<textarea id="ansContent" readonly></textarea>
+						<button type="button" class="close">關閉</button>
+					</form>
+				</article>
+			</div>
+		</div>
+	</div>
+	<!-- footer -->
+	<div class="footer"></div>
+
+	<!-- jQuery 位置 -->
+	<script src="vendor/js/jquery3.6.0.js"></script>
+	<!-- 模板js匯入 位置 -->
+	<!-- <script src="./workJS/Template .js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="JS/otherQues.js"></script>
+</body>
+
+<!-- </html> -->

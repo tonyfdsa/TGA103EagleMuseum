@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,6 @@ public class QuesContentDaoImpl implements QuesContentDao {
 	public QuesContentDaoImpl() throws NamingException {
 		dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/TGA103eagleMuseum");
 	}
-
 	@Override
 	public Integer insert(QuesContent questionContent) {
 		String sql = "insert questionContent(memberId, questionTypeID, questionContent, answerContent, quesTime) "
@@ -29,9 +29,8 @@ public class QuesContentDaoImpl implements QuesContentDao {
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql, new String[] { "questionContentID" });) {
 			// 假裝從session取得memberid
-			int memberId = 2;
-//			pstmt.setInt(1, questionContent.getMemberId());
-			pstmt.setInt(1, memberId);
+//			int memberId = 3;
+			pstmt.setInt(1, questionContent.getMemberId());
 			pstmt.setInt(2, questionContent.getQuestionTypeID());
 			pstmt.setString(3, questionContent.getQuestionContent());
 			pstmt.setString(4, questionContent.getAnswerContent());
@@ -104,13 +103,13 @@ public class QuesContentDaoImpl implements QuesContentDao {
 	}
 
 	@Override
-	public List<QuesContent> findByDate(String lastUpdateDate1, String lastUpdateDate2) {
+	public List<QuesContent> findByDate(Timestamp quesTime, Timestamp answerTime) {
 		String sql = "select * from questionContent where date(quesTime) between ? and ? ";
 
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);) {
-			pstmt.setString(1, lastUpdateDate1);
-			pstmt.setString(2, lastUpdateDate2);
+			pstmt.setTimestamp(1, quesTime);
+			pstmt.setTimestamp(2, answerTime);
 			ResultSet ansrs = pstmt.executeQuery();
 			List<QuesContent> list = new ArrayList<QuesContent>();
 			while (ansrs.next()) {
@@ -133,29 +132,30 @@ public class QuesContentDaoImpl implements QuesContentDao {
 	}
 
 	@Override
-	public List<QuesContent> findByIdAndDate(Integer memberId, String lastUpdateDate1, String lastUpdateDate2) {
+	public List<QuesContent> findByIdAndDate(Integer memberId, Timestamp quesTime, Timestamp answerTime) {
 		String sql = "select * from questionContent " + "where memberId = ? and date(quesTime) between ? and ? ";
 
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			pstmt.setInt(1, memberId);
-			pstmt.setString(2, lastUpdateDate1);
-			pstmt.setString(3, lastUpdateDate2);
-			ResultSet ansrs = pstmt.executeQuery();
+			pstmt.setTimestamp(2, quesTime);
+			pstmt.setTimestamp(3, answerTime);
 			List<QuesContent> list = new ArrayList<QuesContent>();
-			while (ansrs.next()) {
-				QuesContent quesCont = new QuesContent();
-				quesCont.setQuestionContentID(ansrs.getInt("questionContentID"));
-				quesCont.setMemberId(ansrs.getInt("memberId"));
-				quesCont.setQuestionTypeID(ansrs.getInt("questionTypeID"));
-				quesCont.setQuestionContent(ansrs.getString("questionContent"));
-				quesCont.setAnswerContent(ansrs.getString("answerContent"));
-				quesCont.setAnswered(ansrs.getBoolean("answered"));
-				quesCont.setQuesTime(ansrs.getTimestamp("quesTime"));
-				quesCont.setAnswerTime(ansrs.getTimestamp("answerTime"));
-				list.add(quesCont);
-			}
-			return list;
+			try(ResultSet ansrs = pstmt.executeQuery()){
+				while (ansrs.next()) {
+					QuesContent quesCont = new QuesContent();
+					quesCont.setQuestionContentID(ansrs.getInt("questionContentID"));
+					quesCont.setMemberId(ansrs.getInt("memberId"));
+					quesCont.setQuestionTypeID(ansrs.getInt("questionTypeID"));
+					quesCont.setQuestionContent(ansrs.getString("questionContent"));
+					quesCont.setAnswerContent(ansrs.getString("answerContent"));
+					quesCont.setAnswered(ansrs.getBoolean("answered"));
+					quesCont.setQuesTime(ansrs.getTimestamp("quesTime"));
+					quesCont.setAnswerTime(ansrs.getTimestamp("answerTime"));
+					list.add(quesCont);
+				}					
+				return list;
+			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -163,11 +163,11 @@ public class QuesContentDaoImpl implements QuesContentDao {
 	}
 
 	@Override
-	public void updateAns(String ansContent, Integer questionContentID) {
+	public void updateAns(String answerContent, Integer questionContentID) {
 		String sql = "update questionContent set answerContent = ?, answered = true, answerTime=now() where questionContentID = ?";
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);){
-			pstmt.setString(1, ansContent);
+			pstmt.setString(1, answerContent);
 			pstmt.setInt(2, questionContentID);
 			pstmt.executeUpdate();			
 		}catch (SQLException e) {
@@ -221,6 +221,41 @@ public class QuesContentDaoImpl implements QuesContentDao {
 		return null;				
 	}
 
+	@Override
+	public String getQContent(Integer questionContentID) {
+		String sql = "select questionContent from questionContent where questionContentID = ?;";
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(sql);){
+			pstmt.setInt(1, questionContentID);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				QuesContent quesContent = new QuesContent();
+				quesContent.setQuestionContent(rs.getString("questionContent"));
+				return quesContent.getQuestionContent();	
+			}				
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String getAContent(Integer questionContentID) {
+		String sql = "SELECT answerContent FROM questionContent where questionContentID = ?;";
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(sql);){
+			pstmt.setInt(1, questionContentID);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				QuesContent quesContent = new QuesContent();
+				quesContent.setAnswerContent(rs.getString("answerContent"));
+				return quesContent.getAnswerContent();	
+			}				
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 
-}
+}// class

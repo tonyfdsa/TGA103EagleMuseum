@@ -1,21 +1,22 @@
 package contact.service;
 
-import java.util.List;
-
+import java.sql.Timestamp;
 import javax.naming.NamingException;
-
 import org.apache.commons.lang3.StringUtils;
 
+import contact.common.Result;
 import contact.dao.QuesContentDao;
 import contact.dao.QuesContentDaoImpl;
 import contact.vo.QuesContent;
 
 public class QuesContentServiceImpl implements QuesContentService {
 
+	private Result R;
 	private QuesContentDao dao;
-
+	
 	public QuesContentServiceImpl() throws NamingException {
 		dao = new QuesContentDaoImpl();
+		R = new Result();
 	}
 
 	@Override
@@ -42,29 +43,29 @@ public class QuesContentServiceImpl implements QuesContentService {
 	}
 
 	@Override
-	public List<QuesContent> findAllQs() {
-		return dao.selectAll();
+	public Result findAllQs() {
+		return R.success(dao.selectAll());
 	}
 
 	@Override
-	public List<QuesContent> getByMemberId(Integer memberId) {
-		return dao.findByMemberId(memberId);
+	public Result getByMemberId(Integer memberId) {				  
+		return R.success(dao.findByMemberId(memberId));		
 	}
 
 	@Override
-	public List<QuesContent> getByDate(String lastUpdateDate1, String lastUpdateDate2) {
-		return dao.findByDate(lastUpdateDate1, lastUpdateDate2);
+	public Result getByDate(Timestamp quesTime, Timestamp answerTime) {
+		return R.success(dao.findByDate(quesTime, answerTime));
 	}
 
 	@Override
-	public List<QuesContent> getByIdAndDate(Integer memberId, String lastUpdateDate1, String lastUpdateDate2) {
-		return dao.findByIdAndDate(memberId, lastUpdateDate1, lastUpdateDate2);
+	public Result getByIdAndDate(Integer memberId, Timestamp quesTime, Timestamp answerTime) {
+		return R.success(dao.findByIdAndDate(memberId, quesTime, answerTime));
 	}
 
 	@Override
-	public Boolean submitAnswer(String ansContent, Integer questionContentID) {
+	public Boolean submitAnswer(String answerContent, Integer questionContentID) {
 
-		if (StringUtils.isBlank(ansContent)) {
+		if (StringUtils.isBlank(answerContent)) {
 			// final String pickType = "請輸入答覆內容";
 			return false;
 		}
@@ -74,7 +75,7 @@ public class QuesContentServiceImpl implements QuesContentService {
 			return false;
 		}
 
-		dao.updateAns(ansContent, questionContentID);
+		dao.updateAns(answerContent, questionContentID);
 
 		return true;
 	}
@@ -87,6 +88,16 @@ public class QuesContentServiceImpl implements QuesContentService {
 	@Override
 	public String confirmQues(Integer memberId) {
 		return dao.confirmQues(memberId);
+	}
+
+	@Override
+	public String getQContentService(Integer questionContentID) {
+		return dao.getQContent(questionContentID);
+	}
+
+	@Override
+	public String getAContentService(Integer questionContentID) {
+		return dao.getAContent(questionContentID);
 	}
 
 

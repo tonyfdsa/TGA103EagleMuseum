@@ -1,11 +1,9 @@
 package contact.controller;
 
+import static contact.common.json2VO.json2Vo;
 import static prod.common.setHeaders.setHeaders;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,16 +13,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.gson.Gson;
+
 import contact.common.MailService;
+import contact.common.Result;
 import contact.service.QuesContentService;
 import contact.service.QuesContentServiceImpl;
 import contact.vo.QuesContent;
 
 @WebServlet("/questionAns")
 public class QuestAnsServlet extends HttpServlet {
-
-
 	private static final long serialVersionUID = 1L;
+
+	// 跨域
+	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		setHeaders(resp);
+	}
+
 	private QuesContentService service;
 
 	public void init() throws ServletException {
@@ -36,72 +41,28 @@ public class QuestAnsServlet extends HttpServlet {
 		super.init();
 	}
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.doPost(req, resp);
-	}
+	private Gson gson = new Gson();
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		setHeaders(resp);
 		resp.setContentType("application/json;charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
 
-		final String memberIdStr = req.getParameter("memberId");
-		final String lastUpdateDate1 = req.getParameter("lastUpdateDate1");
-		final String lastUpdateDate2 = req.getParameter("lastUpdateDate2");
-		final String ansContent = req.getParameter("ansContent");
-		final String quesIdStr = req.getParameter("quesId");
-		Integer memberId = null;
-		Integer quesId = null;
-
-		if (StringUtils.isAllBlank()) {
-			final List<QuesContent> list = service.findAllQs();
-			req.setAttribute("questionList", list);
-		}
+		QuesContent vo = json2Vo(req, QuesContent.class);
+		String answerContent = vo.getAnswerContent();
+		Integer questionContentID = vo.getQuestionContentID();
 		
-		// 第一次進入此頁，使用者尚未選擇memberId，故先不進行字串轉Int
-		if (StringUtils.isNotBlank(ansContent) && StringUtils.isNotBlank(quesIdStr)) {
-			quesId = Integer.parseInt(quesIdStr);
-			final boolean result = service.submitAnswer(ansContent, quesId);
-			req.setAttribute("result", result ? "答覆已送出" : "答覆失敗");
-			final List<QuesContent> list = service.findAllQs();
-			req.setAttribute("questionList", list);
-					
-			String memNameAndMailAndQues = service.getMemNameAndMailAndQues(quesId);
+		if(StringUtils.isNotBlank(answerContent)) {
+			service.submitAnswer(answerContent, questionContentID);
+			
+			final Result list = service.findAllQs();
+			resp.getWriter().print(gson.toJson(list));
+			
+			String memNameAndMailAndQues = service.getMemNameAndMailAndQues(questionContentID);
 			String[] memNMQ = memNameAndMailAndQues.split(",");
-//			System.out.println(Arrays.toString(memNMQ));
-//			System.out.println("mail = " + xx[0]);
-			new MailService(memNMQ[0], memNMQ[1], memNMQ[2], memNMQ[3]).eagleMail();		
+			new MailService(memNMQ[0], memNMQ[1], memNMQ[2], memNMQ[3]).eagleMail();			
 		}
 
-		if (StringUtils.isNotBlank(memberIdStr) && StringUtils.isNotBlank(lastUpdateDate1)
-				&& StringUtils.isNotBlank(lastUpdateDate2)) {
-			memberId = Integer.parseInt(memberIdStr);
-			final List<QuesContent> list = service.getByIdAndDate(memberId, lastUpdateDate1, lastUpdateDate2);
-			req.setAttribute("questionList", list);
-		}
-
-		
-		if (StringUtils.isNotBlank(memberIdStr) && (StringUtils.isBlank(lastUpdateDate1))
-				&& (StringUtils.isBlank(lastUpdateDate1))) {
-			memberId = Integer.parseInt(memberIdStr);
-			final List<QuesContent> list = service.getByMemberId(memberId);
-			req.setAttribute("questionList", list);
-		} else if (StringUtils.isBlank(memberIdStr)) {
-			final List<QuesContent> list = service.findAllQs();
-			req.setAttribute("questionList", list);
-		}
-
-		if ((StringUtils.isBlank(memberIdStr)) && (StringUtils.isNotBlank(lastUpdateDate1))
-				&& (StringUtils.isNotBlank(lastUpdateDate1))) {
-			final List<QuesContent> list = service.getByDate(lastUpdateDate1, lastUpdateDate2);
-			req.setAttribute("questionList", list);
-		} else if (StringUtils.isBlank(memberIdStr)) {
-			final List<QuesContent> list = service.findAllQs();
-			req.setAttribute("questionList", list);
-		}
-
-
-		req.getRequestDispatcher("/contact/questionAnswer.jsp").forward(req, resp);
 	}
 
-}
+}// class
