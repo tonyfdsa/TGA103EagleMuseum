@@ -1,16 +1,38 @@
-
+//清空答覆內容
+function clear(){
+	$("#ansContent").val("");
+}
 
 // 開啟彈跳視窗
 $(document).on("click", ".replybtn", function () {
 	$(".overlayTag").fadeIn();
+	
 	//綁定quesId
 	$("#quesId").val($(this).val());
+	
+
+	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/getQContentServlet'
+	let questionContentID = document.querySelector("#quesId").value;
+
+	fetch(TagInsertURL, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			questionContentID,
+		})
+	})
+		.then(resp => resp.json())//後端傳給前端的格式
+		.then(R => {
+			console.log(R);
+			let qContent = `${R}`;
+			$("#quesContent").html(qContent);
+		})
 
 	$(".reply").on("click", function () {
 		let ansContent = ($("#ansContent").val());
 		if (ansContent != "") {
 			$("div.overlayTag").fadeOut();
-		} else{
+		} else {
 			$(".ansSubmit").slideToggle("slow");
 		}
 	})
@@ -21,6 +43,7 @@ $(document).on("click", ".replybtn", function () {
 // 關閉 標籤
 $(document).on("click", ".close, div.overlayTag, .tagSubmit", function (e) {
 	$("div.overlayTag").fadeOut();
+	clear();
 });
 
 //取消冒泡事件
@@ -91,8 +114,8 @@ $(".searchAllQs").click(function () {
                 <td>${R.result[i].questionContentID}</td>
                 <td>${R.result[i].memberId}</td>
                 <td>${R.result[i].questionTypeID}</td>
-				<td><button class="replybtn" value="${R.result[i].questionContentID}">回覆</button></td>
-                <td>${R.result[i].questionContent}</td>
+				<td class="replytd"><button class="replybtn" value="${R.result[i].questionContentID}">回覆</button></td>
+                <td class="table_tit">${R.result[i].questionContent}</td>
                 <td>${R.result[i].answered}</td>
                 <td>${R.result[i].quesTime}</td>
                 <td>${R.result[i].answerTime}</td>
@@ -134,7 +157,7 @@ $(".searchById").click(function () {
                 <td>${R.result[i].memberId}</td>
                 <td>${R.result[i].questionTypeID}</td>
 				<td><button class="replybtn" value="${R.result[i].questionContentID}">回覆</button></td>
-                <td>${R.result[i].questionContent}</td>
+                <td class="table_tit">${R.result[i].questionContent}</td>
                 <td>${R.result[i].answered}</td>
                 <td>${R.result[i].quesTime}</td>
                 <td>${R.result[i].answerTime}</td>
@@ -176,7 +199,7 @@ $(".searchByDate").click(function () {
                 <td>${R.result[i].memberId}</td>
                 <td>${R.result[i].questionTypeID}</td>
 				<td><button class="replybtn" value="${R.result[i].questionContentID}">回覆</button></td>
-                <td>${R.result[i].questionContent}</td>
+                <td class="table_tit">${R.result[i].questionContent}</td>
                 <td>${R.result[i].answered}</td>
                 <td>${R.result[i].quesTime}</td>
                 <td>${R.result[i].answerTime}</td>
@@ -216,7 +239,7 @@ $(".searchByIAndD").click(function () {
                 <td>${R.result[i].memberId}</td>
                 <td>${R.result[i].questionTypeID}</td>
 				<td><button class="replybtn" value="${R.result[i].questionContentID}">回覆</button></td>
-                <td>${R.result[i].questionContent}</td>
+                <td class="table_tit">${R.result[i].questionContent}</td>
                 <td>${R.result[i].answered}</td>
                 <td>${R.result[i].quesTime}</td>
                 <td>${R.result[i].answerTime}</td>
@@ -228,8 +251,10 @@ $(".searchByIAndD").click(function () {
 })
 
 
+
 //館員回覆問題
 $(document).on("click", ".reply", function () {
+	
 	// console.log("ok");
 	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/questionAns'
 	let questionContentID = document.querySelector("#quesId").value;
@@ -245,6 +270,7 @@ $(document).on("click", ".reply", function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式
 		.then(R => {
+			clear();
 			let quesList = "";
 			for (let i = 0; i < R.result.length; i++) {
 
@@ -258,7 +284,7 @@ $(document).on("click", ".reply", function () {
                 <td>${R.result[i].memberId}</td>
                 <td>${R.result[i].questionTypeID}</td>
 				<td><button class="replybtn" value="${R.result[i].questionContentID}">回覆</button></td>
-                <td>${R.result[i].questionContent}</td>
+                <td class="table_tit">${R.result[i].questionContent}</td>
                 <td>${R.result[i].answered}</td>
                 <td>${R.result[i].quesTime}</td>
                 <td>${R.result[i].answerTime}</td>
@@ -266,6 +292,7 @@ $(document).on("click", ".reply", function () {
             `
 			}
 			$(".quesList").html(quesList);
+			
 		})
 
 });

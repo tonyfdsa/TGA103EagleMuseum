@@ -5,6 +5,7 @@ import java.util.List;
 
 import contact.common.Result;
 import contact.vo.QuesContent;
+import core.service.CoreService;
 
 public interface QuesContentService {
 
@@ -16,4 +17,6 @@ public interface QuesContentService {
 	Result getByIdAndDate(Integer memberId, Timestamp quesTime, Timestamp answerTime);
 	String getMemNameAndMailAndQues(Integer questionContentID);
 	String confirmQues(Integer memberId);
+	String getQContentService(Integer questionContentID);
+	String getAContentService(Integer questionContentID);
 }

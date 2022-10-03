@@ -1,3 +1,7 @@
+body {
+	background-color: #fffbdd;
+}
+
 div.container {
 	background-color: #fffbdd;
 }
@@ -69,14 +73,34 @@ div.confirm {
 	text-align: center;
 }
 
-table {
-  border: 1px solid #999;
-  padding: 0.5rem;
+.table {
+	border: 1px solid #999;
+	padding: 0.5rem;
+	table-layout: fixed;
+}
+
+
+.table_tit {
+	white-space: nowrap; /*禁止td換行*/
+	overflow: hidden; /*隱藏X,Y滾動條*/
+	text-overflow: ellipsis; /*將顯示不完的以...顯示*/
 }
 
 .inputQues {
 	display: none;
 	color: red;
-	margin-left: 4%;
+	font-size: 18px;
+	/* margin-left: 4%; */
 }
 
+
+#quesId {
+	background-color: lightgrey;
+}
+
+#ansContent {
+	background-color: lightgrey;
+	resize: none;
+	width: 450px;
+	height: 300px;
+}

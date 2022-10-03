@@ -22,7 +22,6 @@ public class QuesContentDaoImpl implements QuesContentDao {
 	public QuesContentDaoImpl() throws NamingException {
 		dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/TGA103eagleMuseum");
 	}
-
 	@Override
 	public Integer insert(QuesContent questionContent) {
 		String sql = "insert questionContent(memberId, questionTypeID, questionContent, answerContent, quesTime) "
@@ -222,6 +221,41 @@ public class QuesContentDaoImpl implements QuesContentDao {
 		return null;				
 	}
 
+	@Override
+	public String getQContent(Integer questionContentID) {
+		String sql = "select questionContent from questionContent where questionContentID = ?;";
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(sql);){
+			pstmt.setInt(1, questionContentID);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				QuesContent quesContent = new QuesContent();
+				quesContent.setQuestionContent(rs.getString("questionContent"));
+				return quesContent.getQuestionContent();	
+			}				
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String getAContent(Integer questionContentID) {
+		String sql = "SELECT answerContent FROM questionContent where questionContentID = ?;";
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(sql);){
+			pstmt.setInt(1, questionContentID);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				QuesContent quesContent = new QuesContent();
+				quesContent.setAnswerContent(rs.getString("answerContent"));
+				return quesContent.getAnswerContent();	
+			}				
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 
-}
+}// class

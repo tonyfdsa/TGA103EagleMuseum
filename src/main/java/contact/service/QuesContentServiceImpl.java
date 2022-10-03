@@ -1,10 +1,7 @@
 package contact.service;
 
 import java.sql.Timestamp;
-import java.util.List;
-
 import javax.naming.NamingException;
-
 import org.apache.commons.lang3.StringUtils;
 
 import contact.common.Result;
@@ -15,9 +12,8 @@ import contact.vo.QuesContent;
 public class QuesContentServiceImpl implements QuesContentService {
 
 	private Result R;
-	
 	private QuesContentDao dao;
-
+	
 	public QuesContentServiceImpl() throws NamingException {
 		dao = new QuesContentDaoImpl();
 		R = new Result();
@@ -92,6 +88,16 @@ public class QuesContentServiceImpl implements QuesContentService {
 	@Override
 	public String confirmQues(Integer memberId) {
 		return dao.confirmQues(memberId);
+	}
+
+	@Override
+	public String getQContentService(Integer questionContentID) {
+		return dao.getQContent(questionContentID);
+	}
+
+	@Override
+	public String getAContentService(Integer questionContentID) {
+		return dao.getAContent(questionContentID);
 	}
 
 

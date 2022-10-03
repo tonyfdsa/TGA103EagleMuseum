@@ -17,5 +17,7 @@ public interface QuesContentDao {
 	void updateAns(String answerContent, Integer questionContentID);
 	String getMemNameAndMailAndQues(Integer questionContentID);
 	String confirmQues(Integer memberId);
+	String getQContent(Integer questionContentID);
+	String getAContent(Integer questionContentID);
 
 }

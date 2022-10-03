@@ -4,8 +4,6 @@ import static contact.common.json2VO.json2Vo;
 import static prod.common.setHeaders.setHeaders;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

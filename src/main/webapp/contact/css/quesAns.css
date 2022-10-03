@@ -74,3 +74,31 @@ div.overlayTag>article {
 #quesId {
 	background-color: lightgrey;
 }
+
+#quesContent {
+	background-color: lightgrey;
+	resize: none;
+	width: 450px;
+	height: 100px;
+}
+
+#ansContent {
+	resize: none;
+	width: 450px;
+	height: 180px;
+}
+
+.table {
+	border: 1px solid #999;
+	padding: 0.5rem;
+	table-layout: fixed;
+}
+
+.table_tit {
+	white-space: nowrap;
+	/*禁止td換行*/
+	overflow: hidden;
+	/*隱藏X,Y滾動條*/
+	text-overflow: ellipsis;
+	/*將顯示不完的以...顯示*/
+}

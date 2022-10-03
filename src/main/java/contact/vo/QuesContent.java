@@ -2,8 +2,17 @@ package contact.vo;
 
 import java.sql.Timestamp;
 
-public class QuesContent {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "questionContent")
+public class QuesContent {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer questionContentID;
 	private Integer memberId;
 	private Integer questionTypeID;
