@@ -3,15 +3,31 @@ package prod.vo;
 public class CartVO {
 	private Integer productID;
 	private String prodName;
+	private Integer prodPrice;
+	private Integer prodCount;
+	private String prodImg;
+	private Integer size;
+	
+	public Integer getSize() {
+		return size;
+	}
+	public void setSize(Integer size) {
+		this.size = size;
+	}
 	public Integer getProdCount() {
 		return prodCount;
 	}
 	public void setProdCount(Integer prodCount) {
 		this.prodCount = prodCount;
 	}
-	private Integer prodPrice;
-	private Integer prodCount;
 	
+
+	public String getProdImg() {
+		return prodImg;
+	}
+	public void setProdImg(String prodImg) {
+		this.prodImg = prodImg;
+	}
 	public Integer getProductID() {
 		return productID;
 	}

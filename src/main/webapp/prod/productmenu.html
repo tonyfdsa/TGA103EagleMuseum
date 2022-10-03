@@ -125,7 +125,7 @@
             <div class="col-1"></div>
             <div class="col-2 d-flex justify-content-center">
               <button class="focusbtn" style="margin-right: 15px; padding: 0px 10px;">關注清單</button>
-              <button class="focusbtn" style="margin-right: 15px; padding: 0px 10px;">購物車</button>
+              <button class="focusbtn" onclick="javascript:location.href='./prodCart.html'" style="margin-right: 15px; padding: 0px 10px;">購物車</button>
             </div>
             
             <div class="col-6"></div>
@@ -285,12 +285,15 @@
             // console.log("123")
             let URL = "http://localhost:8080/TGA103eagleMuseum/ProdShoppingCart"
             let productID = $(this).attr("data-id");
-            console.log(productID)
+            let prodImg = $(this).closest(".card").find("img").attr("src")
+            // console.log(prodImg)
+            // console.log(productID)
             fetch(URL, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-              productID
+              productID,
+              prodImg
               })
             })
             .then(resp => resp.json())

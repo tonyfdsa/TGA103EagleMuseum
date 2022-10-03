@@ -16,7 +16,16 @@ public class productVO {
 	private Integer bestSeller; 
 	private Date lastUpdateTime;
 	
+	private String prodImg;
 	
+	
+
+	public String getProdImg() {
+		return prodImg;
+	}
+	public void setProdImg(String prodImg) {
+		this.prodImg = prodImg;
+	}
 	public Integer getProductID() {
 		return productID;
 	}
