@@ -40,8 +40,6 @@
         return;
       }
 
-
-
       fetch('http://localhost:8080/TGA103eagleMuseum/collectionAdd', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },

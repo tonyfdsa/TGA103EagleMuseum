@@ -3,20 +3,25 @@
 
   var form_data = JSON.parse(sessionStorage.getItem("form_data"));
   var collectionID = form_data.collectionID
+  var collectionMaterial = form_data.collectionMaterial
   // 把ID往下帶
   fetch("http://localhost:8080/TGA103eagleMuseum/collectionGetOne", {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       collectionID: collectionID,
-
+      collectionMaterial: collectionMaterial,
     }),
-
   })
     .then(resp => resp.json())
     .then(collection => {
       document.querySelector('.colTitle').value = collection.collectionTitle;
 
+      let text2 = `
+      <option value="${collection.collectionMaterial}" selected disabled hidden>${collection.collectionMaterial}</option>
+      `
+      $(".selectMaterial").append(text2);
+      
       document.querySelector('.colEar').value = collection.collectionEar;
       document.querySelector('.colText').value = collection.collectionText;
       document.querySelector('.collectStatus').value = collection.collectionStatus;
@@ -30,7 +35,7 @@
   //submit insert
   $(document).on("click", ".submit", function () {
     let collectionTitle = document.querySelector(".colTitle").value;
-    let collectionMaterial = document.querySelector(".colMt").value;
+    let collectionMaterial = document.querySelector(".selectMaterial").value;
     let collectionEar = document.querySelector(".colEar").value;
     let collectionText = document.querySelector(".colText").value;
     let collectionStatus = document.getElementsByName("colStatus");
