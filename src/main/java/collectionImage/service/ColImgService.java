@@ -1,9 +1,14 @@
 package collectionImage.service;
 
-import collectionImage.vo.ColImgVO;
+import java.util.List;
 
-public interface ColImgService {
+import collectionImage.vo.ColImgVO;
+import core.service.CoreService;
+
+public interface ColImgService  extends CoreService{
 	ColImgVO add(ColImgVO ColImg);
 	ColImgVO edit(ColImgVO ColImg);
 	ColImgVO remove(ColImgVO ColImg);
+	public List<ColImgVO> getAll();
+
 }

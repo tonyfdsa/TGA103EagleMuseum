@@ -190,7 +190,6 @@ public class CollectionDaoimpl implements CollectionDaointf {
 
 	@Override
 	public List<CollectionVO> findByName(String collectionTitle) {
-		System.out.println("okok");
 		try {
 			return getSession()
 					.createQuery("FROM CollectionVO where collectionTitle like :collectionTitle", CollectionVO.class)

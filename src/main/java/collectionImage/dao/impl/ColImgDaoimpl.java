@@ -1,42 +1,51 @@
 package collectionImage.dao.impl;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import java.util.List;
+import org.hibernate.query.Query;
 
-import collection.dao.sql.CollectDaoSQL;
 import collectionImage.dao.intf.ColImgDaointf;
 import collectionImage.vo.ColImgVO;
 
 public class ColImgDaoimpl implements ColImgDaointf {
-	private static CollectDaoSQL SQL = null;
-	private static DataSource ds = null;
 
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TGA103eagleMuseum");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	@Override
+	public int insert(ColImgVO ColImgVO) {
+		getSession().persist(ColImgVO);
+		return 1;
 	}
 
 	@Override
-	public boolean insert(ColImgVO ColImgVO) {
-		// TODO Auto-generated method stub
-		return false;
+	public int update(ColImgVO ColImg) {
+		final StringBuilder hql = new StringBuilder().append("UPDATE colImg SET ");
+			hql.append("imageName = :imageName,");
+		Query<?> query = getSession().createQuery(hql.toString());
+		return query
+				.setParameter("imageName", ColImg.getImageName()) 
+				.executeUpdate();
 	}
 
 	@Override
-	public boolean update(ColImgVO ColImgVO) {
-		// TODO Auto-generated method stub
-		return false;
+	public int deleteById(Integer imageID) {
+		ColImgVO ColImg = new ColImgVO();
+		ColImg.setImageID(imageID);
+		getSession().remove(ColImg);
+		return 1;
 	}
 
 	@Override
-	public boolean delete(Integer collectionID) {
-		// TODO Auto-generated method stub
-		return false;
+	public ColImgVO selectById(Integer id) {
+		Query<ColImgVO> query = getSession().createQuery("FROM collectionImage WHERE imageID = :imageID", ColImgVO.class);
+		query.setParameter("gymId", id);
+		ColImgVO ColImg = query.uniqueResult();
+		return ColImg;
 	}
+	@Override
+	public List<ColImgVO> selectAll() {
+		Query<ColImgVO> query = getSession().createQuery("FROM ColImgVO", ColImgVO.class);
+		List<ColImgVO> list = query.list();
+		return list;
+	}
+
+	
+	
 }

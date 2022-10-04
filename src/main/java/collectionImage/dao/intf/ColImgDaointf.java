@@ -1,11 +1,9 @@
 package collectionImage.dao.intf;
+import java.util.List;
 
-import collection.vo.CollectionVO;
 import collectionImage.vo.ColImgVO;
+import core.dao.CoreDao;
 
-public interface ColImgDaointf {
-	public boolean insert(ColImgVO ColImgVO);
-	public boolean update(ColImgVO ColImgVO);
-	public boolean delete(Integer collectionID);
-
+public interface ColImgDaointf extends CoreDao<ColImgVO, Integer> {
+//	public List<ColImgVO> insertColImg(byte[] decode, Integer id);
 }

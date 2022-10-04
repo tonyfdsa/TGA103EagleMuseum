@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
@@ -17,6 +19,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "collectionImage")
 @NoArgsConstructor
 @AllArgsConstructor
 public class ColImgVO extends Core {
@@ -25,6 +28,8 @@ public class ColImgVO extends Core {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer imageID;
 	private Integer collectionID;
-	private Byte[] imageName;
+	@Transient
+	private String collectionimgStr;
+	private byte[] imageName;
 	private Timestamp lastUpdateTime;
 }

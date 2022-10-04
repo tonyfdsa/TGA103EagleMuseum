@@ -12,6 +12,7 @@ Configuration DTD 3.0//EN"
 		<property name="hibernate.highlight_sql">true</property>
 
 		<mapping class="collection.vo.CollectionVO" />
+		<mapping class="collectionImage.vo.ColImgVO" />
 		<mapping class="tag.vo.TagVO" />
 	</session-factory>
 </hibernate-configuration>
