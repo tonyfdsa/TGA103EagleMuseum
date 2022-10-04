@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart</title>
+    <!-- /teleplete -->
+    <link rel="stylesheet" href="./CSS/templete.css" />
+    <!-- bookstrapt -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+     <style>
+.input-file-button{
+    border: 1px black solid;
+    background-color: gray;
+    color: white;
+    padding: 0px 5px;
+    cursor: pointer;
+    position: relative;
+    left:247px;
+  }
+
+  .input-file-button:hover{
+    background-color: rgba(106, 241, 9, 0.482);
+    color: rgb(0, 0, 0);
+  }
+
+  .submit{
+    border: 1px black solid;
+    background-color: gray;
+    color: white;
+    padding: 0px 5px;
+    cursor: pointer;
+  }
+
+  .submit:hover{
+    background-color: rgba(106, 241, 9, 0.482);
+    color: rgb(0, 0, 0);
+  }
+
+  .clear{
+    border: 1px black solid;
+    background-color: gray;
+    color: white;
+    padding: 0px 5px;
+    cursor: pointer;
+    position: relative;
+    left:243px;
+  }
+
+  .clear:hover{
+    background-color: rgba(106, 241, 9, 0.482);
+    color: rgb(0, 0, 0);
+  }
+
+  .preview{
+    height: 250px;
+    max-width: 100%;
+    background-color: rgba(128, 128, 128, 0.268);
+   margin-left: 5px;
+  }
+
+  .preview img.preview_img{
+    width: 100%;
+    height: 100%;
+  }
+
+  /*  */
+  .uploadImage {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: 90px;
+    height: 90px;
+    background: url("../點選上傳.png") no-repeat;
+    background-size: cover;
+    text-align: center;
+    cursor: pointer;
+  }
+  .uploadImage p {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    font-size: 14px;
+    color: #999999;
+  }
+  .uploadImage input#file {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .smallpreview {
+    position: relative;
+    display:inline-block;
+    vertical-align: top;
+    border: solid 1px rgba(0, 0, 0, 0.138);
+    margin: 0px;
+    width: 96px;
+    height: 90px;
+    background: #e1e6ed;
+    
+  }
+  .smallpreview img {
+    /* position: relative; */
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  .smallpreview img[src=""] {
+    opacity: 0;
+    filter: Alpha(0); /* 相容IE8-9 */
+  }
+  .smallpreview img:not([src]) {
+    opacity: 0;
+    filter: Alpha(0); /* 相容IE8-9 */
+  }
+
+    .buy{
+            height: 40px;
+            font-size: 14px;
+            width: 100px;
+            background-color: rgba(247, 110, 60, 0.705);
+            color: white;
+            cursor: pointer; 
+        }
+      .buy:hover{
+        color: white;
+        background-color: rgb(247, 110, 60); 
+        font-size: 14px;
+      }
+
+      .cart{
+            height: 40px;
+            font-size: 14px;
+            width: 100px;
+            background-color: rgba(247, 110, 60, 0.705);
+            color: white;
+            cursor: pointer; 
+        }
+      .cart:hover{
+        color: white;
+        background-color: rgb(247, 110, 60); 
+        font-size: 14px;
+      }
+     </style>
+  </head>
+
+
+  <body>
+    <!-- head -->
+    <div class="wrap">
+          <div class="row d-flex" >
+            <div class="col-1"  alt="大頭貼" ><img src="./img/eagleIcon.jpg" class="min_picture"></IMG></div>
+            <div class="col-5">
+              <h1 style="text-align: center;">Eagle Museum</h1>
+            </div>
+            <div class="col-6 row d-flex menu btn-group" id="meau">
+                <ul class="drop-down-menu d-flex" style="justify-content: end;">
+                    <li ><a href="#" class="topTag">首頁</a></li>
+                    <li ><a href="exhibition.html" class="topTag">展覽</a></li>
+                    <li ><a href="collectionSearch 3.0.html" class="topTag">館藏</a>
+                      <ul>
+                        <li class="dropMeau"><a href="collectionSearch 3.0.html">館藏資訊</a></li>
+                        <li class="dropMeau"><a href="#">館藏地圖</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="#"  class="topTag">活動</a></li>
+                    <li ><a href="#"  class="topTag">商城</a>
+                      <ul>
+                        <li class="dropMeau"><a href="#">商品列表</a></li>
+                        <li class="dropMeau"><a href="#">我的購物車</a></li>
+                        <li class="dropMeau"><a href="./buyerCheck.html">訂單查詢</a></li>
+                        <li class="dropMeau"><a href="#">最愛清單</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="#"  class="topTag">會員中心</a>
+                      <ul>
+                        <li class="dropMeau"><a href="./memberboot.html" >會員資料</a></li>
+                        <li class="dropMeau"><a href="#">訂單資料</a></li>
+                        <li class="dropMeau"><a href="#">我的收藏</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="./contactUs(bootstrap).html" class="topTag">聯絡我們</a>
+                      <ul>
+                          <li class="dropMeau"><a href="./trafic.html">交通資訊</a></li>
+                          <li class="dropMeau"><a href="./memberJoin1.html">合作提案</a></li>
+                          <li class="dropMeau"><a href="#">捐款</a></li>
+                          <li class="dropMeau"><a href="#">問題回饋</a></li>
+                          <li class="dropMeau"><a href="#">租借場地</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+          </div>
+        </div>
+    </div>
+
+
+
+     
+        <div class="upperColumn" id="topcontent" >
+        </div>
+          
+        <!-- </div> -->
+       
+       <!-- main -->
+       <div class="main" style="min-height: 600px;">
+        <div style="height: 30px;"></div>
+         <div class="container-fluid">
+
+                <div class="row">
+                  <div class="col-2"></div>
+                  <div class="col-4">
+                  <!-- 圖片上傳 -->
+                    <div  style="width: 400px;;background-color:white ; ">
+                      <div class="preview">
+                        <span class="text">預覽圖</span>
+                      </div>     
+                    </div>
+                    <div class="pic" style="width:400px ; margin-left: 5px;" ></div>
+
+
+                  </div>     
+                  <div class="col-1">
+                    <div >產品名稱</div>
+                    <div style="margin-top: 10px;">產品價格</div>
+                    <div style="margin-top: 10px;">產品說明:</div>
+                  </div>  
+                    <div class="col-3">
+                        <div class="prodName">產品名稱</div>
+                        <div class="prodPrice" style="margin-top: 10px;">產品價格</div>
+                        <div class="prodDescription" style="margin-top: 10px;">
+                            窩不知道窩不知道窩不知道窩不知道窩不知道窩不知道窩不知道窩不知道窩不知道窩不知道窩不知道窩不知道窩不知道窩不知道窩不知道
+                        </div>
+                    </div>
+                  </div> 
+                  <div class="col-2"></div>
+                  
+
+                  <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-2"></div>
+                    <div class="col-2">
+                        <div style="margin-top: 10px;">
+                            <button class="cart">加入購物車</button>
+                            <button class="buy" style="margin-left: 5px;">加入願望清單</button>
+                        </div>
+                    </div>
+                  </div>
+
+
+
+
+                  </div>     
+                  <div class="col-1"></div>>
+
+                  <div class="col-2"></div>  
+
+              </div>
+         
+          </div>
+        
+
+
+
+         </div>
+
+       
+
+
+
+        
+       </div>
+
+       <!-- footer -->
+       <div class="footer"></div>
+
+  <!-- jQuery 位置 -->
+  <script src="./vendor/js/jquery3.6.0.js"></script>
+  <!-- 模板js匯入 位置 -->
+  <script src="./JS/Template .js"></script>
+
+  <script src="./JS/product.Js">
+   
+
+  </script>
+</html>

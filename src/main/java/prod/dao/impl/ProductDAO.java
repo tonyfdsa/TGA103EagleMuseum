@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import prod.dao.intf.ProductDAO_interface;
 
 import prod.dao.sql.ProductSQL;
+import prod.vo.CartVO;
 import prod.vo.ProdImgVO;
 import prod.vo.ProdTypeVO;
 import prod.vo.productVO;
@@ -269,5 +270,49 @@ public class ProductDAO implements ProductDAO_interface {
 			return 1;
 			}
 	}
+
+	@Override
+	public List<ProdImgVO> prodImgGetAll() throws Exception {
+		List<ProdImgVO> list = new ArrayList<ProdImgVO>();
+		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.GetAllImg);) {
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					ProdImgVO VO = new ProdImgVO();
+					VO.setProductgetimg(rs.getBytes("productimg"));
+					VO.setProductID(rs.getInt("productID"));
+
+					
+					list.add(VO); // Store the row in the list
+				}
+			}
+			return list;
+		}
+	}
+
+
+	//購物車
+	@Override
+	public CartVO cartgetProd(Integer prodID) throws Exception {
+		CartVO VO = new CartVO();
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_BY_ID);) {
+//			GET_BY_ID = "SELECT * FROM productlist where productID = ?
+			pstmt.setInt(1, prodID);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					VO.setProductID(rs.getInt("productID"));
+					VO.setProdName(rs.getString("prodName"));
+					VO.setProdPrice(rs.getInt("prodPrice"));
+				}
+			}
+			return VO;
+		}
+	}
+	
+	
+
+
+
+
 
 }

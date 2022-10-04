@@ -1,11 +1,11 @@
 package prod.controller;
 
-import static prod.common.json2VO.json2Vo;
+
 import static prod.common.setHeaders.setHeaders;
 
 
 import java.io.IOException;
-import java.util.regex.Matcher;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,12 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-
-import net.bytebuddy.agent.builder.AgentBuilder.CircularityLock.Global;
 import prod.common.Result;
 import prod.service.impl.ProductServicelm;
 import prod.vo.ProdImgVO;
-import prod.vo.productVO;
+
 
 
 
@@ -35,11 +33,6 @@ public class ProdInsertImg extends HttpServlet{
 		
 		request.setCharacterEncoding("UTF-8");
 		
-//		ProdImgVO prodImgVO =  json2Vo(request, ProdImgVO.class);
-//		Integer ProdID = prodImgVO.getProductID();
-//		String ProdImg = json2Vo(request, ProdImgVO.class).getProductimg();
-//		System.out.println(ProdID);
-//		System.out.println(ProdImg);
 		
 		ProdImgVO prodImgVO = gson.fromJson(request.getReader().readLine(), ProdImgVO.class);
 		Result R = service.insertProdImg(prodImgVO.getProductimg().replace(BASE64, ""), prodImgVO.getProductID());

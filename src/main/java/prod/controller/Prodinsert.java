@@ -30,8 +30,7 @@ public class Prodinsert extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 
 		productVO productVO = json2Vo(request, productVO.class);	
-		service.insert(productVO);
-	
+		response.getWriter().print(GSON.toJson(service.insert(productVO)));	
 	}
 
 	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

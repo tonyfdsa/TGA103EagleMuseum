@@ -39,4 +39,7 @@ public class ProductSQL {
 	
 	//刪除圖片
 	public static final String ProdDeImg = "delete from productimg where productID= ?";
+	
+	//取得所有圖片
+	public static final String GetAllImg = "select * from productimg ";
 }
