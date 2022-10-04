@@ -1,10 +1,12 @@
 package member.vo;
 
-import java.io.Serializable;
+
 import java.sql.Date;
 import java.sql.Timestamp;
+import core.pojo.CoreSimple;
 
-public class Member implements Serializable{
+// member繼承coreSimple  建立sql表格項目
+public class Member extends CoreSimple {
 	private static final long serialVersionUID = 1L;
 	private Integer memberID;
 	private String memberEmail;
@@ -24,6 +26,7 @@ public class Member implements Serializable{
 		
 	}
 
+	//  建立各項目建構子
 	public Member(Integer memberID, String memberEmail, String memberPassword, String memberName, String memberQA,
 			String memberAns, String memberAddress, Integer memberPhone, Integer memberGender, Date memberBirthday,
 			Integer memberPermission, Timestamp modifyTime, Timestamp lastEnterTime) {
@@ -44,6 +47,7 @@ public class Member implements Serializable{
 	}
 
 	
+	// 建立各項目的 讀取 及  存入
 	public Integer getMemberID() {
 		return memberID;
 	}

@@ -13,16 +13,17 @@ import member.vo.Member;
 public class MemberServiceImpl implements MemberService {
 	private MemberDao dao;
 	
-	public MemberServiceImpl() throws NamingException {
+	public MemberServiceImpl() {
 		dao = new MemberDaoImpl();
 	}
 
+//  註冊
 	@Override
 	public boolean registerMember(Member member) {
 		final String memberEmail = member.getMemberEmail();
         //  帳號沒填 和空字串  直接回false,其他檢查也都寫在這,例如格式  交易控制
 		if (memberEmail == null || memberEmail.isEmpty()) {
-			System.out.println(1);
+			System.out.println("帳號不可空白");
 			return false;
 		}
 		
@@ -74,10 +75,7 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 		}
 		
-		if(dao.selectByMemberEmail(memberEmail) != null) {
-			System.out.println(10);
-			return false;
-		}
+//      設定自動生成		
 		
 		final Integer memberID = dao.insert(member);
 		if (memberID == null) {
@@ -88,11 +86,63 @@ public class MemberServiceImpl implements MemberService {
 		return true;
 	}
 	
-
+//  查詢全部
 	@Override
 	public List<Member> findAllMembers() {
 		
 		return dao.selectAll();
+	}
+
+//  修改
+	@Override
+	public Member editMember(Member member) {
+		
+		return null;
+	}
+
+//  登入	
+	@Override
+	public Member loginMember(Member member) {
+		final String memberEmail = member.getMemberEmail();
+		final String memberPassword = member.getMemberPassword();
+		
+		if (memberEmail == null) {
+			member.setMessage("帳號未輸入");
+			member.setSuccessful(false);
+			return member;
+		}
+		
+		if (memberPassword == null) {
+			member.setMessage("密碼未輸入");
+			member.setSuccessful(false);
+			return member;
+		}
+		
+		member = dao.selectForLogin(memberEmail, memberPassword);
+		if (member == null) {
+			member = new Member();
+			member.setMessage("帳號或密碼錯誤");
+			member.setSuccessful(false);
+			return member;
+		}
+		
+		member.setMessage("登入成功");
+		member.setSuccessful(true);
+		return member;
+	}
+		
+
+//  帳號搜尋
+	@Override
+	public Member selectByMember(String memberEmail) {
+		
+		return null;
+	}
+
+//  刪除	
+	@Override
+	public Member removeMember(Member member) {
+		return null;
 	}
 
 }

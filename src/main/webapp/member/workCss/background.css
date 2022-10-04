@@ -1,0 +1,120 @@
+.body {
+  background-color: #fffbdd;
+}
+
+.main {
+    height: 900px;
+    background-color: transparent;
+    background-image: 
+    linear-gradient(to bottom, rgba(255, 252, 220, 0.5), 
+                              rgba(255,252,220,0.5)),
+                               url(../workImage/member_enter.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom:0px;
+    width: 100%;
+}
+
+.secondBtn{
+  background-color: #fffbdd;
+  font-size: 30px;
+}
+
+.itemBtn_1{
+  font-size: 25px;
+}
+
+.eagle {
+  top: 150px;
+  left: 230px;
+  position: relative;
+  font-size: 80px;
+  font-weight: 700;
+  color: #fff;
+}
+
+button{
+  background:none;
+  border:none;
+  margin:0;
+  padding:0;
+  cursor: pointer;
+}
+  
+input{
+  top: 150px;
+  left: 550px;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  padding:7px;
+  font-size:20px;
+  color:#d5d1d1fb;
+} 
+
+#email{
+  top:180px;
+}
+
+#password{
+  top:145px;
+}
+
+#captcha{
+  top:165px;
+}
+
+.item_1{
+  font-size: 33px;
+  top: 234px;
+  left: 230px;
+  position: relative;
+}
+
+.item_2{
+  font-size: 33px;
+  top: 197px;
+  left: 230px;
+  position: relative;
+}
+
+.itemBtn_2{
+  background-color:rgba(166 159 85);
+  width:570px;
+  height:75px;
+  font-size: 33px;
+  color: white;
+  top: 177px;
+  left: 243px;
+  position: relative;
+}
+
+.itemBtn_3{
+  font-size: 30px;
+  font-weight:40px;
+  top: 187px;
+  left: 380px;
+  position: relative;
+}
+
+.itemBtn_4{
+  font-size: 30px;
+  font-weight:40px;
+  top: 186px;
+  left: 420px;
+  position: relative;
+}
+
+#canvas{
+  top: -30px;
+  left: 240px;
+  position: relative;
+  height: 65px;
+  width: 250px;
+  font-size:20px;
+  color:#d5d1d1fb;
+}
+
+/**/
+

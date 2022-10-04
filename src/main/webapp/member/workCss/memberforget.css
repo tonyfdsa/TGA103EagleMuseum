@@ -1,0 +1,33 @@
+.main{
+    background-color: #fffbdd;
+    position: relative;
+    top: 0px;
+}
+
+.footer{
+    position: relative;
+    top: 0px;
+  }
+
+.container{
+    border: 0px;
+    background-color: rgb(217, 217, 217);
+    padding: 0px;
+    
+}
+.gino{
+    width:90%;
+    margin: 2em;
+    
+}
+
+#button-addon2{
+   background-color: rgb(209, 102, 71);
+   color: white;
+}
+
+#into{
+    background-color: rgb(209, 102, 71);
+    color: white;
+}
+
