@@ -209,7 +209,7 @@
         if($(".card").find(`.${Data.result[i].productID}`).length == 0){
           let text=
               `
-              <img src=${Data.result[i].productimg} class="${Data.result[i].productID}" >
+              <img src=${Data.result[i].productimg} class="${Data.result[i].productID} img" data-id="${Data.result[i].productID}" >
               `
           $(`#${Data.result[i].productID}`).prepend(text);
         }
@@ -221,7 +221,7 @@
     //搜尋by名稱
     $(document).on("click",".search",function(){
             let prodName = document.querySelector("#searchName").value
-            let prodserchname = 'http://localhost:8081/TGA103_EagleMuseum/ProductGetName'
+            let prodserchname = 'http://localhost:8080/TGA103_EagleMuseum/ProductGetName'
             fetch('http://localhost:8080/TGA103eagleMuseum/ProductGetName', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -270,7 +270,7 @@
                   if($(".card").find(`.${Data.result[i].productID}`).length == 0){
                     let text=
                         `
-                        <img src=${Data.result[i].productimg} class="${Data.result[i].productID}" >
+                        <img src=${Data.result[i].productimg} class="img ${Data.result[i].productID}" data-id="${Data.result[i].productID}">
                         `
                     $(`#${Data.result[i].productID}`).prepend(text);
                   }
@@ -299,8 +299,19 @@
             .then(resp => resp.json())
             .then(Data => {  
               console.log(Data);
+              alert("已加入購物車")
             })
           })
+
+        //點擊圖片跳轉到商品頁面
+        $(document).on("click",".img",function(){
+          let prodID = $(this).attr("data-id")
+          // console.log(prodID)
+          sessionStorage.setItem("prodID", prodID)
+          // console.log(sessionStorage.getItem("prodID"))
+          location.href = "./product.html"
+        })
+
           
   </script>
   </body>
