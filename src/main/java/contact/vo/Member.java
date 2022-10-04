@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import core.pojo.Core;
+
 @Entity
 public class Member implements Serializable{
 	private static final long serialVersionUID = 1L;
