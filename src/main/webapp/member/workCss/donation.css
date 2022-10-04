@@ -1,0 +1,17 @@
+.btn-radius {
+  background-color: rgb(209, 102, 71);
+  color: white;
+  border: 1px solidrgb(209, 102, 71);
+  height: auto;
+  border-radius: 24px;
+}
+
+.donate {
+  padding: 7px;
+}
+
+#card1 {
+  margin: 10px;
+  padding: 5px;
+  background-color: rgb(241, 211, 149);
+}
