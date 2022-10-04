@@ -189,9 +189,17 @@ public class CollectionDaoimpl implements CollectionDaointf {
 	}
 
 	@Override
-	public CollectionVO findByName(String collectionVO) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CollectionVO> findByName(String collectionTitle) {
+		System.out.println("okok");
+		try {
+			return getSession()
+					.createQuery("FROM CollectionVO where collectionTitle like :collectionTitle", CollectionVO.class)
+					.setParameter("collectionTitle", "%"+collectionTitle+"%")
+					.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

@@ -11,7 +11,7 @@ public interface CollectionDaointf extends CoreDao<CollectionVO, Integer> {
 	public boolean delete(Integer collectionID);
 	
 	CollectionVO findByPrimaryKey(Integer id);
-	CollectionVO findByName(String collectionVO);
+	List<CollectionVO> findByName(String collectionTitle);
 	CollectionVO findByMaterial(String collectionVO);
 	CollectionVO findByEar(String collectionVO);
 	CollectionVO findByNameMaterial(String collectionVO);

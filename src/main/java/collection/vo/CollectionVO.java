@@ -1,10 +1,12 @@
 package collection.vo;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
@@ -17,6 +19,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+@Table(name = "collection")
 @NoArgsConstructor
 @AllArgsConstructor
 public class CollectionVO extends Core{
@@ -28,6 +31,7 @@ public class CollectionVO extends Core{
 	private String collectionEar;	
 	private String collectionText;
 	private String collectionMaterial;
+	@Column(insertable = false)
 	private Timestamp lastUpdateTime;
 	private Boolean collectionStatus;
 //	

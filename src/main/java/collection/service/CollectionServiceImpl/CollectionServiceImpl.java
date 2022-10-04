@@ -104,5 +104,15 @@ public class CollectionServiceImpl implements CollectionService {
 		return dao.getAll();
 	}
 
+	@Override
+	public List<CollectionVO> findName(CollectionVO collection) {
+		try {
+			return dao.findByName(collection.getCollectionTitle());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 }
