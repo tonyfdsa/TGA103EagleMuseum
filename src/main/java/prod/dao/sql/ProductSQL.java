@@ -9,7 +9,11 @@ public class ProductSQL {
 
 	// 商品ID名稱查詢
 	public static final String GET_BY_ID = "SELECT * FROM productlist where productID = ?";
+	
+	// 商品ID名稱查詢
+	public static final String GET_Listed = "SELECT * FROM productlist where prodStatus = 1";
 
+	
 	// 新增商品
 	public static final String Insert = "INSERT INTO productlist(prodName, ProdTypeID, prodprice, prodDescription, prodInStock, creatTime) VALUES(?, ?, ?, ?, ?,NOW())";
 

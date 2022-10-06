@@ -204,5 +204,15 @@ public class ProductServicelm implements ProductServicein {
 		}
 	}
 
+	@Override
+	public Result prodGetListed() {
+		try {
+			return R.success(DAO.prodListed());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+
 
 }

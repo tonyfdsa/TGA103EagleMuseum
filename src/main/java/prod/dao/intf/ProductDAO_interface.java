@@ -34,6 +34,9 @@ public interface ProductDAO_interface {
   //查詢商品by編號  
 	public List<productVO> prodGetByID(Integer productID) throws Exception;
 	
+  //查詢商品by  
+	public List<productVO> prodListed() throws Exception;
+	
   //圖片商品上傳
 	public Integer insertProdImg(byte[] decode, Integer id) throws Exception;
 	

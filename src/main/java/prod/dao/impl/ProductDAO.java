@@ -308,6 +308,31 @@ public class ProductDAO implements ProductDAO_interface {
 			return VO;
 		}
 	}
+
+	@Override
+	public List<productVO> prodListed() throws Exception {
+		List<productVO> list = new ArrayList<productVO>();
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_Listed);) {
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					productVO productVO = new productVO();
+					productVO.setProductID(rs.getInt("productID"));
+					productVO.setProdName(rs.getString("prodName"));
+					productVO.setProdTypeID(rs.getInt("prodTypeID"));
+					productVO.setProdPrice(rs.getInt("prodPrice"));
+					productVO.setDiscountID(rs.getInt("discountID"));
+					productVO.setProdDescription(rs.getString("prodDescription"));
+					productVO.setProdStatus(rs.getInt("prodStatus"));
+					productVO.setSellQuantity(rs.getInt("sellQuantity"));
+					productVO.setProdInStock(rs.getInt("prodInStock"));
+					list.add(productVO); // Store the row in the list
+				}
+			}
+			return list;
+		}
+	}
 	
 	
 

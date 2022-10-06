@@ -170,10 +170,10 @@
   })
 
   //取得所有商品資訊和圖片資訊
-  fetch('http://localhost:8080/TGA103eagleMuseum/ProductGetAll')
+  fetch('http://localhost:8080/TGA103eagleMuseum/ProdGetListed')
   .then(resp => resp.json())
   .then(Data => {
-            // console.log(Data)
+            console.log(Data)
             for (let i = 0 ; i< Data.result.length; i++){
               let text=
               `
@@ -308,7 +308,7 @@
           let prodID = $(this).attr("data-id")
           // console.log(prodID)
           sessionStorage.setItem("prodID", prodID)
-          // console.log(sessionStorage.getItem("prodID"))
+          console.log(sessionStorage.getItem("prodID"))
           location.href = "./product.html"
         })
 

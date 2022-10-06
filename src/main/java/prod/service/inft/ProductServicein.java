@@ -25,6 +25,8 @@ public interface ProductServicein {
 	
 	public Result prodGetByID(int prodID) ;
 	
+	public Result prodGetListed() ;
+	
 	public Result insertProdImg(String img, Integer id);
 	
 	public Result prodGetImg(Integer id);

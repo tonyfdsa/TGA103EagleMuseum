@@ -154,7 +154,7 @@
       var the_file_element = document.querySelector("#upload")
       the_file_element.addEventListener("change", function (e) {
         var num=e.target.files.length
-        console.log($(".pic").find(".small").length)
+        // console.log($(".pic").find(".small").length)
         let picture_list = document.getElementsByClassName("pic")[0];
         // console.log(this.files.length);
         let that = this;
