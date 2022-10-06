@@ -12,8 +12,22 @@ public class ExhibitionVO {
 	private String exhibitionArticle;
 	private Integer exhibitionStatus;
 	private String lastUpdateTime;
+	private byte[] exhibitionImg;
+	private String img;
 	
 	
+	public byte[] getExhibitionImg() {
+		return exhibitionImg;
+	}
+	public void setExhibitionImg(byte[] exhibitionImg) {
+		this.exhibitionImg = exhibitionImg;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public Integer getExhibitionId() {
 		return exhibitionId;
 	}

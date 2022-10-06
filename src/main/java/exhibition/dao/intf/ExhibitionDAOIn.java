@@ -5,7 +5,7 @@ import exhibition.vo.ExhibitionVO;
 import exhibition.vo.ExhibitionVOo;
 public interface ExhibitionDAOIn {
 
-		public List<ExhibitionVO> getAll() throws Exception;
+		public List<ExhibitionVO> getAll(List<ExhibitionVO> list) throws Exception;
 
 		public List<ExhibitionVO> getById(Integer id);
 

@@ -37,38 +37,43 @@ createApp({
             let exhibitionType = document.querySelector("#exhibitionType").value
             let exhibitionStatus = document.querySelector("#exhibitionStatus").value
             let exhibitionArticle = document.querySelector("#exhibitionArticle").value
-            // let exhibitionImg = img.result;
             let valueAldult = document.querySelector("#valueAldult").value
             let valueStu = document.querySelector("#valueStu").value
             let valueOld = document.querySelector("#valueOld").value
             let valuePhy = document.querySelector("#valuePhy").value
-            fetch('http://localhost:8080/TGA103eagleMuseum/ExhibitionInsert', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    exhibitionName,
-                    exhibitionStartDate,
-                    exhibitionEndDate,
-                    exhibitionType,
-                    exhibitionStatus,
-                    exhibitionArticle,
-                    // exhibitionImg,
-                    valueAldult,
-                    valueStu,
-                    valueOld,
-                    valuePhy
+            let img = document.querySelector("#my-file")
+            var reader = new FileReader(); // 用來讀取檔案
+            reader.readAsDataURL(img.files[0]); // 讀取檔案
+            reader.addEventListener("load", function () {
+                fetch('http://localhost:8080/TGA103eagleMuseum/ExhibitionInsert', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        exhibitionName,
+                        exhibitionStartDate,
+                        exhibitionEndDate,
+                        exhibitionType,
+                        exhibitionStatus,
+                        exhibitionArticle,
+                        img: reader.result.replace("data:image/jpeg;base64,", ""),
+                        valueAldult,
+                        valueStu,
+                        valueOld,
+                        valuePhy
+                    })
                 })
-            })
-                .then(resp => resp.json())
-                .then(R => {
+                    .then(resp => resp.json())
+                    .then(R => {
 
-                    //清除所有的 $("#btn_exbAdd").append(text);
-                    $("#btn_exbAdd").find(".add").remove();
-                    $("#btn_exbAdd").find("#searchNAN").remove();
+                        //清除所有的 $("#btn_exbAdd").append(text);
+                        $("#btn_exbAdd").find(".add").remove();
+                        $("#btn_exbAdd").find("#searchNAN").remove();
 
-                    console.log(R.result);
+                        console.log(R.result);
 
-                });
+                    })
+            });
+
         }
     },
 }).mount("#app");

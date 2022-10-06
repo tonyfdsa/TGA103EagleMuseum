@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.naming.Context;
@@ -22,6 +23,7 @@ import exhibition.dao.intf.ExhibitionDAOIn;
 import exhibition.dao.sql.ExhibitionSQL;
 import exhibition.vo.ExhibitionVO;
 import exhibition.vo.ExhibitionVOo;
+import prod.common.Global;
 
 public class ExhibitionDAOIm implements ExhibitionDAOIn {
 
@@ -37,12 +39,10 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 	}
 
 	@Override
-	public List<ExhibitionVO> getAll() throws Exception {
-		List<ExhibitionVO> list = new ArrayList<ExhibitionVO>();
-//		try with resources
+	public List<ExhibitionVO> getAll(List<ExhibitionVO> list) throws Exception {
+		
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(ExhibitionSQL.GET_ALL);) {
-//			System.out.println("連線成功");
 			try (ResultSet rs = pstmt.executeQuery()) {
 				ExhibitionVO vo;
 				while (rs.next()) {
@@ -57,7 +57,12 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 					vo.setExhibitionArticle(rs.getString("exhibitionArticle"));
 					vo.setExhibitionStatus(rs.getInt("exhibitionStatus"));
 					vo.setLastUpdateTime(rs.getString("lastUpdateTime"));
-					list.add(vo);
+//					var img = vo.getExhibitionImg();
+//					for(img != null) {
+//						vo.setExhibitionImg(Global.BASE64 + Base64.getEncoder().encodeToString(img));
+//						vo.setImg(null);
+//					}
+//					list.add(vo);
 				}
 			}
 			return list;
