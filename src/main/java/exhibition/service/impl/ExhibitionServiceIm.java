@@ -24,7 +24,7 @@ public class ExhibitionServiceIm implements ExhibitionServiceIn {
 	@Override
 	public Result getAll() {
 		try {
-			return R.success(DAO.getAll());
+			return R.success(DAO.getAll(List <ExhibitionVO>)); //有報錯
 		} catch (Exception e) {
 			e.printStackTrace();
 			return R.fail(e.toString());
