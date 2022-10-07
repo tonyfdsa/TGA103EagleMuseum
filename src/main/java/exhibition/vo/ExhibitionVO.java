@@ -4,7 +4,7 @@ public class ExhibitionVO {
 //	EXHIBITION_ID, EXHIBITION_TYPE, EXHIBITION_NAME, EXHIBITION_START_DATE, 
 //	EXHIBITION_END_DATE, EXHIBITION_ARTICLE, EXHIBITION_STATUS, LAST_UPDATE_TIME
 	
-	private Integer exhibitionId;
+	private Integer exhibitionID;
 	private Integer exhibitionType;
 	private String exhibitionName;
 	private String exhibitionStartDate;
@@ -12,27 +12,14 @@ public class ExhibitionVO {
 	private String exhibitionArticle;
 	private Integer exhibitionStatus;
 	private String lastUpdateTime;
+	private Integer locationId;
 	private byte[] exhibitionImg;
-	private String img;
-	
-	
-	public byte[] getExhibitionImg() {
-		return exhibitionImg;
+	private String exhibitionImgBase64;
+	public Integer getExhibitionID() {
+		return exhibitionID;
 	}
-	public void setExhibitionImg(byte[] exhibitionImg) {
-		this.exhibitionImg = exhibitionImg;
-	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = img;
-	}
-	public Integer getExhibitionId() {
-		return exhibitionId;
-	}
-	public void setExhibitionId(Integer exhibitionId) {
-		this.exhibitionId = exhibitionId;
+	public void setExhibitionID(Integer exhibitionID) {
+		this.exhibitionID = exhibitionID;
 	}
 	public Integer getExhibitionType() {
 		return exhibitionType;
@@ -76,5 +63,24 @@ public class ExhibitionVO {
 	public void setLastUpdateTime(String lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 	}
+	public Integer getLocationId() {
+		return locationId;
+	}
+	public void setLocationId(Integer locationId) {
+		this.locationId = locationId;
+	}
+	public byte[] getExhibitionImg() {
+		return exhibitionImg;
+	}
+	public void setExhibitionImg(byte[] exhibitionImg) {
+		this.exhibitionImg = exhibitionImg;
+	}
+	public String getExhibitionImgBase64() {
+		return exhibitionImgBase64;
+	}
+	public void setExhibitionImgBase64(String exhibitionImgBase64) {
+		this.exhibitionImgBase64 = exhibitionImgBase64;
+	}
+	
 
 }

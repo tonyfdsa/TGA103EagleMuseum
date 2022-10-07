@@ -22,9 +22,17 @@ public class ExhibitionController extends HttpServlet {
 	private ExhibitionServiceIm service = new ExhibitionServiceIm();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		setHeaders(response);
-	
-		response.getWriter().print(_gson.toJson(service.getAll()));
+		String pathInfo = request.getPathInfo();
+		String id;
+
+		// 判斷是否有 ID
+		if (pathInfo != null) {
+			id = pathInfo.split("/")[1];
+		} else {
+			id = request.getParameter("exhibitionID");
+		}
+		// 資料轉換 JSON 後回傳
+		response.getWriter().print(_gson.toJson(id == null ? service.getAll() : service.getById(Integer.parseInt(id))));
 	}
 
 

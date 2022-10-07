@@ -17,4 +17,8 @@ public interface ExhibitionServiceIn {
 	public Result getByDate(String exhibitionStartDate, String exhibitionEndDate);
 	
 	public Result insert(ExhibitionVOo vo);
+
+	public Result updateImg(String img, Integer id);
+
+	public Result delete(Integer id);
 }

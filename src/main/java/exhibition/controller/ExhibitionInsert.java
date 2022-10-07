@@ -32,11 +32,8 @@ public class ExhibitionInsert extends HttpServlet{
 		setHeaders(response);
 		request.setCharacterEncoding("UTF-8");
 		ExhibitionVOo vo = gson.fromJson(request.getReader().readLine(), ExhibitionVOo.class);
-//		System.out.println(vo.getExhibitionName());
-		vo.getExhibitionImg(Base64.getDecoder().decode(vo.getImg()));
+		vo.setExhibitionImg(Base64.getDecoder().decode(vo.getImg()));
 		System.out.println(vo.getImg());
-		
-//		response.getWriter().print(gson.toJson(service.insert(vo.getImg())); //有報錯	
 		response.getWriter().print(gson.toJson(service.insert(vo)));	
 	}
 	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

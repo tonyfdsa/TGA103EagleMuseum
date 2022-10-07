@@ -9,6 +9,7 @@ import exhibition.dao.impl.ExhibitionDAOIm;
 import exhibition.service.inft.ExhibitionServiceIn;
 import exhibition.vo.ExhibitionVO;
 import exhibition.vo.ExhibitionVOo;
+import prod.common.Global;
 
 public class ExhibitionServiceIm implements ExhibitionServiceIn {
 
@@ -24,7 +25,7 @@ public class ExhibitionServiceIm implements ExhibitionServiceIn {
 	@Override
 	public Result getAll() {
 		try {
-			return R.success(DAO.getAll(List <ExhibitionVO>)); //有報錯
+			return R.success(getBase64(DAO.getAll()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return R.fail(e.toString());
@@ -67,6 +68,39 @@ public class ExhibitionServiceIm implements ExhibitionServiceIn {
 			e.printStackTrace();
 			return R.fail(e.toString());
 		}
+	}
+	@Override
+	public Result updateImg(String img, Integer id) {
+
+		try {
+			return R.success(DAO.updateImg(Base64.getDecoder().decode(img), id));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+	
+	@Override
+	public Result delete(Integer id) {
+		try {
+			return R.success(DAO.delete(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+	
+	public List<ExhibitionVO> getBase64(List<ExhibitionVO> list) {
+
+		for (ExhibitionVO vo : list) {
+			var img = vo.getExhibitionImg();
+			if (img != null) {
+				vo.setExhibitionImgBase64(Global.BASE64 + Base64.getEncoder().encodeToString(img));
+				vo.setExhibitionImg(null);
+			}
+		}
+
+		return list;
 	}
 	
 
