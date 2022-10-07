@@ -1,7 +1,10 @@
 package member.controller;
 
+
 import java.io.IOException;
 import java.util.List;
+import static core.util.CommonUtil.writePojo2Json;
+import static member.common.MemberConstants.SERVICE;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,30 +12,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import member.service.MemberService;
-//import member.service.impl.MemberServiceImpl;
-//import member.vo.Member;
-
+import member.vo.Member;
 
 
 @WebServlet("/member/getAll")
 public class MemberGetAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-//	private MemberService service;
-	
-//	@Override
-//	public void init() throws ServletException {
-//		
-//			service = new MemberServiceImpl();
-//	}
-//	
-//	
-//	@Override
-//	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		final List<Member> list = service.findAllMembers();
-//		req.setAttribute("memberList", list);
-//		req.getRequestDispatcher("/index.jsp").forward(req, resp);
-//		
-//	}
-	
+		
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		
+		List<Member> member = SERVICE.findAllMembers();
+		
+		writePojo2Json(resp, member);
+
+		
+	}
+
 }

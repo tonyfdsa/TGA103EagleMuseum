@@ -21,6 +21,8 @@ public interface MemberService {
 //	帳號查詢  
 	Member selectByMember(String memberEmail);
 	
+//	
+	
 //  查詢全部	
 	List<Member> findAllMembers();
 	
