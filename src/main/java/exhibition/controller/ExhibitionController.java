@@ -22,6 +22,7 @@ public class ExhibitionController extends HttpServlet {
 	private ExhibitionServiceIm service = new ExhibitionServiceIm();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		setHeaders(response);
 		String pathInfo = request.getPathInfo();
 		String id;
 

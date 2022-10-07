@@ -15,6 +15,7 @@ public class ExhibitionVO {
 	private Integer locationId;
 	private byte[] exhibitionImg;
 	private String exhibitionImgBase64;
+	
 	public Integer getExhibitionID() {
 		return exhibitionID;
 	}
