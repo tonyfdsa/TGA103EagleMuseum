@@ -1,7 +1,7 @@
 
     //搜尋byID  
     let productID = sessionStorage.getItem("prodID")
-    console.log(productID)
+    // console.log(productID)
     fetch('http://localhost:8080/TGA103eagleMuseum/ProdGetImg', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -11,7 +11,7 @@
       })
       .then(resp => resp.json())
       .then(Data => {
-        console.log(Data.result)
+        // console.log(Data.result)
       })
       fetch('http://localhost:8080/TGA103eagleMuseum/ProdgetById', {
         method: 'POST',
@@ -23,11 +23,11 @@
       .then(resp => resp.json())
       .then(Data => {
         console.log(Data.result)
-        $(".prodName").html(Data.result[0].prodName)
-        $(".prodPrice").html(Data.result[0].prodPrice)
-        $(".prodInStock").html(Data.result[0].prodInStock)
-        $(".prodDescription").html(Data.result[0].prodDescription)
-        console.log(Data.result.prodName)
+        // $(".prodName").html(Data.result[0].prodName)
+        // $(".prodPrice").html(Data.result[0].prodPrice)
+        // $(".prodInStock").html(Data.result[0].prodInStock)
+        // $(".prodDescription").html(Data.result[0].prodDescription)
+        // console.log(Data.result.prodName)
       })
     
       

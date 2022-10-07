@@ -85,7 +85,7 @@ public class ProductServicelm implements ProductServicein {
 	public Result updateStatus(productVO productVO) {
 		try {
 			System.out.println(R.success(DAO.updateStatus(productVO)));
-			return R.success(DAO.insert(productVO));
+			return R.success(DAO.updateStatus(productVO));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return R.fail(e.toString());
