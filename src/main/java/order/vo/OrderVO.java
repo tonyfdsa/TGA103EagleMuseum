@@ -2,7 +2,7 @@ package order.vo;
 
 import java.sql.Date;
 
-public class orderVO {
+public class OrderVO {
 private Integer order;
 private Integer orderID;
 private Integer memberId;

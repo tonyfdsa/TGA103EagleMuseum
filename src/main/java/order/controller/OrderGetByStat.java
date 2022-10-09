@@ -2,17 +2,19 @@ package order.controller;
 
 import static prod.common.json2VO.json2Vo;
 import static prod.common.setHeaders.setHeaders;
+
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.google.gson.Gson;
 
 import order.service.impl.OrderServiceImpl;
-import order.vo.orderVO;
-import prod.service.impl.ProductServicelm;
+import order.vo.OrderVO;
 
 @WebServlet("/OrderGetByStat")
 public class OrderGetByStat extends HttpServlet{
@@ -23,7 +25,7 @@ public class OrderGetByStat extends HttpServlet{
 		setHeaders(response);
 		request.setCharacterEncoding("UTF-8");
 		
-		Integer OrderStatus = json2Vo(request, orderVO.class).getOrderStatus();
+		Integer OrderStatus = json2Vo(request, OrderVO.class).getOrderStatus();
 		System.out.println(OrderStatus);
 		response.getWriter().print(gson.toJson(service.getbyStatus(OrderStatus)));	
 	}

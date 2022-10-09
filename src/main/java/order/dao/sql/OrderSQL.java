@@ -6,5 +6,14 @@ public class OrderSQL {
 	
 	//更新狀態By OrderID
 	public static final String updateStatus ="update `order` set orderStatus= ? where orderID = ?";
-
+	
+	//新增訂單 
+	public static final String insertOrder =
+			"insert into `order`(memberID, orderAmount, orderStatus, deliveryAddress, freight, memo, createTime) "
+			+ "values(? , ? , \"1\", ? , \"60\", \"無\", Now())";
+	
+	public static final String insertOrderDetail =
+				"insert into `orderdetails`(productID,orderID,prodQuantity) "
+				+ "values(? , ? , ?)";
+			
 }

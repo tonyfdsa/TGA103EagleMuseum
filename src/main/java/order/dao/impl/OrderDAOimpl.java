@@ -3,6 +3,7 @@ package order.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,10 @@ import javax.sql.DataSource;
 
 import order.dao.intf.OrderDAOinf;
 import order.dao.sql.OrderSQL;
-import order.vo.orderVO;
-import prod.dao.sql.ProductSQL;
+import order.vo.OrderVO;
+import prod.vo.CartVO;
 import prod.vo.productVO;
+
 
 public class OrderDAOimpl implements OrderDAOinf{
 	// 獲取DS使用連線池
@@ -29,14 +31,15 @@ public class OrderDAOimpl implements OrderDAOinf{
 			}
 		}
 	@Override
-	public List<orderVO> statusget(Integer orderStatus) throws Exception {
-		List<orderVO> list = new ArrayList<orderVO>();
+	public List<OrderVO> statusget(Integer orderStatus) throws Exception {
+		List<OrderVO> list = new ArrayList<OrderVO>();
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(OrderSQL.orderGetByStatus);) {
 			pstmt.setInt(1, orderStatus);
 			try (ResultSet rs = pstmt.executeQuery()) {
+				
 				while (rs.next()) {
-					orderVO VO = new orderVO();
+					OrderVO VO = new OrderVO();
 					VO.setOrderID(rs.getInt("orderID"));
 					VO.setMemberId(rs.getInt("memberId"));
 					VO.setOrderAmount(rs.getInt("orderAmount"));
@@ -62,6 +65,36 @@ public class OrderDAOimpl implements OrderDAOinf{
 			pstmt.executeUpdate();
 			return 1;
 			}
+	}
+	@Override
+	public Integer insertOrder(Integer mem, String address,Integer amount) throws Exception {
+		Integer orderID =0;
+		try (Connection con = ds.getConnection();
+				 PreparedStatement pstmt = con.prepareStatement(OrderSQL.insertOrder,Statement.RETURN_GENERATED_KEYS);){
+			 		 
+					 pstmt.setInt(1, mem);
+					 pstmt.setInt(2, amount);
+					 pstmt.setString(3, address);
+					 pstmt.executeUpdate(); 
+					 ResultSet rs = pstmt.getGeneratedKeys(); 
+					 if(rs.next()) {
+						orderID = rs.getInt(1);
+					 }
+					 
+					 return orderID;	    
+		 }
+	}
+	@Override
+	public Integer insertOrderDetail(CartVO vo, Integer ID) throws Exception {
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(OrderSQL.insertOrderDetail);){
+					pstmt.setInt(1, vo.getProductID());
+					pstmt.setInt(2, ID);
+					pstmt.setInt(3, vo.getProdCount());
+					pstmt.executeUpdate();
+					return 1;
+		}
+		
 	}
 
 }

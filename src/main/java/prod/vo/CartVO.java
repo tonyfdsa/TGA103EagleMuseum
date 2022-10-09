@@ -11,10 +11,13 @@ public class CartVO {
 	public Integer getSize() {
 		return size;
 	}
+	public Integer getProdCount() {
+		return prodCount;
+	}
 	public void setSize(Integer size) {
 		this.size = size;
 	}
-	public Integer getProdCount() {
+	public Integer ID() {
 		return prodCount;
 	}
 	public void setProdCount(Integer prodCount) {
