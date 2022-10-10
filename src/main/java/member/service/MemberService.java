@@ -7,7 +7,7 @@ import member.vo.Member;
 public interface MemberService {
 	
 //  註冊
-	boolean registerMember(Member member);
+	Member registerMember(Member member);
 	
 //  移除	(後台)
 	Member removeMember(Member member);

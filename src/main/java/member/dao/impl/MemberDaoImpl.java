@@ -27,7 +27,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public Integer insert(Member member) {
-		final String sql = "insert into member(memberEmail,memberPassword,memberName,memberQA,memberAns,memberAddress,memberPhone,memberGender,memberBirthday,memberPermission,modifyTime,lastEnterTime) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		final String sql = "insert into member(memberEmail,memberPassword,memberName,memberQA,memberAns,memberAddress,memberPhone,memberGender,memberBirthday,memberPermission,modifyTime,lastEnterTime) VALUES (?,?,?,?,?,?,?,?,?,?,1,now(),now())";
 		try (
 			Connection conn = dataSource.getConnection();
 				
@@ -43,8 +43,8 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setInt(8, member.getMemberGender());
 			pstmt.setDate(9, member.getMemberBirthday());
 			pstmt.setInt(10, member.getMemberPermission());
-			pstmt.setTimestamp(11, member.getModifyTime());
-			pstmt.setTimestamp(12, member.getLastEnterTime());
+//			pstmt.setTimestamp(11, member.getModifyTime());
+//			pstmt.setTimestamp(12, member.getLastEnterTime());
 			pstmt.executeUpdate();
 			
 			return 1;	
@@ -122,7 +122,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public Integer update(Member member) {
-		final String sql = "update member set memberEmail = ?,memberPassword = ?,memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ?,memberPermission = ?,modifyTime = ?,lastEnterTime = ? where memberEmail=?;";
+		final String sql = "update member set memberEmail = ?,memberPassword = ?,memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ?,memberPermission = ?,modifyTime = now(),lastEnterTime = ? where memberEmail=?;";
 		try (
 			Connection conn = dataSource.getConnection();
 				
