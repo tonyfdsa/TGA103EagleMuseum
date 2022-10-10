@@ -11,11 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import order.service.impl.OrderServiceImpl;
-
-import static prod.common.json2VO.json2Vo;
 import static prod.common.setHeaders.setHeaders;
 
-@WebServlet("/OrderGetAll")
+@WebServlet("/OrderTagGetAll")
 public class OrderTagGetAll extends HttpServlet{
 	private OrderServiceImpl service = new OrderServiceImpl();
 	private Gson gson = new Gson();
@@ -25,8 +23,12 @@ public class OrderTagGetAll extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		setHeaders(resp);
 		req.setCharacterEncoding("UTF-8");
-		service.OrderTagGetAll
+		resp.getWriter().print(gson.toJson(service.orderTagGetAll()));
 		
+	}
+	@Override
+	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		setHeaders(resp);
 	}
 
 }
