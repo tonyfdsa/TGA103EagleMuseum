@@ -1,8 +1,10 @@
 package collectionImage.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +20,9 @@ import collectionImage.service.ColImgService;
 import collectionImage.service.impl.ColImgServiceimpl;
 import collectionImage.vo.ColImgVO;
 
-@WebServlet("/imgAdd")
-public class AddImgServlet extends HttpServlet {
+@WebServlet("/ImgGetOneById")
+@MultipartConfig
+public class FindOneImgServlet extends HttpServlet {
 	private static final long serialVersionUID = 1;
 	private ColImgService service = new ColImgServiceimpl();
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
@@ -29,14 +32,17 @@ public class AddImgServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		setHeaders(response);
 		
-		ColImgVO Addimg = json2Pojo(request, ColImgVO.class);
-        writePojo2Json(response, service.add(Addimg));
+		
+		ColImgVO collectionImgNameID = json2Pojo(request, ColImgVO.class);
+
+        writePojo2Json(response, service.getImgName(collectionImgNameID));
 	}
 	
 	@Override
 	 protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  setHeaders(response);
 	 }
+	
 	private void setHeaders(HttpServletResponse response) {
 		response.setContentType("application/json;charset=UTF-8"); // 重要
 		response.setHeader("Cache-control", "no-cache, no-store");

@@ -114,5 +114,25 @@ public class CollectionServiceImpl implements CollectionService {
 		}
 	}
 
+	@Override
+	public List<CollectionVO> findMaterial(CollectionVO collection) {
+		try {
+			return dao.findByMaterial(collection.getCollectionMaterial());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public List<CollectionVO> findEar(CollectionVO collection) {
+		try {
+			return dao.findByEar(collection.getCollectionEar());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 }

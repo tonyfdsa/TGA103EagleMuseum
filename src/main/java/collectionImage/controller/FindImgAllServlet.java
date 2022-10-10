@@ -34,6 +34,11 @@ public class FindImgAllServlet extends HttpServlet {
 		
 		writePojo2Json(response, allImg);
 	}
+	@Override
+	 protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	  setHeaders(response);
+	 }
+	
 	private void setHeaders(HttpServletResponse response) {
 		response.setContentType("application/json;charset=UTF-8"); // 重要
 		response.setHeader("Cache-control", "no-cache, no-store");

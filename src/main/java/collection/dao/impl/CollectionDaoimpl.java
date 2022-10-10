@@ -192,7 +192,7 @@ public class CollectionDaoimpl implements CollectionDaointf {
 	public List<CollectionVO> findByName(String collectionTitle) {
 		try {
 			return getSession()
-					.createQuery("FROM CollectionVO where collectionTitle like :collectionTitle", CollectionVO.class)
+					.createQuery("FROM CollectionVO where collectionTitle like :collectionTitle order by collectionStatus desc, collectionID", CollectionVO.class)
 					.setParameter("collectionTitle", "%"+collectionTitle+"%")
 					.list();
 		} catch (Exception e) {
@@ -202,15 +202,29 @@ public class CollectionDaoimpl implements CollectionDaointf {
 	}
 
 	@Override
-	public CollectionVO findByMaterial(String collectionVO) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CollectionVO> findByMaterial(String collectionMaterial) {
+		try {
+			return getSession()
+					.createQuery("FROM CollectionVO where collectionMaterial like :collectionMaterial order by collectionStatus desc, collectionID", CollectionVO.class)
+					.setParameter("collectionMaterial", "%"+collectionMaterial+"%")
+					.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public CollectionVO findByEar(String collectionVO) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CollectionVO> findByEar(String collectionEar) {
+		try {
+			return getSession()
+					.createQuery("FROM CollectionVO where collectionEar like :collectionEar order by collectionStatus desc, collectionID", CollectionVO.class)
+					.setParameter("collectionEar", "%"+collectionEar+"%")
+					.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

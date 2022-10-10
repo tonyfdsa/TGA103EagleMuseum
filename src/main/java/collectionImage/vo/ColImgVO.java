@@ -2,6 +2,7 @@ package collectionImage.vo;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,5 +32,6 @@ public class ColImgVO extends Core {
 	@Transient
 	private String collectionimgStr;
 	private byte[] imageName;
+	@Column(insertable = false)
 	private Timestamp lastUpdateTime;
 }

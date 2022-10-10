@@ -9,6 +9,8 @@ public interface CollectionService extends CoreService {
 	CollectionVO edit(CollectionVO collection);
 	CollectionVO findId(CollectionVO collection);
     List<CollectionVO> findName(CollectionVO collection);
+    List<CollectionVO> findMaterial(CollectionVO collection);
+    List<CollectionVO> findEar(CollectionVO collection);
     
 	public List<CollectionVO> getAll();
 }

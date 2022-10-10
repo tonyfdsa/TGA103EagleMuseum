@@ -12,8 +12,8 @@ public interface CollectionDaointf extends CoreDao<CollectionVO, Integer> {
 	
 	CollectionVO findByPrimaryKey(Integer id);
 	List<CollectionVO> findByName(String collectionTitle);
-	CollectionVO findByMaterial(String collectionVO);
-	CollectionVO findByEar(String collectionVO);
+	List<CollectionVO> findByMaterial(String collectionMaterial);
+	List<CollectionVO>  findByEar(String collectionEar);
 	CollectionVO findByNameMaterial(String collectionVO);
 	CollectionVO findByNameEar(String collectionVO);
 	CollectionVO findByEarMaterial(String collectionVO);

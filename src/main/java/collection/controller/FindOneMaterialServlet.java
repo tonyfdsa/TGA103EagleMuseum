@@ -1,4 +1,4 @@
-package collectionImage.controller;
+package collection.controller;
 
 import java.io.IOException;
 
@@ -10,33 +10,38 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import collection.service.CollectionService;
+import collection.service.CollectionServiceImpl.CollectionServiceImpl;
+import collection.vo.CollectionVO;
+
 import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 
 
-import collectionImage.service.ColImgService;
-import collectionImage.service.impl.ColImgServiceimpl;
-import collectionImage.vo.ColImgVO;
-
-@WebServlet("/imgAdd")
-public class AddImgServlet extends HttpServlet {
+@WebServlet("/collectionGetOneMaterial")
+public class FindOneMaterialServlet extends HttpServlet {
 	private static final long serialVersionUID = 1;
-	private ColImgService service = new ColImgServiceimpl();
+	private CollectionService service = new CollectionServiceImpl();
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		setHeaders(response);
 		
-		ColImgVO Addimg = json2Pojo(request, ColImgVO.class);
-        writePojo2Json(response, service.add(Addimg));
+		CollectionVO collectionSerchMaterial = json2Pojo(request, CollectionVO.class);
+//		collectionSerchName = service.findName(collectionSerchName);      
+        writePojo2Json(response, service.findMaterial(collectionSerchMaterial));
 	}
 	
 	@Override
 	 protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  setHeaders(response);
 	 }
+	
+	
 	private void setHeaders(HttpServletResponse response) {
 		response.setContentType("application/json;charset=UTF-8"); // 重要
 		response.setHeader("Cache-control", "no-cache, no-store");

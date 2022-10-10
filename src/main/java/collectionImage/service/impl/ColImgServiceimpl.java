@@ -12,7 +12,6 @@ public class ColImgServiceimpl implements ColImgService {
 	private ColImgDaointf dao;
 	private Global base64;
 
-
 	public ColImgServiceimpl() {
 		dao = new ColImgDaoimpl();
 		base64 = new Global();
@@ -20,32 +19,20 @@ public class ColImgServiceimpl implements ColImgService {
 	}
 
 	@Override
-	public ColImgVO add(ColImgVO ColImg) {
-		try {
-			if (ColImg.getImageName() == null) {
-				ColImg.setMessage("圖片名稱未輸入");
-				ColImg.setSuccessful(false);
-				return ColImg;
+	public int add(ColImgVO colImgVO) {		
+		try {	
+			if (colImgVO.getCollectionimgStr() == null) {
+				colImgVO.setImageName(null);
+			} else if (!colImgVO.getCollectionimgStr().equals("")) {
+				colImgVO.setImageName(base64.Decoder(colImgVO.getCollectionimgStr()));
 			}
-			if (ColImg.getCollectionimgStr() == null) {
-				ColImg.setImageName(null);
-			} else if (!ColImg.getCollectionimgStr().equals("")) {
-				ColImg.setImageName(base64.Decoder(ColImg.getCollectionimgStr()));
-			}
-			
-			ColImg.setMessage("新增成功");
-			ColImg.setSuccessful(true);
-			return ColImg;
+			return dao.insert(colImgVO);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			return 0;
 		}
 	}
 
-	@Override
-	public ColImgVO edit(ColImgVO ColImg) {
-		return null;
-	}
 
 	@Override
 	public ColImgVO remove(ColImgVO ColImg) {
@@ -55,11 +42,28 @@ public class ColImgServiceimpl implements ColImgService {
 	@Override
 	public List<ColImgVO> getAll() {
 		try {
-			return (List<ColImgVO>) dao.selectAll();
+			return dao.selectAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
+	@Override
+	public List<ColImgVO> getImgName(ColImgVO colImgVO) {	
+//		try {
+//			return dao.selectByName(colImgVO);
+//		} 
+		
+		try {
+			List<ColImgVO> list = dao.selectByName(colImgVO);
+			for (int i = 0; i < list.size(); i++) {
+				list.get(i).setCollectionimgStr(base64.Encoder(list.get(i).getImageName()));
+			}
+			return list;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
