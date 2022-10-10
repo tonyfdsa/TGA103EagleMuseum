@@ -251,16 +251,16 @@
 
           //抓資料庫商品標籤類型
         
-          fetch('http://localhost:8080/TGA103eagleMuseum/ProdTagGetAll')
+          fetch('http://localhost:8080/TGA103eagleMuseum/OrderGetAll')
           .then(resp => resp.json())
           .then(R => {
-
-            for( i = 0 ; i < R.result["length"] ; i++){F
-              let text = `
-              <option value="${R.result[i].prodTypeId}">${R.result[i].prodType}</option>
-              `
-              $(".prodTypeID").append(text);
-            }
+            console.log(R);
+            // for( i = 0 ; i < R.result["length"] ; i++){F
+            //   let text = `
+            //   <option value="${R.result[i].prodTypeId}">${R.result[i].prodType}</option>
+            //   `
+            //   $(".prodTypeID").append(text);
+            // }
           });
 
           $(document).on("click", ".fixed" ,function(){
