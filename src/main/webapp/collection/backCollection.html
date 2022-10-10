@@ -252,17 +252,17 @@
 		</div>
 
 		<div class="head">
-			<button class="searchBtn">搜尋</button>
-			<input type="search" class="searchbar" placeholder=" 請輸入館藏名稱">
+			<button class="searchBtn" id="searchBtnTitle">搜尋</button>
+			<input type="search" class="searchbar" id="collectionTitle" placeholder=" 請輸入館藏名稱">
 		</div>
 
 		<div class="head">
-			<button class="searchBtn">搜尋</button>
-			<input type="search" class="searchbar" placeholder=" 請輸入館藏類別">
+			<button class="searchBtn" id="searchBtnMaterial">搜尋</button>
+			<input type="search" class="searchbar" id="searchbarMaterial" placeholder=" 請輸入館藏類別">
 		</div>
 		<div class="head">
-			<button class="searchBtn">搜尋</button>
-			<input type="search" class="searchbar" placeholder=" 請輸入館藏朝代">
+			<button class="searchBtn" id="searchBtnEar">搜尋</button>
+			<input type="search" class="searchbar" id="collectionEar" placeholder=" 請輸入館藏朝代">
 		</div>
 
 
@@ -294,82 +294,7 @@
 
 	<script src="./JS/backtemplete.js"></script>
 	<script src="./JS/backCollectionAdd.js"></script>
-	<script>
-
-
-		$(document).on("click", ".headerBtn", function () {
-			let val = $(this).val()
-			$(".head").css("display", "none")
-			$(".head").eq(val).slideToggle("slow");
-		})
-
-
-
-		// 接受後端訊息
-
-		fetch('http://localhost:8080/TGA103eagleMuseum/collectionAll')
-			.then(resp => resp.json())
-			.then(findCollectuins => {
-				console.log(findCollectuins)
-
-				for (i = 0; i < findCollectuins.length; i++) {
-					let re = (findCollectuins[i].collectionStatus === true ? "上架中" : "下架");
-					let text = `
-          <div class="container-fluid">
-          <div class="row d-flex  column">
-          <div class="col-1" style="text-align:center">${i + 1}</div>
-          <div class="col-1" style="text-align:center">${findCollectuins[i].collectionID}</div>
-          <div class="col-2" style="">${findCollectuins[i].collectionTitle}</div>
-          <div class="col-3" style="">${findCollectuins[i].collectionText}</div>
-          <div class="col-1" style="text-align:center">${findCollectuins[i].collectionEar}</div>
-          <div class="col-2" style="text-align:center">${findCollectuins[i].collectionMaterial}</div>
-          <div class="col-1" style="text-align:center" data-stats= ${findCollectuins[i].collectionStatus}>${re}</div>
-          <div class="col-1" style="text-align:center"> 
-            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"
-                  width="25" height="25" class="fixed" data-ID = ${findCollectuins[i].collectionID}  data-TAG = ${findCollectuins[i].collectionMaterial}>
-                  <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M9 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"></path>
-                  <path d="M9 15h3l8.5-8.5a1.5 1.5 0 0 0-3-3L9 12v3"></path>
-                  <path d="M16 5l3 3"></path>
-                  </g>
-              </svg>
-              <span style="margin-left: 10px; margin-right:10px" class="icon" data-value="1">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="25" height="25">
-                    <path d="M5 18h14v2H5v-2zm4.6-2.7L5 10.7l2-1.9l2.6 2.6L17 4l2 2l-9.4 9.3z" fill="currentColor">    
-                    </path>
-                </svg>
-            </span>
-            </span>
-            </div>
-          <div class="col-1"></div>
-        </div>
-      </div>  `;
-					$(".searchContent").append(text);
-				}
-			});
-
-		// 抓商品標籤
-		fetch('http://localhost:8080/TGA103eagleMuseum/tagAll')
-			.then(resp => resp.json())
-			.then(findAllTags => {
-				for (i = 0; i < findAllTags.length; i++) {
-					let text = `
-              			<option value="${findAllTags[i].tag}">${findAllTags[i].tag}</option>
-              			`
-					$(".selectMaterial").append(text);
-				}
-			});
-
-
-		$(document).on("click", ".fixed", function () {
-			var send_data = {};
-			send_data.collectionID = $(this).attr("data-id");
-			send_data.collectionMaterial = $(this).attr("data-tag");
-			sessionStorage.setItem("form_data", JSON.stringify(send_data));
-			location.href = "./backCollectionUpdate.html";
-		})
-	</script>
+	<script src="./JS/backCollection.js"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"

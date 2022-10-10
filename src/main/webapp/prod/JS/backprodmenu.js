@@ -164,12 +164,13 @@
               })
               .then(resp => resp.json())
               .then(R => {
-                console.log(Array[0]);
                 //清除所有的 $(".searchContent").append(text);
                 $(".searchContent").find(".add").remove();
                 $(".searchContent").find("#searchNAN").remove();
+                console.log(R,"0000")
 
                 if(R.result["length"] === 0){
+                  console.log(R.result,"1111")
                   
                   $(".searchContent").append("<div style='color: red;' id=searchNAN> 查無結果，請重新輸入 </div>");
                 }

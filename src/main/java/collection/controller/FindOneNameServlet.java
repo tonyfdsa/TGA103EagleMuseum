@@ -1,6 +1,5 @@
 package collection.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -16,25 +15,27 @@ import collection.service.CollectionService;
 import collection.service.CollectionServiceImpl.CollectionServiceImpl;
 import collection.vo.CollectionVO;
 
+import static core.util.CommonUtil.json2Pojo;
+import static core.util.CommonUtil.writePojo2Json;
 
 
-@WebServlet("/collectionAdd")
-public class AddServlet extends HttpServlet {
+@WebServlet("/collectionGetOneName")
+public class FindOneNameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1;
 	private CollectionService service = new CollectionServiceImpl();
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		setHeaders(response);
-
-		BufferedReader br = request.getReader();
-		String json = br.readLine();
-		CollectionVO addCollection = gson.fromJson(json, CollectionVO.class);
-		response.getWriter().print(gson.toJson(service.add(addCollection)));
-
+		
+		CollectionVO collectionSerchName = json2Pojo(request, CollectionVO.class);
+//		collectionSerchName = service.findName(collectionSerchName);      
+        writePojo2Json(response, service.findName(collectionSerchName));
 	}
+	
 	@Override
 	 protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  setHeaders(response);

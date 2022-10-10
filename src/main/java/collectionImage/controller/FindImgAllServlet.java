@@ -1,7 +1,7 @@
-package collection.controller;
+package collectionImage.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,35 +11,33 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import collection.service.CollectionService;
-import collection.service.CollectionServiceImpl.CollectionServiceImpl;
-import collection.vo.CollectionVO;
+import static core.util.CommonUtil.json2Pojo;
+import static core.util.CommonUtil.writePojo2Json;
 
 
+import collectionImage.service.ColImgService;
+import collectionImage.service.impl.ColImgServiceimpl;
+import collectionImage.vo.ColImgVO;
 
-@WebServlet("/collectionAdd")
-public class AddServlet extends HttpServlet {
+@WebServlet("/getAllImg")
+public class FindImgAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1;
-	private CollectionService service = new CollectionServiceImpl();
+	private ColImgService service = new ColImgServiceimpl();
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		setHeaders(response);
-
-		BufferedReader br = request.getReader();
-		String json = br.readLine();
-		CollectionVO addCollection = gson.fromJson(json, CollectionVO.class);
-		response.getWriter().print(gson.toJson(service.add(addCollection)));
-
+		
+		List<ColImgVO> allImg = service.getAll();
+		
+		writePojo2Json(response, allImg);
 	}
 	@Override
 	 protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  setHeaders(response);
 	 }
-	
 	
 	private void setHeaders(HttpServletResponse response) {
 		response.setContentType("application/json;charset=UTF-8"); // 重要
