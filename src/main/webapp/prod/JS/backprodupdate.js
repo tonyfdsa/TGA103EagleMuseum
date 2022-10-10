@@ -99,32 +99,9 @@
         let prodStatus  = document.querySelector(".prodStatus").value    
         // console.log(productimg);
         //刪除圖片
-        fetch('http://localhost:8080/TGA103eagleMuseum/ProdDeImg', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            productID,
-          })
-        })
-        .then(resp => resp.json())
-        .then(R => {  
-          console.log(R)
-        })
 
 
-        //上傳圖片
-        fetch('http://localhost:8080/TGA103eagleMuseum/InsertProdImg', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            productID,
-            productimg
-          })
-        })
-        .then(resp => resp.json())
-        .then(R => {  
-          // console.log(R)
-        })
+       
         
         // update資料
         fetch('http://localhost:8080/TGA103eagleMuseum/ProdUpdate', {
@@ -143,8 +120,40 @@
         })
         .then(resp => resp.json())
         .then(R => {  
-          // console.log(R)
-        })
+          if(R.code == 200 ){
+            console.log(typeof(productimg) != "undefined")
+            if(typeof(productimg) != "undefined"){
+              fetch('http://localhost:8080/TGA103eagleMuseum/ProdDeImg', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                  productID,
+                })
+                })
+                .then(resp => resp.json())
+                .then(R => {  
+  
+               })
+                  //上傳圖片
+              fetch('http://localhost:8080/TGA103eagleMuseum/InsertProdImg', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                  productID,
+                  productimg
+                })
+              })
+              .then(resp => resp.json())
+              .then(R => {  
+                
+              })
+            } 
+          alert("更新成功")
+      // location.href = "./backprodmenu.html"
+          }else{
+            alert("更新失敗，請檢視是否有項目未輸入")
+          }
+          })
 
         })
 

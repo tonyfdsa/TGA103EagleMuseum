@@ -105,8 +105,10 @@
      }) 
      //點擊結帳轉跳
      document.querySelector(".buy").addEventListener("click",function(){
-      console.log($(".price").length)
-      console.log($(".totalPrice").attr("value"))
+      // console.log($(".price").length)
+      // console.log($(".totalPrice").attr("value"))
+
+      
       if($(".price").length === 0  ){
         alert("請新增商品至購物車")
       }else{

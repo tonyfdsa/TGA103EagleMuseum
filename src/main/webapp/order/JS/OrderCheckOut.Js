@@ -52,17 +52,17 @@ fetch('http://localhost:8080/TGA103eagleMuseum/CartGet')
             $(".totalPrice").attr("value",(totalprice +  mailPrice))
         }
 
+        //點擊按鈕結帳
         $(".buy").click(function(){
           let orderAmount = document.querySelector(".totalPrice").value;
           let deliveryAddress = document.querySelector(".deliveryAddress").value;
-          console.log(deliveryAddress);
           let URL = 'http://localhost:8080/TGA103eagleMuseum/OrderInsert';
-          if (deliveryAddress == null){
-            $("#NAN").remove();
+          $("#NAN").remove();
+          if (deliveryAddress == ""){
             text="<div style='color: red;' id=NAN> 請輸入地址 </div>"
             $(".deliveryAddress").closest(".col-8").append( text);
           }else{
-
+          //成立訂單
           fetch(URL, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -74,8 +74,23 @@ fetch('http://localhost:8080/TGA103eagleMuseum/CartGet')
             .then(resp => resp.json())
             .then(Data => {  
               console.log(Data);
-              alert("訂單已成立")
-              location.href = "../prod/productmenu.html"
+              if(Data.code == 400){
+                $(".mes").html(Data.message);
+              }
+             
+              if(Data.code === 200){
+                alert("訂單已成立")
+                //清除購物車內容
+                fetch("http://localhost:8080/TGA103eagleMuseum/CartDelAll")
+                .then(resp => resp.json)
+                .then(Data =>{
+                  console.log(Data)
+                  location.href = "../prod/productmenu.html"
+                })
+                
+              }
+
+
             })
           }
         })

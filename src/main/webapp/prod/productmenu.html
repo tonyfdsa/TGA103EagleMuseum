@@ -183,7 +183,8 @@
                     <h5 class="prodName" style="align-items:center">${Data.result[i].prodName}
                       
                     </h5>
-                    <p class="prodtext">商品說明</p>
+                    <br>
+
                     <span class="prodPrice"><span>NT$</span>${Data.result[i].prodPrice}</span>
     
                     <span  style="float: right;"  >
@@ -209,7 +210,7 @@
         if($(".card").find(`.${Data.result[i].productID}`).length == 0){
           let text=
               `
-              <img src=${Data.result[i].productimg} class="${Data.result[i].productID} img" data-id="${Data.result[i].productID}" >
+              <img src=${Data.result[i].productimg} class="card-img ${Data.result[i].productID} img" data-id="${Data.result[i].productID}" >
               `
           $(`#${Data.result[i].productID}`).prepend(text);
         }
@@ -242,7 +243,8 @@
                         <h5 class="prodName" style="align-items:center">${Data.result[i].prodName}
                           
                         </h5>
-                        <p class="prodtext">商品說明</p>
+                        <br>
+                        <br>
                         <span class="prodPrice"><span>NT$</span>${Data.result[i].prodPrice}</span>
         
                         <span  style="float: right;"  >

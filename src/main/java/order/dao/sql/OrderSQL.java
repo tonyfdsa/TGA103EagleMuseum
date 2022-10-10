@@ -14,6 +14,21 @@ public class OrderSQL {
 	
 	public static final String insertOrderDetail =
 				"insert into `orderdetails`(productID,orderID,prodQuantity) "
-				+ "values(? , ? , ?)";
-			
+		
+						+ "values(? , ? , ?)";
+	//取得商品BYID
+	public static final String prodStGetByID =
+			"select  prodInStock, sellQuantity from productlist where productID= ? ";
+	
+//	更新產品庫存和銷售數量
+	public static final String prodStUpdate =
+			"UPDATE productlist set prodInStock=? , sellQuantity=? where productID = ?";
+	
+	//取得所有訂單
+	public static final String orderGetAll =
+			"select * from `order` ";
+	
+	//取得所有訂單狀態標籤
+	public static final String orderTagGetAll =
+			"select * from `orderstatus`" ;
 }

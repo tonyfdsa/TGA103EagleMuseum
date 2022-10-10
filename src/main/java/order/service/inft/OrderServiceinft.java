@@ -15,4 +15,10 @@ public interface OrderServiceinft {
 	
 	//結帳
 	public Result insertOrder(Integer amountPrice, String deliveryAddress,List<CartVO> map);
+	
+	//取得所有訂單資訊
+	public Result orderGetAll();
+	
+	//取得所有訂單狀態
+	public Result orderTagGetAll();
 }

@@ -3,6 +3,7 @@ package prod.controller;
 import static prod.common.json2VO.json2Vo;
 import static prod.common.setHeaders.setHeaders;
 
+import java.awt.print.Printable;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -31,7 +32,8 @@ public class ProdStUpdateServlet extends HttpServlet{
 			productVO productVO = json2Vo(request, productVO.class);	
 //			System.out.println(productVO);
 			Result R  = service.updateStatus(productVO);
-		
+			response.getWriter().print(gson.toJson(R));
+			
 		}
 		
 		protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

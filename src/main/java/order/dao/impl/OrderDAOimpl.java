@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import order.dao.intf.OrderDAOinf;
 import order.dao.sql.OrderSQL;
+import order.vo.OrderTagVO;
 import order.vo.OrderVO;
 import prod.vo.CartVO;
 import prod.vo.productVO;
@@ -96,5 +97,73 @@ public class OrderDAOimpl implements OrderDAOinf{
 		}
 		
 	}
+	@Override
+	public productVO prodStGetbyID(Integer ID) throws Exception {
+		productVO vo = new productVO();
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(OrderSQL.prodStGetByID)){
+			pstmt.setInt(1, ID);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
 
+				vo.setProdInStock(rs.getInt(1));
+				vo.setSellQuantity(rs.getInt(2));
+			 }
+		}
+		return vo;
+	}
+	@Override
+	public Integer prodStUpdate(productVO vo, Integer buy, Integer ID) throws Exception{
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(OrderSQL.prodStUpdate)){
+			pstmt.setInt(1, (vo.getProdInStock() - buy));
+			pstmt.setInt(2, (vo.getSellQuantity() + buy));
+			pstmt.setInt(3, ID);
+			pstmt.executeUpdate();
+			return 1;
+		}
+	}
+	@Override
+	public List<OrderVO> orderGetAll() throws Exception {
+		List<OrderVO> list = new ArrayList<OrderVO>();
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt =  con.prepareStatement(OrderSQL.orderGetAll)){
+				try (ResultSet rs = pstmt.executeQuery()) {
+				
+				while (rs.next()) {
+					OrderVO VO = new OrderVO();
+					VO.setOrderID(rs.getInt("orderID"));
+					VO.setMemberId(rs.getInt("memberId"));
+					VO.setOrderAmount(rs.getInt("orderAmount"));
+					VO.setOrderStatus(rs.getInt("orderStatus"));
+					VO.setDeliveryAddress(rs.getString("deliveryAddress"));
+					VO.setFreight(rs.getInt("freight"));
+					VO.setMemo(rs.getString("memo"));
+					VO.setOrderAmount(rs.getInt("orderAmount"));
+					VO.setCreateTime(rs.getDate("createTime"));
+				
+					list.add(VO); // Store the row in the list
+					}
+				}
+		return list;
+		}
+
+	}
+	@Override
+	public List<OrderTagVO> orderTagGetAll() throws Exception {
+		List<OrderTagVO> list = new ArrayList<OrderTagVO>();
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(OrderSQL.orderTagGetAll)){
+			try (ResultSet rs = pstmt.executeQuery()){
+				while (rs.next()) {
+					OrderTagVO vo = new OrderTagVO();
+					vo.setOrderStatusID(rs.getInt("orderStatusID"));
+					vo.setOrderStatus(rs.getString("orderStatus"));
+					list.add(vo);
+				}
+			}
+			return list;
+		}
+
+	}
 }

@@ -23,11 +23,11 @@
       .then(resp => resp.json())
       .then(Data => {
         console.log(Data.result)
-        // $(".prodName").html(Data.result[0].prodName)
-        // $(".prodPrice").html(Data.result[0].prodPrice)
-        // $(".prodInStock").html(Data.result[0].prodInStock)
-        // $(".prodDescription").html(Data.result[0].prodDescription)
-        // console.log(Data.result.prodName)
+        $(".prodName").html(Data.result[0].prodName)
+        $(".prodPrice").html(Data.result[0].prodPrice)
+        $(".prodInStock").html(Data.result[0].prodInStock)
+        $(".prodDescription").html(Data.result[0].prodDescription)
+//        console.log(Data.result.prodName)
       })
     
       

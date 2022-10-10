@@ -2,10 +2,13 @@ package order.service.impl;
 
 
 import java.util.List;
+
 import order.dao.impl.OrderDAOimpl;
 import order.service.inft.OrderServiceinft;
 import prod.common.Result;
+import prod.dao.impl.ProductDAO;
 import prod.vo.CartVO;
+import prod.vo.productVO;
 
 public class OrderServiceImpl implements OrderServiceinft{
 	private OrderDAOimpl DAO;
@@ -47,15 +50,35 @@ public class OrderServiceImpl implements OrderServiceinft{
 		}
 		
 		
+		//檢查每一條明細的商品數量與庫存數量
+		for(int i = 0 ; i < valueList.size() ; i++) {
+			
+			CartVO List = valueList.get(i);
+			Integer amount;
+			try {
+				amount = DAO.prodStGetbyID(List.getProductID()).getProdInStock();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return R.fail(e.toString());
+			}
+			
+			if( (amount- List.getProdCount() <= 0)) {
+				return R.fail("商品" + List.getProdName() + "庫存不足，請從購物車刪除該商品後重新嘗試購買");
+			}
+		}
 		
 			
 			try {
 				//產生訂單
 				Integer orderID	= DAO.insertOrder(mem,  deliveryAddress,amountPrice);
-				for(int i = 0 ; i < valueList.size() ; i++) {
+				for(int i = 0 ; i < valueList.size() ; i++) {;
 					//每筆商品都產生一條明細
 					CartVO List = valueList.get(i);
+					productVO PVO = DAO.prodStGetbyID(List.getProductID());
 					DAO.insertOrderDetail(List, orderID);
+					//庫存減少
+					DAO.prodStUpdate(PVO , List.getProdCount(), List.getProductID());
+					
 				}
 				return R.success("訂單產生成功");
 				
@@ -67,6 +90,24 @@ public class OrderServiceImpl implements OrderServiceinft{
 
 	}
 
+	}
+	@Override
+	public Result orderGetAll() {
+		try {
+			return R.success(DAO.orderGetAll());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+	@Override
+	public Result orderTagGetAll() {
+		try {
+			return R.success(DAO.orderTagGetAll());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
 	}
 
 }

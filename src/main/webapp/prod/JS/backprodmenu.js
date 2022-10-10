@@ -242,6 +242,9 @@
                 })
                 .then(resp => resp.json())
                 .then(R => {  
+                  if(R.code == 200){
+                    alert("狀態更新成功")
+                  }
                 })
             
           })
