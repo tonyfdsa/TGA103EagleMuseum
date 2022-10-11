@@ -5,6 +5,7 @@ import static prod.common.setHeaders.setHeaders;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -43,10 +44,6 @@ public class QuesSearchByDateServlet extends HttpServlet {
 		}
 		super.init();
 	}
-
-//	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		this.doPost(req, resp);
-//	}
 	
 	private Gson gson = new Gson();
 	
@@ -56,9 +53,12 @@ public class QuesSearchByDateServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		QuesContent vo = json2Vo(req, QuesContent.class);
+		System.out.println(vo);
 		
-		Timestamp quesTime = vo.getQuesTime();
-		Timestamp answerTime = vo.getAnswerTime();
+		Date quesTime = vo.getQuesTime();
+		Date answerTime = vo.getAnswerTime();	
+		System.out.println(quesTime);
+		System.out.println(answerTime);
 		
 		final Result list = service.getByDate(quesTime, answerTime);
 		resp.getWriter().print(gson.toJson(list));

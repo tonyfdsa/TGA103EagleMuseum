@@ -5,6 +5,7 @@ import static prod.common.setHeaders.setHeaders;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -50,8 +51,8 @@ public class QuesSearchByIAndDServlet extends HttpServlet {
 		
 		QuesContent vo = json2Vo(req, QuesContent.class);
 		Integer memberId = vo.getMemberId();
-		Timestamp quesTime = vo.getQuesTime();
-		Timestamp answerTime = vo.getAnswerTime();
+		Date quesTime = vo.getQuesTime();
+		Date answerTime = vo.getAnswerTime();
 		final Result list = service.getByIdAndDate(memberId, quesTime, answerTime);
 		resp.getWriter().print(gson.toJson(list));
 

@@ -20,6 +20,7 @@ import contact.common.QuesConfirmMail;
 import contact.common.Result;
 import contact.service.QuesContentService;
 import contact.service.QuesContentServiceImpl;
+import contact.vo.Member;
 import contact.vo.QuesContent;
 
 @WebServlet("/inserQuesServlet")
@@ -60,7 +61,7 @@ public class InserQuesServlet extends HttpServlet {
 		if (StringUtils.isNotBlank(getQuesContent)) {
 			final boolean result = service.submitQuestion(vo);
 			if (result) {
-				String memberEmail = service.confirmQues(vo.getMemberId());
+				String memberEmail = service.confirmQues(vo.getMemberId()).getMemberEmail();
 				new QuesConfirmMail(memberEmail).quesConfirmMail();
 			}
 		}
