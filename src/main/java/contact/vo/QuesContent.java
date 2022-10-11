@@ -119,6 +119,6 @@ public class QuesContent {
 	public void setAnswerTime(Date answerTime) {
 		this.answerTime = answerTime;
 	}
-	
+
 	
 }

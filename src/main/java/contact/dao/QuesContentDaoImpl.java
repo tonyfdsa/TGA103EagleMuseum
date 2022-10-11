@@ -296,38 +296,30 @@ public class QuesContentDaoImpl implements QuesContentDao {
 //		}
 //		return null;
 	}
-
+	
+	//HibernateOK
 	@Override
 	public void updateAns(String answerContent, Integer questionContentID) {
-		// Hibernate寫法的bug解決不了
-//		try {
-		/*
-		 * 用get查詢會存入新答案寄出舊答案。 用load查詢因為延遲載入會遇到 Attempted to serialize java.lang.Class:
-		 * org.hibernate.proxy.HibernateProxy. Forgot to register a type adapter?
-		 */
-//			QuesContent oQuesContent = getSession().load(QuesContent.class, quesContent.getQuestionContentID());
-//			
-//			final String answerContent = quesContent.getAnswerContent();
-//			if (answerContent != null && !answerContent.isEmpty()) {
-//				oQuesContent.setAnswerContent(answerContent);
-//				oQuesContent.setAnswered(true);
-//				oQuesContent.setAnswerTime(new Timestamp(new Date().getTime()));
-//			}
-//		} catch (Exception e) {
+		
+		//Hibernate參數化寫法
+		getSession().createQuery("UPDATE QuesContent "
+		+ "SET answerContent = :answerContent, answered = true, answerTime=now() "
+		+ "WHERE questionContentID = :questionContentID")
+		.setParameter("answerContent", answerContent)
+		.setParameter("questionContentID", questionContentID)
+		.executeUpdate();
+		
+		// JDBC寫法
+//		String sql = "update questionContent set answerContent = ?, "
+//				+ "answered = true, answerTime=now() where questionContentID = ?";
+//		try (Connection connection = dataSource.getConnection();
+//				PreparedStatement pstmt = connection.prepareStatement(sql);) {
+//			pstmt.setString(1, answerContent);
+//			pstmt.setInt(2, questionContentID);
+//			pstmt.executeUpdate();
+//		} catch (SQLException e) {
 //			e.printStackTrace();
 //		}
-
-		// JDBC寫法
-		String sql = "update questionContent set answerContent = ?, "
-				+ "answered = true, answerTime=now() where questionContentID = ?";
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(sql);) {
-			pstmt.setString(1, answerContent);
-			pstmt.setInt(2, questionContentID);
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 }// class
