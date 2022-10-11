@@ -1,15 +1,15 @@
 //清空答覆內容
-function clear(){
+function clear() {
 	$("#ansContent").val("");
 }
 
 // 開啟彈跳視窗
 $(document).on("click", ".replybtn", function () {
 	$(".overlayTag").fadeIn();
-	
+
 	//綁定quesId
 	$("#quesId").val($(this).val());
-	
+
 
 	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/getQContentServlet'
 	let questionContentID = document.querySelector("#quesId").value;
@@ -23,7 +23,7 @@ $(document).on("click", ".replybtn", function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式
 		.then(R => {
-			console.log(R);
+//			console.log(R);
 			let qContent = `${R}`;
 			$("#quesContent").html(qContent);
 		})
@@ -101,7 +101,8 @@ $(".searchAllQs").click(function () {
 
 		})
 	})
-		.then(resp => resp.json())//後端傳給前端的格式
+		//後端傳給前端的格式
+		.then(resp => resp.json())
 		.then(R => {
 			let quesList = "";
 			for (let i = 0; i < R.result.length; i++) {
@@ -109,12 +110,13 @@ $(".searchAllQs").click(function () {
 				if (R.result[i].answerTime == null) {
 					R.result[i].answerTime = "";
 				}
+
 				quesList += `
                 <tr>
                 <td>${R.result[i].questionContentID}</td>
                 <td>${R.result[i].memberId}</td>
                 <td>${R.result[i].questionTypeID}</td>
-				<td class="replytd"><button class="replybtn" value="${R.result[i].questionContentID}">回覆</button></td>
+				<td><button class="replybtn" value="${R.result[i].questionContentID}">回覆</button></td>
                 <td class="table_tit">${R.result[i].questionContent}</td>
                 <td>${R.result[i].answered}</td>
                 <td>${R.result[i].quesTime}</td>
@@ -130,21 +132,19 @@ $(".searchAllQs").click(function () {
 $(".searchById").click(function () {
 	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/quesSearchByIdServlet'
 	let memberId = document.querySelector("#memberId").value;
-	// let quesTime = document.querySelector("#start_date").value;
-	// let answerTime = document.querySelector("#end_date").value;
 
 	fetch(TagInsertURL, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({
 			memberId,
-			// quesTime,
-			// answerTime
 		})
 	})
-		.then(resp => resp.json())//後端傳給前端的格式
+		.then(resp => resp.json())//後端傳給前端的格式	
 		.then(R => {
+		
 			let quesList = "";
+			
 			for (let i = 0; i < R.result.length; i++) {
 
 				if (R.result[i].answerTime == null) {
@@ -171,15 +171,14 @@ $(".searchById").click(function () {
 //館員SearchByDate
 $(".searchByDate").click(function () {
 	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/quesSearchByDateServlet'
-	// let memberId = document.querySelector(".memberId").value;
 	let quesTime = document.querySelector("#start_date").value;
 	let answerTime = document.querySelector("#end_date").value;
-
+//	console.log(quesTime);
+//	console.log(answerTime);
 	fetch(TagInsertURL, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({
-			// memberId,
 			quesTime,
 			answerTime
 		})
@@ -254,7 +253,7 @@ $(".searchByIAndD").click(function () {
 
 //館員回覆問題
 $(document).on("click", ".reply", function () {
-	
+
 	// console.log("ok");
 	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/questionAns'
 	let questionContentID = document.querySelector("#quesId").value;
@@ -292,7 +291,7 @@ $(document).on("click", ".reply", function () {
             `
 			}
 			$(".quesList").html(quesList);
-			
+
 		})
 
 });

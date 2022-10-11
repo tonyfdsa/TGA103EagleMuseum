@@ -1,12 +1,15 @@
 package contact.vo;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "questionContent")
@@ -18,25 +21,50 @@ public class QuesContent {
 	private Integer questionTypeID;
 	private String questionContent;
 	private String answerContent;
+	@Column(insertable = false)
 	private Boolean answered;
-	private Timestamp quesTime;
-	private Timestamp answerTime;
+	@Column(insertable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date quesTime;
+	@Column(insertable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date answerTime;
 	
 	public QuesContent() {
 	}
+	
+	
 
+	public QuesContent(Integer memberId) {
+		super();
+		this.memberId = memberId;
+	}
+
+
+	
 	public QuesContent(Integer questionContentID, Integer memberId, Integer questionTypeID,
-			String questionContent, String answerContent, Boolean answered, Timestamp quesTime, 
-			Timestamp answerTime) {
+			String questionContent, String answerContent, Boolean answered) {
 		this.questionContentID = questionContentID;
 		this.memberId = memberId;
 		this.questionTypeID = questionTypeID;
 		this.questionContent = questionContent;
 		this.answerContent = answerContent;
 		this.answered = answered;
-		this.answerTime= answerTime;
 	}
 	
+	public QuesContent(Integer questionContentID, Integer memberId, Integer questionTypeID,
+			String questionContent, String answerContent, Boolean answered, Date quesTime, 
+			Date answerTime) {
+		this.questionContentID = questionContentID;
+		this.memberId = memberId;
+		this.questionTypeID = questionTypeID;
+		this.questionContent = questionContent;
+		this.answerContent = answerContent;
+		this.answered = answered;
+		this.quesTime = quesTime;
+		this.answerTime= answerTime;
+	}
+		
 	
 	
 	public Integer getQuestionContentID() {
@@ -76,19 +104,19 @@ public class QuesContent {
 		this.answered = answered;
 	}
 
-	public Timestamp getQuesTime() {
+	public Date getQuesTime() {
 		return quesTime;
 	}
 
-	public void setQuesTime(Timestamp quesTime) {
+	public void setQuesTime(Date quesTime) {
 		this.quesTime = quesTime;
 	}
 
-	public Timestamp getAnswerTime() {
+	public Date getAnswerTime() {
 		return answerTime;
 	}
 
-	public void setAnswerTime(Timestamp answerTime) {
+	public void setAnswerTime(Date answerTime) {
 		this.answerTime = answerTime;
 	}
 	

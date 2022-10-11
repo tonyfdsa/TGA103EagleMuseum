@@ -47,7 +47,7 @@ public class GetQContentServlet extends HttpServlet {
 
 		QuesContent vo = json2Vo(req, QuesContent.class);
 
-		final String qString = service.getQContentService(vo.getQuestionContentID());
+		final String qString = service.getQAContentService(vo.getQuestionContentID()).getQuestionContent();
 			
 
 		resp.getWriter().print(gson.toJson(qString));

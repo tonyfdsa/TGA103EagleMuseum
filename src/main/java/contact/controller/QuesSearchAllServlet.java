@@ -48,7 +48,6 @@ public class QuesSearchAllServlet extends HttpServlet {
 		resp.setContentType("application/json;charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
 
-		QuesContent vo = json2Vo(req, QuesContent.class);
 
 		final Result list = service.findAllQs();
 		resp.getWriter().print(gson.toJson(list));

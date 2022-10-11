@@ -4,6 +4,7 @@ import static contact.common.json2VO.json2Vo;
 import static contact.common.setHeaders.setHeaders;
 import static prod.common.setHeaders.setHeaders;
 
+import java.awt.PageAttributes.MediaType;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -50,14 +51,17 @@ public class QuesSearchByIdServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		setHeaders(resp);
+		
 		resp.setContentType("application/json;charset=UTF-8");
+//		resp.setContentType("text/String;charset=UTF-8");	
 		req.setCharacterEncoding("UTF-8");
 
 		QuesContent vo = json2Vo(req, QuesContent.class);
-
+//		QuesContent quesContent = new QuesContent();
 		final Result list = service.getByMemberId(vo.getMemberId());
 
 		resp.getWriter().print(gson.toJson(list));
+//		resp.getWriter().print(list);
 
 
 	}

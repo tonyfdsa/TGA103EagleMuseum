@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Hibernate;
 
 import com.google.gson.Gson;
 
@@ -54,6 +55,7 @@ public class QuestAnsServlet extends HttpServlet {
 		
 		if(StringUtils.isNotBlank(answerContent)) {
 			service.submitAnswer(answerContent, questionContentID);
+
 			
 			final Result list = service.findAllQs();
 			resp.getWriter().print(gson.toJson(list));
