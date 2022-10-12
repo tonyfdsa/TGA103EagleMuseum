@@ -10,16 +10,8 @@
 	const phone = document.querySelector('#phone');
 	const birth = document.querySelector('#birth');
 	const errMsg = document.querySelector('#errMsg');
-
-	const gender = document.querySelectorAll('[name=inlineRadioOptions]').forEach(input => input.addEventListener('change', onChange))
-		var onChange = () => {
-    	var checked = document.querySelector('[name=inlineRadioOptions]:checked')
-    	console.log('选中的值:', checked.value)
-		}
+	const gender = document.getElementsByName('inlineRadioOptions');
 		
-	// const gender = document.querySelector("input[name='inlineRadioOptions']:checked");
-	// console.log(gender.value);
-
 	document.getElementById('password').addEventListener('input', () => {
 		const pass = password.value.length;
 		// console.log(pass);
@@ -40,11 +32,22 @@
 		}
 	});
 	document.getElementById('next').addEventListener('click', () => {
-		// const accLength = username.value.length;
-		// if (accLength < 1 || accLength > 30) {
-		// 	errMsg.textContent = '帳號長度須介於8~50字元';
-		// 	return;
-		// }
+		let selected_gender;
+		if (gender[0].checked == true) {
+			selected_gender = gender[0];
+		} else if (gender[1].checked == true) {
+			selected_gender = gender[1];
+		} else if (gender[2].checked == true) {
+			selected_gender = gender[2];
+		} else if (gender[3].checked == true) {
+			selected_gender = gender[3];
+		}
+		
+		if (selected_gender == null) {
+			errMsg.textContent = '性別未選';
+			return;
+		}
+		
 		const pass = password.value.length;
 		if (pass < 8 || pass > 50) {
 			errMsg.textContent = '密碼長度須介於8~50字元';
@@ -67,8 +70,8 @@
 				memberQA: memQA.value,
 				memberAns: memAns.value,
 				memberAddress: address.value,
-				memerPhone: phone.value,
-				memberGender: gender.value,
+				memberPhone: phone.value,
+				memberGender: selected_gender.value,
 				memberBirthday: birth.value
 			}),
 		})

@@ -3,6 +3,8 @@ package member.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,10 +50,10 @@ public class MemberDaoImpl implements MemberDao {
 					member.setMemberAddress(rs.getString("memberAddress"));
 					member.setMemberPhone(rs.getInt("memberPhone"));
 					member.setMemberGender(rs.getInt("memberGender"));
-					member.setMemberBirthday(rs.getDate("memberBirthday"));
+					member.setMemberBirthday(rs.getObject("memberBirthday", LocalDate.class));
 					member.setMemberPermission(rs.getInt("memberPermission"));
-					member.setModifyTime(rs.getTimestamp("modifyTime"));
-					member.setLastEnterTime(rs.getTimestamp("lastEnterTime"));
+					member.setModifyTime(rs.getObject("modifyTime", LocalDateTime.class));
+					member.setLastEnterTime(rs.getObject("lastEnterTime", LocalDateTime.class));
 				}		
 			}
 		} catch (Exception e) {
@@ -101,7 +103,7 @@ public class MemberDaoImpl implements MemberDao {
 	
 	@Override
 	public Integer insert(Member member) {
-		final String sql = "insert into member(memberEmail,memberPassword,memberName,memberQA,memberAns,memberAddress,memberPhone,memberGender,memberBirthday,memberPermission,modifyTime,lastEnterTime) VALUES (?,?,?,?,?,?,?,?,?,?,1,now(),now())";
+		final String sql = "insert into member(memberEmail,memberPassword,memberName,memberQA,memberAns,memberAddress,memberPhone,memberGender,memberBirthday,memberPermission,modifyTime,lastEnterTime) VALUES (?,?,?,?,?,?,?,?,?,1,now(),now())";
 		try (
 			Connection conn = dataSource.getConnection();
 				
@@ -115,7 +117,7 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setString(6, member.getMemberAddress());
 			pstmt.setInt(7, member.getMemberPhone());
 			pstmt.setInt(8, member.getMemberGender());
-			pstmt.setDate(9, member.getMemberBirthday());
+			pstmt.setObject(9, member.getMemberBirthday());
 			pstmt.executeUpdate();
 			
 			return 1;	
@@ -148,10 +150,10 @@ public class MemberDaoImpl implements MemberDao {
 					member.setMemberAddress(rs.getString("memberAddress"));
 					member.setMemberPhone(rs.getInt("memberPhone"));
 					member.setMemberGender(rs.getInt("memberGender"));
-					member.setMemberBirthday(rs.getDate("memberBirthday"));
+					member.setMemberBirthday(rs.getObject("memberBirthday", LocalDate.class));
 					member.setMemberPermission(rs.getInt("memberPermission"));
-					member.setModifyTime(rs.getTimestamp("modifyTime"));
-					member.setLastEnterTime(rs.getTimestamp("lastEnterTime"));
+					member.setModifyTime(rs.getObject("modifyTime", LocalDateTime.class));
+					member.setLastEnterTime(rs.getObject("lastEnterTime", LocalDateTime.class));
 				}		
 			}
 		} catch (Exception e) {
@@ -194,7 +196,7 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setString(6, member.getMemberAddress());
 			pstmt.setInt(7, member.getMemberPhone());
 			pstmt.setInt(8, member.getMemberGender());
-			pstmt.setDate(9, member.getMemberBirthday());
+			pstmt.setObject(9, member.getMemberBirthday());
 //			pstmt.setTimestamp(10, member.getModifyTime());
 //			pstmt.setTimestamp(11, member.getLastEnterTime());
 			pstmt.executeUpdate();
@@ -222,10 +224,10 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setString(6, member.getMemberAddress());
 			pstmt.setInt(7, member.getMemberPhone());
 			pstmt.setInt(8, member.getMemberGender());
-			pstmt.setDate(9, member.getMemberBirthday());
+			pstmt.setObject(9, member.getMemberBirthday());
 			pstmt.setInt(10, member.getMemberPermission());
 //			pstmt.setTimestamp(11, member.getModifyTime());
-			pstmt.setTimestamp(12, member.getLastEnterTime());
+			pstmt.setObject(11, member.getLastEnterTime());
 			pstmt.executeUpdate();
 			
 			return 1;	
@@ -258,10 +260,10 @@ public class MemberDaoImpl implements MemberDao {
 					member.setMemberAddress(rs.getString("memberAddress"));
 					member.setMemberPhone(rs.getInt("memberPhone"));
 					member.setMemberGender(rs.getInt("memberGender"));
-					member.setMemberBirthday(rs.getDate("memberBirthday"));
+					member.setMemberBirthday(rs.getObject("memberBirthday", LocalDate.class));
 					member.setMemberPermission(rs.getInt("memberPermission"));
-					member.setModifyTime(rs.getTimestamp("modifyTime"));
-					member.setLastEnterTime(rs.getTimestamp("lastEnterTime"));
+					member.setModifyTime(rs.getObject("modifyTime", LocalDateTime.class));
+					member.setLastEnterTime(rs.getObject("lastEnterTime", LocalDateTime.class));
 				}		
 			}
 		} catch (Exception e) {
@@ -311,10 +313,10 @@ public class MemberDaoImpl implements MemberDao {
 				member.setMemberAddress(rs.getString("memberAddress"));
 				member.setMemberPhone(rs.getInt("memberPhone"));
 				member.setMemberGender(rs.getInt("memberGender"));
-				member.setMemberBirthday(rs.getDate("memberBirthday"));
+				member.setMemberBirthday(rs.getObject("memberBirthday", LocalDate.class));
 				member.setMemberPermission(rs.getInt("memberPermission"));
-				member.setModifyTime(rs.getTimestamp("modifyTime"));
-				member.setLastEnterTime(rs.getTimestamp("lastEnterTime"));
+				member.setModifyTime(rs.getObject("modifyTime", LocalDateTime.class));
+				member.setLastEnterTime(rs.getObject("lastEnterTime", LocalDateTime.class));
 				list.add(member);
 			}
 			return list;

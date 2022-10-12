@@ -19,7 +19,7 @@ public interface MemberService {
 	Member forgetpass (Member member);
 	
 //  移除	(後台)
-	Member removeMember(Member member);
+	boolean removeMember(Integer memberId);
 	
 //  會員編輯修改	
 	Member editMember(Member member);

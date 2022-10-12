@@ -1,8 +1,9 @@
 package member.vo;
 
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import core.pojo.CoreSimple;
 
 // member繼承coreSimple  建立sql表格項目
@@ -17,10 +18,10 @@ public class Member extends CoreSimple {
 	private String memberAddress;
 	private Integer memberPhone;
 	private Integer memberGender;
-	private Date memberBirthday;
+	private LocalDate memberBirthday;
 	private Integer memberPermission;
-	private Timestamp modifyTime;
-	private Timestamp lastEnterTime ;
+	private LocalDateTime modifyTime;
+	private LocalDateTime lastEnterTime ;
 	
 	public Member() {
 		
@@ -28,8 +29,8 @@ public class Member extends CoreSimple {
 
 	//  建立各項目建構子
 	public Member(Integer memberID, String memberEmail, String memberPassword, String memberName, String memberQA,
-			String memberAns, String memberAddress, Integer memberPhone, Integer memberGender, Date memberBirthday,
-			Integer memberPermission, Timestamp modifyTime, Timestamp lastEnterTime) {
+			String memberAns, String memberAddress, Integer memberPhone, Integer memberGender, LocalDate memberBirthday,
+			Integer memberPermission, LocalDateTime modifyTime, LocalDateTime lastEnterTime) {
 		super();
 		this.memberID = memberID;
 		this.memberEmail = memberEmail;
@@ -120,11 +121,11 @@ public class Member extends CoreSimple {
 		this.memberGender = memberGender;
 	}
 
-	public Date getMemberBirthday() {
+	public LocalDate getMemberBirthday() {
 		return memberBirthday;
 	}
 
-	public void setMemberBirthday(Date memberBirthday) {
+	public void setMemberBirthday(LocalDate memberBirthday) {
 		this.memberBirthday = memberBirthday;
 	}
 
@@ -136,19 +137,19 @@ public class Member extends CoreSimple {
 		this.memberPermission = memberPermission;
 	}
 
-	public Timestamp getModifyTime() {
+	public LocalDateTime getModifyTime() {
 		return modifyTime;
 	}
 
-	public void setModifyTime(Timestamp modifyTime) {
+	public void setModifyTime(LocalDateTime modifyTime) {
 		this.modifyTime = modifyTime;
 	}
 
-	public Timestamp getLastEnterTime() {
+	public LocalDateTime getLastEnterTime() {
 		return lastEnterTime;
 	}
 
-	public void setLastEnterTime(Timestamp lastEnterTime) {
+	public void setLastEnterTime(LocalDateTime lastEnterTime) {
 		this.lastEnterTime = lastEnterTime;
 	}
 	

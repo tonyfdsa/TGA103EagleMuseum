@@ -1,6 +1,6 @@
 package member.service.impl;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -164,7 +164,7 @@ public class MemberServiceImpl implements MemberService {
 			return member;
 		}
 		
-		final Date memberBirthday = member.getMemberBirthday();
+		final LocalDate memberBirthday = member.getMemberBirthday();
 		if (memberBirthday == null ) {
 			member.setMessage("生日未輸入");
 			member.setSuccessful(false);
@@ -173,7 +173,6 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 
-		
 		
 //      設定自動生成		
 		
@@ -217,27 +216,27 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 		
-		// 讓信件可以抓到名字
-		member.setMemberName(dao.selectForPass(email, ans).getMemberName());
-		// JavaMail執行緒
-		JavaMailThread.to = mem.getMemEmail();
-		JavaMailThread.subject = "忘記密碼確認信";
-		JavaMailThread.ch_name = mem.getMemName();
-		VerificationCode code = new VerificationCode();
-		JavaMailThread.passRandom = code.getRandom();
-		mem.setMemVerification(JavaMailThread.passRandom);
-		JavaMailThread.messageText = "Hello! " + JavaMailThread.ch_name + " 您的驗證碼為: " + JavaMailThread.passRandom + "\n" + "(30分鐘後過期)";
-		JavaMailThread jmt = new JavaMailThread();
-		jmt.start();
-		
-		mem.setSuccessful(true);
-		return mem;
+//		// 讓信件可以抓到名字
+//		member.setMemberName(dao.selectForPass(email, ans).getMemberName());
+//		// JavaMail執行緒
+//		JavaMailThread.to = mem.getMemEmail();
+//		JavaMailThread.subject = "忘記密碼確認信";
+//		JavaMailThread.ch_name = mem.getMemName();
+//		VerificationCode code = new VerificationCode();
+//		JavaMailThread.passRandom = code.getRandom();
+//		mem.setMemVerification(JavaMailThread.passRandom);
+//		JavaMailThread.messageText = "Hello! " + JavaMailThread.ch_name + " 您的驗證碼為: " + JavaMailThread.passRandom + "\n" + "(30分鐘後過期)";
+//		JavaMailThread jmt = new JavaMailThread();
+//		jmt.start();
+//		
+		member.setSuccessful(true);
+		return member;
 	}
 	
 //  刪除	//
 	@Override
-	public Member removeMember(Member member) {
-		return null;
+	public boolean removeMember(Integer memberId) {
+		return dao.delete(memberId) > 0;
 	}
 
 //  修改//
@@ -250,7 +249,7 @@ public class MemberServiceImpl implements MemberService {
 //	管理員修改//
 	@Override
 	public Member manageUpdat(Member member) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -264,7 +263,7 @@ public class MemberServiceImpl implements MemberService {
 //	會員查詢//
 	@Override
 	public List<Member> serchAllMember() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}	
 	
