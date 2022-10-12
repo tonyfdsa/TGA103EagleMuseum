@@ -1,7 +1,7 @@
 package member.controller;
 
-import static core.util.CommonUtil.json2Pojo;
-import static core.util.CommonUtil.writePojo2Json;
+import static core.util.GsonWithDateFormatUtil.json2Pojo;
+import static core.util.GsonWithDateFormatUtil.writePojo2Json;
 import static member.common.MemberConstants.SERVICE;
 
 import javax.servlet.annotation.WebServlet;

@@ -277,7 +277,7 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public List<Member> serchAllMember() {
 		try (Connection conn = dataSource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement("select memberID,memberEmail,memberPassword,memberName,memberPhone,memberGender from member order by memberID;");
+				PreparedStatement pstmt = conn.prepareStatement("select memberID,memberEmail,memberPassword,memberName,memberPhone,memberGender from member ;");
 				ResultSet rs = pstmt.executeQuery()) {
 			List<Member> list = new ArrayList<>();
 			while (rs.next()) {

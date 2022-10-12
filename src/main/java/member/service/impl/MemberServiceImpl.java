@@ -263,8 +263,7 @@ public class MemberServiceImpl implements MemberService {
 //	會員查詢//
 	@Override
 	public List<Member> serchAllMember() {
-		
-		return null;
+		return dao.serchAllMember();
 	}	
 	
 //  管理員查詢全部
