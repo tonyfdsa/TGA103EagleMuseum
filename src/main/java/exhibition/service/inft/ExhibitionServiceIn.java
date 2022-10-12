@@ -10,7 +10,7 @@ public interface ExhibitionServiceIn {
 
 	public Result getAll() throws Exception;
 	
-	public Result getById(Integer id);
+	public Result getById(Integer exhibitionID);
 	
 	public Result getByName(String exhibitionName);
 	

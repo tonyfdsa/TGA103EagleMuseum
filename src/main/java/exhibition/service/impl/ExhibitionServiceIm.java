@@ -44,8 +44,14 @@ public class ExhibitionServiceIm implements ExhibitionServiceIn {
 	}
 
 	@Override
-	public Result getById(Integer id) {
-		return null;
+	public Result getById(Integer exhibitionID) {
+		try {
+			System.out.println(R.success(getBase64(DAO.getById(exhibitionID))));
+			return R.success(getBase64(DAO.getById(exhibitionID)));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
 	}
 	
 	@Override

@@ -64,16 +64,10 @@ createApp({
                 })
                     .then(resp => resp.json())
                     .then(R => {
-
-                        //清除所有的 $("#btn_exbAdd").append(text);
-                        $("#btn_exbAdd").find(".add").remove();
-                        $("#btn_exbAdd").find("#searchNAN").remove();
-
-                        console.log(R.result);
-
+                        alert("新增成功^_^!");
                     })
             });
 
-        }
+        },
     },
 }).mount("#app");

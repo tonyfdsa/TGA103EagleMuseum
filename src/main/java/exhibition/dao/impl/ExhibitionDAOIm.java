@@ -59,6 +59,10 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 					vo.setExhibitionStatus(rs.getInt("exhibitionStatus"));
 					vo.setLastUpdateTime(rs.getString("lastUpdateTime"));
 					vo.setExhibitionImg(rs.getBytes("exhibitionImg"));
+					vo.setValueAldult(rs.getInt("valueAldult"));
+					vo.setValueStu(rs.getInt("valueStu"));
+					vo.setValueOld(rs.getInt("valueOld"));
+					vo.setValuePhy(rs.getInt("valuePhy"));
 					list.add(vo);
 				}
 			}
@@ -68,8 +72,35 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 
 
 	@Override
-	public List<ExhibitionVO> getById(Integer id) {
-		return null;
+	public List<ExhibitionVO> getById(Integer exhibitionID)throws Exception {
+		List<ExhibitionVO> list = new ArrayList<ExhibitionVO>();
+//		try with resources
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(ExhibitionSQL.GET_BY_ID);) {
+			System.out.println("連線成功");
+			pstmt.setInt(1, exhibitionID);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				ExhibitionVO vo;
+				while (rs.next()) {
+					vo = new ExhibitionVO();
+					vo.setExhibitionID(rs.getInt("exhibitionID"));
+					vo.setExhibitionType(rs.getInt("exhibitionType"));
+					vo.setExhibitionName(rs.getString("exhibitionName"));
+					vo.setExhibitionStartDate(rs.getString("exhibitionStartDate"));
+					vo.setExhibitionEndDate(rs.getString("exhibitionEndDate"));
+					vo.setExhibitionArticle(rs.getString("exhibitionArticle"));
+					vo.setExhibitionStatus(rs.getInt("exhibitionStatus"));
+					vo.setLastUpdateTime(rs.getString("lastUpdateTime"));
+					vo.setExhibitionImg(rs.getBytes("exhibitionImg"));
+					vo.setValueAldult(rs.getInt("valueAldult"));
+					vo.setValueStu(rs.getInt("valueStu"));
+					vo.setValueOld(rs.getInt("valueOld"));
+					vo.setValuePhy(rs.getInt("valuePhy"));
+					list.add(vo);
+				}
+			}
+			return list;
+		} 
 	}
 
 	@Override
@@ -93,6 +124,10 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 					vo.setExhibitionStatus(rs.getInt("exhibitionStatus"));
 					vo.setLastUpdateTime(rs.getString("lastUpdateTime"));
 					vo.setExhibitionImg(rs.getBytes("exhibitionImg"));
+					vo.setValueAldult(rs.getInt("valueAldult"));
+					vo.setValueStu(rs.getInt("valueStu"));
+					vo.setValueOld(rs.getInt("valueOld"));
+					vo.setValuePhy(rs.getInt("valuePhy"));
 					list.add(vo);
 				}
 			}
@@ -122,12 +157,15 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 					vo.setExhibitionStatus(rs.getInt("exhibitionStatus"));
 					vo.setLastUpdateTime(rs.getString("lastUpdateTime"));
 					vo.setExhibitionImg(rs.getBytes("exhibitionImg"));
+					vo.setValueAldult(rs.getInt("valueAldult"));
+					vo.setValueStu(rs.getInt("valueStu"));
+					vo.setValueOld(rs.getInt("valueOld"));
+					vo.setValuePhy(rs.getInt("valuePhy"));
 					list.add(vo);
 				}
 			}
 			
-			return list;
-			
+			return list;		
 		}
 	}
 

@@ -15,7 +15,36 @@ public class ExhibitionVO {
 	private Integer locationId;
 	private byte[] exhibitionImg;
 	private String exhibitionImgBase64;
+	private Integer valueAldult;
+	private Integer valueStu;
+	private Integer valueOld;
+	private Integer valuePhy;
 	
+	
+	public Integer getValueAldult() {
+		return valueAldult;
+	}
+	public void setValueAldult(Integer valueAldult) {
+		this.valueAldult = valueAldult;
+	}
+	public Integer getValueStu() {
+		return valueStu;
+	}
+	public void setValueStu(Integer valueStu) {
+		this.valueStu = valueStu;
+	}
+	public Integer getValueOld() {
+		return valueOld;
+	}
+	public void setValueOld(Integer valueOld) {
+		this.valueOld = valueOld;
+	}
+	public Integer getValuePhy() {
+		return valuePhy;
+	}
+	public void setValuePhy(Integer valuePhy) {
+		this.valuePhy = valuePhy;
+	}
 	public Integer getExhibitionID() {
 		return exhibitionID;
 	}

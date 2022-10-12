@@ -7,7 +7,7 @@ public interface ExhibitionDAOIn {
 
 		public List<ExhibitionVO> getAll() throws Exception;
 
-		public List<ExhibitionVO> getById(Integer id);
+		public List<ExhibitionVO> getById(Integer exhibitionID)throws Exception;
 
 		public List<ExhibitionVO> getByName(String exhibitionName) throws Exception;
 		
