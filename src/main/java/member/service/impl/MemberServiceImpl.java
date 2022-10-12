@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.naming.NamingException;
-
 import member.dao.MemberDao;
 import member.dao.impl.MemberDaoImpl;
 import member.service.MemberService;
@@ -18,7 +16,70 @@ public class MemberServiceImpl implements MemberService {
 		dao = new MemberDaoImpl();
 	}
 
-//  註冊
+//  登入	
+	@Override
+	public Member loginMember(Member member) {
+		final String memberEmail = member.getMemberEmail();
+		final String memberPassword = member.getMemberPassword();
+		
+		if (memberEmail == null) {
+			member.setMessage("帳號未輸入");
+			member.setSuccessful(false);
+			return member;
+		}
+		
+		if (memberPassword == null) {
+			member.setMessage("密碼未輸入");
+			member.setSuccessful(false);
+			return member;
+		}
+		
+		member = dao.selectForLogin(memberEmail, memberPassword);
+		if (member == null) {
+			member = new Member();
+			member.setMessage("帳號或密碼錯誤");
+			member.setSuccessful(false);
+			return member;
+		}
+		
+		member.setMessage("登入成功");
+		member.setSuccessful(true);
+		return member;
+	}
+
+//	管理員登入//
+	@Override
+	public Member loginManage(Member member) {
+		final String memberEmail = member.getMemberEmail();
+		final String memberPassword = member.getMemberPassword();
+		
+		if (memberEmail == null) {
+			member.setMessage("帳號未輸入");
+			member.setSuccessful(false);
+			return member;
+		}
+		
+		if (memberPassword == null) {
+			member.setMessage("密碼未輸入");
+			member.setSuccessful(false);
+			return member;
+		}
+		
+		member = dao.selectForLogin(memberEmail, memberPassword);
+		if (member == null) {
+			member = new Member();
+			member.setMessage("帳號或密碼錯誤");
+			member.setSuccessful(false);
+			return member;
+		}
+		
+		member.setMessage("登入成功");
+		member.setSuccessful(true);
+		return member;
+	}
+	
+	
+//  註冊//
 	@Override
 	public Member registerMember(Member member) {
 		final String memberEmail = member.getMemberEmail();
@@ -111,15 +172,7 @@ public class MemberServiceImpl implements MemberService {
 			return member;
 		}
 		
-//		權限
-//		final Integer memberID = dao.insert(member);
-//		if (memberID == null) {
-//			System.out.println(10);
-//			return false;
-//		}
-//		
-//		return true;
-//	}
+
 		
 		
 //      設定自動生成		
@@ -134,63 +187,92 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 	
-//  查詢全部
+//  忘記密碼 ///
 	@Override
-	public List<Member> findAllMembers() {
+	public Member forgetpass(Member member) {
+		final String email = member.getMemberEmail();
+		final String qa = member.getMemberQA();
+		final String ans = member.getMemberAns();
 		
-		return dao.selectAll();
-	}
-
-//  修改
-	@Override
-	public Member editMember(Member member) {
-		
-		return null;
-	}
-
-//  登入	
-	@Override
-	public Member loginMember(Member member) {
-		final String memberEmail = member.getMemberEmail();
-		final String memberPassword = member.getMemberPassword();
-		
-		if (memberEmail == null) {
+		if ("".equals(email)) {
 			member.setMessage("帳號未輸入");
 			member.setSuccessful(false);
 			return member;
 		}
-		
-		if (memberPassword == null) {
-			member.setMessage("密碼未輸入");
+		if ("".equals(qa)) {
+			member.setMessage("問題未輸入");
+			member.setSuccessful(false);
+			return member;
+		}
+		if ("".equals(ans)) {
+			member.setMessage("答案未輸入");
 			member.setSuccessful(false);
 			return member;
 		}
 		
-		member = dao.selectForLogin(memberEmail, memberPassword);
-		if (member == null) {
-			member = new Member();
-			member.setMessage("帳號或密碼錯誤");
+		if (dao.selectForPass(email, ans) == null) {
 			member.setSuccessful(false);
+			member.setMessage("帳號或信箱錯誤！");
 			return member;
 		}
 		
-		member.setMessage("登入成功");
-		member.setSuccessful(true);
-		return member;
+		
+		// 讓信件可以抓到名字
+		member.setMemberName(dao.selectForPass(email, ans).getMemberName());
+		// JavaMail執行緒
+		JavaMailThread.to = mem.getMemEmail();
+		JavaMailThread.subject = "忘記密碼確認信";
+		JavaMailThread.ch_name = mem.getMemName();
+		VerificationCode code = new VerificationCode();
+		JavaMailThread.passRandom = code.getRandom();
+		mem.setMemVerification(JavaMailThread.passRandom);
+		JavaMailThread.messageText = "Hello! " + JavaMailThread.ch_name + " 您的驗證碼為: " + JavaMailThread.passRandom + "\n" + "(30分鐘後過期)";
+		JavaMailThread jmt = new JavaMailThread();
+		jmt.start();
+		
+		mem.setSuccessful(true);
+		return mem;
 	}
-		
+	
+//  刪除	//
+	@Override
+	public Member removeMember(Member member) {
+		return null;
+	}
 
-//  帳號搜尋
+//  修改//
+	@Override
+	public Member editMember(Member member) {
+		
+		return null;
+	}	
+	
+//	管理員修改//
+	@Override
+	public Member manageUpdat(Member member) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+//  帳號搜尋//
 	@Override
 	public Member selectByMember(String memberEmail) {
 		
 		return null;
 	}
 
-//  刪除	
+//	會員查詢//
 	@Override
-	public Member removeMember(Member member) {
+	public List<Member> serchAllMember() {
+		// TODO Auto-generated method stub
 		return null;
+	}	
+	
+//  管理員查詢全部
+	@Override
+	public List<Member> findAllMembers() {
+		
+		return dao.selectAll();
 	}
 
 }

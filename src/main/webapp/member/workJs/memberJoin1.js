@@ -8,24 +8,17 @@
 	const memAns = document.querySelector('#memAns');
 	const address = document.querySelector('#address');
 	const phone = document.querySelector('#phone');
-	const gender = document.querySelector('input[name="inlineRadioOptions"]:checked');
 	const birth = document.querySelector('#birth');
 	const errMsg = document.querySelector('#errMsg');
 
-	// document.getElementById('username').addEventListener('input', () => {
-	// 	const username = username.value.length;
-	// 	if (username < 8 || username > 30) {
-	// 		errMsg.textContent = '帳號長度須介於8~50字元';
-	// 		return;
-	// 	} else {
-	// 		errMsg.textContent = '';
-	// 	}
-	// });
-
-	$('[name=inlineRadioOptions]').change(function () {
-		var checked = $('[name=inlineRadioOptions]:checked')
-		console.log('选中的值:', checked.val())
-	})
+	const gender = document.querySelectorAll('[name=inlineRadioOptions]').forEach(input => input.addEventListener('change', onChange))
+		var onChange = () => {
+    	var checked = document.querySelector('[name=inlineRadioOptions]:checked')
+    	console.log('选中的值:', checked.value)
+		}
+		
+	// const gender = document.querySelector("input[name='inlineRadioOptions']:checked");
+	// console.log(gender.value);
 
 	document.getElementById('password').addEventListener('input', () => {
 		const pass = password.value.length;
