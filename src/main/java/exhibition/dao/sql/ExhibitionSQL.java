@@ -9,5 +9,11 @@ public class ExhibitionSQL {
 
 	// 查詢展覽日期
 	public static final String GET_BY_DATE = "SELECT * FROM exhibition where date(exhibitionEndDate) between ? and ?;";
+	
+	public static final String GET_BY_ID = "SELECT * FROM exhibition where exhibitionID = ?";
+	
+	public static final String UPDATE_IMG = "UPDATE `eagle_museum`.`exhibition` SET `ebhibitionImg` = ? WHERE (`exhibitionID` = ?)";
+
+	public static final String DELETE = "DELETE FROM `eagle_museum`.`exhibition` WHERE (`exhibitionID` = ?);";
 
 }
