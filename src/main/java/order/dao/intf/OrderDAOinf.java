@@ -2,6 +2,7 @@ package order.dao.intf;
 
 import java.util.List;
 
+import order.vo.OrderDetailVO;
 import order.vo.OrderTagVO;
 import order.vo.OrderVO;
 import prod.vo.CartVO;
@@ -34,4 +35,9 @@ public List<OrderVO> orderGetAll() throws Exception;
 //取得所有訂單狀態
 public List<OrderTagVO> orderTagGetAll() throws Exception;
 
+//根據訂單編號取得明細
+public List<OrderDetailVO> getOrderDetailByID(Integer orderID) throws Exception;
+
+//根據memID取得訂單\
+public List<OrderVO> getByMem(Integer memID) throws Exception;
 }

@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import order.dao.intf.OrderDAOinf;
 import order.dao.sql.OrderSQL;
+import order.vo.OrderDetailVO;
 import order.vo.OrderTagVO;
 import order.vo.OrderVO;
 import prod.vo.CartVO;
@@ -61,6 +62,7 @@ public class OrderDAOimpl implements OrderDAOinf{
 	public Integer statupdate(Integer orderID, Integer status) throws Exception {
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(OrderSQL.updateStatus);) {
+			System.out.println(status);
 			pstmt.setInt(1, status);
 			pstmt.setInt(2, orderID);
 			pstmt.executeUpdate();
@@ -92,6 +94,8 @@ public class OrderDAOimpl implements OrderDAOinf{
 					pstmt.setInt(1, vo.getProductID());
 					pstmt.setInt(2, ID);
 					pstmt.setInt(3, vo.getProdCount());
+					pstmt.setString(4, vo.getProdName());
+					pstmt.setInt(5,vo.getProdPrice());
 					pstmt.executeUpdate();
 					return 1;
 		}
@@ -165,5 +169,50 @@ public class OrderDAOimpl implements OrderDAOinf{
 			return list;
 		}
 
+	}
+	@Override
+	public List<OrderDetailVO> getOrderDetailByID(Integer orderID) throws Exception {
+		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(OrderSQL.getOrderDetailByID)){
+			pstmt.setInt(1, orderID);
+			try (ResultSet rs = pstmt.executeQuery()){
+				while (rs.next()) {
+					OrderDetailVO vo = new OrderDetailVO();
+					vo.setProductID(rs.getInt("productID"));
+					vo.setProdQuantity(rs.getInt("prodQuantity"));
+					vo.setProdPrice(rs.getInt("prodPrice"));
+					vo.setProdName(rs.getString("prodName"));
+					list.add(vo);
+				}
+			}
+			return list;
+		}
+		
+	}
+	@Override
+	public List<OrderVO> getByMem(Integer memID) throws Exception {
+		List<OrderVO> list = new ArrayList<OrderVO>();
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(OrderSQL.getByMem)){
+			pstmt.setInt(1, memID);
+			try(ResultSet rs = pstmt.executeQuery()){
+				while (rs.next()) {
+					OrderVO VO = new OrderVO();
+					VO.setOrderID(rs.getInt("orderID"));
+					VO.setMemberId(rs.getInt("memberId"));
+					VO.setOrderAmount(rs.getInt("orderAmount"));
+					VO.setOrderStatus(rs.getInt("orderStatus"));
+					VO.setDeliveryAddress(rs.getString("deliveryAddress"));
+					VO.setFreight(rs.getInt("freight"));
+					VO.setMemo(rs.getString("memo"));
+					VO.setOrderAmount(rs.getInt("orderAmount"));
+					VO.setCreateTime(rs.getDate("createTime"));
+				
+					list.add(VO); // Store the row in the list
+					}
+			}
+			return list;
+		}
 	}
 }

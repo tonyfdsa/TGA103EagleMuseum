@@ -21,4 +21,10 @@ public interface OrderServiceinft {
 	
 	//取得所有訂單狀態
 	public Result orderTagGetAll();
+	
+	//根據訂單編號取得明細
+	public Result getOrderDetailByID(Integer prodID);
+	
+	//取得訂單根據memID
+	public Result getByMem(Integer memID);
 }
