@@ -1,114 +1,128 @@
-.img{
-    /* display: none; */
-    position: absolute;
-    width: 600px;
-    height: 500px;
-    
+.preview {
+  height: 250px;
+  max-width: 100%;
+  background-color: rgba(128, 128, 128, 0.268);
+  margin-left: 5px;
 }
 
-#show{
-    width: 600px;
-    height: 500px;
-    position: relative;
-    /* display: none; */
-    display: block; 
-    z-index: 2;
+.preview img.preview_img {
+  width: 100%;
+  height: 100%;
+}
+
+.img {
+  /* display: none; */
+  position: absolute;
+  width: 600px;
+  height: 500px;
+
+}
+
+#show {
+  width: 600px;
+  height: 500px;
+  position: relative;
+  /* display: none; */
+  display: block;
+  z-index: 2;
 }
 
 
-#imgBtnL,#imgBtnR {
-background-color:rgba(230, 200, 200, 0.7);
-height: 30px;
-width: 30px;
-position: relative;
-top: 50%;
-z-index: 3;
+#imgBtnL,
+#imgBtnR {
+  background-color: rgba(230, 200, 200, 0.7);
+  height: 30px;
+  width: 30px;
+  position: relative;
+  top: 50%;
+  z-index: 3;
 }
 
-#imgBtnL{
-left: 30px;
+#imgBtnL {
+  left: 30px;
 }
 
-#imgBtnR{
-right: 30px;
+#imgBtnR {
+  right: 30px;
 }
 
-.collect{
-font-size: 36px;
+.collect {
+  font-size: 36px;
 }
 
-.map{
-/* display: flex; */
-position: relative;
-left: 30%;
-font-size: 50px;
-cursor: pointer;
+.map {
+  /* display: flex; */
+  position: relative;
+  left: 30%;
+  font-size: 50px;
+  cursor: pointer;
 }
 
-.collectContent{
-    margin-top: 30px;
-    margin-bottom: 30px;
-    
-    font-size: 24px;
-    position: relative;
+.collectContent {
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  font-size: 24px;
+  position: relative;
 }
 
-.mapText{
+.mapText {
   height: 20px;
   font-size: 24px;
-  margin-left: 16px; 
-  position: relative; 
+  margin-left: 16px;
+  position: relative;
   right: 40px;
   cursor: pointer;
 }
 
 
 
-.tag{
-    margin-left: 20px;
-    font-size: 16px;
+.tag {
+  margin-left: 20px;
+  font-size: 16px;
 }
 
-.tag:hover{
-    background-color: white;
+.tag:hover {
+  background-color: white;
 }
+
 .like {
-text-align: center;
-align-items: center;
-font-size: 24px;
-width: 250px;
-/* margin-left: 500px; */
-border-radius: 30px;
-cursor: pointer;
+  text-align: center;
+  align-items: center;
+  font-size: 24px;
+  width: 250px;
+  /* margin-left: 500px; */
+  border-radius: 30px;
+  cursor: pointer;
 
 }
 
-.like iconify-icon{
-    position: relative;
-    
-    
+.like iconify-icon {
+  position: relative;
+
+
 }
 
-.like iconify-icon:hover{
-    background: url('https://api.iconify.design/ant-design/heart-twotone.svg?color=%23f24e1e') no-repeat center center / contain;
-    position: relative;
-  
+.like iconify-icon:hover {
+  background: url('https://api.iconify.design/ant-design/heart-twotone.svg?color=%23f24e1e') no-repeat center center / contain;
+  position: relative;
+
 }
 
-.like :hover{
-    /* background-color: white; */
-    border-radius: 30px;
+.like :hover {
+  /* background-color: white; */
+  border-radius: 30px;
 }
 
-.collect .like{
+.collect .like {
   display: flex;
   justify-content: end;
 }
 
-.Text{
+.collectionTextFront {
   font-size: 16px;
 }
 
-.bottomImg{
+.bottomImg {
   cursor: pointer;
 }

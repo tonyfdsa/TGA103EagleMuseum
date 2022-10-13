@@ -25,7 +25,6 @@
   })
     .then(resp => resp.json())
     .then(collectionImgNameID => {
-      console.log(collectionImgNameID,"2222");
       for (i = 0; i < collectionImgNameID.length; i++) {
         let div_html = `
                      <span class="smallpreview" >
