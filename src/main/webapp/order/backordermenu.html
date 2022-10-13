@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>productmeau</title>
+    <!-- 後臺模板Css -->
+    <link rel="stylesheet" href="./CSS/backtemplete.css">
+
+    <!-- bootstrapr -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <!-- 正黑體字型包 -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./CSS/backordermeau.css">
+
+    <style>
+   div.overlayTag {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: hsla(0, 0%, 0%, .5);
+    
+    display: none;
+  }
+
+  /* 元素 article 置中及基本樣式 */
+  div.overlayTag > article{
+
+   
+    background-color: white;
+    width: 90%;
+    height: 150px;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ddd;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+  div.overlayProd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: hsla(0, 0%, 0%, .5);
+    display: none;
+  }
+
+  /* 元素 article 置中及基本樣式 */
+  div.overlayProd > article{
+    background-color: white;
+    width: 90%;
+    height: 450px;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ddd;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+     
+    </style>
+
+  </head>
+  <body>
+    <!-- header -->
+    <header>
+      <div class="header">
+        <div>
+          <img src="./img/eagle2.jpg" alt="" class="headImg" />
+          <span class="user">使用者</span>
+        </div>
+      </div>
+    </header>
+    <!-- aside -->
+
+    <div class="aside">
+      <!-- 頂部留白 -->
+      <div style="height: 20px"></div>
+      <!-- 大標籤 -->
+      <ul>
+        <li>
+          <div class="sideBtn">首頁管理</div>
+          <div class="Btn" ><a href="#">展覽資訊</a></div>
+          <div class="Btn"><a href="#">商品資訊</a></div>
+          <div class="Btn"><a href="#">館方資訊</a></div>
+        </li>
+          <li>
+            <div class="sideBtn">展覽管理</div>
+            <div class="Btn"><a href="#">票卷管理</a></div>
+          </li>
+        </li>
+        <li>
+            <div class="sideBtn">館藏管理</div>
+            <div class="Btn"><a href="#">館藏列表</a></div>
+        </li>
+        <li>
+            <div class="sideBtn">商城管理</div>
+            <div class="Btn"><a href="#">訂單搜尋</a></div>
+            <div class="Btn"><a href="../prod/backprodmenu.html">商品搜尋</a></div>
+        </li>
+        <li>
+            <div class="sideBtn">會員管理</div>
+            <div class="Btn"><a href="#">會員搜尋</a></div>
+        </li>
+          <li>
+            <div class="sideBtn">聯絡管理</div>
+            <div class="Btn"><a href="#">常見問題</a></div>
+            <div class="Btn"><a href="#">其他問題</a></div>
+            <div class="Btn"><a href="#">交通資訊</a></div>
+            <div class="Btn"><a href="#">租借場地</a></div>
+          </li>
+        </li>
+      </ul>
+    </div>
+    <!-- main -->
+    <div class="main">
+
+
+      <div class="headbar d-flex ">
+        <button class="headerBtn" value="0" >會員搜尋</button>
+        <select class="orderTag" style="width: 100px; margin-top: 10px;">
+          <!--有value傳value，沒有value就傳包含的文字-->
+          <option >請選擇</option>
+      </select>
+        <button class="insertProd" value="2">新增商品</button>
+      </div>
+
+
+      <div class="head">
+        <button class="searchBtn">搜尋
+        </button>
+        <input type="search" class="searchbar"  placeholder=" 請輸入會員編號" >
+      </div>
+
+
+
+      <div style="height: 5px;"></div>
+      <div class="container-fluid" id="title">
+        <div class="row d-flex column" >
+          <div class="col-1 " style="text-align:center">會員ID</div>
+          <div class="col-2" style="text-align:center">訂單編號</div>
+          <div class="col-2" style="text-align:center">訂單金額</div>
+          <div class="col-2" style="text-align:center">訂單狀態</div>
+          <div class="col-2"  style="text-align:center">訂單日期</div>
+          <div class="col-2" style="text-align:center">訂單明細</div>
+          <div class="col-1"></div>
+        </div>
+      </div>
+    <div class="searchContent"></div>
+          <div class="col-1"></div>
+
+        
+        <div class="overlayProd">
+          <article>
+            
+            <h4 style="justify-content: center; display: flex;">商品新增</h4>
+            <div style="height: 20px;"></div>
+            <div style=" margin-top: 10px;">商品名稱: <input class="prodName" type="text" name="" id=""></div>
+            <div>
+              商品標籤:
+              <select class="orderTag" style="width: 100px; margin-top: 10px;">
+                  <!--有value傳value，沒有value就傳包含的文字-->
+                  <option >請選擇</option>
+              </select>
+          </div>
+          <div style=" margin-top: 10px;">商品價格: <input class="prodPrice" type="text" name="" id=""></div>
+          <div style=" margin-top: 10px;">商品庫存: <input class="prodInStock" type="text" name="" id=""></div>
+          <textarea class="prodDescription" placeholder="商品介紹" style="width:80%;height: 30%; margin-top: 10px;"></textarea>
+            <div>
+              <input type="submit" class="prodSubmit" style="margin-top: 10px;" value="送出">
+              <input type="submit" class="btnClose" style="margin-top: 10px;" value="關閉">
+            </div>
+          </article>
+        </div>
+      </div>
+    
+
+      
+ 
+      
+    </div>
+
+    <!-- jquery link -->
+    <script src="./vendor/js/jquery3.6.0.js"></script>
+
+    <script src="./JS/backtemplete.js"></script>
+
+    <script src="./JS/backordermenu.js"></script>
+    
+    <script>
+
+    
+    </script>
+  </body>
+</html>

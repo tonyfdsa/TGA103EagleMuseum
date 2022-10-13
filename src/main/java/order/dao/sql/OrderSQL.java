@@ -13,9 +13,8 @@ public class OrderSQL {
 			+ "values(? , ? , \"1\", ? , \"60\", \"無\", Now())";
 	
 	public static final String insertOrderDetail =
-				"insert into `orderdetails`(productID,orderID,prodQuantity) "
-		
-						+ "values(? , ? , ?)";
+				"insert into `orderdetails`(productID,orderID,prodQuantity,prodName,prodPrice) "
+						+ "values(? , ? , ?, ?, ?)";
 	//取得商品BYID
 	public static final String prodStGetByID =
 			"select  prodInStock, sellQuantity from productlist where productID= ? ";
@@ -31,4 +30,11 @@ public class OrderSQL {
 	//取得所有訂單狀態標籤
 	public static final String orderTagGetAll =
 			"select * from `orderstatus`" ;
+	
+	//根據訂單編號取得明細
+	public static final String getOrderDetailByID =
+			"select * from `orderdetails` where orderID = ?";
+	
+	public static final String getByMem =
+			"select * from `order` where memberId = ?";
 }
