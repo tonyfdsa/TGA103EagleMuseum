@@ -43,8 +43,8 @@
             <div class="row d-flex  column">
               <div class="col-1 "style="text-align:center">${i + 1}</div>
               <div class="col-1" style="text-align:center">${collectionSerchName[i].collectionID}</div>
-              <div class="col-2" style="">${collectionSerchName[i].collectionTitle}</div>
-              <div class="col-3" style="">${collectionSerchName[i].collectionText}</div>
+              <div class="col-2">${collectionSerchName[i].collectionTitle}</div>
+              <div class="col-3" id="collectionTextLimit">${collectionSerchName[i].collectionText}</div>
               <div class="col-1" style="text-align:center">${collectionSerchName[i].collectionEar}</div>
               <div class="col-2" style="text-align:center">${collectionSerchName[i].collectionMaterial}</div>
               <div class="col-2"  style="text-align:center"></div>
@@ -89,8 +89,8 @@
             <div class="row d-flex  column">
               <div class="col-1 "style="text-align:center">${i + 1}</div>
               <div class="col-1" style="text-align:center">${collectionSerchEar[i].collectionID}</div>
-              <div class="col-2" style="">${collectionSerchEar[i].collectionTitle}</div>
-              <div class="col-3" style="">${collectionSerchEar[i].collectionText}</div>
+              <div class="col-2">${collectionSerchEar[i].collectionTitle}</div>
+              <div class="col-3" id="collectionTextLimit">${collectionSerchEar[i].collectionText}</div>
               <div class="col-1" style="text-align:center">${collectionSerchEar[i].collectionEar}</div>
               <div class="col-2" style="text-align:center">${collectionSerchEar[i].collectionMaterial}</div>
               <div class="col-1" style="text-align:center" class="statis" data-status= ${collectionSerchEar[i].prodStatus}>${re}</div>
