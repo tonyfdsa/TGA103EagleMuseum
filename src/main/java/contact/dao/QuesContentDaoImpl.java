@@ -226,7 +226,7 @@ public class QuesContentDaoImpl implements QuesContentDao {
 	@Override
 	public String getMemNameAndMailAndQues(Integer questionContentID) {
 		// JDBC寫法
-		String sql = "SELECT memberEmail, memberName, questionContent, answerContent FROM "
+		String sql = "SELECT memberEmail, memberName, questionContent FROM "
 				+ "	member m join questionContent q on m.memberID = q.memberId " + "	where q.questionContentID = ?;";
 		String returnString = "";
 		try (Connection connection = dataSource.getConnection();
@@ -239,8 +239,6 @@ public class QuesContentDaoImpl implements QuesContentDao {
 				returnString += ansrs.getString(2);
 				returnString += ",";
 				returnString += ansrs.getString(3);
-				returnString += ",";
-				returnString += ansrs.getString(4);
 			}
 			return returnString;
 		} catch (SQLException e) {

@@ -23,7 +23,7 @@ $(document).on("click", ".replybtn", function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式
 		.then(R => {
-//			console.log(R);
+			//			console.log(R);
 			let qContent = `${R}`;
 			$("#quesContent").html(qContent);
 		})
@@ -125,6 +125,7 @@ $(".searchAllQs").click(function () {
             `
 			}
 			$(".quesList").html(quesList);
+			$(".noResult").html("");
 		})
 })
 
@@ -142,16 +143,19 @@ $(".searchById").click(function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式	
 		.then(R => {
-		
-			let quesList = "";
-			
-			for (let i = 0; i < R.result.length; i++) {
+			if (R.code == 400) {
+				$(".quesList").html("");
+				$(".noResult").html("查無相關資訊！");
+			} else if (R.message == "Success") {
+				let quesList = "";
 
-				if (R.result[i].answerTime == null) {
-					R.result[i].answerTime = "";
-				}
+				for (let i = 0; i < R.result.length; i++) {
 
-				quesList += `
+					if (R.result[i].answerTime == null) {
+						R.result[i].answerTime = "";
+					}
+
+					quesList += `
                 <tr>
                 <td>${R.result[i].questionContentID}</td>
                 <td>${R.result[i].memberId}</td>
@@ -163,8 +167,11 @@ $(".searchById").click(function () {
                 <td>${R.result[i].answerTime}</td>
             </tr>
             `
+				}
+				$(".noResult").html("");
+				$(".quesList").html(quesList);
+				
 			}
-			$(".quesList").html(quesList);
 		})
 })
 
@@ -173,8 +180,7 @@ $(".searchByDate").click(function () {
 	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/quesSearchByDateServlet'
 	let quesTime = document.querySelector("#start_date").value;
 	let answerTime = document.querySelector("#end_date").value;
-//	console.log(quesTime);
-//	console.log(answerTime);
+
 	fetch(TagInsertURL, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -185,14 +191,18 @@ $(".searchByDate").click(function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式
 		.then(R => {
-			let quesList = "";
-			for (let i = 0; i < R.result.length; i++) {
+			if (R.code == 400) {
+				$(".quesList").html("");
+				$(".noResult").html("查無相關資訊！");
+			} else if (R.message == "Success") {
+				let quesList = "";
+				for (let i = 0; i < R.result.length; i++) {
 
-				if (R.result[i].answerTime == null) {
-					R.result[i].answerTime = "";
-				}
+					if (R.result[i].answerTime == null) {
+						R.result[i].answerTime = "";
+					}
 
-				quesList += `
+					quesList += `
                 <tr>
                 <td>${R.result[i].questionContentID}</td>
                 <td>${R.result[i].memberId}</td>
@@ -202,10 +212,12 @@ $(".searchByDate").click(function () {
                 <td>${R.result[i].answered}</td>
                 <td>${R.result[i].quesTime}</td>
                 <td>${R.result[i].answerTime}</td>
-            </tr>
-            `
+            	</tr>
+            	`
+				}
+				$(".noResult").html("");
+				$(".quesList").html(quesList);
 			}
-			$(".quesList").html(quesList);
 		})
 })
 
@@ -227,12 +239,16 @@ $(".searchByIAndD").click(function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式
 		.then(R => {
-			let quesList = "";
-			for (let i = 0; i < R.result.length; i++) {
-				if (R.result[i].answerTime == null) {
-					R.result[i].answerTime = "";
-				}
-				quesList += `
+			if (R.code == 400) {
+				$(".quesList").html("");
+				$(".noResult").html("查無相關資訊！");
+			} else if (R.message == "Success") {
+				let quesList = "";
+				for (let i = 0; i < R.result.length; i++) {
+					if (R.result[i].answerTime == null) {
+						R.result[i].answerTime = "";
+					}
+					quesList += `
                 <tr>
                 <td>${R.result[i].questionContentID}</td>
                 <td>${R.result[i].memberId}</td>
@@ -244,8 +260,10 @@ $(".searchByIAndD").click(function () {
                 <td>${R.result[i].answerTime}</td>
             </tr>
             `
+				}
+				$(".noResult").html("");
+				$(".quesList").html(quesList);
 			}
-			$(".quesList").html(quesList);
 		})
 })
 

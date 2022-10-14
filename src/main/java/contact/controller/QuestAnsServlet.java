@@ -62,7 +62,9 @@ public class QuestAnsServlet extends HttpServlet {
 			
 			String memNameAndMailAndQues = service.getMemNameAndMailAndQues(questionContentID);
 			String[] memNMQ = memNameAndMailAndQues.split(",");
-			new MailService(memNMQ[0], memNMQ[1], memNMQ[2], memNMQ[3]).eagleMail();			
+			/*把memNameAndMailAndQues取到的舊answerContent（memNMQ[3]）部分刪掉，
+			  在這邊把新的answerContent加進去*/		 
+			new MailService(memNMQ[0], memNMQ[1], memNMQ[2], answerContent).eagleMail();			
 		}
 
 	}

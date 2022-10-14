@@ -44,19 +44,28 @@ $(".btn").click(function () {
 	if (questionContent == "") {
 		$(".inputQues").slideToggle("slow");
 	}
+//	else if(!questionContent == ""){
+//		$(".inputQues").
+//	}
 });
 
 function clear(){
 	$("#questionContent").val("");
 }
 
+//清除按鈕
+$("#clearBtn").click(clear ());
+
 //fetch部分
+//提交問題
 $("#submitBtn").click(function () {
 	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/inserQuesServlet'
 	let memberId = document.querySelector(".memberId").value;
 	let questionContent = document.querySelector(".formContent").value;
 	let questionTypeID = document.querySelector(".questionTypeID").value;
-	//    console.log(memberId);
+	console.log(memberId);
+	console.log(questionContent);
+	console.log(questionTypeID);
 
 	fetch(TagInsertURL, {
 		method: 'POST',
@@ -69,11 +78,13 @@ $("#submitBtn").click(function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式
 		.then(R => {
-			try {
-
-			} finally {
-				query();
-				clear();
+			if(R == true){
+				try {
+	
+				} finally {
+					query();
+					clear();
+				}
 			}
 		})
 })

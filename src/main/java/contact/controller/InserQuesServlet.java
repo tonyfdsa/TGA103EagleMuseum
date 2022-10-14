@@ -53,18 +53,22 @@ public class InserQuesServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		QuesContent vo = json2Vo(req, QuesContent.class);
-
+//		System.out.println(vo);
 		// 假裝從session取得memberid（要跟servlet一致）
 //			final Integer memberId = 3;
 
 		String getQuesContent = vo.getQuestionContent();
 		if (StringUtils.isNotBlank(getQuesContent)) {
 			final boolean result = service.submitQuestion(vo);
-			if (result) {
+			
+			//寄出確認信
+			if (result == true) {
 				String memberEmail = service.confirmQues(vo.getMemberId()).getMemberEmail();
 				new QuesConfirmMail(memberEmail).quesConfirmMail();
+				resp.getWriter().print(gson.toJson(true));
+			}else {
+				resp.getWriter().print(gson.toJson(false));
 			}
 		}
-		resp.getWriter().print(gson.toJson(true));
 	}
 }

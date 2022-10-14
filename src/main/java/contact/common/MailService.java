@@ -118,7 +118,6 @@ public class MailService {
 	}
 	
 	public void eagleMail() {
-//		String messageText = "Hello! " + memberName + " " + mailContent + "\n" + " ";
 		this.sendMail(mailAddress, subject, memberName + quesContent + ansContent);
 	}
 	

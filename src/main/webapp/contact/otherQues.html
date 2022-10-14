@@ -117,8 +117,7 @@
 			</div>
 			<form method="POST">
 				<div class="questionTypeSearch1">
-					<span>問題類型</span>
-					<select class="questionTypeID" name="questionTypeID">
+					<span>問題類型</span> <select class="questionTypeID" name="questionTypeID">
 						<option value=1>交通問題</option>
 						<option value=2>展覽問題</option>
 						<option value=3>商品問題</option>
@@ -131,16 +130,31 @@
 				<div class="statement formTextName">
 					<textarea id="questionContent" name="questionContent" class="formContent" rows="10"
 						placeholder="請輸入您的疑問......"></textarea>
-					<div class="needQues">
+
+<!-- 					<span class="preview"> -->
+<!-- 						<span style="width: 400px; background-color: white" class="text">預覽圖</span> -->
+<!-- 						<div> -->
+<!-- 							<label class="input-file-button" for="upload" @click="">可上傳圖片</label> -->
+<!-- 							<input type="file" id="upload" style="display: none;" multiple="multiple" -->
+<!-- 								@change="fileSelected" /> -->
+<!-- 							<input type="submit" class="clear" value="清除圖片"> -->
+<!-- 						</div> -->
+
+<!-- 					</span> -->
+
+
+					<div > 
 						<span class="inputQues">提問失敗，請輸入問題內容</span>
 					</div>
+					
 					<br> <input class="memberId" value="2">
 				</div>
+
 				<div class="confirm">
 					<button class="btn" type="button" id="submitBtn">提交</button>
-					<!-- <span> -->
-					<!-- <button class="btn" id="clearBtn">清除</button> -->
-					<!-- </span> -->
+					<span>
+					<button class="btn" id="clearBtn">清除</button>
+					</span>
 					<div class="hint"></div>
 				</div>
 
