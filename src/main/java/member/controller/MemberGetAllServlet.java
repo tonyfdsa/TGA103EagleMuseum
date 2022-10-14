@@ -3,7 +3,7 @@ package member.controller;
 
 import java.io.IOException;
 import java.util.List;
-import static core.util.CommonUtil.writePojo2Json;
+import static core.util.GsonWithDateFormatUtil.writePojo2Json;
 import static member.common.MemberConstants.SERVICE;
 
 import javax.servlet.ServletException;
