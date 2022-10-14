@@ -28,7 +28,7 @@ public interface MemberService {
 	Member manageUpdat(Member member);
 	
 //	帳號查詢  
-	Member selectByMember(String memberEmail);
+	Member selectByMember(Member member);
 	
 //	會員查詢全部
 	List<Member> serchAllMember(); 

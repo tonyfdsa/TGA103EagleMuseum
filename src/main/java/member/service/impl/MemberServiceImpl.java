@@ -233,7 +233,7 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 	
-//  刪除	//
+//  刪除	
 	@Override
 	public boolean removeMember(Integer memberId) {
 		return dao.delete(memberId) > 0;
@@ -255,12 +255,12 @@ public class MemberServiceImpl implements MemberService {
 
 //  帳號搜尋//
 	@Override
-	public Member selectByMember(String memberEmail) {
+	public Member selectByMember(Member member) {
 		
-		return null;
+		return dao.selectByMemberEmail(member.getMemberEmail());
 	}
 
-//	會員查詢//
+//	會員查詢
 	@Override
 	public List<Member> serchAllMember() {
 		return dao.serchAllMember();
