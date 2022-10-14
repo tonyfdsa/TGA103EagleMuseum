@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.naming.Context;
@@ -22,6 +23,7 @@ import exhibition.dao.intf.ExhibitionDAOIn;
 import exhibition.dao.sql.ExhibitionSQL;
 import exhibition.vo.ExhibitionVO;
 import exhibition.vo.ExhibitionVOo;
+import prod.common.Global;
 
 public class ExhibitionDAOIm implements ExhibitionDAOIn {
 
@@ -39,17 +41,16 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 	@Override
 	public List<ExhibitionVO> getAll() throws Exception {
 		List<ExhibitionVO> list = new ArrayList<ExhibitionVO>();
-//		try with resources
+		// try with resources
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(ExhibitionSQL.GET_ALL);) {
-//			System.out.println("連線成功");
+			System.out.println("連線成功");
 			try (ResultSet rs = pstmt.executeQuery()) {
 				ExhibitionVO vo;
 				while (rs.next()) {
-//					EXHIBITION_ID, EXHIBITION_TYPE, EXHIBITION_NAME, EXHIBITION_START_DATE, 
-//					EXHIBITION_END_DATE, EXHIBITION_ARTICLE, EXHIBITION_STATUS, LAST_UPDATE_TIME,
+
 					vo = new ExhibitionVO();
-					vo.setExhibitionId(rs.getInt("exhibitionID"));
+					vo.setExhibitionID(rs.getInt("exhibitionID"));
 					vo.setExhibitionType(rs.getInt("exhibitionType"));
 					vo.setExhibitionName(rs.getString("exhibitionName"));
 					vo.setExhibitionStartDate(rs.getString("exhibitionStartDate"));
@@ -57,16 +58,49 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 					vo.setExhibitionArticle(rs.getString("exhibitionArticle"));
 					vo.setExhibitionStatus(rs.getInt("exhibitionStatus"));
 					vo.setLastUpdateTime(rs.getString("lastUpdateTime"));
+					vo.setExhibitionImg(rs.getBytes("exhibitionImg"));
+					vo.setValueAldult(rs.getInt("valueAldult"));
+					vo.setValueStu(rs.getInt("valueStu"));
+					vo.setValueOld(rs.getInt("valueOld"));
+					vo.setValuePhy(rs.getInt("valuePhy"));
+					list.add(vo);
+				}
+			}
+		}
+		return list;
+	}
+
+
+	@Override
+	public List<ExhibitionVO> getById(Integer exhibitionID)throws Exception {
+		List<ExhibitionVO> list = new ArrayList<ExhibitionVO>();
+//		try with resources
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(ExhibitionSQL.GET_BY_ID);) {
+			System.out.println("連線成功");
+			pstmt.setInt(1, exhibitionID);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				ExhibitionVO vo;
+				while (rs.next()) {
+					vo = new ExhibitionVO();
+					vo.setExhibitionID(rs.getInt("exhibitionID"));
+					vo.setExhibitionType(rs.getInt("exhibitionType"));
+					vo.setExhibitionName(rs.getString("exhibitionName"));
+					vo.setExhibitionStartDate(rs.getString("exhibitionStartDate"));
+					vo.setExhibitionEndDate(rs.getString("exhibitionEndDate"));
+					vo.setExhibitionArticle(rs.getString("exhibitionArticle"));
+					vo.setExhibitionStatus(rs.getInt("exhibitionStatus"));
+					vo.setLastUpdateTime(rs.getString("lastUpdateTime"));
+					vo.setExhibitionImg(rs.getBytes("exhibitionImg"));
+					vo.setValueAldult(rs.getInt("valueAldult"));
+					vo.setValueStu(rs.getInt("valueStu"));
+					vo.setValueOld(rs.getInt("valueOld"));
+					vo.setValuePhy(rs.getInt("valuePhy"));
 					list.add(vo);
 				}
 			}
 			return list;
-		}
-	}
-
-	@Override
-	public List<ExhibitionVO> getById(Integer id) {
-		return null;
+		} 
 	}
 
 	@Override
@@ -75,15 +109,13 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 //		try with resources
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(ExhibitionSQL.GET_BY_NAME);) {
-//			System.out.println("連線成功");
+			System.out.println("連線成功");
 			pstmt.setString(1, exhibitionName);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				ExhibitionVO vo;
 				while (rs.next()) {
-//					EXHIBITION_ID, EXHIBITION_TYPE, EXHIBITION_NAME, EXHIBITION_START_DATE, 
-//					EXHIBITION_END_DATE, EXHIBITION_ARTICLE, EXHIBITION_STATUS, LAST_UPDATE_TIME,
 					vo = new ExhibitionVO();
-					vo.setExhibitionId(rs.getInt("exhibitionID"));
+					vo.setExhibitionID(rs.getInt("exhibitionID"));
 					vo.setExhibitionType(rs.getInt("exhibitionType"));
 					vo.setExhibitionName(rs.getString("exhibitionName"));
 					vo.setExhibitionStartDate(rs.getString("exhibitionStartDate"));
@@ -91,6 +123,11 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 					vo.setExhibitionArticle(rs.getString("exhibitionArticle"));
 					vo.setExhibitionStatus(rs.getInt("exhibitionStatus"));
 					vo.setLastUpdateTime(rs.getString("lastUpdateTime"));
+					vo.setExhibitionImg(rs.getBytes("exhibitionImg"));
+					vo.setValueAldult(rs.getInt("valueAldult"));
+					vo.setValueStu(rs.getInt("valueStu"));
+					vo.setValueOld(rs.getInt("valueOld"));
+					vo.setValuePhy(rs.getInt("valuePhy"));
 					list.add(vo);
 				}
 			}
@@ -104,16 +141,14 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 //		try with resources
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(ExhibitionSQL.GET_BY_DATE);) {
-//			System.out.println("時間= " + new SimpleDateFormat("yyyy-MM-dd").parse(exhibitionStartDate).getTime());
+			System.out.println("連線成功");
 			pstmt.setObject(1, new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(exhibitionStartDate).getTime()));
 			pstmt.setObject(2, new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(exhibitionEndDate).getTime()));
 			try (ResultSet rs = pstmt.executeQuery()) {
 				ExhibitionVO vo;
 				while (rs.next()) {
-//					EXHIBITION_ID, EXHIBITION_TYPE, EXHIBITION_NAME, EXHIBITION_START_DATE, 
-//					EXHIBITION_END_DATE, EXHIBITION_ARTICLE, EXHIBITION_STATUS, LAST_UPDATE_TIME,
 					vo = new ExhibitionVO();
-					vo.setExhibitionId(rs.getInt("exhibitionID"));
+					vo.setExhibitionID(rs.getInt("exhibitionID"));
 					vo.setExhibitionType(rs.getInt("exhibitionType"));
 					vo.setExhibitionName(rs.getString("exhibitionName"));
 					vo.setExhibitionStartDate(rs.getString("exhibitionStartDate"));
@@ -121,12 +156,16 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 					vo.setExhibitionArticle(rs.getString("exhibitionArticle"));
 					vo.setExhibitionStatus(rs.getInt("exhibitionStatus"));
 					vo.setLastUpdateTime(rs.getString("lastUpdateTime"));
+					vo.setExhibitionImg(rs.getBytes("exhibitionImg"));
+					vo.setValueAldult(rs.getInt("valueAldult"));
+					vo.setValueStu(rs.getInt("valueStu"));
+					vo.setValueOld(rs.getInt("valueOld"));
+					vo.setValuePhy(rs.getInt("valuePhy"));
 					list.add(vo);
 				}
 			}
 			
-			return list;
-			
+			return list;		
 		}
 	}
 
@@ -134,6 +173,7 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 	public boolean insert(ExhibitionVOo vo) {
 		Transaction tx = null; 
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			System.out.println("連線成功");
 			tx = session.beginTransaction();	
 			session.save(vo);
 			tx.commit();
@@ -146,4 +186,31 @@ public class ExhibitionDAOIm implements ExhibitionDAOIn {
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean updateImg(byte[] img, Integer id) throws Exception {
+		// try with resources
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(ExhibitionSQL.UPDATE_IMG);) {
+			System.out.println("連線成功");
+
+			pstmt.setBytes(1, img);
+			pstmt.setInt(2, id);
+
+			return pstmt.executeUpdate() != 0;
+		}
+	}
+
+	@Override
+	public boolean delete(Integer id) throws Exception {
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(ExhibitionSQL.DELETE);) {
+			System.out.println("連線成功");
+
+			pstmt.setInt(1, id);
+
+			return pstmt.executeUpdate() != 0;
+		}
+	}
+
 }

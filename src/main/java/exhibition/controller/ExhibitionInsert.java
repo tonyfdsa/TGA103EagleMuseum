@@ -1,6 +1,7 @@
 package exhibition.controller;
 
 import java.io.IOException;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,8 +32,8 @@ public class ExhibitionInsert extends HttpServlet{
 		setHeaders(response);
 		request.setCharacterEncoding("UTF-8");
 		ExhibitionVOo vo = gson.fromJson(request.getReader().readLine(), ExhibitionVOo.class);
-//		System.out.println(vo.getExhibitionName());
-		
+		vo.setExhibitionImg(Base64.getDecoder().decode(vo.getImg()));
+		System.out.println(vo.getImg());
 		response.getWriter().print(gson.toJson(service.insert(vo)));	
 	}
 	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

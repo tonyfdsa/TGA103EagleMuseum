@@ -10,11 +10,15 @@ public interface ExhibitionServiceIn {
 
 	public Result getAll() throws Exception;
 	
-	public Result getById(Integer id);
+	public Result getById(Integer exhibitionID);
 	
 	public Result getByName(String exhibitionName);
 	
 	public Result getByDate(String exhibitionStartDate, String exhibitionEndDate);
 	
 	public Result insert(ExhibitionVOo vo);
+
+	public Result updateImg(String img, Integer id);
+
+	public Result delete(Integer id);
 }

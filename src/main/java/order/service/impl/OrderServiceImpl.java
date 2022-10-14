@@ -109,5 +109,23 @@ public class OrderServiceImpl implements OrderServiceinft{
 			return R.fail(e.toString());
 		}
 	}
+	@Override
+	public Result getOrderDetailByID(Integer prodID) {
+		try {
+			return R.success(DAO.getOrderDetailByID(prodID));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+	@Override
+	public Result getByMem(Integer memID) {
+		try {
+			return R.success(DAO.getByMem(memID));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
 
 }
