@@ -1,7 +1,7 @@
 package member.controller;
 
-import static core.util.CommonUtil.json2Pojo;
-import static core.util.CommonUtil.writePojo2Json;
+import static core.util.GsonWithDateFormatUtil.json2Pojo;
+import static core.util.GsonWithDateFormatUtil.writePojo2Json;
 import static member.common.MemberConstants.SERVICE;
 
 import java.io.IOException;
@@ -18,6 +18,7 @@ import member.vo.Member;
 @WebServlet("/member/login")
 public class MemberLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

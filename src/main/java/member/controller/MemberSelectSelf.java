@@ -1,8 +1,8 @@
 package member.controller;
 
-
 import java.io.IOException;
-import java.util.List;
+
+import static core.util.GsonWithDateFormatUtil.json2Pojo;
 import static core.util.GsonWithDateFormatUtil.writePojo2Json;
 import static member.common.MemberConstants.SERVICE;
 
@@ -14,21 +14,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.vo.Member;
 
-
-@WebServlet("/member/getAll")
-public class MemberGetAllServlet extends HttpServlet {
+@WebServlet("/member/selectSelf")
+public class MemberSelectSelf extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-		
+	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
+		System.out.println("我有跑");
+		Member member = json2Pojo(req, Member.class);
 		
-		List<Member> member = SERVICE.serchAllMember();
-		
-		writePojo2Json(resp, member);
-
+		member = SERVICE.selectByMember(member);
+        
+        writePojo2Json(resp, member);
 		
 	}
-
+	
 }
