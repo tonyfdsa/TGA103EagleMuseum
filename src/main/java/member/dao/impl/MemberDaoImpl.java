@@ -181,8 +181,9 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	
 	@Override
-	public Integer update(Member member) {
+	public boolean update(Member member) {
 		final String sql = "update member set memberEmail = ?,memberPassword = ?,memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ?,modifyTime = now(),lastEnterTime =now() where memberEmail=?;";
+		int rowCount = 0;
 		try (
 			Connection conn = dataSource.getConnection();
 				
@@ -199,13 +200,13 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setObject(9, member.getMemberBirthday());
 //			pstmt.setTimestamp(10, member.getModifyTime());
 //			pstmt.setTimestamp(11, member.getLastEnterTime());
-			pstmt.executeUpdate();
+			rowCount =pstmt.executeUpdate();
 			
-			return 1;	
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null ;
 		}
+		return rowCount != 0 ;
 	}
 	
 	@Override

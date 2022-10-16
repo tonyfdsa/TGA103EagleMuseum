@@ -16,7 +16,7 @@ public interface MemberDao {
 	// 管理員 刪除
 	Integer delete(Integer memberId);
 	// 修改
-	Integer update(Member member);
+	boolean update(Member member);
 	// 管理員修改
 	Integer updateManage(Member member);
 	// 帳號查詢

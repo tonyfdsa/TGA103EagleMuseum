@@ -84,7 +84,7 @@
             <tr>
               <td>
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="請輸入姓名" aria-label="Recipient's username"
+                  <input type="text" class="form-control" id="usname" aria-label="Recipient's username"
                     aria-describedby="button-addon2">
               </td>
         </div>
@@ -97,7 +97,7 @@
         </tr>
         <tr>
           <td>
-            <u>yo5946666@gogo.com</u>
+          </label><span id="username"></span>
           </td>
         </tr>
         <tr>
@@ -107,8 +107,7 @@
           <td>密碼 :</td>
         </tr>
         <tr>
-          <td><input type="text" class="form-control" placeholder="請輸入"
-              value="&#10059&#10059&#10059&#10059&#10059&#10059&#10059&#10059&#10059&#10059"></td>
+          <td><input type="password" class="form-control" id="pass"></td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -117,13 +116,8 @@
           <td>密碼修改 :</td>
         </tr>
         <tr>
-          <td><input type="text" class="form-control" placeholder="請輸入修改密碼" aria-label="Recipient's username"
+          <td><input type="password" class="form-control" id="password" aria-label="Recipient's username"
               aria-describedby="button-addon2"></td>
-        </tr>
-        <tr>
-          <td>
-            <font color="red">請填寫5-20字元英文或數字, 但不可為空白鍵,「'」,「"」</font>
-          </td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -132,7 +126,7 @@
           <td>密碼修改再次確認 :</td>
         </tr>
         <tr>
-          <td><input type="text" class="form-control" placeholder="請輸入修改密碼" aria-label="Recipient's username"
+          <td><input type="password" class="form-control" id="confirm_password" aria-label="Recipient's username"
               aria-describedby="button-addon2"></td>
         </tr>
         <tr>
@@ -142,7 +136,7 @@
           <td>密碼忘記驗證問題 :</td>
         </tr>
         <tr>
-          <td><input type="text" class="form-control" placeholder="請輸入密碼提示" aria-label="Recipient's username"
+          <td><input type="text" class="form-control" id="memQA" aria-label="Recipient's username"
               aria-describedby="button-addon2"></td>
         </tr>
         <tr>
@@ -152,7 +146,7 @@
           <td>密碼忘記驗證回答 :</td>
         </tr>
         <tr>
-          <td><input type="text" class="form-control" placeholder="請輸入密碼提示" aria-label="Recipient's username"
+          <td><input type="text" class="form-control" id="memAns" aria-label="Recipient's username"
               aria-describedby="button-addon2"></td>
         </tr>
         <tr>
@@ -162,7 +156,7 @@
           <td>地址 :</td>
         </tr>
         <tr>
-          <td><input type="text" class="form-control" placeholder="請輸入地址" aria-label="Recipient's username"
+          <td><input type="text" class="form-control" id="address" aria-label="Recipient's username"
               aria-describedby="button-addon2"></td>
         </tr>
         <tr>
@@ -172,7 +166,7 @@
           <td>手機 :</td>
         </tr>
         <tr>
-          <td><input type="text" class="form-control" placeholder="請輸入手機號碼" aria-label="Recipient's username"
+          <td><input type="text" class="form-control" id="phone" aria-label="Recipient's username"
               aria-describedby="button-addon2"></td>
         </tr>
         <tr>
@@ -184,24 +178,25 @@
         <tr>
           <td>
             <div class="form-check col-1 form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                value="option1">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio"
+                value="1">
               <label class="form-check-label" for="inlineRadio1">男</label>
             </div>
             <div class="form-check col-1 form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                value="option2">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio"
+                value="2">
               <label class="form-check-label" for="inlineRadio2">女</label>
             </div>
             <div class="form-check col-1 form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                value="option3">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio"
+                value="3">
               <label class="form-check-label" for="inlineRadio3">其他 </label>
             </div>
             <div class="form-check col-2 form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                value="option3">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio"
+                value="4" checked>
               <label class="form-check-label" for="inlineRadio3">不願透露 </label>
+            </div>
           </td>
         </tr>
         <tr>
@@ -210,18 +205,9 @@
         <td>生日 :</td>
         </tr>
         <tr>
-          <td><input type="text" class="form-control" placeholder="西元/月/日" aria-label="Recipient's username"
+          <td><input type="date" class="form-control" id="birth" aria-label="Recipient's username"
               aria-describedby="button-addon2"></td>
         </tr>
-        <!-- <tr>
-              <td>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio"
-                    value="option">
-                  <label class="form-check-label" for="inlineRadio">我願意收到大鷹博物館電子報</label>
-                </div>
-              </td>
-            </tr> -->
         </table>
         <div class="d-grid gap-2 col-6 mx-auto">
           <button class="btn btn-warning" type="button" id="revise"
@@ -240,7 +226,7 @@
   <script src="./workJs/jquery/jquery-3.6.0.min.js"></script>
   <!-- 模板js匯入 位置 -->
   <script src="./workJS/Template .js"></script>
-  <script src="./workJs/memberprofile2.jsS"></script>
+  <script src="./workJs/memberprofile2.js"></script>
 
 </body>
 
