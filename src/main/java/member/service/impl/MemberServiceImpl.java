@@ -242,7 +242,10 @@ public class MemberServiceImpl implements MemberService {
 //  修改//
 	@Override
 	public Member editMember(Member member) {
+		System.out.println(member.getMemberEmail());
 		if (dao.update(member) == false || dao.selectByMemberEmail(member.getMemberEmail()) == null) {
+			System.out.println(dao.update(member)+"1" );
+			System.out.println(dao.selectByMemberEmail(member.getMemberEmail())+"2");
 			member.setMessage("資料更改出現錯誤，請聯絡管理員!");
 			member.setSuccessful(false);
 			return member;

@@ -15,13 +15,13 @@
     .then(member => {
         console.log(member)
         let memberGender = "";
-        if (member.memberGender == "0") {
+        if (member.memberGender == "1") {
             memberGender = "男";
-        } else if (member.memberGender == "1") {
+        } else if (member.memberGender == "2") {
             memberGender = "女";
-        }else if (member.memberGender == "2") {
-            memberGender = "其他";
         }else if (member.memberGender == "3") {
+            memberGender = "其他";
+        }else if (member.memberGender == "4") {
             memberGender = "不透露";
         }
         let text = `

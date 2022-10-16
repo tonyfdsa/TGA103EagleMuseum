@@ -182,7 +182,7 @@ public class MemberDaoImpl implements MemberDao {
 	
 	@Override
 	public boolean update(Member member) {
-		final String sql = "update member set memberEmail = ?,memberPassword = ?,memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ?,modifyTime = now(),lastEnterTime =now() where memberEmail=?;";
+		final String sql = "update member set memberEmail = ?,memberPassword = ?,memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ? where memberEmail=?;";
 		int rowCount = 0;
 		try (
 			Connection conn = dataSource.getConnection();
@@ -198,8 +198,9 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setInt(7, member.getMemberPhone());
 			pstmt.setInt(8, member.getMemberGender());
 			pstmt.setObject(9, member.getMemberBirthday());
-//			pstmt.setTimestamp(10, member.getModifyTime());
-//			pstmt.setTimestamp(11, member.getLastEnterTime());
+//			pstmt.setObject(10, member.getModifyTime());
+//			pstmt.setObject(11, member.getLastEnterTime());
+			pstmt.setString(10, member.getMemberEmail());
 			rowCount =pstmt.executeUpdate();
 			
 

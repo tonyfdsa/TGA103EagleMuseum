@@ -21,42 +21,23 @@
 	  document.querySelector("#memAns").value = member.memberAns;
 	  document.querySelector("#address").value = member.memberAddress;
       document.querySelector('#phone').value = member.memberPhone;
-      if (member.memberGender == "0") {
+      if (member.memberGender == "1") {
       	document.querySelector('#inlineRadio').checked = "男";
-      } else if (member.memGender == "1") {
-      	document.querySelector('#inlineRadio').checked = "女";
       } else if (member.memGender == "2") {
+      	document.querySelector('#inlineRadio').checked = "女";
+      } else if (member.memGender == "3") {
       	document.querySelector('#inlineRadio').checked = "其他";
-      } else {
+      } else if (member.memGender == "4") {
       	document.querySelector('#inlineRadio').checked = "不透露";
       }
 	  console.log(member.memberGender);
       document.querySelector("#birth").value = member.memberBirthday;
   
-
-      // document.getElementById("#usname").value = member.memberName;
-      // document.getElementById("username").value = member.memberEmail;
-    //   document.getElementById("pass").value = member.memberPassword;
-    //   document.getElementById("password").value = member.memberPassword;
-    //   document.getElementById("confirm_pass").value = member.memberPass;
-    //   document.getElementById("memQA").value = member.memberQA;
-    //   document.getElementById("memAns").value = member.memberAns;
-    //   document.getElementById("address").value = member.memberAddress;
-    //   document.getElementById("phone").value = member.memberPhone;
-    //   if (member.memGender == "0") {
-    //   	document.getElementById("inlineRadio1").checked = true;
-    //   } else if (member.memGender == "1") {
-    //   	document.getElementById("inlineRadio2").checked = true;
-    //   } else if (member.memGender == "3") {
-    //   	document.getElementById("inlineRadio3").checked = true;
-    //   } else if (member.memGender == "4") {
-    //   	document.getElementById("inlineRadio4").checked = true;
-    //   }
-    //   document.getElementById("birth").value = member.memberBirthday;
       console.log(1233);
     });
 
   // 編輯資料
+  const username = document.querySelector("#username");
   const usname = document.querySelector("#usname");
   const password = document.querySelector("#password");
   const confirm_pass = document.querySelector("#confirm_password");
@@ -67,6 +48,7 @@
   const birth = document.querySelector("#birth");
   const errMsg = document.querySelector("#errMsg");
   const gender = document.getElementsByName("inlineRadioOptions");
+  
 
   document.getElementById("password").addEventListener("input", () => {
     const pass = password.value.length;

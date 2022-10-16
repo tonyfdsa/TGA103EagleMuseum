@@ -23,12 +23,16 @@ public class MemberEdit extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
+		
 		System.out.println("跑跑跑走");
 		final HttpSession session = req.getSession();
-		final String username = ((Member) session.getAttribute("member")).getMemberName();
+		final String email = ((Member) session.getAttribute("member")).getMemberEmail();
+		
 		System.out.println("跑跑跑");
 		Member member = json2Pojo(req, Member.class);
-		member.setMemberName(username);
+		System.out.println(member.getMemberEmail());
+		member.setMemberEmail(email);
+		
 		writePojo2Json(resp, SERVICE.editMember(member));
 		
 		
