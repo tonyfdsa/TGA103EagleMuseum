@@ -9,10 +9,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(value = "/*")
+@WebFilter(value = "/contact/toBeFiltered/*")
 public class FilterByE implements Filter {
 
 	// server啟動時會自動調用此init方法，啟動filter1次
@@ -41,8 +42,7 @@ public class FilterByE implements Filter {
 				|| uri.contains("/member/register")
 				|| uri.contains("/member/workCss/")
 				|| uri.contains("/member/workJs/")
-				|| uri.contains("/member/workImage/")	
-				
+				|| uri.contains("/member/workImage/")				
 				) {
 //			System.out.println(456);
 			// 是就放行，讓瀏覽器可以訪問到servlet或JSP
