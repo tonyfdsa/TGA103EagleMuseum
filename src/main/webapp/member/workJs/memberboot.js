@@ -1,4 +1,3 @@
-
 // //----- 產生min到max之間的亂數
 // function getRandom(min, max) {
 // 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -59,44 +58,40 @@
 // }
 // draw_Captcha();
 
-
-
 (() => {
-	const username = document.querySelector('#username');
-	const password = document.querySelector('#password');
-	const errMsg = document.querySelector('#errMsg');
-	document.getElementById('next').addEventListener('click', () => {
-		// console.log('next');
-		fetch('http://localhost:8080/TGA103eagleMuseum/member/login', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				memberEmail: username.value,
-				memberPassword: password.value
-			}),
-		})
-			.then(resp => resp.json())
-			.then(body => {
-				console.log(body)
-				errMsg.textContent = '';
-				const { successful, message } = body;
-				if (successful) {
-					const { memberID, memberEmail } = body;
-					sessionStorage.setItem('id', memberID);
-					sessionStorage.setItem('Email', memberEmail);
-					location = 'memberHome.html'
-				} else {
-					errMsg.textContent = message;
-				}
-			});
-	});
+  const username = document.querySelector("#username");
+  const password = document.querySelector("#password");
+  const errMsg = document.querySelector("#errMsg");
+  document.getElementById("next").addEventListener("click", () => {
+    // console.log('next');
+    fetch("http://localhost:8080/TGA103eagleMuseum/member/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        memberEmail: username.value,
+        memberPassword: password.value,
+      }),
+    })
+      .then((resp) => {
+        sessionStorage.setItem("url", resp.headers.get("url"));
+        return resp.json();
+      })
+      .then((body) => {
+        console.log(body.headers);
+        errMsg.textContent = "";
+        const { successful, message } = body;
+        if (successful) {
+          const { memberID, memberEmail } = body;
+          sessionStorage.setItem("id", memberID);
+          sessionStorage.setItem("Email", memberEmail);
+          if (sessionStorage.getItem("url") != "null") {
+            location = "http://localhost:8080" + sessionStorage.getItem("url");
+          } else {
+            location = "memberHome.html";
+          }
+        } else {
+          errMsg.textContent = message;
+        }
+      });
+  });
 })();
-
-
-
-
-
-
-
-
-

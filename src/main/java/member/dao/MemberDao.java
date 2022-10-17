@@ -7,11 +7,14 @@ import member.vo.Member;
 public interface MemberDao {
 	// 登入
 	Member selectForLogin(String email, String password);
-
+	// 管理員登入
+	Member managerForLogin(String email, String password);
 	// 註冊
 	Integer insert(Member member);
-	// 忘記密碼
-	Member selectForPass(String memberEmail, String memberAns);
+	// 忘記密碼查詢
+	Member selectForPass(String memberEmail);
+	// 忘記密碼更新
+	boolean updateForPass(Member member);
 	// 管理員 刪除
 	Integer delete(Integer memberId);
 	// 修改

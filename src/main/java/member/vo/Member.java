@@ -23,6 +23,8 @@ public class Member extends CoreSimple {
 	private LocalDateTime modifyTime;
 	private LocalDateTime lastEnterTime;
 	private String Verification;
+	private String captcha;
+	private String memberNewPass;
 	
 	public Member() {
 		
@@ -160,6 +162,22 @@ public class Member extends CoreSimple {
 
 	public void setVerification(String verification) {
 		Verification = verification;
+	}
+
+	public String getCaptcha() {
+		return captcha;
+	}
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
+	}
+
+	public String getMemberNewPass() {
+		return memberNewPass;
+	}
+
+	public void setMemberNewPass(String memberNewPass) {
+		this.memberNewPass = memberNewPass;
 	}
 	
 }
