@@ -216,10 +216,10 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 		
-//		// 讓信件可以抓到名字
-//		member.setMemberName(dao.selectForPass(email, ans).getMemberName());
-//		// JavaMail執行緒
-//		JavaMailThread.to = mem.getMemEmail();
+		// 讓信件可以抓到名字
+		member.setMemberName(dao.selectForPass(email, ans).getMemberName());
+		// JavaMail執行緒
+//		JavaMailThread.to = member.getMemberEmail();
 //		JavaMailThread.subject = "忘記密碼確認信";
 //		JavaMailThread.ch_name = mem.getMemName();
 //		VerificationCode code = new VerificationCode();
@@ -242,8 +242,21 @@ public class MemberServiceImpl implements MemberService {
 //  修改//
 	@Override
 	public Member editMember(Member member) {
+		System.out.println(member.getMemberEmail());
+		if (dao.update(member) == false || dao.selectByMemberEmail(member.getMemberEmail()) == null) {
+			System.out.println(dao.update(member)+"1" );
+			System.out.println(dao.selectByMemberEmail(member.getMemberEmail())+"2");
+			member.setMessage("資料更改出現錯誤，請聯絡管理員!");
+			member.setSuccessful(false);
+			return member;
+		}
+		// 回會員編輯有完整session
+		member = dao.selectByMemberEmail(member.getMemberEmail());
 		
-		return null;
+		member.setMessage("資料更改成功");
+		member.setSuccessful(true);
+		return member;
+		
 	}	
 	
 //	管理員修改//

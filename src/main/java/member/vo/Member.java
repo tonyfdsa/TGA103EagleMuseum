@@ -21,7 +21,8 @@ public class Member extends CoreSimple {
 	private LocalDate memberBirthday;
 	private Integer memberPermission;
 	private LocalDateTime modifyTime;
-	private LocalDateTime lastEnterTime ;
+	private LocalDateTime lastEnterTime;
+	private String Verification;
 	
 	public Member() {
 		
@@ -151,6 +152,14 @@ public class Member extends CoreSimple {
 
 	public void setLastEnterTime(LocalDateTime lastEnterTime) {
 		this.lastEnterTime = lastEnterTime;
+	}
+
+	public String getVerification() {
+		return Verification;
+	}
+
+	public void setVerification(String verification) {
+		Verification = verification;
 	}
 	
 }
