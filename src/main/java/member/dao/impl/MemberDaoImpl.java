@@ -26,7 +26,7 @@ public class MemberDaoImpl implements MemberDao {
 			e.printStackTrace();
 		}
 	}
-
+//  登入
 	@Override
 	public Member selectForLogin(String email, String password) {
 		final String sql = "select * from member where memberEmail = ? and memberPassword = ? " ;
@@ -64,43 +64,7 @@ public class MemberDaoImpl implements MemberDao {
 		return member;
 	}
 	
-//	@Override
-//	public Member selectLoginManage(String email, String password) {
-//		final String sql = "select * from member where memberEmail = ? and memberPassword = ? " ;
-//		Member member = null;
-//		try (
-//				Connection conn = dataSource.getConnection();
-//				PreparedStatement pstmt = conn.prepareStatement(sql);
-//				) {
-//			pstmt.setString(1, email);
-//			pstmt.setString(2, password);
-//			try(ResultSet rs = pstmt.executeQuery()){
-//				if (rs.next()) {
-//					
-//					member = new Member();
-//					member.setMemberID(rs.getInt("memberID"));
-//					member.setMemberEmail(rs.getString("memberEmail"));
-//					member.setMemberPassword(rs.getString("memberPassword"));
-//					member.setMemberName(rs.getString("memberName"));
-//					member.setMemberQA(rs.getString("memberQA"));
-//					member.setMemberAns(rs.getString("memberAns"));
-//					member.setMemberAddress(rs.getString("memberAddress"));
-//					member.setMemberPhone(rs.getInt("memberPhone"));
-//					member.setMemberGender(rs.getInt("memberGender"));
-//					member.setMemberBirthday(rs.getDate("memberBirthday"));
-//					member.setMemberPermission(rs.getInt("memberPermission"));
-//					member.setModifyTime(rs.getTimestamp("modifyTime"));
-//					member.setLastEnterTime(rs.getTimestamp("lastEnterTime"));
-//				}		
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//		
-//		return member;
-//	}
-	
+//  註冊	
 	@Override
 	public Integer insert(Member member) {
 		final String sql = "insert into member(memberEmail,memberPassword,memberName,memberQA,memberAns,memberAddress,memberPhone,memberGender,memberBirthday,memberPermission,modifyTime,lastEnterTime) VALUES (?,?,?,?,?,?,?,?,?,1,now(),now())";
@@ -126,6 +90,7 @@ public class MemberDaoImpl implements MemberDao {
 			return null;
 		}
 	}
+	
 	// 忘記密碼
 	@Override
 	public Member selectForPass(String memberEmail, String memberAns) {
@@ -159,11 +124,10 @@ public class MemberDaoImpl implements MemberDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
-		}
-		
+		}	
 		return member;
 	}
-	
+//  刪除	
 	@Override
 	public Integer delete(Integer memberId) {
 		final String sql = "DELETE FROM member where memberID = ?";
@@ -179,10 +143,10 @@ public class MemberDaoImpl implements MemberDao {
 			return null;
 		}
 	}
-	
+//  更新	
 	@Override
 	public boolean update(Member member) {
-		final String sql = "update member set memberEmail = ?,memberPassword = ?,memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ? where memberEmail=?;";
+		final String sql = "update member set memberEmail = ?,memberPassword = ?,memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ?,modifyTime = now(),lastEnterTime =now() where memberEmail=?;";
 		int rowCount = 0;
 		try (
 			Connection conn = dataSource.getConnection();
@@ -198,12 +162,9 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setInt(7, member.getMemberPhone());
 			pstmt.setInt(8, member.getMemberGender());
 			pstmt.setObject(9, member.getMemberBirthday());
-//			pstmt.setObject(10, member.getModifyTime());
-//			pstmt.setObject(11, member.getLastEnterTime());
 			pstmt.setString(10, member.getMemberEmail());
 			rowCount =pstmt.executeUpdate();
 			
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -211,13 +172,13 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	
 	@Override
-	public Integer updateManage(Member member) {
-		final String sql = "update member set memberEmail = ?,memberPassword = ?,memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ?,memberPermission = ?,modifyTime = now(),lastEnterTime =? where memberEmail=?;";
+	public boolean updateManage(Member member) {
+		final String sql = "update member set memberEmail = ?,memberPassword = ?,memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ?,memberPermission = ?,modifyTime = now() where memberEmail=?;";
+		int rowCount = 0;
 		try (
 			Connection conn = dataSource.getConnection();
-				
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			) {
+				) {
 			pstmt.setString(1, member.getMemberEmail());
 			pstmt.setString(2, member.getMemberPassword());
 			pstmt.setString(3, member.getMemberName());
@@ -229,14 +190,13 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setObject(9, member.getMemberBirthday());
 			pstmt.setInt(10, member.getMemberPermission());
 //			pstmt.setTimestamp(11, member.getModifyTime());
-			pstmt.setObject(11, member.getLastEnterTime());
-			pstmt.executeUpdate();
-			
-			return 1;	
+			pstmt.setString(12, member.getMemberEmail());
+			rowCount =pstmt.executeUpdate();
+				
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null ;
 		}
+			return rowCount != 0 ;
 	}
 	
 	

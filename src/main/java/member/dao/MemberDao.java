@@ -7,8 +7,7 @@ import member.vo.Member;
 public interface MemberDao {
 	// 登入
 	Member selectForLogin(String email, String password);
-	// 管理員登入
-//	Member selectLoginManage(String email, String password);
+
 	// 註冊
 	Integer insert(Member member);
 	// 忘記密碼
@@ -18,7 +17,7 @@ public interface MemberDao {
 	// 修改
 	boolean update(Member member);
 	// 管理員修改
-	Integer updateManage(Member member);
+	boolean updateManage(Member member);
 	// 帳號查詢
 	Member selectByMemberEmail(String memberEmail);
 	// 管理員簡易全員查詢
