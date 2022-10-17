@@ -1,7 +1,7 @@
 // 開啟彈跳視窗
 $(document).on("click", "#seeAns", function () {
 	$(".overlayTag").fadeIn();
-	
+
 	//綁定quesId
 	$("#quesId").val($(this).val());
 
@@ -20,7 +20,7 @@ $(document).on("click", "#seeAns", function () {
 			if (R != null) {
 				let aContent = `${R}`;
 				$("#ansContent").html(aContent);
-			}else{
+			} else {
 				$("#ansContent").html(" ");
 			}
 		})
@@ -44,17 +44,17 @@ $(".btn").click(function () {
 	if (questionContent == "") {
 		$(".inputQues").slideToggle("slow");
 	}
-//	else if(!questionContent == ""){
-//		$(".inputQues").
-//	}
+	//	else if(!questionContent == ""){
+	//		$(".inputQues").
+	//	}
 });
 
-function clear(){
+function clear() {
 	$("#questionContent").val("");
 }
 
 //清除按鈕
-$("#clearBtn").click(clear ());
+$("#clearBtn").click(clear());
 
 //fetch部分
 //提交問題
@@ -78,14 +78,14 @@ $("#submitBtn").click(function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式
 		.then(R => {
-			if(R == true){
-				try {
-	
-				} finally {
-					query();
-					clear();
-				}
+
+			try {
+
+			} finally {
+				query();
+				clear();
 			}
+
 		})
 })
 

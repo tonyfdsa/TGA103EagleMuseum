@@ -51,6 +51,7 @@ public class QuesSearchAllServlet extends HttpServlet {
 
 		final Result list = service.findAllQs();
 		resp.getWriter().print(gson.toJson(list));
+		
 
 	}
 

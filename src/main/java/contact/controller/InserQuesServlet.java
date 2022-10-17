@@ -60,15 +60,13 @@ public class InserQuesServlet extends HttpServlet {
 		String getQuesContent = vo.getQuestionContent();
 		if (StringUtils.isNotBlank(getQuesContent)) {
 			final boolean result = service.submitQuestion(vo);
-			
 			//寄出確認信
-			if (result == true) {
+			if (result) {
 				String memberEmail = service.confirmQues(vo.getMemberId()).getMemberEmail();
 				new QuesConfirmMail(memberEmail).quesConfirmMail();
-				resp.getWriter().print(gson.toJson(true));
-			}else {
-				resp.getWriter().print(gson.toJson(false));
 			}
+			resp.getWriter().print(gson.toJson(true));
+		
 		}
 	}
 }

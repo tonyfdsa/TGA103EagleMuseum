@@ -28,7 +28,7 @@ public class Member implements Serializable{
 	private Integer memberPhone;
 	private Integer memberGender;
 	private Date memberBirthday;
-	@Column(insertable = false)
+	@Column
 	private Integer memberPermission;
 	@Column(insertable = false)
 	private Timestamp modifyTime;

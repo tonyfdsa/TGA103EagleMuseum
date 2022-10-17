@@ -31,7 +31,6 @@ public class QuesContentServiceImpl implements QuesContentService {
 	@Override
 	public Boolean submitQuestion(QuesContent questionContent) {
 
-//		try {
 			final String questionContentString = questionContent.getQuestionContent();
 			if (StringUtils.isBlank(questionContentString)) {
 				return false;
@@ -42,10 +41,6 @@ public class QuesContentServiceImpl implements QuesContentService {
 				return false;
 			}
 			return true;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
 	}
 
 	@Override
