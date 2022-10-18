@@ -20,8 +20,8 @@ import contact.common.QuesConfirmMail;
 import contact.common.Result;
 import contact.service.QuesContentService;
 import contact.service.QuesContentServiceImpl;
-import contact.vo.Member;
 import contact.vo.QuesContent;
+import member.vo.Member;
 
 @WebServlet("/inserQuesServlet")
 public class InserQuesServlet extends HttpServlet {
@@ -56,6 +56,11 @@ public class InserQuesServlet extends HttpServlet {
 //		System.out.println(vo);
 		// 假裝從session取得memberid（要跟servlet一致）
 //			final Integer memberId = 3;
+		Member user = (Member)req.getSession().getAttribute("member");
+		Integer userId = user.getMemberID();
+//		System.out.println(userId);
+		
+		resp.setIntHeader("userId", userId);
 
 		String getQuesContent = vo.getQuestionContent();
 		if (StringUtils.isNotBlank(getQuesContent)) {

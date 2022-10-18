@@ -1,5 +1,5 @@
 // 開啟彈跳視窗
-$(document).on("click", "#seeAns", function () {
+$(document).on("click", "#seeAns", function() {
 	$(".overlayTag").fadeIn();
 
 	//綁定quesId
@@ -27,18 +27,18 @@ $(document).on("click", "#seeAns", function () {
 });
 
 // 關閉彈跳視窗
-$(document).on("click", ".close, div.overlayTag, .tagSubmit", function (e) {
+$(document).on("click", ".close, div.overlayTag, .tagSubmit", function(e) {
 	$("div.overlayTag").fadeOut();
 });
 
 //取消冒泡事件
-$(document).on("click", "div.overlayTag > article", function (e) {
+$(document).on("click", "div.overlayTag > article", function(e) {
 	e.stopPropagation();
 });
 
 
 //請輸入問題內容
-$(".btn").click(function () {
+$(".btn").click(function() {
 	let questionContent = ($(".formContent").val());
 
 	if (questionContent == "") {
@@ -58,9 +58,10 @@ $("#clearBtn").click(clear());
 
 //fetch部分
 //提交問題
-$("#submitBtn").click(function () {
+$("#submitBtn").click(function() {
 	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/inserQuesServlet'
-	let memberId = document.querySelector(".memberId").value;
+	//	let memberId = document.querySelector(".memberId").value;
+	let memberId = sessionStorage.getItem('id');
 	let questionContent = document.querySelector(".formContent").value;
 	let questionTypeID = document.querySelector(".questionTypeID").value;
 	console.log(memberId);
@@ -76,7 +77,10 @@ $("#submitBtn").click(function () {
 			questionTypeID
 		})
 	})
-		.then(resp => resp.json())//後端傳給前端的格式
+		.then(resp => {
+			resp.json()
+
+		})//後端傳給前端的格式
 		.then(R => {
 
 			try {
@@ -93,8 +97,8 @@ $("#submitBtn").click(function () {
 
 function query() {
 	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/questionContent'
-	let memberId = document.querySelector(".memberId").value;
-	//    console.log(memberId);
+	//	let memberId = document.querySelector(".memberId").value;
+
 	fetch(TagInsertURL, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
