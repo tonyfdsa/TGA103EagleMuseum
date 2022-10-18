@@ -13,7 +13,14 @@ import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(value = "/contact/toBeFiltered/*")
+@WebFilter(value = {
+		"/collection/toBeFiltered/*", 
+		"/contact/toBeFiltered/*", 
+		"/exhibition/toBeFiltered/*", 
+		"/member/toBeFiltered/*", 
+		"/order/toBeFiltered/*", 
+		"/prod/toBeFiltered/*",
+		})
 public class FilterByE implements Filter {
 
 	// server啟動時會自動調用此init方法，啟動filter1次
