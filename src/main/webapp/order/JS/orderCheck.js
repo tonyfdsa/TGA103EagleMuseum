@@ -1,6 +1,6 @@
         //取得訂單資料
         let orderStatus = 1;
-        fetch('http://localhost:8080/TGA103eagleMuseum/OrderGetByStat',{
+        fetch('TGA103eagleMuseum/OrderGetByStat',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -47,7 +47,7 @@
                 })
              }
 
-             fetch('http://localhost:8080/TGA103eagleMuseum/OrderGetByStat',{
+             fetch('TGA103eagleMuseum/OrderGetByStat',{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -95,7 +95,7 @@
         //點擊more查看明細
         $(document).on("click",".more",function(){
            let orderID = $(this).attr('order-id')
-           fetch("http://localhost:8080/TGA103eagleMuseum/OrderDetailGetByID",{
+           fetch("TGA103eagleMuseum/OrderDetailGetByID",{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({

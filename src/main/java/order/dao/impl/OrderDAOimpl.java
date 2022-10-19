@@ -1,4 +1,4 @@
-package order.dao.impl;
+package tw.com.order.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,11 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
+
+import org.hibernate.Session;
+
 
 import order.dao.intf.OrderDAOinf;
 import order.dao.sql.OrderSQL;
@@ -22,6 +26,13 @@ import prod.vo.productVO;
 
 
 public class OrderDAOimpl implements OrderDAOinf{
+	@PersistenceContext
+	private Session session = null;
+	public Session getSession() {
+		return session;
+//		return sessionFactory.getCurrentSession();
+	}
+	
 	// 獲取DS使用連線池
 		private static DataSource ds = null;
 		static {
@@ -34,6 +45,15 @@ public class OrderDAOimpl implements OrderDAOinf{
 		}
 	@Override
 	public List<OrderVO> statusget(Integer orderStatus) throws Exception {
+//		final String sql = "select * from  `order` where orderStatus =:orderstatus";
+//		return getSession().createQuery(sql,OrderVO.class)
+//				.setParameter("orderstatus", orderStatus)
+//				.getResultList();
+//		
+
+		
+		
+		//JDBC
 		List<OrderVO> list = new ArrayList<OrderVO>();
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(OrderSQL.orderGetByStatus);) {
@@ -60,6 +80,17 @@ public class OrderDAOimpl implements OrderDAOinf{
 	}
 	@Override
 	public Integer statupdate(Integer orderID, Integer status) throws Exception {
+//		Hibernare 
+		
+//		final String hql = "update order SET orderStatus = :orderStatus";
+//		getSession().createQuery(hql)
+//			.setParameter("orderStatus", status)
+//			.executeUpdate();
+//		return 1;
+		
+		
+		
+//		JDBC
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(OrderSQL.updateStatus);) {
 			System.out.println(status);
@@ -89,6 +120,8 @@ public class OrderDAOimpl implements OrderDAOinf{
 	}
 	@Override
 	public Integer insertOrderDetail(CartVO vo, Integer ID) throws Exception {
+		
+//		JDBC
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(OrderSQL.insertOrderDetail);){
 					pstmt.setInt(1, vo.getProductID());
@@ -129,45 +162,54 @@ public class OrderDAOimpl implements OrderDAOinf{
 	}
 	@Override
 	public List<OrderVO> orderGetAll() throws Exception {
-		List<OrderVO> list = new ArrayList<OrderVO>();
-		try(Connection con = ds.getConnection();
-				PreparedStatement pstmt =  con.prepareStatement(OrderSQL.orderGetAll)){
-				try (ResultSet rs = pstmt.executeQuery()) {
-				
-				while (rs.next()) {
-					OrderVO VO = new OrderVO();
-					VO.setOrderID(rs.getInt("orderID"));
-					VO.setMemberId(rs.getInt("memberId"));
-					VO.setOrderAmount(rs.getInt("orderAmount"));
-					VO.setOrderStatus(rs.getInt("orderStatus"));
-					VO.setDeliveryAddress(rs.getString("deliveryAddress"));
-					VO.setFreight(rs.getInt("freight"));
-					VO.setMemo(rs.getString("memo"));
-					VO.setOrderAmount(rs.getInt("orderAmount"));
-					VO.setCreateTime(rs.getDate("createTime"));
-				
-					list.add(VO); // Store the row in the list
-					}
-				}
+		final String sql = "select * from `order`";
+		List<OrderVO> list = getSession().createNativeQuery(sql, OrderVO.class).list();
 		return list;
-		}
+		
+		//JDBC
+//		List<OrderVO> list = new ArrayList<OrderVO>();
+//		try(Connection con = ds.getConnection();
+//				PreparedStatement pstmt =  con.prepareStatement(OrderSQL.orderGetAll)){
+//				try (ResultSet rs = pstmt.executeQuery()) {
+//				
+//				while (rs.next()) {
+//					OrderVO VO = new OrderVO();
+//					VO.setOrderID(rs.getInt("orderID"));
+//					VO.setMemberId(rs.getInt("memberId"));
+//					VO.setOrderAmount(rs.getInt("orderAmount"));
+//					VO.setOrderStatus(rs.getInt("orderStatus"));
+//					VO.setDeliveryAddress(rs.getString("deliveryAddress"));
+//					VO.setFreight(rs.getInt("freight"));
+//					VO.setMemo(rs.getString("memo"));
+//					VO.setOrderAmount(rs.getInt("orderAmount"));
+//					VO.setCreateTime(rs.getDate("createTime"));
+//				
+//					list.add(VO); // Store the row in the list
+//					}
+//				}
+//		return list;
+//		}
 
 	}
 	@Override
 	public List<OrderTagVO> orderTagGetAll() throws Exception {
-		List<OrderTagVO> list = new ArrayList<OrderTagVO>();
-		try(Connection con = ds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(OrderSQL.orderTagGetAll)){
-			try (ResultSet rs = pstmt.executeQuery()){
-				while (rs.next()) {
-					OrderTagVO vo = new OrderTagVO();
-					vo.setOrderStatusID(rs.getInt("orderStatusID"));
-					vo.setOrderStatus(rs.getString("orderStatus"));
-					list.add(vo);
-				}
-			}
-			return list;
-		}
+		final String sql = "select * from orderstatus"; 
+		List<OrderTagVO> list =  getSession().createNativeQuery(sql,OrderTagVO.class).list();
+		return list;
+		//JDBC
+//		List<OrderTagVO> list = new ArrayList<OrderTagVO>();
+//		try(Connection con = ds.getConnection();
+//				PreparedStatement pstmt = con.prepareStatement(OrderSQL.orderTagGetAll)){
+//			try (ResultSet rs = pstmt.executeQuery()){
+//				while (rs.next()) {
+//					OrderTagVO vo = new OrderTagVO();
+//					vo.setOrderStatusID(rs.getInt("orderStatusID"));
+//					vo.setOrderStatus(rs.getString("orderStatus"));
+//					list.add(vo);
+//				}
+//			}
+//			return list;
+//		}
 
 	}
 	@Override

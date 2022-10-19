@@ -1,7 +1,6 @@
-fetch('http://localhost:8080/TGA103eagleMuseum/CartGet')
+fetch('/TGA103eagleMuseum/CartGet')
   .then(resp => resp.json())
   .then(Data => {
-    console.log(Data)
 
     for(let i = 0 ; i < Data.result.length; i++){
 
@@ -56,7 +55,7 @@ fetch('http://localhost:8080/TGA103eagleMuseum/CartGet')
         $(".buy").click(function(){
           let orderAmount = document.querySelector(".totalPrice").value;
           let deliveryAddress = document.querySelector(".deliveryAddress").value;
-          let URL = 'http://localhost:8080/TGA103eagleMuseum/OrderInsert';
+          let URL = '/TGA103eagleMuseum/OrderInsert';
           $("#NAN").remove();
           if (deliveryAddress == ""){
             text="<div style='color: red;' id=NAN> 請輸入地址 </div>"
@@ -81,7 +80,7 @@ fetch('http://localhost:8080/TGA103eagleMuseum/CartGet')
               if(Data.code === 200){
                 alert("訂單已成立")
                 //清除購物車內容
-                fetch("http://localhost:8080/TGA103eagleMuseum/CartDelAll")
+                fetch("/CartDelAll")
                 .then(resp => resp.json)
                 .then(Data =>{
                   console.log(Data)
@@ -95,7 +94,7 @@ fetch('http://localhost:8080/TGA103eagleMuseum/CartGet')
           }
         })
           //取得上架商品的資料
-          fetch('http://localhost:8080/TGA103eagleMuseum/ProdGetListed')
+          fetch('/TGA103eagleMuseum/ProdGetListed')
           .then(resp => resp.json())
           .then(Data => {
             console.log(Data)
@@ -123,3 +122,7 @@ fetch('http://localhost:8080/TGA103eagleMuseum/CartGet')
               $(".product").append(text)
             }
           });
+
+
+        
+          

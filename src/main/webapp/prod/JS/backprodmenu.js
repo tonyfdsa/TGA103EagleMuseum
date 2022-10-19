@@ -28,7 +28,7 @@
 
       //新增商品
       $(".prodSubmit").click(function(){
-        let prodStatusURL = 'http://localhost:8080/TGA103eagleMuseum/ProdInsert'
+        let prodStatusURL = '/TGA103eagleMuseum/ProdInsert'
         let prodName= document.querySelector(".prodName").value;
         let prodTypeID= document.querySelector(".prodTypeID").value;
         let prodPrice= document.querySelector(".prodPrice").value;
@@ -53,7 +53,7 @@
 
       //新增標籤
       $(".tagSubmit").click(function(){
-        let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/ProdTagInsert'
+        let TagInsertURL = '/TGA103eagleMuseum/ProdTagInsert'
         let prodType = document.querySelector(".ProdType").value;
         console.log(prodType);
 

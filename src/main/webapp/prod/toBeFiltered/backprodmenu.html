@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>productmeau</title>
     <!-- 後臺模板Css -->
-    <link rel="stylesheet" href="./CSS/backtemplete.css">
+    <link rel="stylesheet" href="../CSS/backtemplete.css">
 
     <!-- bootstrapr -->
     <link
@@ -25,7 +25,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="./CSS/backordermeau.css">
+    <link rel="stylesheet" href="../CSS/backprodmeau.css">
 
     <style>
    div.overlayTag {
@@ -120,7 +120,7 @@
         <li>
             <div class="sideBtn">商城管理</div>
             <div class="Btn"><a href="#">訂單搜尋</a></div>
-            <div class="Btn"><a href="../prod/backprodmenu.html">商品搜尋</a></div>
+            <div class="Btn"><a href="#">商品搜尋</a></div>
         </li>
         <li>
             <div class="sideBtn">會員管理</div>
@@ -141,11 +141,8 @@
 
 
       <div class="headbar d-flex ">
-        <button class="headerBtn" value="0" >會員搜尋</button>
-        <select class="orderTag" style="width: 100px; margin-top: 10px;">
-          <!--有value傳value，沒有value就傳包含的文字-->
-          <option >請選擇</option>
-      </select>
+        <button class="headerBtn" value="0" >商品搜尋</button>
+        <button class="insertTag" value="1">新增標籤</button>
         <button class="insertProd" value="2">新增商品</button>
       </div>
 
@@ -153,7 +150,7 @@
       <div class="head">
         <button class="searchBtn">搜尋
         </button>
-        <input type="search" class="searchbar"  placeholder=" 請輸入會員編號" >
+        <input type="search" class="searchbar" id="prodName" placeholder=" 請輸入商品名稱" >
       </div>
 
 
@@ -162,17 +159,31 @@
       <div class="container-fluid" id="title">
         <div class="row d-flex column" >
           <div class="col-1 " style="text-align:center">會員ID</div>
-          <div class="col-2" style="text-align:center">訂單編號</div>
-          <div class="col-2" style="text-align:center">訂單金額</div>
-          <div class="col-2" style="text-align:center">訂單狀態</div>
-          <div class="col-2"  style="text-align:center">訂單日期</div>
-          <div class="col-2" style="text-align:center">訂單明細</div>
+          <div class="col-2" style="text-align:center">商品編號</div>
+          <div class="col-2" style="text-align:center">商品名稱</div>
+          <div class="col-2" style="text-align:center">商品狀態</div>
+          <div class="col-2"  style="text-align:center">新增日期</div>
+          <div class="col-2" style="text-align:center">商品編輯</div>
           <div class="col-1"></div>
         </div>
       </div>
     <div class="searchContent"></div>
           <div class="col-1"></div>
 
+
+
+          
+
+          <div class="overlayTag">
+            <article >
+              <h4>商品標籤新增</h4>
+              <div style="height: 10px;"></div>
+              <span>商品標籤: <input type="text" name="" id="" class="ProdType"></span>
+              <span><input type="submit" class="tagSubmit" style="margin-top: 10px;" value="送出"></span>
+              <span><input type="submit" class="btnClose" style="margin-top: 10px;" value="關閉"></span>
+            </article>
+          </div>
+        </div>
         
         <div class="overlayProd">
           <article>
@@ -182,7 +193,7 @@
             <div style=" margin-top: 10px;">商品名稱: <input class="prodName" type="text" name="" id=""></div>
             <div>
               商品標籤:
-              <select class="orderTag" style="width: 100px; margin-top: 10px;">
+              <select class="prodTypeID" style="width: 100px;margin-top: 0px;">
                   <!--有value傳value，沒有value就傳包含的文字-->
                   <option >請選擇</option>
               </select>
@@ -205,11 +216,11 @@
     </div>
 
     <!-- jquery link -->
-    <script src="./vendor/js/jquery3.6.0.js"></script>
+    <script src="../vendor/js/jquery3.6.0.js"></script>
 
-    <script src="./JS/backtemplete.js"></script>
+    <script src="../JS/backtemplete.js"></script>
 
-    <script src="./JS/backordermenu.js"></script>
+    <script src="../JS/backprodmenu.js"></script>
     
     <script>
 

@@ -65,8 +65,9 @@
     <!-- head -->
     <div class="wrap">
           <div class="row d-flex" >
-            <div class="col-1"  alt="大頭貼" ><img src="./img/eagleIcon.jpg" class="min_picture"></IMG></div>
-            <div class="col-5">
+            <div class="col-2"  alt="大頭貼" ><img src="./img/eagleIcon.jpg" class="min_picture"></IMG>
+              <span id="memberName"></span></div>
+            <div class="col-4">
               <h1 style="text-align: center;">Eagle Museum</h1>
             </div>
             <div class="col-6 row d-flex menu btn-group" id="meau">
@@ -155,7 +156,7 @@
   <!-- jQuery 位置 -->
   <script src="./vendor/js/jquery3.6.0.js"></script>
   <!-- 模板js匯入 位置 -->
-  <!-- <script src="./workJS/Template .js"></script> -->
+  <script src="./JS/Template .js"></script>
   <!-- icon -->
   <script src="https://code.iconify.design/iconify-icon/1.0.0-beta.3/iconify-icon.min.js"></script>
   <script>
@@ -170,7 +171,7 @@
   })
 
   //取得上架商品資訊和圖片資訊
-  fetch('http://localhost:8080/TGA103eagleMuseum/ProdGetListed')
+  fetch('/TGA103eagleMuseum/ProdGetListed')
   .then(resp => resp.json())
   .then(Data => {
             console.log(Data)
@@ -201,7 +202,7 @@
           });
           
 // 取得所有商品圖片資訊
-  fetch('http://localhost:8080/TGA103eagleMuseum/ProdImgGetAll')
+  fetch('/TGA103eagleMuseum/ProdImgGetAll')
     .then(resp => resp.json())
     .then(Data => {
       console.log(Data)
@@ -222,8 +223,8 @@
     //搜尋by名稱
     $(document).on("click",".search",function(){
             let prodName = document.querySelector("#searchName").value
-            let prodserchname = 'http://localhost:8080/TGA103_EagleMuseum/ProductGetName'
-            fetch('http://localhost:8080/TGA103eagleMuseum/ProductGetName', {
+
+            fetch('/TGA103eagleMuseum/ProductGetName', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -263,7 +264,7 @@
 
                 //圖片
               })
-              fetch('http://localhost:8080/TGA103eagleMuseum/ProdImgGetAll')
+              fetch('/TGA103eagleMuseum/ProdImgGetAll')
               .then(resp => resp.json())
               .then(Data => {
                 console.log(Data)
@@ -285,7 +286,7 @@
           $(document).on("click",".shoopingCart",function(){
 
             // console.log("123")
-            let URL = "http://localhost:8080/TGA103eagleMuseum/ProdShoppingCart"
+            let URL = "/TGA103eagleMuseum/ProdShoppingCart"
             let productID = $(this).attr("data-id");
             let prodImg = $(this).closest(".card").find("img").attr("src")
             // console.log(prodImg)
@@ -313,6 +314,12 @@
           console.log(sessionStorage.getItem("prodID"))
           location.href = "./product.html"
         })
+
+        //登入後顯示使用者名字
+        window.addEventListener("load", function() { 
+          document.querySelector('#memberName').textContent = 
+          sessionStorage.getItem('memberName') + "，您好！";
+        });
 
           
   </script>

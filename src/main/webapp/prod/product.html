@@ -158,8 +158,9 @@
     <!-- head -->
     <div class="wrap">
           <div class="row d-flex" >
-            <div class="col-1"  alt="大頭貼" ><img src="./img/eagleIcon.jpg" class="min_picture"></IMG></div>
-            <div class="col-5">
+            <div class="col-2"  alt="大頭貼" ><img src="./img/eagleIcon.jpg" class="min_picture"></IMG>
+              <span id="memberName"></span></div>
+            <div class="col-4">
               <h1 style="text-align: center;">Eagle Museum</h1>
             </div>
             <div class="col-6 row d-flex menu btn-group" id="meau">
@@ -261,7 +262,7 @@
 
 
                   </div>     
-                  <div class="col-1"></div>>
+                  <div class="col-1"></div>
 
                   <div class="col-2"></div>  
 
@@ -294,7 +295,7 @@
   //搜尋byID  
   let productID = sessionStorage.getItem("prodID")
   // console.log(productID)
-  fetch('http://localhost:8080/TGA103eagleMuseum/ProdGetImg', {
+  fetch('/TGA103eagleMuseum/ProdGetImg', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -305,7 +306,7 @@
     .then(Data => {
       // console.log(Data.result)
     })
-    fetch('http://localhost:8080/TGA103eagleMuseum/ProdgetById', {
+    fetch('/TGA103eagleMuseum/ProdgetById', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -324,7 +325,7 @@
   
     
     let picture_list = document.getElementsByClassName("pic")[0];
-    fetch('http://localhost:8080/TGA103eagleMuseum/ProdGetImg', {
+    fetch('/TGA103eagleMuseum/ProdGetImg', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -370,7 +371,7 @@
 
   //加入購物車
   $(".cart").click(function(){
-    let URL = "http://localhost:8080/TGA103eagleMuseum/ProdShoppingCart"
+    let URL = "/TGA103eagleMuseum/ProdShoppingCart"
     let prodImg = $(".preview_img").attr("src")
     // console.log(prodImg)
     // console.log(productID)
@@ -388,6 +389,13 @@
       alert("已加入購物車")
     })
   })
+
+  window.addEventListener("load", function() { 
+  if(productID  == null){
+    location.href = "./productmenu.html"
+  }
+});
+
   
 
 
