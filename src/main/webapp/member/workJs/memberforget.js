@@ -7,7 +7,7 @@
 	document.getElementById('button-addon2').addEventListener('click', () => {
 		console.log(username.value);
 		console.log(memAns.value);
-		fetch('http://localhost:8080/TGA103eagleMuseum/member/forgetpass', {
+		fetch('/TGA103eagleMuseum/member/forgetpass', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
@@ -66,7 +66,7 @@
 		}
         console.log(captcha.value);
         console.log(password.value)
-		fetch('http://localhost:8080/TGA103eagleMuseum/member/UpdatePass', {
+		fetch('/TGA103eagleMuseum/member/UpdatePass', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({

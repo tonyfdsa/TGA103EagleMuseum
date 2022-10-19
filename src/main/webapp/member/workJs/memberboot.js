@@ -64,7 +64,7 @@
   const errMsg = document.querySelector("#errMsg");
   document.getElementById("next").addEventListener("click", () => {
     // console.log('next');
-    fetch("http://localhost:8080/TGA103eagleMuseum/member/login", {
+    fetch("/TGA103eagleMuseum/member/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -79,15 +79,16 @@
       .then((body) => {
         console.log(body.headers);
         errMsg.textContent = "";
-        const { successful, message } = body;
+        const { successful, message, memberName} = body;
         if (successful) {
           const { memberID, memberEmail } = body;
           sessionStorage.setItem("id", memberID);
           sessionStorage.setItem("Email", memberEmail);
+          sessionStorage.setItem("memberName", memberName);
           if (sessionStorage.getItem("url") != "null") {
-            location = "http://localhost:8080" + sessionStorage.getItem("url");
+            location = sessionStorage.getItem("url");
           } else {
-            location = "memberHome.html";
+            location = "./toBeFiltered/memberHome.html";
           }
         } else {
           errMsg.textContent = message;

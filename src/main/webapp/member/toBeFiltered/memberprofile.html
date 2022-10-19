@@ -5,21 +5,23 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>會員登入</title>
-  <!-- member -->
-  <link rel="stylesheet" href="./workCss/templete.css" />
-  <link rel="stylesheet" href="./workCss/memberboot.css" />
-
+  <title>會員資料</title>
+  <!-- /teleplete -->
+  <link rel="stylesheet" href="../workCss/templete.css" />
+  <link rel="stylesheet" href="../workCss/memberprofile.css">
   <!-- bookstrapt -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+
 </head>
+
+
 
 <body>
   <!-- head -->
   <div class="wrap">
     <div class="row d-flex">
-      <div class="col-1" alt="大頭貼"><img src="./workImage/eagleIcon.jpg" class="min_picture"></IMG></div>
+      <div class="col-1" alt="大頭貼"><img src="../workImage/eagleIcon.jpg" class="min_picture"></IMG></div>
       <div class="col-5">
         <h1 style="text-align: center;">Eagle Museum</h1>
       </div>
@@ -65,59 +67,40 @@
 
   <div class="upperColumn" id="topcontent"></div>
 
-  <!--內容-->
-  <div style="height: 62px;"></div>
-  <div class="row">
-    <div class="d-flex flex-row bd-highlight" style="background-color: #fffbdd; position:relative;">
-      <button type="button" class="btn btn-sm" onclick="location.href='#'">首頁</button>
-      <div class="p-1 bd-highlight">➞</div>
-      <label class="p-1 bd-highlight" id="lab" >會員中心</label>
-    </div>
-  </div>
-
-  <main class="main">
-    <div style="height: 100px;"></div>
+  <!-- main -->
+  <div class="main">
+    <div style="height: 60px;"></div>
     <div class="container">
       <div class="row align-content-center">
-        <i class="" id="eagle">EAGLE MUSEUM</i><br>
-        <div class="row col-8 md-3">
-          <div class="col-md-5"><b>會員帳號 Email</b></div>
-          <input type="text" id="username" class="col-md-4" placeholder="請輸入Email" aria-label="Recipient's username"
-            aria-describedby="button-addon2">
+        <div class="col-12 text-center">
+          <font size="20px"><b>會員資料</b></font>
         </div>
-        <div>&nbsp;</div>
-        <div class="row col-8 md-3">
-          <div class="col-md-5"><b>會員密碼 Password</b></div>
-          <input type="password" id="password" class="col-md-4" placeholder="請輸入密碼" aria-label="Recipient's username"
-            aria-describedby="button-addon2">
+        <div class="col-2"></div>
+        <div class="col-9">
+          <table class="gino">
+            <!-- get all 進來 -->
+
+          </table>
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-warning" type="button" id="revise"
+              onclick="location.href='memberprofile2.html'">修改會員資料</button>
+          </div>
+          <div>&nbsp;</div>
         </div>
-        <div>&nbsp;</div>
-        <!-- <div class="row col-8 md-3">
-          <div class="col-md-5" onclick="window.location.reload()"><canvas id="canvas"></canvas></div>
-          <input type="text" class="col-md-4" placeholder="請輸入驗證碼" aria-label="Recipient's username"
-            aria-describedby="button-addon2">
-        </div> -->
-        <div>&nbsp;</div>
-        <div class="d-grid gap-2 col-6 ">
-          <button class="btn btn-warning" type="button" id="next">下一步</button>
-        </div>
-        <div>&nbsp;</div>
-        <div class="col-1"></div>
-        <button type="button" class="btn col-2" onclick="location.href='memberJoin1.html'">加入會員</button>
-        <button type="button" class="btn col-2" onclick="location.href='memberforget.html'">忘記密碼</button>
-        <div id="errMsg" class="error"></div>
       </div>
     </div>
-  </main>
 
-  <div class="footer"></div>
+    <div style="background-color: #fffbdd;">&nbsp;</div>
 
-  <!-- jQuery 位置 -->
-  <script src="./workJs/jquery/jquery-3.6.0.min.js"></script>
-  <!-- 模板js匯入 位置 -->
+    <!-- footer -->
+    <div class="footer"></div>
 
-  <script src="./workJs/Template.js"></script>
-  <script src="./workJs/memberboot.js"></script>
+    <!-- jQuery 位置 -->
+    <script src="../workJs/jquery/jquery-3.6.0.min.js"></script>
+    <!-- 模板js匯入 位置 -->
+    <script src="../workJS/Template.js"></script>
+    <script src="../workJs/memberprofile1.js"></script>
+
 </body>
 
 </html>
