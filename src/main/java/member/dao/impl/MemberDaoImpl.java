@@ -64,6 +64,47 @@ public class MemberDaoImpl implements MemberDao {
 		return member;
 	}
 	
+	
+//  管理員登入
+	@Override
+	public Member managerForLogin(String email, String password) {
+		final String sql = "select * from member where memberEmail = ? and memberPassword = ? and memberPermission = 2;"
+				+ "" ;
+		Member member = null;
+		try (
+				Connection conn = dataSource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				) {
+			pstmt.setString(1, email);
+			pstmt.setString(2, password);
+			try(ResultSet rs = pstmt.executeQuery()){
+				if (rs.next()) {
+					
+					member = new Member();
+					member.setMemberID(rs.getInt("memberID"));
+					member.setMemberEmail(rs.getString("memberEmail"));
+					member.setMemberPassword(rs.getString("memberPassword"));
+					member.setMemberName(rs.getString("memberName"));
+					member.setMemberQA(rs.getString("memberQA"));
+					member.setMemberAns(rs.getString("memberAns"));
+					member.setMemberAddress(rs.getString("memberAddress"));
+					member.setMemberPhone(rs.getInt("memberPhone"));
+					member.setMemberGender(rs.getInt("memberGender"));
+					member.setMemberBirthday(rs.getObject("memberBirthday", LocalDate.class));
+					member.setMemberPermission(rs.getInt("memberPermission"));
+					member.setModifyTime(rs.getObject("modifyTime", LocalDateTime.class));
+					member.setLastEnterTime(rs.getObject("lastEnterTime", LocalDateTime.class));
+				}		
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		return member;
+	}
+	
+	
 //  註冊	
 	@Override
 	public Integer insert(Member member) {
@@ -91,17 +132,17 @@ public class MemberDaoImpl implements MemberDao {
 		}
 	}
 	
-	// 忘記密碼
+	// 忘記密碼寄mail
 	@Override
-	public Member selectForPass(String memberEmail, String memberAns) {
-		final String sql = "select * from member where memberEmail = ? and memberAns = ? " ;
+	public Member selectForPass(String memberEmail) {
+		final String sql = "select * from member where memberEmail = ?  " ;
 		Member member = null;
 		try (
 				Connection conn = dataSource.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				) {
 			pstmt.setString(1, memberEmail);
-			pstmt.setString(2, memberAns);
+//			pstmt.setString(2, memberAns);
 			try(ResultSet rs = pstmt.executeQuery()){
 				if (rs.next()) {
 					
@@ -127,6 +168,26 @@ public class MemberDaoImpl implements MemberDao {
 		}	
 		return member;
 	}
+	
+//  忘記密碼更新	
+	@Override
+	public boolean updateForPass(Member member) {
+		final String sql =  "update member set memberPassword = ? where memberEmail = ?;";
+		int rowCount = 0;
+		try (
+			Connection conn = dataSource.getConnection();
+				
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			) {
+			pstmt.setString(1, member.getMemberPassword());
+			pstmt.setString(2, member.getMemberEmail());
+			rowCount =pstmt.executeUpdate();	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rowCount != 0;
+	}
+	
 //  刪除	
 	@Override
 	public Integer delete(Integer memberId) {
