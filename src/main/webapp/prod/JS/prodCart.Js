@@ -112,7 +112,7 @@
       if($(".price").length === 0  ){
         alert("請新增商品至購物車")
       }else{
-        location.href = "../order/OrderCheckOut.html";
+        location.href = "../order/toBeFiltered/OrderCheckOut.html";        
       }
       
      })

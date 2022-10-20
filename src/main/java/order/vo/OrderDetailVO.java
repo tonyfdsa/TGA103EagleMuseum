@@ -1,11 +1,25 @@
 package order.vo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "orderdetails")
 public class OrderDetailVO {
+	@Id
+	@Column
 	private Integer orderDetailsID;
+	@Column
 	private Integer productID;
+	@Column
 	private Integer orderID;
+	@Column
 	private Integer prodQuantity;
+	@Column
 	private Integer prodPrice;
+	@Column
 	private String prodName;
 	public Integer getProdPrice() {
 		return prodPrice;

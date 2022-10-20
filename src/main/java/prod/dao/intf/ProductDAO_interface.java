@@ -11,7 +11,7 @@ import prod.vo.productVO;
 public interface ProductDAO_interface {
 	
 	//新增商品
-	public productVO insert(productVO productVO) throws Exception;
+	public Integer insert(productVO productVO) throws Exception;
 	
   //更新商品資訊
     public productVO update(productVO productVO) throws Exception;

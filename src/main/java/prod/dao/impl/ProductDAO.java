@@ -12,6 +12,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+
+import core.util.HibernateUtil;
 import prod.dao.intf.ProductDAO_interface;
 
 import prod.dao.sql.ProductSQL;
@@ -32,49 +35,65 @@ public class ProductDAO implements ProductDAO_interface {
 			e.printStackTrace();
 		}
 	}
+	
+	public Session getSession() {
+//		return session;
+		return HibernateUtil.getSessionFactory().getCurrentSession();
+	}
 
 	// 查詢商品
 	public List<productVO> getAll() throws Exception {
-		List<productVO> list = new ArrayList<productVO>();
-
-		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_ALL);) {
-			
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					productVO productVO = new productVO();
-					productVO.setProductID(rs.getInt("productID"));
-					productVO.setProdName(rs.getString("prodName"));
-					productVO.setProdTypeID(rs.getInt("prodTypeID"));
-					productVO.setProdPrice(rs.getInt("prodPrice"));
-					productVO.setDiscountID(rs.getInt("discountID"));
-					productVO.setProdDescription(rs.getString("prodDescription"));
-					productVO.setProdStatus(rs.getInt("prodStatus"));
-					productVO.setCreatTime(rs.getDate("creatTime"));
-					productVO.setLaunchTime(rs.getDate("launchTime"));
-					productVO.setSellQuantity(rs.getInt("sellQuantity"));
-					productVO.setProdInStock(rs.getInt("prodInStock"));
-					productVO.setBestSeller(rs.getInt("bestSeller"));
-					productVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
-					list.add(productVO); // Store the row in the list
-				}
-			}
-			return list;
-		}
+		
+		return getSession().createQuery("from productVO")
+					.getResultList();
+		
+		
+//		JDBC
+//		List<productVO> list = new ArrayList<productVO>();
+//
+//		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_ALL);) {
+//			
+//			try (ResultSet rs = pstmt.executeQuery()) {
+//				while (rs.next()) {
+//					productVO productVO = new productVO();
+//					productVO.setProductID(rs.getInt("productID"));
+//					productVO.setProdName(rs.getString("prodName"));
+//					productVO.setProdTypeID(rs.getInt("prodTypeID"));
+//					productVO.setProdPrice(rs.getInt("prodPrice"));
+//					productVO.setDiscountID(rs.getInt("discountID"));
+//					productVO.setProdDescription(rs.getString("prodDescription"));
+//					productVO.setProdStatus(rs.getInt("prodStatus"));
+//					productVO.setCreatTime(rs.getDate("creatTime"));
+//					productVO.setLaunchTime(rs.getDate("launchTime"));
+//					productVO.setSellQuantity(rs.getInt("sellQuantity"));
+//					productVO.setProdInStock(rs.getInt("prodInStock"));
+//					productVO.setBestSeller(rs.getInt("bestSeller"));
+//					productVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
+//					list.add(productVO); // Store the row in the list
+//				}
+//			}
+//			return list;
+//		}
 	}
 
-	// 新增商品 還沒加判斷
+	// 新增商品 
 	@Override
-	public productVO insert(productVO productVO) throws Exception {
-		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.Insert);) {
-			
-			pstmt.setString(1, productVO.getProdName());
-			pstmt.setInt(2, productVO.getProdTypeID());
-			pstmt.setInt(3, productVO.getProdPrice());
-			pstmt.setString(4, productVO.getProdDescription());
-			pstmt.setInt(5, productVO.getProdInStock());
-			pstmt.executeUpdate();
-		}
+	public Integer insert(productVO productVO) throws Exception {
+//		Hibernate
+		productVO.setBestSeller(0);
+		getSession().persist(productVO);
 		return null;
+//		JDBC
+//		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.Insert);) {
+//			
+//			pstmt.setString(1, productVO.getProdName());
+//			pstmt.setInt(2, productVO.getProdTypeID());
+//			pstmt.setInt(3, productVO.getProdPrice());
+//			pstmt.setString(4, productVO.getProdDescription());
+//			pstmt.setInt(5, productVO.getProdInStock());
+//			pstmt.executeUpdate();
+//		}
+//		return null;
 	}
 		
 	
@@ -119,12 +138,10 @@ public class ProductDAO implements ProductDAO_interface {
 					productVO.setDiscountID(rs.getInt("discountID"));
 					productVO.setProdDescription(rs.getString("prodDescription"));
 					productVO.setProdStatus(rs.getInt("prodStatus"));
-					productVO.setCreatTime(rs.getDate("creatTime"));
-					productVO.setLaunchTime(rs.getDate("launchTime"));
 					productVO.setSellQuantity(rs.getInt("sellQuantity"));
 					productVO.setProdInStock(rs.getInt("prodInStock"));
 					productVO.setBestSeller(rs.getInt("bestSeller"));
-					productVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
+					productVO.setLastUpdateTime(rs.getTimestamp("lastUpdateTime"));
 					list.add(productVO); // Store the row in the list
 				}
 			}
@@ -194,12 +211,10 @@ public class ProductDAO implements ProductDAO_interface {
 					productVO.setDiscountID(rs.getInt("discountID"));
 					productVO.setProdDescription(rs.getString("prodDescription"));
 					productVO.setProdStatus(rs.getInt("prodStatus"));
-					productVO.setCreatTime(rs.getDate("creatTime"));
-					productVO.setLaunchTime(rs.getDate("launchTime"));
 					productVO.setSellQuantity(rs.getInt("sellQuantity"));
 					productVO.setProdInStock(rs.getInt("prodInStock"));
 					productVO.setBestSeller(rs.getInt("bestSeller"));
-					productVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
+					productVO.setLastUpdateTime(rs.getTimestamp("lastUpdateTime"));
 					list.add(productVO); // Store the row in the list
 				}
 			}

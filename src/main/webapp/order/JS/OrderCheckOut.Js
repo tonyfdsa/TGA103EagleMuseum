@@ -84,7 +84,7 @@ fetch('/TGA103eagleMuseum/CartGet')
                 .then(resp => resp.json)
                 .then(Data =>{
                   console.log(Data)
-                  location.href = "../prod/productmenu.html"
+                  location.href = "../../prod/productmenu.html"
                 })
                 
               }

@@ -2,14 +2,14 @@ package order.dao.sql;
 
 public class OrderSQL {
 	//查詢訂單By狀態
-	public static final String orderGetByStatus ="select * from `order` where orderStatus=?"; 
+	public static final String orderGetByStatus ="select * from orderlist where orderStatus=?"; 
 	
 	//更新狀態By OrderID
-	public static final String updateStatus ="update `order` set orderStatus= ? where orderID = ?";
+	public static final String updateStatus ="update orderlist set orderStatus= ? where orderID = ?";
 	
 	//新增訂單 
 	public static final String insertOrder =
-			"insert into `order`(memberID, orderAmount, orderStatus, deliveryAddress, freight, memo, createTime) "
+			"insert into orderlist(memberID, orderAmount, orderStatus, deliveryAddress, freight, memo, createTime) "
 			+ "values(? , ? , \"1\", ? , \"60\", \"無\", Now())";
 	
 	public static final String insertOrderDetail =
@@ -25,7 +25,7 @@ public class OrderSQL {
 	
 	//取得所有訂單
 	public static final String orderGetAll =
-			"select * from `order` ";
+			"select * from orderlist ";
 	
 	//取得所有訂單狀態標籤
 	public static final String orderTagGetAll =
@@ -36,5 +36,5 @@ public class OrderSQL {
 			"select * from `orderdetails` where orderID = ?";
 	
 	public static final String getByMem =
-			"select * from `order` where memberId = ?";
+			"select * from `orderlist` where memberId = ?";
 }
