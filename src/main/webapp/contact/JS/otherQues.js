@@ -1,3 +1,12 @@
+//登入後顯示使用者名字
+window.addEventListener("load", function() {
+	if(sessionStorage.getItem('memberName') != null){
+      document.querySelector('#memberName').textContent = 
+      sessionStorage.getItem('memberName') + "，您好！";
+    }
+  });
+
+
 // 開啟彈跳視窗
 $(document).on("click", "#seeAns", function() {
 	$(".overlayTag").fadeIn();
@@ -5,7 +14,7 @@ $(document).on("click", "#seeAns", function() {
 	//綁定quesId
 	$("#quesId").val($(this).val());
 
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/getAContentServlet'
+	let TagInsertURL = '/TGA103eagleMuseum/getAContentServlet'
 	let questionContentID = document.querySelector("#quesId").value;
 
 	fetch(TagInsertURL, {
@@ -59,8 +68,7 @@ $("#clearBtn").click(clear());
 //fetch部分
 //提交問題
 $("#submitBtn").click(function() {
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/inserQuesServlet'
-	//	let memberId = document.querySelector(".memberId").value;
+	let TagInsertURL = '/TGA103eagleMuseum/inserQuesServlet'
 	let memberId = sessionStorage.getItem('id');
 	let questionContent = document.querySelector(".formContent").value;
 	let questionTypeID = document.querySelector(".questionTypeID").value;
@@ -77,14 +85,12 @@ $("#submitBtn").click(function() {
 			questionTypeID
 		})
 	})
-		.then(resp => {
+		.then(resp => {			
 			resp.json()
-
 		})//後端傳給前端的格式
 		.then(R => {
 
 			try {
-
 			} finally {
 				query();
 				clear();
@@ -96,8 +102,8 @@ $("#submitBtn").click(function() {
 
 
 function query() {
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/questionContent'
-	//	let memberId = document.querySelector(".memberId").value;
+	let TagInsertURL = '/TGA103eagleMuseum/questionContent'
+	let memberId = sessionStorage.getItem('id');
 
 	fetch(TagInsertURL, {
 		method: 'POST',
