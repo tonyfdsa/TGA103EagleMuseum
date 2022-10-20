@@ -1,3 +1,11 @@
+//登入後顯示使用者名字
+window.addEventListener("load", function() {
+	if(sessionStorage.getItem('memberName') != null){
+      document.querySelector('#memberName').textContent = 
+      sessionStorage.getItem('memberName') + "，您好！";
+    }
+  });
+
 //清空答覆內容
 function clear() {
 	$("#ansContent").val("");
@@ -11,7 +19,7 @@ $(document).on("click", ".replybtn", function () {
 	$("#quesId").val($(this).val());
 
 
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/getQContentServlet'
+	let TagInsertURL = '/TGA103eagleMuseum/getQContentServlet'
 	let questionContentID = document.querySelector("#quesId").value;
 
 	fetch(TagInsertURL, {
@@ -92,7 +100,7 @@ $(".searchByIAndD").click(function () {
 //fetch部分
 //列出全部問題
 $(".searchAllQs").click(function () {
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/quesSearchAllServlet'
+	let TagInsertURL = '/TGA103eagleMuseum/quesSearchAllServlet'
 
 	fetch(TagInsertURL, {
 		method: 'POST',
@@ -131,7 +139,7 @@ $(".searchAllQs").click(function () {
 
 //館員SearchById
 $(".searchById").click(function () {
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/quesSearchByIdServlet'
+	let TagInsertURL = '/TGA103eagleMuseum/quesSearchByIdServlet'
 	let memberId = document.querySelector("#memberId").value;
 
 	fetch(TagInsertURL, {
@@ -177,7 +185,7 @@ $(".searchById").click(function () {
 
 //館員SearchByDate
 $(".searchByDate").click(function () {
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/quesSearchByDateServlet'
+	let TagInsertURL = '/TGA103eagleMuseum/quesSearchByDateServlet'
 	let quesTime = document.querySelector("#start_date").value;
 	let answerTime = document.querySelector("#end_date").value;
 
@@ -223,7 +231,7 @@ $(".searchByDate").click(function () {
 
 //館員SearchByIAndD
 $(".searchByIAndD").click(function () {
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/quesSearchByIAndDServlet'
+	let TagInsertURL = '/TGA103eagleMuseum/quesSearchByIAndDServlet'
 	let memberId = document.querySelector("#memberId").value;
 	let quesTime = document.querySelector("#start_date").value;
 	let answerTime = document.querySelector("#end_date").value;
@@ -273,7 +281,7 @@ $(".searchByIAndD").click(function () {
 $(document).on("click", ".reply", function () {
 
 	// console.log("ok");
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/questionAns'
+	let TagInsertURL = '/TGA103eagleMuseum/questionAns'
 	let questionContentID = document.querySelector("#quesId").value;
 	let answerContent = document.querySelector("#ansContent").value;
 

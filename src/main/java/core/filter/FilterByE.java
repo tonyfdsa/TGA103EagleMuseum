@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,7 +30,6 @@ public class FilterByE implements Filter {
 	// 瀏覽器向server發送請求n次
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 		
-//		chain.doFilter(req, resp);
 		
 		//強制將轉型成HTTP物件
 		HttpServletRequest request = (HttpServletRequest) req;
@@ -58,9 +56,11 @@ public class FilterByE implements Filter {
 			//不是，就要檢查是否已經登入
 			Object user = request.getSession().getAttribute("member");
 			if(user != null) {
+//				System.out.println(789);
 				//放行
-				chain.doFilter(req, resp);
-			}else{			
+				chain.doFilter(request, response);
+			}else{
+//				System.out.println("ok");
 				//存入目前想去的頁面
 				request.getSession().setAttribute("url", request.getRequestURI());
 				//轉發到登入頁面（要確認實際登入程式的檔案名稱）
