@@ -69,7 +69,6 @@ public class ProductServicelm implements ProductServicein {
 
 			
 			if (ProdName != null && ProdTypeID != 0 && ProdInStock != 0 && ProdName != null && ProdDescription != null) {
-				System.out.println(R.success(DAO.insert(productVO)));
 				return R.success(DAO.insert(productVO));
 			}else {
 				return null;
@@ -84,7 +83,6 @@ public class ProductServicelm implements ProductServicein {
 	@Override
 	public Result updateStatus(productVO productVO) {
 		try {
-			System.out.println(R.success(DAO.updateStatus(productVO)));
 			return R.success(DAO.updateStatus(productVO));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -95,7 +93,6 @@ public class ProductServicelm implements ProductServicein {
 	@Override
 	public Result insertTag(String prodType) {
 		try {
-			System.out.println(R.success(DAO.insertTag(prodType)));
 			return R.success(DAO.insertTag(prodType));
 		} catch (Exception e) {
 			e.printStackTrace();

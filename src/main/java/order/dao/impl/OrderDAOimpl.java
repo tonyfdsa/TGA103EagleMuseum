@@ -139,29 +139,29 @@ public class OrderDAOimpl implements OrderDAOinf{
 	public Integer insertOrderDetail(CartVO vo, Integer ID) throws Exception {
 		
 //		Hibernate
-		final String hql = "insert into OrderDetailVO values(:productID, :orderID, :prodQuantity, :prodName, :prodPrice)";
-		getSession().createQuery(hql)
-					.setParameter("productID", vo.getProductID())
-					.setParameter("orderID", ID)
-					.setParameter("prodQuantity", vo.getProdCount())
-					.setParameter("prodName", vo.getProdName())
-					.setParameter("prodPrice", vo.getProdPrice())
-					.executeUpdate();
-		return 1;
+//		final String hql = "insert into OrderDetailVO values(:productID, :orderID, :prodQuantity, :prodName, :prodPrice)";
+//		getSession().createQuery(hql)
+//					.setParameter("productID", vo.getProductID())
+//					.setParameter("orderID", ID)
+//					.setParameter("prodQuantity", vo.getProdCount())
+//					.setParameter("prodName", vo.getProdName())
+//					.setParameter("prodPrice", vo.getProdPrice())
+//					.executeUpdate();
+//		return 1;
 		
 
 		
 //		JDBC
-//		try (Connection con = ds.getConnection();
-//				PreparedStatement pstmt = con.prepareStatement(OrderSQL.insertOrderDetail);){
-//					pstmt.setInt(1, vo.getProductID());
-//					pstmt.setInt(2, ID);
-//					pstmt.setInt(3, vo.getProdCount());
-//					pstmt.setString(4, vo.getProdName());
-//					pstmt.setInt(5,vo.getProdPrice());
-//					pstmt.executeUpdate();
-//					return 1;
-//		}
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(OrderSQL.insertOrderDetail);){
+					pstmt.setInt(1, vo.getProductID());
+					pstmt.setInt(2, ID);
+					pstmt.setInt(3, vo.getProdCount());
+					pstmt.setString(4, vo.getProdName());
+					pstmt.setInt(5,vo.getProdPrice());
+					pstmt.executeUpdate();
+					return 1;
+		}
 		
 	}
 	@Override
