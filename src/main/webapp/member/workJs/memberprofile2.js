@@ -2,7 +2,7 @@
   let memberEmail = sessionStorage.getItem("Email");
   // console.log(memberEmail);
   // GET session 出現資料庫資料
-  fetch("http://localhost:8080/TGA103eagleMuseum/member/selectSelf", {
+  fetch("/TGA103eagleMuseum/member/selectSelf", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -91,7 +91,7 @@
       return;
     }
 	console.log(58585);
-    fetch("http://localhost:8080/TGA103eagleMuseum/member/edit", {
+    fetch("/TGA103eagleMuseum/member/edit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -3,7 +3,7 @@
    let memberEmail = sessionStorage.getItem("Email")
    console.log(memberEmail);
   // 一進來get member資料
-  fetch("http://localhost:8080/TGA103eagleMuseum/member/selectSelf",{
+  fetch("/TGA103eagleMuseum/member/selectSelf",{
     method: 'POST',
 	headers: { 'Content-Type': 'application/json' },
 	body: JSON.stringify({
