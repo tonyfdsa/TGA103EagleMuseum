@@ -24,6 +24,7 @@
           const { memberID, memberEmail } = body;
           sessionStorage.setItem("id", memberID);
           sessionStorage.setItem("Email", memberEmail);
+          sessionStorage.setItem("memberName", memberName);
           console.log(memberEmail);
           if (sessionStorage.getItem("url") != "null") {
             location = sessionStorage.getItem("url");

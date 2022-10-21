@@ -35,15 +35,20 @@ function click(){
 
 
 
-
   tab = document.querySelectorAll(".topBtn")
   active()
   click()
-  
+
   window.addEventListener("load", function() { 
 
     if(sessionStorage.getItem('memberName') != null){
       document.querySelector('#memberName').textContent = 
       sessionStorage.getItem('memberName') + "，您好！";
+
+
+
+
+
+      
     }
   });

@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!-- 後臺模板Css -->
-    <link rel="stylesheet" href="./workCss/backtemplete.css">
+    <link rel="stylesheet" href="../workCss/backtemplete.css">
+    <link rel="stylesheet" href="../workCss/backedit.css">
 
     <!-- bootstrapr -->
     <link
@@ -25,131 +26,14 @@
       rel="stylesheet"
     />
 
-
-    
-    <style>
-      
-
-     
-
-      .input-file-button{
-        border: 1px black solid;
-        background-color: gray;
-        color: white;
-        padding: 0px 5px;
-        cursor: pointer;
-        position: relative;
-        left:247px;
-      }
-
-      .input-file-button:hover{
-        background-color: rgba(106, 241, 9, 0.482);
-        color: rgb(0, 0, 0);
-      }
-
-      .submit{
-        border: 1px black solid;
-        background-color: gray;
-        color: white;
-        padding: 0px 5px;
-        cursor: pointer;
-      }
-
-      .submit:hover{
-        background-color: rgba(106, 241, 9, 0.482);
-        color: rgb(0, 0, 0);
-      }
-
-      .clear{
-        border: 1px black solid;
-        background-color: gray;
-        color: white;
-        padding: 0px 5px;
-        cursor: pointer;
-        position: relative;
-        left:243px;
-      }
-
-      .clear:hover{
-        background-color: rgba(106, 241, 9, 0.482);
-        color: rgb(0, 0, 0);
-      }
-
-      .preview{
-        height: 250px;
-        max-width: 100%;
-        background-color: rgba(128, 128, 128, 0.268);
-       margin-left: 5px;
-      }
-
-      .preview img.preview_img{
-        width: 100%;
-        height: 100%;
-      }
-
-      /*  */
-      .uploadImage {
-        display: inline-block;
-        vertical-align: top;
-        position: relative;
-        width: 90px;
-        height: 90px;
-        background: url("../點選上傳.png") no-repeat;
-        background-size: cover;
-        text-align: center;
-        cursor: pointer;
-      }
-      .uploadImage p {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 10px;
-        font-size: 14px;
-        color: #999999;
-      }
-      .uploadImage input#file {
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        cursor: pointer;
-      }
-      .smallpreview {
-        position: relative;
-        display:inline-block;
-        vertical-align: top;
-        border: solid 1px rgba(0, 0, 0, 0.138);
-        margin: 0px;
-        width: 96px;
-        height: 90px;
-        background: #e1e6ed;
-        
-      }
-      .smallpreview img {
-        /* position: relative; */
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-      }
-      .smallpreview img[src=""] {
-        opacity: 0;
-        filter: Alpha(0); /* 相容IE8-9 */
-      }
-      .smallpreview img:not([src]) {
-        opacity: 0;
-        filter: Alpha(0); /* 相容IE8-9 */
-      }
-      
-   
-    </style>
   </head>
   <body>
     <!-- header -->
     <header>
       <div class="header">
         <div>
-          <img src="./img/eagle2.jpg" alt="" class="headImg" />
-          <span class="user">使用者</span>
+          <img src="../workImage/eagle2.jpg" alt="" class="headImg" />
+          <span id="memberName"></span>
         </div>
       </div>
     </header>
@@ -204,16 +88,7 @@
           <div class="row">
             <div class="col-auto">
             <!-- 圖片上傳 -->
-              <div  style="width: 400px;;background-color:white ; ">
-                <div class="preview">
-                  <span class="text">預覽圖</span>
-                </div>     
-              </div>
-              <div class="pic" style="width:400px ; margin-left: 5px;" ></div>
-              <label class="input-file-button" for="upload" @click=""> 上傳圖片</label>
-              <input type="file" id="upload" style="display: none;" multiple="multiple" @change="fileSelected"/>
-              <input type="submit" class="clear" value="清除上傳">
-            </div>     
+              
             <div class="col-5">
               <div>商品介紹:</div>
               <textarea class="prodDescription" placeholder="商品介紹" style="width:100%;height: 80%;"></textarea>
@@ -259,119 +134,9 @@
 
 
     <!-- jquery link -->
-    <script src="./vendor/js/jquery3.6.0.js"></script>
-
-    <script src="./JS/backtemplete.js"></script>
-
-    <script>
-
-      //  上傳圖片
-       var preview_img = function (file) {
-          var reader = new FileReader(); // 用來讀取檔案
-          reader.readAsDataURL(file); // 讀取檔案
-          reader.addEventListener("load", function () {
-                let img_src =
-                '<img src="' + reader.result + '" class="preview_img">';
-                document.querySelector(".preview").innerHTML = img_src
-          });
-        };
-
-
-
-        // 縮圖上傳
-        var the_file_element = document.querySelector("#upload")
-        the_file_element.addEventListener("change", function (e) {
-          var num=e.target.files.length
-          console.log($(".pic").find(".small").length)
-          let picture_list = document.getElementsByClassName("pic")[0];
-          // console.log(this.files.length);
-          let that = this;
-          if (num > 4 || $(".pic").find(".small").length >= 4){
-            alert("最多上傳4張")
-          }else{
-            for (let i = 0; i < this.files.length; i++) {
-              preview_img(this.files[0]);
-              let reader = new FileReader(); // 用來讀取檔案
-              reader.readAsDataURL(this.files[i]); // 讀取檔案
-              // console.log(this.files.length);
-              reader.addEventListener("load", function (e) {
-                // console.log("load 事件");
-                // console.log(e);
-                let div_html = `
-                    <span class="smallpreview" >
-                      <img src="${reader.result}" class="small"/>
-                    </span>
-                `;
-                picture_list.insertAdjacentHTML("beforeend", div_html); // 加進節點
-                let form_data = new FormData();
-                form_data.append("the_file", that.files[i]);
-                })
-            };
-          }
-        })  
-
-       
-        
-        // 縮圖變預覽圖
-        $(document).on("click", ".small", function (){
-         $(".preview_img").attr("src",$(this).attr("src"))
-        })
-
-        
-
-
-      //click 清除所有縮圖和預覽圖
-      $(document).on("click", ".clear", function (){
-        $(".pic").find(".smallpreview").remove();
-        $(".preview").find(".preview_img").remove();
-      })
-
-      //上傳圖片至後端
-      $(document).on("click", ".input-submit", function (){
-  
-      })
-
-
-      //submit insert
-      $(document).on("click", ".submit", function (){
-        let prodStatusURL = 'http://localhost:8081/TGA103_EagleMuseum/ProdInsert'
-        let prodName= document.querySelector(".prodName").value;
-        let prodTypeID= document.querySelector(".prodTypeID").value;
-        let prodPrice= document.querySelector(".prodPrice").value;
-        let prodDescription= document.querySelector(".prodDescription").value;
-        let prodInStock = document.querySelector(".prodInStock").value;
-        console.log(prodName);
-        console.log( prodTypeID);
-        // console.log(prodPrice);
-        // console.log(prodDescription);
-        // console.log(prodInStock);
-
-        fetch(prodStatusURL, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            prodName,
-            prodTypeID,
-            prodPrice,
-            prodDescription,
-            prodInStock
-          })
-        })
-        .then(resp => resp.json())
-        .then(R => {  
-          console.log(R)
-        })  
-      }); 
-
-
-
-      
-
-
-
-
-
-
-    </script>
+    <script src="../workJs/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../workJs/backtemplete.js"></script>
+    <script src="../workJs/backtemplete.js"></script>
+ 
   </body>
 </html>
