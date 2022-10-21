@@ -67,7 +67,7 @@ public class MemberServiceImpl implements MemberService {
 			return member;
 		}
 		
-		member = dao.selectForLogin(memberEmail, memberPassword);
+		member = dao.managerForLogin(memberEmail, memberPassword);
 		if (member == null) {
 			member = new Member();
 			member.setMessage("帳號或密碼錯誤");
@@ -186,7 +186,7 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 	
-//  忘記密碼 ///
+//  忘記密碼 
 	@Override
 	public Member forgetpass(Member member) {
 		final String email = member.getMemberEmail();
@@ -220,7 +220,7 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 	
-//  忘記密碼更新 ///
+//  忘記密碼更新 
 	@Override
 	public Member updateForPass(Member member) {
 		final String newPass = member.getMemberNewPass();

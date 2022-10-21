@@ -24,7 +24,7 @@ public class MemberGetAllServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 		
-		List<Member> member = SERVICE.serchAllMember();
+		List<Member> member = SERVICE.findAllMembers();
 		
 		writePojo2Json(resp, member);
 
