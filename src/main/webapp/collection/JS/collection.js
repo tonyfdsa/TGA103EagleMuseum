@@ -5,18 +5,6 @@
     $(".head").eq(val).slideToggle("slow");
   })
 
-  // // 抓商品標籤
-  // fetch('http://localhost:8080/TGA103eagleMuseum/tagAll')
-  //   .then(resp => resp.json())
-  //   .then(findAllTags => {
-  //     for (i = 0; i < findAllTags.length; i++) {
-  //       let text = `
-  //             			<option value="${findAllTags[i].tag}">${findAllTags[i].tag}</option>
-  //             			`
-  //       $(".selectMaterial").append(text);
-  //     }
-  //   });
-
   // searchTitle 商品搜尋的資料回傳  
   $("#searchBtnTitle").click(function () {
     let collectionTitle = document.querySelector("#collectionTitle").value
@@ -63,6 +51,52 @@
   })
 
   // searchEar 商品搜尋的資料回傳  
+  $("#searchBtnMaterial").click(function () {
+    let collectionMaterial = document.querySelector("#collectionMaterial").value
+    if (collectionMaterial != "") {
+      fetch('http://localhost:8080/TGA103eagleMuseum/collectionGetOneMaterial', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        collectionMaterial
+      })
+    })
+      .then(resp => resp.json())
+      .then(collectionSerchMaterial => {
+        //清除所有的 $(".searchContent").append(text);
+        $(".searchContent").find(".add").remove();
+        $(".searchContent").find("#searchNAN").remove();
+        if (collectionSerchMaterial.length === 0) {
+          $(".searchContent").append("<div style='color: red;' id=searchNAN> 查無結果，請重新輸入 </div>");
+        }
+        //新增搜尋的結果
+        for (i = 0; i < collectionSerchMaterial.length; i++) {
+          let re = (collectionSerchMaterial[i].collectionStatus === true ? "上架中" : "下架");
+          let text = `
+          <div class="container-fluid add" data-ID = ${collectionSerchMaterial[i].collectionID} >
+            <div class="row d-flex  column">
+              <div class="col-1 "style="text-align:center">${i + 1}</div>
+              <div class="col-1" style="text-align:center">${collectionSerchMaterial[i].collectionID}</div>
+              <div class="col-2">${collectionSerchMaterial[i].collectionTitle}</div>
+              <div class="col-3" id="collectionTextLimit">${collectionSerchMaterial[i].collectionText}</div>
+              <div class="col-1" style="text-align:center">${collectionSerchMaterial[i].collectionEar}</div>
+              <div class="col-2" style="text-align:center">${collectionSerchMaterial[i].collectionMaterial}</div>
+              <div class="col-2"  style="text-align:center"></div>
+              <div class="col-1"></div>
+            </div>
+          </div>
+        `;
+          $(".searchContent").append(text);
+        }
+      });
+    } else {
+      $(".searchContent").find(".add").remove();
+      $(".searchContent").find("#searchNAN").remove();
+      $(".searchContent").append("<div style='color: red;' id=searchNAN> 請輸入查詢文字 </div>");
+    }
+  })
+
+  // searchM 商品搜尋的資料回傳  
   $("#searchBtnEar").click(function () {
     let collectionEar = document.querySelector("#collectionEar").value
     if (collectionEar != "") {
@@ -93,8 +127,7 @@
               <div class="col-3" id="collectionTextLimit">${collectionSerchEar[i].collectionText}</div>
               <div class="col-1" style="text-align:center">${collectionSerchEar[i].collectionEar}</div>
               <div class="col-2" style="text-align:center">${collectionSerchEar[i].collectionMaterial}</div>
-              <div class="col-1" style="text-align:center" class="statis" data-status= ${collectionSerchEar[i].prodStatus}>${re}</div>
-              <div class="col-1"  style="text-align:center"></div>
+              <div class="col-2"  style="text-align:center"></div>
               <div class="col-1"></div>
             </div>
           </div>
