@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.gson.Gson;
 
 import contact.common.QuesConfirmMail;
+import contact.common.Result;
 import contact.service.QuesContentService;
 import contact.service.QuesContentServiceImpl;
 import contact.vo.QuesContent;
@@ -54,13 +55,17 @@ public class InserQuesServlet extends HttpServlet {
 
 		String getQuesContent = vo.getQuestionContent();
 		if (StringUtils.isNotBlank(getQuesContent)) {
-			final boolean result = service.submitQuestion(vo);
+			Result result = service.submitQuestion(vo);
 			//寄出確認信
-			if (result) {
+			if (result != null) {
 				String memberEmail = service.confirmQues(vo.getMemberId()).getMemberEmail();
 				new QuesConfirmMail(memberEmail).quesConfirmMail();
 			}
-			resp.getWriter().print(gson.toJson(true));
+//			resp.getWriter().print(gson.toJson(true));
+//			System.out.println(gson.toJson(result));
+			resp.getWriter().print(gson.toJson(result));
+			
+			
 		
 		}
 	}

@@ -13,10 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(value = {
-//		"/collection/toBeFilteredBack/*",
-//		"/contact/toBeFilteredBack/*", 
+		"/collection/toBeFilteredBack/*",
+		"/tag/toBeFilteredBack/*",
+		"/contact/toBeFilteredBack/*", 
 //		"/exhibition/toBeFilteredBack/*", 
-//		"/member/toBeFilteredBack/*", 
+		"/member/toBeFilteredBack/*", 
 //		"/order/toBeFilteredBack/*", 
 //		"/prod/toBeFilteredBack/*",
 })
@@ -49,17 +50,13 @@ public class FilterByEBack extends HttpFilter implements Filter {
 		String uri = request.getRequestURI();
 		//	System.out.println(uri);
 		
-		// 判斷是否為登入相關路徑（要確認實際登入程式的檔案名稱）
-		// 其他不需要登入就可瀏覽的頁面也要加入
-		if (uri.contains("/member/館員登入頁面.html")
-//			|| uri.contains("/member/memberforget.html")
-//			|| uri.contains("/member/memberJoin1.html") 
-//			|| uri.contains("/member/login")
-//			|| uri.contains("/member/forgetpass") 
-//			|| uri.contains("/member/register")
-//			|| uri.contains("/member/workCss/") 
-//			|| uri.contains("/member/workJs/")
-//			|| uri.contains("/member/workImage/")
+		//判斷是否為登入相關程式碼（要確認路徑名稱）
+		if (uri.contains("/member/manlogin")
+			|| uri.contains("/member/register")
+			|| uri.contains("/member/forgetpass")
+			|| uri.contains("/member/workCss/") 
+			|| uri.contains("/member/workJs/")
+			|| uri.contains("/member/workImage/")
 		) {
 			// System.out.println(456);
 			// 是就放行，讓瀏覽器可以訪問到servlet或JSP
@@ -76,7 +73,7 @@ public class FilterByEBack extends HttpFilter implements Filter {
 				// 存入目前想去的頁面
 				request.getSession().setAttribute("url", request.getRequestURI());
 				// 轉發到登入頁面（要確認實際登入程式的檔案名稱）
-				response.sendRedirect(request.getContextPath() + "/member/館員登入頁面.html");
+				response.sendRedirect(request.getContextPath()+"/member/manegerboot.html");
 			}
 		}
 	}

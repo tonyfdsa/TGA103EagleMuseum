@@ -19,7 +19,8 @@ public interface QuesContentService {
 	Session session = sessionFactory.openSession();
 
 	Boolean submitAnswer(String answerContent, Integer questionContentID);
-	Boolean submitQuestion(QuesContent questionContent); 
+//	Boolean submitQuestion(QuesContent questionContent); 
+	Result submitQuestion(QuesContent questionContent); 
 	Result findAllQs();
 	Result getByMemberId(Integer memberId);
 	Result getByDate(Date startTime, Date endTime);
