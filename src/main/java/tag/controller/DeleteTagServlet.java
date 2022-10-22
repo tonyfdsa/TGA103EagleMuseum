@@ -1,5 +1,9 @@
-package collection.controller;
+package tag.controller;
 
+import static core.util.CommonUtil.json2Pojo;
+import static core.util.CommonUtil.writePojo2Json;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -11,30 +15,27 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import collection.service.CollectionService;
-import collection.service.CollectionServiceImpl.CollectionServiceImpl;
-import collection.vo.CollectionVO;
-
-import static core.util.CommonUtil.json2Pojo;
-import static core.util.CommonUtil.writePojo2Json;
+import tag.service.TagService;
+import tag.service.TagServiceImpl.TagServiceImpl;
+import tag.vo.TagVO;
 
 
-@WebServlet("/collectionGetOneName")
-public class FindOneNameServlet extends HttpServlet {
+
+@WebServlet("/tagDelete")
+public class DeleteTagServlet extends HttpServlet {
 	private static final long serialVersionUID = 1;
-	private CollectionService service = new CollectionServiceImpl();
-	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+	private TagService service = new TagServiceImpl();
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		setHeaders(response);
-		
-		CollectionVO collectionSerchName = json2Pojo(request, CollectionVO.class);
-        writePojo2Json(response, service.findName(collectionSerchName));
+
+        TagVO deleteTag = json2Pojo(request, TagVO.class);
+        deleteTag = service.deleteTag(deleteTag);
+        writePojo2Json(response, deleteTag);
+
 	}
-	
 	@Override
 	 protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  setHeaders(response);
