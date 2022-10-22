@@ -44,6 +44,8 @@ public class MemberServiceImpl implements MemberService {
 			return member;
 		}
 		
+		dao.updateLastLogin(member);
+		
 		member.setMessage("登入成功");
 		member.setSuccessful(true);
 		return member;
@@ -318,7 +320,7 @@ public class MemberServiceImpl implements MemberService {
 		return dao.selectByMemberEmail(member.getMemberEmail());
 	}
 
-//	會員查詢
+//	會員查詢 (暫時沒用)
 	@Override
 	public List<Member> serchAllMember() {
 		return dao.serchAllMember();

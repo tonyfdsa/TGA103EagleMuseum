@@ -232,6 +232,28 @@ public class MemberDaoImpl implements MemberDao {
 		return rowCount != 0 ;
 	}
 	
+	// 更新時間
+	@Override
+	public boolean updateLastLogin(Member member) {
+		final String sql = "update member set lastEnterTime =? where memberEmail=?;";
+		int rowCount = 0;
+		try (
+			Connection conn = dataSource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+				) {
+			System.out.println("連線成功");
+			
+			pstmt.setObject(1, member.getLastEnterTime());
+			pstmt.setString(2, member.getMemberEmail());
+			
+			rowCount = pstmt.executeUpdate();	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rowCount != 0;
+	}
+	
+	
 	@Override
 	public boolean updateManage(Member member) {
 		final String sql = "update member set memberEmail = ?,memberPassword = ?,memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ?,memberPermission = ?,modifyTime = now() where memberEmail=?;";
@@ -297,6 +319,7 @@ public class MemberDaoImpl implements MemberDao {
 		return member;
 	}
 	
+//	暫時沒用到
 	@Override
 	public List<Member> serchAllMember() {
 		try (Connection conn = dataSource.getConnection();
