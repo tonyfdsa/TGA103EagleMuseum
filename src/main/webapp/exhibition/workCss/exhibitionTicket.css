@@ -1,0 +1,12 @@
+.btn-qrcode:hover{
+  background-color: #d16647 !important;
+  color: #fff !important;
+}
+
+.card-body{
+  background-color: #fff;
+}
+
+.control-label.text-left{
+  text-align: left;
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <!-- 後臺模板Css -->
+  <link rel="stylesheet" href="../workCss/backtemplete.css">
+  <link rel="stylesheet" href="../workCss\exhibition_back.css">
+  <link rel="stylesheet" type="text/css" href="../vendor\calender\css\daterangepicker.css">
+  s
+  <!-- bootstrapr -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+  <!-- 正黑體字型包 -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet" />
+  <script src="../vendor\calender\js\jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+  <!-- header -->
+  <header>
+    <div class="header">
+      <div>
+        <img src="../img/eagle2.jpg" alt="" class="headImg" />
+        <span class="user">使用者</span>
+      </div>
+    </div>
+  </header>
+  <!-- aside -->
+
+  <div class="aside">
+    <!-- 頂部留白 -->
+    <div style="height: 20px"></div>
+    <!-- 大標籤 -->
+    <ul>
+      <li>
+        <div class="sideBtn">首頁管理</div>
+        <div class="Btn">
+          <a href="#">展覽資訊</a>
+        </div>
+        <div class="Btn">
+          <a href="#">商品資訊</a>
+        </div>
+        <div class="Btn">
+          <a href="#">館方資訊</a>
+        </div>
+      </li>
+      <li>
+        <div class="sideBtn">展覽管理</div>
+        <div class="Btn">
+
+          <a href="#">票卷管理</a>
+        </div>
+      </li>
+      </li>
+      <li>
+        <div class="sideBtn">館藏管理</div>
+        <div class="Btn">
+          <a href="#">館藏列表</a>
+        </div>
+      </li>
+      <li>
+        <div class="sideBtn">商城管理</div>
+        <div class="Btn">
+          <a href="#">訂單搜尋</a>
+        </div>
+        <div class="Btn">
+          <a href="#">商品搜尋</a>
+        </div>
+      </li>
+      <li>
+        <div class="sideBtn">會員管理</div>
+        <div class="Btn">
+          <a href="#">會員搜尋</a>
+        </div>
+      </li>
+      <li>
+        <div class="sideBtn">聯絡管理</div>
+        <div class="Btn">
+          <a href="#">常見問題</a>
+        </div>
+        <div class="Btn">
+          <a href="#">其他問題</a>
+        </div>
+        <div class="Btn">
+          <a href="#">交通資訊</a>
+        </div>
+        <div class="Btn">
+          <a href="#">租借場地</a>
+        </div>
+      </li>
+      </li>
+    </ul>
+  </div>
+
+  <!-- main -->
+  <div class="main">
+    <div class="container">
+      <form class="row mt-2" novalidate>
+        <div class="col-12">
+          <div class="row table-line"></div>
+        </div>
+        <div class="col-md-3">
+          <label for="exhibitionName" class="form-label">展覽名稱</label>
+          <input type="text" class="form-control" id="exhibitionName" placeholder="請輸入關鍵字" required>
+        </div>
+        <div class="col-md-5">
+          <label for="" class="form-label">展覽日期區間</label>
+          <div class="row g-10 align-items-center">
+            <div class="col-md-5">
+              <input name="exhibitionStartDate" id="start_date" type="date" class="form-control">
+            </div>
+            ~
+            <div class="col-md-5 ">
+              <input name="exhibitionEndDate" id="end_date" type="date" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="exhibitionType" class="form-label">展覽類型</label>
+          <select class="form-select" id="exhibitionType" required>
+            <option selected disabled value="">請選擇展覽類型</option>
+            <option>1.常設展</option>
+            <option>2.活動</option>
+            <option>3.演講</option>
+          </select>
+        </div>
+        <div class="col-12">
+        </div>
+        <div class="col-md-3 needs-validation">
+          <label for="exhibitionYear" class="form-label">年度</label>
+          <input type="text" class="form-control" id="exhibitionYear" placeholder="請輸入西元年" required>
+
+        </div>
+        <div class="col-md-3">
+          <label for="exhibitionStatus" class="form-label">展覽狀態</label>
+          <select class="form-select" id="exhibitionStatus" required>
+            <option selected disabled value="">請選擇展覽狀態</option>
+            <option>1.展覽中</option>
+            <option>2.已結束</option>
+            <option>3.預計展覽</option>
+          </select>
+
+        </div>
+        <div class="col-md-5">
+        </div>
+        <div class="col-12">
+          <div class="row table-line"></div>
+        </div>
+        <div class="col-6">
+          <a href="exhibitionAdd_back.html" class="btn btn-outline-secondary addExhibition" type="button">新增展覽</a>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-outline-secondary searchBtn" type="button">搜尋</button>
+        </div>
+        <div class="col-12">
+          <div class="row table-line"></div>
+        </div>
+      </form>
+    </div>
+    <div class="container-fulid">
+      <div class="row line"></div>
+    </div>
+    <div class="container-fluid" id="title">
+      <div class="row d-flex column">
+        <div class="col-1" style="text-align:center">項次</div>
+        <div class="col-2" style="text-align:center">展覽編號</div>
+        <div class="col-2" style="text-align:center">展覽名稱</div>
+        <div class="col-2" style="text-align:center">展覽日期區間</div>
+        <div class="col-1" style="text-align:center">展覽類型</div>
+        <div class="col-1" style="text-align:center">展覽狀態</div>
+        <div class="col-2" style="text-align:center">展覽編輯</div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+    <div class="searchContent"></div>
+    <div class="col-1"></div>
+
+    <!-- jquery link -->
+    <!-- <script src="./vendor/js/jquery3.6.0.js"></script> -->
+    <script src="../JS/exhibition.js"></script>
+    <script src="../JS/backtemplete.js"></script>
+    <script src="../vendor\calender\js\daterangepicker.min.js"></script>
+    <script src="../vendor\calender\js\moment.js"></script>
+
+</body>
+
+</html>

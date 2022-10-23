@@ -3,10 +3,8 @@ package exhibition.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 import javax.naming.Context;
@@ -17,13 +15,11 @@ import javax.sql.DataSource;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import contact.vo.QuesContent;
 import core.util.HibernateUtil;
 import exhibition.dao.intf.ExhibitionDAOIn;
 import exhibition.dao.sql.ExhibitionSQL;
 import exhibition.vo.ExhibitionVO;
 import exhibition.vo.ExhibitionVOo;
-import prod.common.Global;
 
 public class ExhibitionDAOIm implements ExhibitionDAOIn {
 

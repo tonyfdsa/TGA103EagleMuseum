@@ -3,7 +3,6 @@ package exhibition.service.impl;
 import java.util.Base64;
 import java.util.List;
 
-import contact.vo.QuesContent;
 import exhibition.common.Result;
 import exhibition.dao.impl.ExhibitionDAOIm;
 import exhibition.service.inft.ExhibitionServiceIn;
