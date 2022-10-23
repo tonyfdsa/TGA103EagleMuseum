@@ -19,7 +19,7 @@ import prod.vo.productVO;
 
 @WebServlet("/ProdUpdate")
 public class produpdate extends HttpServlet{
-
+	private static final long serialVersionUID = 1L;
 	private Gson gson = new Gson();
 	private ProductServicelm service = new ProductServicelm();
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

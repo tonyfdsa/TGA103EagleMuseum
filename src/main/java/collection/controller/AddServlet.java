@@ -32,7 +32,6 @@ public class AddServlet extends HttpServlet {
 		BufferedReader br = request.getReader();
 		String json = br.readLine();
 		CollectionVO addCollection = gson.fromJson(json, CollectionVO.class);
-		
 		response.getWriter().print(gson.toJson(service.add(addCollection)));
 
 	}

@@ -85,5 +85,5 @@ $(document).on("click", "#ticketBtn", function () {
   // console.log(exhibitionID)
   sessionStorage.setItem("exhibitionID", exhibitionID)
   // console.log(sessionStorage.getItem("exhibitionID"))
-  location.href = "./exhibitionContent.html"
+  location.href = "toBeFiltered/exhibitionContent.html"
 })

@@ -1,19 +1,28 @@
 package contact.dao;
 
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Session;
+
+import contact.vo.Member;
 import contact.vo.QuesContent;
+import core.util.HibernateUtil;
 
 public interface QuesContentDao {
 	
+	default Session getSession() {
+		return HibernateUtil.getSessionFactory().getCurrentSession();	
+	}
 	
 	Integer insert(QuesContent questionContent);
-	List<QuesContent> selectAll();
 	List<QuesContent> findByMemberId(Integer memberId);
-	List<QuesContent> findByDate(String lastUpdateDate1, String lastUpdateDate2);
-	List<QuesContent> findByIdAndDate(Integer memberId, String lastUpdateDate1, String lastUpdateDate2);
-	void updateAns(String ansContent, Integer questionContentID);
+	List<QuesContent> selectAll();
+	List<QuesContent> findByDate(Date startTime, Date endTime);
+	List<QuesContent> findByIdAndDate(Integer memberId, Date startTime, Date endTime);
+	void updateAns(String answerContent, Integer questionContentID);
 	String getMemNameAndMailAndQues(Integer questionContentID);
-	String confirmQues(Integer memberId);
+	Member confirmQues(Integer memberId);
+	QuesContent getQAContent(Integer questionContentID);
 
 }

@@ -20,6 +20,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
+import contact.vo.Member;
+
 public class QuesConfirmMail {
 	private final static String HOST = "smtp.gmail.com";
 	private final static String AUTH = "true";

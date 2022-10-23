@@ -1,22 +1,53 @@
 package prod.vo;
-import java.sql.Date;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "productlist")
 public class productVO {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer productID;
-	private String prodName;   
-	private Integer prodTypeID; 
+	@Column
+	private String prodName;
+	@Column
+	private Integer prodTypeID;
+	@Column
 	private Integer prodPrice; 
-	private Integer discountID; 
+	@Column
+	private Integer discountID;
+	@Column
 	private String prodDescription; 
-	private Integer prodStatus;
-	private Date creatTime; 
-	private Date launchTime; 
+	@Column(insertable = false)
+	private Integer prodStatus; 
+	@Column(insertable = false)
 	private Integer sellQuantity; 
+	@Column
 	private Integer prodInStock; 
+	@Column(insertable = false)
 	private Integer bestSeller; 
-	private Date lastUpdateTime;
+	@Column(insertable = false)
+	private Timestamp lastUpdateTime;
+	@Transient
+	private String prodImg;
 	
 	
+
+	public String getProdImg() {
+		return prodImg;
+	}
+	public void setProdImg(String prodImg) {
+		this.prodImg = prodImg;
+	}
 	public Integer getProductID() {
 		return productID;
 	}
@@ -59,18 +90,8 @@ public class productVO {
 	public void setProdStatus(Integer prodStatus) {
 		this.prodStatus = prodStatus;
 	}
-	public Date getCreatTime() {
-		return creatTime;
-	}
-	public void setCreatTime(Date creatTime) {
-		this.creatTime = creatTime;
-	}
-	public Date getLaunchTime() {
-		return launchTime;
-	}
-	public void setLaunchTime(Date launchTime) {
-		this.launchTime = launchTime;
-	}
+
+
 	public Integer getSellQuantity() {
 		return sellQuantity;
 	}
@@ -89,14 +110,13 @@ public class productVO {
 	public void setBestSeller(Integer bestSeller) {
 		this.bestSeller = bestSeller;
 	}
-	public Date getLastUpdateTime() {
+	public Timestamp getLastUpdateTime() {
 		return lastUpdateTime;
 	}
-	public void setLastUpdateTime(Date lastUpdateTime) {
+
+	public void setLastUpdateTime(Timestamp lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 	}
-
-		
 	
 
 

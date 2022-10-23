@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quesAnswer</title>
+
+    <link rel="stylesheet" href="../css/backtemplete.css">
+
+    <!-- bootstrapr -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+    <!-- 正黑體字型包 -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/quesAns.css">
+    <style type="text/css">
+        div.overlayTag {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: hsla(0, 0%, 0%, .5);
+            display: none;
+        }
+
+        /* 元素 article 置中及基本樣式 */
+        div.overlayTag>article {
+            background-color: white;
+            width: 35%;
+            height: 450px;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ddd;
+            padding: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <div class="header">
+            <div>
+                <img src="../img/eagle2.jpg" alt="" class="headImg" /> <span class="user" id="memberName">使用者</span>
+            </div>
+        </div>
+    </header>
+    <!-- aside -->
+
+    <div class="aside">
+        <!-- 頂部留白 -->
+        <div style="height: 20px"></div>
+        <!-- 大標籤 -->
+        <ul>
+            <li>
+                <div class="sideBtn">首頁管理</div>
+                <div class="Btn">
+                    <a href="#">展覽資訊</a>
+                </div>
+                <div class="Btn">
+                    <a href="#">商品資訊</a>
+                </div>
+                <div class="Btn">
+                    <a href="#">館方資訊</a>
+                </div>
+            </li>
+            <li>
+                <div class="sideBtn">展覽管理</div>
+                <div class="Btn">
+                    <a href="#">票卷管理</a>
+                </div>
+            </li>
+            </li>
+            <li>
+                <div class="sideBtn">館藏管理</div>
+                <div class="Btn">
+                    <a href="#">館藏列表</a>
+                </div>
+            </li>
+            <li>
+                <div class="sideBtn">商城管理</div>
+                <div class="Btn">
+                    <a href="#">訂單搜尋</a>
+                </div>
+                <div class="Btn">
+                    <a href="#">商品搜尋</a>
+                </div>
+            </li>
+            <li>
+                <div class="sideBtn">會員管理</div>
+                <div class="Btn">
+                    <a href="#">會員搜尋</a>
+                </div>
+            </li>
+            <li>
+                <div class="sideBtn">問題管理</div>
+                <!-- <div class="Btn">
+                    <a href="#">常見問題</a>
+                </div>
+                <div class="Btn">
+                    <a href="#">其他問題</a>
+                </div>
+                <div class="Btn">
+                    <a href="#">交通資訊</a>
+                </div>
+                <div class="Btn">
+                    <a href="#">租借場地</a>
+                </div> -->
+            </li>
+            </li>
+        </ul>
+    </div>
+    <div class="main">
+
+        <div>
+
+            <h1>問題管理</h1>
+            <button type="button" class="searchAllQs">列出全部問題</button>
+            <hr>
+            <form>
+                <form>
+                    <div>搜尋發文日期：</div>
+                    <label for="start_date">從</label> <input name="start_date" id="start_date" type="date"> <label
+                        for="end_date">到</label>
+                    <input name="end_date" id="end_date" type="date">
+                    <button type="button" class="searchByDate">搜尋</button>
+                    <div class="needDates">
+                        <span class="needSD">請輸入開始日期</span>
+                        <span class="needED">請輸入結束日期</span>
+                    </div>
+                </form>
+                <br>
+                <form>
+                    <label for="memberId">搜尋會員Id：</label> <br>
+                    <input id="memberId" name="memberId">
+                    <button type="button" class="searchById">搜尋</button>
+                    <div class="needId">
+                        <span class="inputId">請輸入會員Id</span>
+                    </div>
+                </form>
+                <br>
+                <button type="button" class="searchByIAndD">日期&會員複合搜尋</button>
+                <div class="needIAndD">
+                    <span class="inputIAndD">請輸入會員Id與日期</span>
+                </div>
+            </form>
+            <hr>
+            <table class="table">
+                <thead>
+                    <tr class="thead">
+                        <th>問題編號</th>
+                        <th>會員ID</th>
+                        <th>問題類型</th>
+                        <th></th>
+                        <th>問題內容</th>
+                        <th>答覆狀態</th>
+                        <th>提問時間</th>
+                        <th>答覆時間</th>
+                    </tr>
+                </thead>
+                <tbody class="quesList"> </tbody>
+            </table>
+            <div class="noResult"> </div>
+        </div>
+
+        <div class="overlayTag">
+            <article>
+                <form>
+                    <div>問題編號：</div>
+                    <input id="quesId" name="quesId" readonly> <br>
+                    <div>問題內容：</div>
+                    <textarea id="quesContent" readonly></textarea>
+                    <div>請輸入答覆內容：</div>
+                    <textarea id="ansContent" name="ansContent"></textarea>
+                    <br>
+                    <button type="button" class="reply">提交</button>
+                    <button type="button" class="close">關閉</button>
+                    <div class="ansSubmit">
+                        請輸入答覆內容
+                    </div>
+                </form>
+            </article>
+        </div>
+    </div>
+</body>
+<script src="../vendor/js/jquery3.6.0.js"></script>
+<script src="../JS/backtemplete.js"></script>
+<!-- <script src="JS/backprodmeau.js"></script> -->
+<script src="../JS/quesAns.js"></script>
+
+</html>

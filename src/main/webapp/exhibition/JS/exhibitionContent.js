@@ -153,6 +153,7 @@ $(document).on("click", "#buyTicket", function () {
         .then(resp => resp.json())
         .then(R => {
             alert("新增訂單成功^_^!");
+            
             sessionStorage.setItem("ticketID", ticketID)
             console.log(sessionStorage.getItem("ticketID"))
         })
@@ -168,7 +169,7 @@ $(document).on("click", "#buyTicket", function () {
     console.log(sessionStorage.getItem("countOld"))
     console.log(sessionStorage.getItem("countPhy"))
     console.log(sessionStorage.getItem("total"))
-    location.href = "toBeFiltered/exhibitionTicket.html"
+    location.href = "./exhibitionTicket.html"
 })
 // const { createApp } = Vue;
 

@@ -9,7 +9,11 @@ public class ProductSQL {
 
 	// 商品ID名稱查詢
 	public static final String GET_BY_ID = "SELECT * FROM productlist where productID = ?";
+	
+	// 商品ID名稱查詢
+	public static final String GET_Listed = "SELECT * FROM productlist where prodStatus = 1";
 
+	
 	// 新增商品
 	public static final String Insert = "INSERT INTO productlist(prodName, ProdTypeID, prodprice, prodDescription, prodInStock, creatTime) VALUES(?, ?, ?, ?, ?,NOW())";
 
@@ -39,4 +43,7 @@ public class ProductSQL {
 	
 	//刪除圖片
 	public static final String ProdDeImg = "delete from productimg where productID= ?";
+	
+	//取得所有圖片
+	public static final String GetAllImg = "select * from productimg ";
 }

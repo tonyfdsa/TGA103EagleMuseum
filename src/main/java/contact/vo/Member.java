@@ -4,11 +4,23 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import core.pojo.Core;
+
+@Entity
 public class Member implements Serializable{
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer memberID;
 	private String memberEmail;
 	private String memberPassword; 
+	@Column
 	private String memberName;
 	private String memberQA;
 	private String memberAns;
@@ -16,10 +28,18 @@ public class Member implements Serializable{
 	private Integer memberPhone;
 	private Integer memberGender;
 	private Date memberBirthday;
+	@Column
 	private Integer memberPermission;
+	@Column(insertable = false)
 	private Timestamp modifyTime;
 	private Timestamp lastEnterTime ;
 	
+	public Member(Integer memberID, String memberEmail) {
+		super();
+		this.memberID = memberID;
+		this.memberEmail = memberEmail;
+	}
+
 	public Member() {
 		
 	}

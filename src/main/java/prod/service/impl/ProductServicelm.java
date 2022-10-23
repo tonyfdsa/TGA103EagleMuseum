@@ -9,6 +9,7 @@ import prod.common.Global;
 import prod.common.Result;
 import prod.dao.impl.ProductDAO;
 import prod.service.inft.ProductServicein;
+import prod.vo.CartVO;
 import prod.vo.ProdImgVO;
 import prod.vo.productVO;
 
@@ -68,7 +69,6 @@ public class ProductServicelm implements ProductServicein {
 
 			
 			if (ProdName != null && ProdTypeID != 0 && ProdInStock != 0 && ProdName != null && ProdDescription != null) {
-				System.out.println(R.success(DAO.insert(productVO)));
 				return R.success(DAO.insert(productVO));
 			}else {
 				return null;
@@ -83,8 +83,7 @@ public class ProductServicelm implements ProductServicein {
 	@Override
 	public Result updateStatus(productVO productVO) {
 		try {
-			System.out.println(R.success(DAO.updateStatus(productVO)));
-			return R.success(DAO.insert(productVO));
+			return R.success(DAO.updateStatus(productVO));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return R.fail(e.toString());
@@ -94,7 +93,6 @@ public class ProductServicelm implements ProductServicein {
 	@Override
 	public Result insertTag(String prodType) {
 		try {
-			System.out.println(R.success(DAO.insertTag(prodType)));
 			return R.success(DAO.insertTag(prodType));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -143,18 +141,7 @@ public class ProductServicelm implements ProductServicein {
 		}
 	}
 	
-	public List<ProdImgVO> getBase64(List<ProdImgVO> list) {
 
-		for (ProdImgVO vo : list) {
-			var img = vo.getProductgetimg();
-			if (img != null) {
-				vo.setProductimg(Global.BASE64 + Base64.getEncoder().encodeToString(img));
-				vo.setProductgetimg(null);
-			}
-		}
-
-		return list;
-	}
 
 	@Override
 	public Result prodUpdate(productVO ProductVO) {
@@ -175,5 +162,54 @@ public class ProductServicelm implements ProductServicein {
 			return R.fail(e.toString());
 		}
 	}
+
+	@Override
+	public Result prodGetAllImg() {
+		try {
+			return R.success(getBase64(DAO.prodImgGetAll()));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+
+	
+	
+	
+	
+	//工具
+	public List<ProdImgVO> getBase64(List<ProdImgVO> list) {
+
+		for (ProdImgVO vo : list) {
+			var img = vo.getProductgetimg();
+			if (img != null) {
+				vo.setProductimg(Global.BASE64 + Base64.getEncoder().encodeToString(img));
+				vo.setProductgetimg(null);
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public CartVO cartGetProd(Integer prodID) {
+		try {
+			return DAO.cartgetProd(prodID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public Result prodGetListed() {
+		try {
+			return R.success(DAO.prodListed());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+
 
 }

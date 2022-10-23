@@ -1,10 +1,13 @@
 package member.vo;
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
 
-public class Member implements Serializable{
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import core.pojo.CoreSimple;
+
+// member繼承coreSimple  建立sql表格項目
+public class Member extends CoreSimple {
 	private static final long serialVersionUID = 1L;
 	private Integer memberID;
 	private String memberEmail;
@@ -15,18 +18,22 @@ public class Member implements Serializable{
 	private String memberAddress;
 	private Integer memberPhone;
 	private Integer memberGender;
-	private Date memberBirthday;
+	private LocalDate memberBirthday;
 	private Integer memberPermission;
-	private Timestamp modifyTime;
-	private Timestamp lastEnterTime ;
+	private LocalDateTime modifyTime;
+	private LocalDateTime lastEnterTime;
+	private String Verification;
+	private String captcha;
+	private String memberNewPass;
 	
 	public Member() {
 		
 	}
 
+	//  建立各項目建構子
 	public Member(Integer memberID, String memberEmail, String memberPassword, String memberName, String memberQA,
-			String memberAns, String memberAddress, Integer memberPhone, Integer memberGender, Date memberBirthday,
-			Integer memberPermission, Timestamp modifyTime, Timestamp lastEnterTime) {
+			String memberAns, String memberAddress, Integer memberPhone, Integer memberGender, LocalDate memberBirthday,
+			Integer memberPermission, LocalDateTime modifyTime, LocalDateTime lastEnterTime) {
 		super();
 		this.memberID = memberID;
 		this.memberEmail = memberEmail;
@@ -44,6 +51,7 @@ public class Member implements Serializable{
 	}
 
 	
+	// 建立各項目的 讀取 及  存入
 	public Integer getMemberID() {
 		return memberID;
 	}
@@ -116,11 +124,11 @@ public class Member implements Serializable{
 		this.memberGender = memberGender;
 	}
 
-	public Date getMemberBirthday() {
+	public LocalDate getMemberBirthday() {
 		return memberBirthday;
 	}
 
-	public void setMemberBirthday(Date memberBirthday) {
+	public void setMemberBirthday(LocalDate memberBirthday) {
 		this.memberBirthday = memberBirthday;
 	}
 
@@ -132,20 +140,44 @@ public class Member implements Serializable{
 		this.memberPermission = memberPermission;
 	}
 
-	public Timestamp getModifyTime() {
+	public LocalDateTime getModifyTime() {
 		return modifyTime;
 	}
 
-	public void setModifyTime(Timestamp modifyTime) {
+	public void setModifyTime(LocalDateTime modifyTime) {
 		this.modifyTime = modifyTime;
 	}
 
-	public Timestamp getLastEnterTime() {
+	public LocalDateTime getLastEnterTime() {
 		return lastEnterTime;
 	}
 
-	public void setLastEnterTime(Timestamp lastEnterTime) {
+	public void setLastEnterTime(LocalDateTime lastEnterTime) {
 		this.lastEnterTime = lastEnterTime;
+	}
+
+	public String getVerification() {
+		return Verification;
+	}
+
+	public void setVerification(String verification) {
+		Verification = verification;
+	}
+
+	public String getCaptcha() {
+		return captcha;
+	}
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
+	}
+
+	public String getMemberNewPass() {
+		return memberNewPass;
+	}
+
+	public void setMemberNewPass(String memberNewPass) {
+		this.memberNewPass = memberNewPass;
 	}
 	
 }

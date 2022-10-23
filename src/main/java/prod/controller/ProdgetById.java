@@ -19,6 +19,7 @@ import prod.vo.productVO;
 
 @WebServlet("/ProdgetById")
 public class ProdgetById extends HttpServlet{
+	private static final long serialVersionUID = 1L;
 	private Gson gson = new Gson();
 	private ProductServicelm service = new ProductServicelm();
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +27,6 @@ public class ProdgetById extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		
 		Integer ProdID = json2Vo(request, productVO.class).getProductID();
-//		System.out.println(ProdID);
 		Result R  = service.prodGetByID(ProdID);
 		response.getWriter().print(gson.toJson(R));	
 	}

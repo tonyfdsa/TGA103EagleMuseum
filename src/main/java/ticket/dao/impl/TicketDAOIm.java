@@ -79,7 +79,7 @@ public class TicketDAOIm implements TicketDAOIn {
 
 					vo = new TicketVOo();
 					vo.setTicketID(rs.getInt("ticketID"));
-					vo.setMemberID(1);
+					vo.setMemberID(rs.getInt("memberId"));
 					vo.setExhibitionID(rs.getInt("exhibitionID"));
 					vo.setTicketDate("2022-10-23");
 					vo.setAldultTicket(rs.getInt("aldultTicket"));
@@ -99,28 +99,32 @@ public class TicketDAOIm implements TicketDAOIn {
 
 
 	@Override
-	public boolean insert(TicketVO vo) {
+	public Integer insert(TicketVO vo) {
 		Transaction tx = null;
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
-			System.out.println("連線成功");
+			System.out.println("連線成功11");
 			tx = session.beginTransaction();
-			final String SQL = "INSERT into ticket(memberID, exhibitionID, ticketDate, aldultTicket, stuTicket, oldTicket, phyTicket, ticketTotal, buyTime, lastUpdateTime) values (1, ?, '2022-10-23',?, ?, ?, ?, ?, NOW(), NOW()) "; 		
+			final String SQL = "INSERT into ticket(memberId, exhibitionID, ticketDate, aldultTicket, stuTicket, oldTicket, phyTicket, ticketTotal, buyTime, lastUpdateTime) values (?, ?, '2022-10-23',?, ?, ?, ?, ?, NOW(), NOW()) "; 		
 			session.createNativeQuery(SQL)
-			       .setParameter(1, vo.getExhibitionID())
-			       .setParameter(2, vo.getAldultTicket())
-			       .setParameter(3, vo.getStuTicket())
-			       .setParameter(4, vo.getOldTicket())
-			       .setParameter(5, vo.getPhyTicket())
-			       .setParameter(6, vo.getTicketTotal());		       
+			       .setParameter(1, vo.getMemberId())
+			       .setParameter(2, vo.getExhibitionID())
+			       .setParameter(3, vo.getAldultTicket())
+			       .setParameter(4, vo.getStuTicket())
+			       .setParameter(5, vo.getOldTicket())
+			       .setParameter(6, vo.getPhyTicket())
+			       .setParameter(7, vo.getTicketTotal()).executeUpdate();
+			
 			tx.commit();
-			return true;
+			System.out.println(vo.getTicketID());
+			return vo.getTicketID();
 		}catch(Exception e) {
+			System.out.println("失敗啦幹");
 			if(tx != null) {
 				tx.rollback();
 			}
 			e.printStackTrace();			
 		}
-		return false;
+		return null;
 	}
 
 }

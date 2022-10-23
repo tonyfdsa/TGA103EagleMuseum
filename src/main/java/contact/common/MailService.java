@@ -1,14 +1,10 @@
 package contact.common;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Properties;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -116,13 +112,12 @@ public class MailService {
 	
 	public MailService(String mailAddress, String memberName, String quesContent, String ansContent){
 		this.mailAddress = mailAddress;
-		this.memberName = memberName + "您好：";
-		this.quesContent = "您的問題是：" + quesContent + "。";
+		this.memberName = memberName + "您好。<br>";
+		this.quesContent = "您的問題是：" + quesContent + "。<br>" ;
 		this.ansContent = "我們的回覆是：" + ansContent;
 	}
 	
 	public void eagleMail() {
-//		String messageText = "Hello! " + memberName + " " + mailContent + "\n" + " ";
 		this.sendMail(mailAddress, subject, memberName + quesContent + ansContent);
 	}
 	

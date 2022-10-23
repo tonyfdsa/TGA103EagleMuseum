@@ -9,6 +9,6 @@ public interface TicketDAOIn {
 
 	public List<TicketVOo> getById(Integer ticketID)throws Exception;
 	
-	public boolean insert(TicketVO vo);
+	public Integer insert(TicketVO vo);
 
 }

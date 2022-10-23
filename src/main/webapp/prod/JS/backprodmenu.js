@@ -28,7 +28,7 @@
 
       //新增商品
       $(".prodSubmit").click(function(){
-        let prodStatusURL = 'http://localhost:8080/TGA103eagleMuseum/ProdInsert'
+        let prodStatusURL = '/TGA103eagleMuseum/ProdInsert'
         let prodName= document.querySelector(".prodName").value;
         let prodTypeID= document.querySelector(".prodTypeID").value;
         let prodPrice= document.querySelector(".prodPrice").value;
@@ -47,13 +47,17 @@
         })
         .then(resp => resp.json())
         .then(R => {  
+          if(R.code === 200){
+            alert("新增成功")
+            location.href ="./backprodmenu.html"
+          }
 
         })  
       })
 
       //新增標籤
       $(".tagSubmit").click(function(){
-        let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/ProdTagInsert'
+        let TagInsertURL = '/TGA103eagleMuseum/ProdTagInsert'
         let prodType = document.querySelector(".ProdType").value;
         console.log(prodType);
 
@@ -69,19 +73,28 @@
           console.log(R);
         })  
       })
-   
+      TheHeaderBtn()
+function TheHeaderBtn(){
+  document.querySelector('.headerBtn').onclick = () =>{
+    console.log(123);
+  }
+}
+
       $(document).on("click", ".headerBtn", function (){
         let val  = $(this).val()
         // console.log($(this).val())
-
-        
-       
-
         $(".head").css("display","none")
         $(".head").eq(val).slideToggle("slow");
         $(".head").eq(val).find(".searchbar").val("")
         
       })
+
+      window.addEventListener("load",function(){
+
+      })
+      window.onload= function(){
+
+      }
 
       $(document).on("click", ".icon", function (){
         // console.log("as")
@@ -101,10 +114,10 @@
 
     
 
-        fetch('http://localhost:8080/TGA103eagleMuseum/ProductGetAll')
+        fetch('/TGA103eagleMuseum/ProductGetAll')
           .then(resp => resp.json())
           .then(R => {
-          
+            console.log(R)
             for( i = 0 ; i < R.result["length"] ; i++){
 
             // console.log(statis);
@@ -116,7 +129,7 @@
                             <div class="col-2 productID" style="text-align:center">${R.result[i].productID}</div>
                             <div class="col-2" style="text-align:center">${R.result[i].prodName}</div>
                             <div class="col-2 status" style="text-align:center"  data-status= ${R.result[i].prodStatus}>${re}</div>
-                            <div class="col-2"  style="text-align:center">${R.result[i].creatTime}</div>
+                            <div class="col-2"  style="text-align:center">${R.result[i].lastUpdateTime}</div>
                             <div class="col-2"  style="text-align:center"> 
                               <span class="icon" >
                                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"
@@ -158,8 +171,8 @@
           // 抓商品搜尋的資料回傳  
           $(".searchBtn").click(function(){
             let prodName = document.querySelector("#prodName").value
-            let prodserchname = 'http://localhost:8081/TGA103_EagleMuseum/ProductGetName'
-            fetch('http://localhost:8080/TGA103eagleMuseum/ProductGetName', {
+            let prodserchname = '/TGA103_EagleMuseum/ProductGetName'
+            fetch('/TGA103eagleMuseum/ProductGetName', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -168,12 +181,13 @@
               })
               .then(resp => resp.json())
               .then(R => {
-                console.log(Array[0]);
                 //清除所有的 $(".searchContent").append(text);
                 $(".searchContent").find(".add").remove();
                 $(".searchContent").find("#searchNAN").remove();
+                console.log(R,"0000")
 
                 if(R.result["length"] === 0){
+                  console.log(R.result,"1111")
                   
                   $(".searchContent").append("<div style='color: red;' id=searchNAN> 查無結果，請重新輸入 </div>");
                 }
@@ -191,7 +205,7 @@
                             <div class="col-2" style="text-align:center">${R.result[i].productID}</div>
                             <div class="col-2" style="text-align:center">${R.result[i].prodName}</div>
                             <div class="col-2" style="text-align:center" class="statis" data-status= ${R.result[i].prodStatus}>${re}</div>
-                            <div class="col-2"  style="text-align:center">${R.result[i].creatTime}</div>
+                            <div class="col-2"  style="text-align:center">${R.result[i].lastUpdateTime}</div>
                             <div class="col-2"  style="text-align:center"> 
                               <span class="icon" data-ID = ${R.result[i].productID}>
                                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"
@@ -234,7 +248,7 @@
           $(document).on("click", ".status", function (){
             let productID = $(this).attr("data-ID");
             let prodStatus = $(this).attr("data-value");
-            let prodStatusURL = 'http://localhost:8080/TGA103eagleMuseum/ProdStatusUpdate'
+            let prodStatusURL = '/TGA103eagleMuseum/ProdStatusUpdate'
             console.log(prodStatus);
               fetch(prodStatusURL, {
                   method: 'POST',
@@ -246,13 +260,16 @@
                 })
                 .then(resp => resp.json())
                 .then(R => {  
+                  if(R.code == 200){
+                    alert("狀態更新成功")
+                  }
                 })
             
           })
 
           //抓資料庫商品標籤類型
         
-          fetch('http://localhost:8080/TGA103eagleMuseum/ProdTagGetAll')
+          fetch('/TGA103eagleMuseum/ProdTagGetAll')
           .then(resp => resp.json())
           .then(R => {
 

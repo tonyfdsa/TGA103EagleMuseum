@@ -37,7 +37,7 @@ public class TicketGetByID extends HttpServlet{
 		if (pathInfo != null) {
 			id = pathInfo.split("/")[1];
 		} else {
-			id = request.getParameter("ticketID");
+			
 		}
 		
 		PrintWriter out = response.getWriter();

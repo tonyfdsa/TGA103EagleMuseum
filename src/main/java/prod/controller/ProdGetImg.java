@@ -20,7 +20,7 @@ import prod.vo.productVO;
 
 @WebServlet("/ProdGetImg")
 public class ProdGetImg extends HttpServlet{
-	
+	private static final long serialVersionUID = 1L;
 	private Gson gson = new Gson();
 	private ProductServicelm service = new ProductServicelm();
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,6 +28,7 @@ public class ProdGetImg extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		
 		Integer ProdID = json2Vo(request, ProdImgVO.class).getProductID();
+		System.out.println(ProdID);
 		Result R  = service.prodGetImg(ProdID);
 		
 		response.getWriter().print(gson.toJson(R));	

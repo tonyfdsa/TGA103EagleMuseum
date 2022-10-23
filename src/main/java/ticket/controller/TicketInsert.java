@@ -29,7 +29,11 @@ public class TicketInsert extends HttpServlet{
 		setHeaders(response);
 		request.setCharacterEncoding("UTF-8");
 		TicketVO vo = gson.fromJson(request.getReader().readLine(), TicketVO.class);
-		response.getWriter().print(gson.toJson(service.insert(vo)));	
+		System.out.println(vo.getMemberId());
+		System.out.println(vo.getTicketDate());
+		System.out.println(vo.getExhibitionID());
+		response.getWriter().print(gson.toJson(service.insert(vo)));
+		
 	}
 	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		setHeaders(resp);

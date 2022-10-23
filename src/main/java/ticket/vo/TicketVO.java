@@ -18,7 +18,7 @@ public class TicketVO {
 	@Column
 	private Integer ticketID;
 	@Column
-	private Integer memberID;
+	private Integer memberId;
 	@Column
 	private Integer exhibitionID;
 	@Column
@@ -29,16 +29,6 @@ public class TicketVO {
 	private Integer stuTicket;
 	@Column
 	private Integer oldTicket;
-	@Column
-	private Integer phyTicket;
-	@Column
-	private Integer ticketTotal;
-	@Column
-	private Integer ticketStatus;
-	@Column
-	private String buyTime;
-	@Column
-	private String lastUpdateTime;
 	
 	
 	public Integer getTicketID() {
@@ -47,11 +37,11 @@ public class TicketVO {
 	public void setTicketID(Integer ticketID) {
 		this.ticketID = ticketID;
 	}
-	public Integer getMemberID() {
-		return memberID;
+	public Integer getMemberId() {
+		return memberId;
 	}
-	public void setMemberID(Integer memberID) {
-		this.memberID = memberID;
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
 	}
 	public Integer getExhibitionID() {
 		return exhibitionID;
@@ -113,6 +103,19 @@ public class TicketVO {
 	public void setLastUpdateTime(String lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 	}
+
+	@Column
+	private Integer phyTicket;
+	@Column
+	private Integer ticketTotal;
+	@Column
+	private Integer ticketStatus;
+	@Column
+	private String buyTime;
+	@Column
+	private String lastUpdateTime;
+	
+	
 	
 	
 }

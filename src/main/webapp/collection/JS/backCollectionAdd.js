@@ -23,7 +23,7 @@
         return;
       }
 
-      if (colMaterial.value == ""){
+      if (colMaterial.value == "none"){
         errMsg.textContent = "類別未填寫"
         return;
       }
@@ -39,9 +39,6 @@
         errMsg.textContent = "狀態未選"
         return;
       }
-
-
-
       fetch('http://localhost:8080/TGA103eagleMuseum/collectionAdd', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理理員登入</title>
+  <!-- member -->
+  <link rel="stylesheet" href="./workCss/templete.css" />
+  <link rel="stylesheet" href="./workCss/memberboot.css" />
+
+  <!-- bookstrapt -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+</head>
+
+<body>
+  <!-- head -->
+  <div class="wrap">
+    <div class="row d-flex">
+      <div class="col-1" alt="大頭貼"><img src="./workImage/eagleIcon.jpg" class="min_picture"></IMG></div>
+      <div class="col-5">
+        <h1 style="text-align: center;">Eagle Museum</h1>
+      </div>
+      <div class="col-6 row d-flex menu btn-group" id="meau">
+        <ul class="drop-down-menu d-flex" style="justify-content: end;">
+          <li><a href="#" class="topTag">首頁</a></li>
+          <li><a href="#" class="topTag">展覽</a></li>
+          <li><a href="#" class="topTag">館藏</a>
+            <ul>
+              <li class="dropMeau"><a href="#">館藏資訊</a></li>
+              <li class="dropMeau"><a href="#">館藏地圖</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="topTag">活動</a></li>
+          <li><a href="#" class="topTag">商城</a>
+            <ul>
+              <li class="dropMeau"><a href="#">商品列表</a></li>
+              <li class="dropMeau"><a href="#">我的購物車</a></li>
+              <li class="dropMeau"><a href="#">訂單查詢</a></li>
+              <li class="dropMeau"><a href="#">最愛清單</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="topTag">會員中心</a>
+            <ul>
+              <li class="dropMeau"><a href="#">會員資料</a></li>
+              <li class="dropMeau"><a href="#">訂單資料</a></li>
+              <li class="dropMeau"><a href="#">我的收藏</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="topTag">聯絡我們</a>
+            <ul>
+              <li class="dropMeau"><a href="#">交通資訊</a></li>
+              <li class="dropMeau"><a href="#">合作提案</a></li>
+              <li class="dropMeau"><a href="#">捐款</a></li>
+              <li class="dropMeau"><a href="#">問題回饋</a></li>
+              <li class="dropMeau"><a href="#">租借場地</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="upperColumn" id="topcontent"></div>
+
+  <!--內容-->
+  <div style="height: 62px;"></div>
+  <div class="row">
+    <div class="d-flex flex-row bd-highlight" style="background-color: #fffbdd; position:relative;">
+      <button type="button" class="btn btn-sm" onclick="location.href='#'">首頁</button>
+      <div class="p-1 bd-highlight">➞</div>
+      <label class="p-1 bd-highlight" id="lab" >管理員</label>
+    </div>
+  </div>
+
+  <main class="main">
+    <div style="height: 100px;"></div>
+    <div class="container">
+      <div class="row align-content-center">
+        <i class="" id="eagle">EAGLE MUSEUM</i><br>
+        <div class="row col-8 md-3">
+          <div class="col-md-5"><b>管理員帳號</b></div>
+          <input type="text" id="username" class="col-md-4" placeholder="請輸入Email" aria-label="Recipient's username"
+            aria-describedby="button-addon2">
+        </div>
+        <div>&nbsp;</div>
+        <div class="row col-8 md-3">
+          <div class="col-md-5"><b>管理員密碼</b></div>
+          <input type="password" id="password" class="col-md-4" placeholder="請輸入密碼" aria-label="Recipient's username"
+            aria-describedby="button-addon2">
+        </div>
+        <div>&nbsp;</div>
+        <!-- <div class="row col-8 md-3">
+          <div class="col-md-5" onclick="window.location.reload()"><canvas id="canvas"></canvas></div>
+          <input type="text" class="col-md-4" placeholder="請輸入驗證碼" aria-label="Recipient's username"
+            aria-describedby="button-addon2">
+        </div> -->
+        <div>&nbsp;</div>
+        <div class="d-grid gap-2 col-6 ">
+          <button class="btn btn-warning" type="button" id="next">下一步</button>
+        </div>
+        <div>&nbsp;</div>
+        <div class="col-1"></div>
+        <button type="button" class="btn col-2" onclick="location.href='memberJoin1.html'">加入會員</button>
+        <button type="button" class="btn col-2" onclick="location.href='memberforget.html'">忘記密碼</button>
+        <div id="errMsg" class="error"></div>
+      </div>
+    </div>
+  </main>
+
+  <div class="footer"></div>
+
+  <!-- jQuery 位置 -->
+  <script src="./workJs/jquery/jquery-3.6.0.min.js"></script>
+  <!-- 模板js匯入 位置 -->
+
+  <script src="./workJs/Template.js"></script>
+  <script src="./workJs/manegerboot.js"></script>
+</body>
+
+</html>

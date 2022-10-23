@@ -6,7 +6,7 @@
 		driverClassName="com.mysql.cj.jdbc.Driver"
 		jdbcUrl="jdbc:mysql://localhost:3306/eagleMuseum_schema"
 		username="root"
-		password="password"
+		password="yulou925279"
 		factory="com.zaxxer.hikari.HikariJNDIFactory"
 		minimumIdle="5"
 		maximumPoolSize="10"

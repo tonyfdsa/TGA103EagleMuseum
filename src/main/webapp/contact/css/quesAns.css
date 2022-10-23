@@ -1,9 +1,6 @@
-
-
-.date-control {
-	width: 70%;
-	display: inline-block;
-	margin-left: 20px;
+.noResult {
+	color: red;
+	font-size: 30px;
 }
 
 #headbar-AnsOrNot {
@@ -15,21 +12,12 @@
 	/* text-align: center; */
 }
 
-.xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px;
-	/* width:  300px; */
-}
-
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px;
-	/* height:  151px; */
-}
-
 .main {
-	margin: 2% 10% 5% 2%;
+	margin: 2% 0% 5% 3%;
 }
 
 button {
+	margin-top: 0.5%;
 	cursor: pointer;
 }
 
@@ -46,8 +34,8 @@ div.overlayTag {
 /* 元素 article 置中及基本樣式 */
 div.overlayTag>article {
 	background-color: white;
-	width: 90%;
-	height: 150px;
+	width: 45%;
+	height: 300px;
 	max-width: 600px;
 	border-radius: 10px;
 	box-shadow: 0 0 10px #ddd;
@@ -56,4 +44,66 @@ div.overlayTag>article {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.needSD {
+	display: none;
+	color: red;
+	margin-left: 2%;
+}
+
+.needED {
+	display: none;
+	color: red;
+	margin-left: 4%;
+}
+
+.inputId {
+	display: none;
+	color: red;
+	margin-left: 1%;
+}
+
+.inputIAndD {
+	display: none;
+	color: red;
+	margin-left: 1%;
+}
+
+.ansSubmit {
+	display: none;
+	color: rgb(210, 103, 9);
+	margin-left: 1%;
+}
+
+#quesId {
+	background-color: lightgrey;
+}
+
+#quesContent {
+	background-color: lightgrey;
+	resize: none;
+	width: 450px;
+	height: 100px;
+}
+
+#ansContent {
+	resize: none;
+	width: 450px;
+	height: 180px;
+}
+
+.table {
+	border: 1px solid #999;
+	padding: 0.5rem;
+	table-layout: fixed;
+}
+
+.table_tit {
+	white-space: nowrap;
+	/*禁止td換行*/
+	overflow: hidden;
+	/*隱藏X,Y滾動條*/
+	text-overflow: ellipsis;
+	/*將顯示不完的以...顯示*/
 }
