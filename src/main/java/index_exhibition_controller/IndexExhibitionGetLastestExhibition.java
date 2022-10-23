@@ -2,6 +2,7 @@ package index_exhibition_controller;
 
 import static prod.common.setHeaders.setHeaders;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ import com.google.gson.JsonSerializer;
 import index_exhibition_dto.IndexExhibitionDto;
 import index_exhibition_service.IndexExhibitionService;
 import prod.common.Result;
+import static core.util.CommonUtil.*;
 
 /**
  * Servlet implementation class IndexExhibitionGetLastestExhibition
@@ -36,13 +38,13 @@ public class IndexExhibitionGetLastestExhibition extends HttpServlet {
 	        .setPrettyPrinting()
 	        .registerTypeAdapter(LocalDateTime.class, new LocalDateAdapter())
 	        .create();
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		setHeaders(response);
-		IndexExhibitionDto dto;
 		Result r = new Result();
 		try {
-			dto = service.getLastExhibition();
+			IndexExhibitionDto dto = service.getLastExhibition();
 			r.success(dto);
 			response.getWriter().print(gson.toJson(r));	
 		} catch (Exception e) {
@@ -50,6 +52,28 @@ public class IndexExhibitionGetLastestExhibition extends HttpServlet {
 			response.getWriter().print(gson.toJson(r));
 		}
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		setHeaders(resp);
+		IndexExhibitionDto dto = gson.fromJson(req.getReader(), IndexExhibitionDto.class);
+//        IndexExhibitionDto dto = json2Pojo(req, IndexExhibitionDto.class);
+        System.out.println(dto);
+        Long id = service.insertExhibition(dto);
+        writePojo2Json(resp, id);
+	}
+
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		setHeaders(resp);
+		IndexExhibitionDto dto = gson.fromJson(req.getReader(), IndexExhibitionDto.class);
+        service.updateExhibition(dto);
+	}
+
 
 	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		setHeaders(resp);
