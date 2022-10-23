@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(value = {
-		"/collection/toBeFiltered/*", 
+//		"/collection/toBeFiltered/*", 
 		"/contact/toBeFiltered/*", 
 		"/exhibition/toBeFiltered/*", 
 		"/member/toBeFiltered/*", 
@@ -37,14 +37,10 @@ public class FilterByE implements Filter {
 		//獲取瀏覽器請求資源的路徑
 		String uri = request.getRequestURI();
 //		System.out.println(uri);
-		//判斷是否為登入相關路徑（要確認實際登入程式的檔案名稱）
-		//其他不需要登入就可瀏覽的頁面也要加入
-		if(uri.contains("/member/memberboot.html") 
-				|| uri.contains("/member/memberforget.html")
-				|| uri.contains("/member/memberJoin1.html")
-				|| uri.contains("/member/login")
-				|| uri.contains("/member/forgetpass")
+		//判斷是否為登入相關程式碼（要確認路徑名稱）
+		if(uri.contains("/member/login")
 				|| uri.contains("/member/register")
+				|| uri.contains("/member/forgetpass")
 				|| uri.contains("/member/workCss/")
 				|| uri.contains("/member/workJs/")
 				|| uri.contains("/member/workImage/")				

@@ -112,8 +112,8 @@ public class MailService {
 	
 	public MailService(String mailAddress, String memberName, String quesContent, String ansContent){
 		this.mailAddress = mailAddress;
-		this.memberName = memberName + "您好。";
-		this.quesContent = "您的問題是：" + quesContent + "。";
+		this.memberName = memberName + "您好。<br>";
+		this.quesContent = "您的問題是：" + quesContent + "。<br>" ;
 		this.ansContent = "我們的回覆是：" + ansContent;
 	}
 	
