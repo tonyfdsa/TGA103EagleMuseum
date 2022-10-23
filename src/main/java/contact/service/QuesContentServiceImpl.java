@@ -29,18 +29,20 @@ public class QuesContentServiceImpl implements QuesContentService {
 	}
 
 	@Override
-	public Boolean submitQuestion(QuesContent questionContent) {
+//	public Boolean submitQuestion(QuesContent questionContent) {
 
-			final String questionContentString = questionContent.getQuestionContent();
-			if (StringUtils.isBlank(questionContentString)) {
-				return false;
-			}
+	public Result submitQuestion(QuesContent questionContent) {
 
-			final Integer id = dao.insert(questionContent);
-			if (id == null) {
-				return false;
-			}
-			return true;
+		final String questionContentString = questionContent.getQuestionContent();
+		if (StringUtils.isBlank(questionContentString)) {
+			return R.fail("2");
+		}
+
+		final Integer id = dao.insert(questionContent);
+		if (id == null) {
+			return R.fail("2");
+		}
+		return R.success(1);
 	}
 
 	@Override
