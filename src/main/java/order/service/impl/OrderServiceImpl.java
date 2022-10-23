@@ -5,6 +5,7 @@ import java.util.List;
 
 import order.dao.impl.OrderDAOimpl;
 import order.service.inft.OrderServiceinft;
+import order.vo.OrderVO;
 import prod.common.Result;
 import prod.vo.CartVO;
 import prod.vo.productVO;
@@ -36,11 +37,11 @@ public class OrderServiceImpl implements OrderServiceinft{
 		}
 	}
 	@Override
-	public Result insertOrder(Integer amountPrice, String deliveryAddress ,List<CartVO> valueList) {
+	public Result insertOrder(OrderVO VO ,List<CartVO> valueList) {
 		//假設已經登入的member為1
-		Integer mem = 1;
+		
 		//未登入失敗
-		if(mem == null) {
+		if(VO.getMemberId() == null) {
 			return R.fail("未登入");
 		}
 		//檢查購物車商品
@@ -61,7 +62,7 @@ public class OrderServiceImpl implements OrderServiceinft{
 				return R.fail(e.toString());
 			}
 			
-			if( (amount- List.getProdCount() <= 0)) {
+			if( (amount- List.getProdCount() < 0)) {
 				return R.fail("商品" + List.getProdName() + "庫存不足，請從購物車刪除該商品後重新嘗試購買");
 			}
 		}
@@ -69,7 +70,7 @@ public class OrderServiceImpl implements OrderServiceinft{
 			
 			try {
 				//產生訂單
-				Integer orderID	= DAO.insertOrder(mem,  deliveryAddress,amountPrice);
+				Integer orderID	= DAO.insertOrder(VO.getMemberId() , VO.getDeliveryAddress(), VO.getOrderAmount());
 				for(int i = 0 ; i < valueList.size() ; i++) {;
 					//每筆商品都產生一條明細
 					CartVO List = valueList.get(i);
