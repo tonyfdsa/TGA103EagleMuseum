@@ -96,7 +96,7 @@ $("#submitBtn").click(function() {
 		})
 })
 
-//提交後的Query功能
+//提交後直接秀出全部問題
 function query() {
 	let TagInsertURL = '/TGA103eagleMuseum/questionContent'
 	let memberId = sessionStorage.getItem('id');
