@@ -298,25 +298,25 @@
   
                })
                   //上傳圖片
-              fetch('http://localhost:8080/TGA103eagleMuseum/InsertProdImg', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                  productID,
-                  productimg
+                fetch('http://localhost:8080/TGA103eagleMuseum/InsertProdImg', {
+                  method: 'POST',
+                  headers: {'Content-Type': 'application/json'},
+                  body: JSON.stringify({
+                    productID,
+                    productimg
+                  })
                 })
+                .then(resp => resp.json())
+                .then(R => {  
+                  
+                })
+              } 
+              alert("更新成功")
+
+              }else{
+                alert("更新失敗，請檢視是否有項目未輸入")
+              }
               })
-              .then(resp => resp.json())
-              .then(R => {  
-                
-              })
-            } 
-          alert("更新成功")
-      // location.href = "./backprodmenu.html"
-          }else{
-            alert("更新失敗，請檢視是否有項目未輸入")
-          }
-          })
 
         })
 
