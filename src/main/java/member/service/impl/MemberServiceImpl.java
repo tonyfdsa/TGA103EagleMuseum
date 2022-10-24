@@ -309,8 +309,21 @@ public class MemberServiceImpl implements MemberService {
 //	管理員修改//
 	@Override
 	public Member manageUpdat(Member member) {
+		System.out.println(member.getMemberEmail());
+		if (dao.updateManage(member) == false || dao.selectByMemberEmail(member.getMemberEmail()) == null) {
+			System.out.println(dao.update(member)+"1" );
+			System.out.println(dao.selectByMemberEmail(member.getMemberEmail())+"2");
+			member.setMessage("資料更改出現錯誤，請聯絡管理員!");
+			member.setSuccessful(false);
+			return member;
+		}
+		// 回會員編輯有完整session
+		member = dao.selectByMemberEmail(member.getMemberEmail());
 		
-		return null;
+		member.setMessage("資料更改成功");
+		member.setSuccessful(true);
+		return member;
+		
 	}
 
 //  帳號搜尋
@@ -318,6 +331,7 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectByMember(Member member) {
 		
 		return dao.selectByMemberEmail(member.getMemberEmail());
+		
 	}
 
 //	會員查詢 (暫時沒用)

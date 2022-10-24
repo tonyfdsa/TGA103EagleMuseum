@@ -182,12 +182,11 @@
 
 
   $(document).on("click", ".fixed", function () {
-    var send_data = {};
 
-    send_data.productId = $(this).attr("data-id");
+   var send_data = $(this).attr("data-id");
     console.log(send_data);
 
-    sessionStorage.setItem("form_data", JSON.stringify(send_data));
+    sessionStorage.setItem("form_data", send_data);
     console.log(sessionStorage.getItem("form_data"));
     location.href = "backEdit.html";
   });

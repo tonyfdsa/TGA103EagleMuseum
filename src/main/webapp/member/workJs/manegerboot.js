@@ -19,7 +19,7 @@
       .then((body) => {
         console.log(body.headers);
         errMsg.textContent = "";
-        const { successful, message } = body;
+        const { successful, message, memberName} = body;
         if (successful) {
           const { memberID, memberEmail } = body;
           sessionStorage.setItem("id", memberID);
