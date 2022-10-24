@@ -59,8 +59,8 @@
               <div class="col-1 " style="text-align:center">${i+1}</div>
               <div class="col-2" style="text-align:center">${orderID}</div>
               <div class="col-2" style="text-align:center">${Data.result[i].productID}</div>
-              <div class="col-2" style="text-align:center" >${Data.result[i].prodQuantity}</div>
-              <div class="col-2"  style="text-align:center"></div>
+              <div class="col-2" style="text-align:center" >${Data.result[i].prodName}</div>
+              <div class="col-2"  style="text-align:center">${Data.result[i].prodQuantity}</div>
               <div class="col-2"  style="text-align:center"> </div>
               <div class="col-1"></div>
             </div>

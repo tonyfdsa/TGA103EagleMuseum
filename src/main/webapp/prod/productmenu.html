@@ -125,7 +125,6 @@
           <div class ="row" style="background-color: rgba(244, 154, 65, 0.69); height: 50px;">
             <div class="col-1"></div>
             <div class="col-2 d-flex justify-content-center">
-              <button class="focusbtn" style="margin-right: 15px; padding: 0px 10px;">關注清單</button>
               <button class="focusbtn" onclick="javascript:location.href='./prodCart.html'" style="margin-right: 15px; padding: 0px 10px;">購物車</button>
             </div>
             
@@ -198,26 +197,28 @@
                 </div>
               `
               $(".product").append(text)
+
             }
+                // 取得所有商品圖片資訊
+                        fetch('/TGA103eagleMuseum/ProdImgGetAll')
+                .then(resp => resp.json())
+                .then(Data => {
+                  console.log(Data)
+                  for(let i = 0 ; i < Data.result.length; i++){
+                    console.log($(".card").find(".prodImg").length) 
+                    if($(".card").find(`.${Data.result[i].productID}`).length == 0){
+                      let text=
+                          `
+                          <img src=${Data.result[i].productimg} class="img ${Data.result[i].productID}" data-id="${Data.result[i].productID}">
+                          `
+                      $(`#${Data.result[i].productID}`).prepend(text);
+                    }
+                  }
+                  
+                })
           });
           
-// 取得所有商品圖片資訊
-  fetch('/TGA103eagleMuseum/ProdImgGetAll')
-    .then(resp => resp.json())
-    .then(Data => {
-      console.log(Data)
-      for(let i = 0 ; i < Data.result.length; i++){
-        console.log($(".card").find(".prodImg").length) 
-        if($(".card").find(`.${Data.result[i].productID}`).length == 0){
-          let text=
-              `
-              <img src=${Data.result[i].productgetimg} class="card-img ${Data.result[i].productID} img" data-id="${Data.result[i].productID}" >
-              `
-          $(`#${Data.result[i].productID}`).prepend(text);
-        }
-      }
-             
-    })
+
 
 
     //搜尋by名稱
@@ -263,23 +264,24 @@
 
 
                 //圖片
-              })
-              fetch('/TGA103eagleMuseum/ProdImgGetAll')
-              .then(resp => resp.json())
-              .then(Data => {
-                console.log(Data)
-                for(let i = 0 ; i < Data.result.length; i++){
-                  console.log($(".card").find(".prodImg").length) 
-                  if($(".card").find(`.${Data.result[i].productID}`).length == 0){
-                    let text=
-                        `
-                        <img src=${Data.result[i].productimg} class="img ${Data.result[i].productID}" data-id="${Data.result[i].productID}">
-                        `
-                    $(`#${Data.result[i].productID}`).prepend(text);
+                fetch('/TGA103eagleMuseum/ProdImgGetAll')
+                .then(resp => resp.json())
+                .then(Data => {
+                  console.log(Data)
+                  for(let i = 0 ; i < Data.result.length; i++){
+                    console.log($(".card").find(".prodImg").length) 
+                    if($(".card").find(`.${Data.result[i].productID}`).length == 0){
+                      let text=
+                          `
+                          <img src=${Data.result[i].productimg} class="img ${Data.result[i].productID}" data-id="${Data.result[i].productID}">
+                          `
+                      $(`#${Data.result[i].productID}`).prepend(text);
+                    }
                   }
-                }
                       
               })
+              })
+
           });
     
           //加入購物車
@@ -315,11 +317,7 @@
           location.href = "./product.html"
         })
 
-        //登入後顯示使用者名字
-        window.addEventListener("load", function() { 
-          document.querySelector('#memberName').textContent = 
-          sessionStorage.getItem('memberName') + "，您好！";
-        });
+
 
           
   </script>
