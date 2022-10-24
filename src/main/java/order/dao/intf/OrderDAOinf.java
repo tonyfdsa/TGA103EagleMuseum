@@ -40,4 +40,9 @@ public List<OrderDetailVO> getOrderDetailByID(Integer orderID) throws Exception;
 
 //根據memID取得訂單\
 public List<OrderVO> getByMem(Integer memID) throws Exception;
+
+//根據mem 和 stat 取得Order
+public List<OrderVO> OrdergetbyMemStat(OrderVO orderVO) throws Exception;
+	
+
 }

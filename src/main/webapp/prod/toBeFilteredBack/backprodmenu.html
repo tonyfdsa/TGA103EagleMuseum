@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>productmeau</title>
+    <title>backproductmeau</title>
     <!-- 後臺模板Css -->
     <link rel="stylesheet" href="../CSS/backtemplete.css">
 
@@ -91,7 +91,7 @@
       <div class="header">
         <div>
           <img src="../img/eagle2.jpg" alt="" class="headImg" />
-          <span class="user">使用者</span>
+          <span id="memberName"></span>
         </div>
       </div>
     </header>
@@ -119,8 +119,8 @@
         </li>
         <li>
             <div class="sideBtn">商城管理</div>
-            <div class="Btn"><a href="#">訂單搜尋</a></div>
-            <div class="Btn"><a href="#">商品搜尋</a></div>
+            <div class="Btn"><a href="../../order/toBeFilteredBack/backordermenu.html">訂單搜尋</a></div>
+            <div class="Btn"><a href="./backprodmenu.html">商品搜尋</a></div>
         </li>
         <li>
             <div class="sideBtn">會員管理</div>
@@ -158,7 +158,7 @@
       <div style="height: 5px;"></div>
       <div class="container-fluid" id="title">
         <div class="row d-flex column" >
-          <div class="col-1 " style="text-align:center">會員ID</div>
+          <div class="col-1 " style="text-align:center">項次</div>
           <div class="col-2" style="text-align:center">商品編號</div>
           <div class="col-2" style="text-align:center">商品名稱</div>
           <div class="col-2" style="text-align:center">商品狀態</div>
@@ -296,6 +296,7 @@
         .then(R => {  
           if(R.code === 200){
             alert("新增成功")
+            location.href = "./backprodmenu.html"
           }
         })  
         }else{
@@ -304,12 +305,8 @@
 
 
       })
-      TheHeaderBtn()
-function TheHeaderBtn(){
-  document.querySelector('.headerBtn').onclick = () =>{
-    console.log(123);
-  }
-}
+
+
 
       $(document).on("click", ".headerBtn", function (){
         let val  = $(this).val()
@@ -415,16 +412,15 @@ function TheHeaderBtn(){
                 //清除所有的 $(".searchContent").append(text);
                 $(".searchContent").find(".add").remove();
                 $(".searchContent").find("#searchNAN").remove();
-                console.log(R,"0000")
+
 
                 if(R.result["length"] === 0){
                   console.log(R.result,"1111")
                   
                   $(".searchContent").append("<div style='color: red;' id=searchNAN> 查無結果，請重新輸入 </div>");
                 }
-                var datetime = R.result[i].lastUpdateTime.substring(6, data.length - 2)
-                new Date(parseInt(datetime, 10))
-                console.log(R.result[i].lastUpdateTime)
+
+
                 
                 //新增搜尋的結果
                 for( i = 0 ; i < R.result["length"] ; i++){

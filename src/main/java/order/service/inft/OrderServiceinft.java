@@ -28,4 +28,7 @@ public interface OrderServiceinft {
 	
 	//取得訂單根據memID
 	public Result getByMem(Integer memID);
+	
+	//取得訂單By mem和stat
+	public Result OrdergetbyMemStat(OrderVO orderVO);
 }

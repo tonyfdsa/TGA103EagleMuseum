@@ -308,4 +308,13 @@ public class OrderDAOimpl implements OrderDAOinf{
 //			return list;
 //		}
 	}
+	@Override
+	public List<OrderVO> OrdergetbyMemStat(OrderVO orderVO) throws Exception {
+		final String hql ="from OrderVO where orderStatus =:orderstatus AND memberId =:memberId";
+		return getSession().createQuery(hql)
+						   .setParameter("orderstatus", orderVO.getOrderStatus())
+						   .setParameter("memberId", orderVO.getMemberId())
+						   .getResultList();
+		
+	}
 }

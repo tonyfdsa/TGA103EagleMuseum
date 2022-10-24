@@ -36,7 +36,7 @@ public class ProductServicelm implements ProductServicein {
 	@Override
 	public Result getByName(String prodName) {
 		try {
-			System.out.println(R.success(DAO.getByName(prodName)));
+			
 			return R.success(DAO.getByName(prodName));
 		} catch (Exception e) {
 			e.printStackTrace();

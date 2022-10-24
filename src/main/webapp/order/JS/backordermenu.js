@@ -202,4 +202,12 @@
         sessionStorage.getItem('memberName') + "，您好！";
       }
     });
+    
+    $(document).on("click", ".headerBtn", function (){
+      let val  = $(this).val()
+      $(".head").css("display","none")
+      $(".head").eq(val).slideToggle("slow");
+      $(".head").eq(val).find(".searchbar").val("")
+      
+    })
   

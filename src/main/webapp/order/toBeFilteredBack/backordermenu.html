@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>productmeau</title>
+    <title>ordermeau</title>
     <!-- 後臺模板Css -->
     <link rel="stylesheet" href="../CSS/backtemplete.css">
 
@@ -91,7 +91,7 @@
       <div class="header">
         <div>
           <img src="../img/eagle2.jpg" alt="" class="headImg" />
-          <span class="user">使用者</span>
+          <span id="memberName"></span>
         </div>
       </div>
     </header>
@@ -119,8 +119,8 @@
         </li>
         <li>
             <div class="sideBtn">商城管理</div>
-            <div class="Btn"><a href="#">訂單搜尋</a></div>
-            <div class="Btn"><a href="../prod/backprodmenu.html">商品搜尋</a></div>
+            <div class="Btn"><a href="./backordermenu.html">訂單搜尋</a></div>
+            <div class="Btn"><a href="../../prod/toBeFilteredBack/backprodmenu.html">商品搜尋</a></div>
         </li>
         <li>
             <div class="sideBtn">會員管理</div>
@@ -128,10 +128,7 @@
         </li>
           <li>
             <div class="sideBtn">聯絡管理</div>
-            <div class="Btn"><a href="#">常見問題</a></div>
-            <div class="Btn"><a href="#">其他問題</a></div>
-            <div class="Btn"><a href="#">交通資訊</a></div>
-            <div class="Btn"><a href="#">租借場地</a></div>
+            <li class="dropMeau"><a href="#">問題回饋</a></li>
           </li>
         </li>
       </ul>
@@ -146,9 +143,13 @@
           <!--有value傳value，沒有value就傳包含的文字-->
           <option >請選擇</option>
       </select>
-        
-      </div>
 
+      </div>
+      <div class="head">
+        <button class="searchBtn">搜尋
+        </button>
+        <input type="search" class="searchbar" id="memberid" placeholder=" 請輸入會員編號" >
+      </div>
 
 
       <div style="height: 5px;"></div>

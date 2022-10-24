@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 		"/contact/toBeFilteredBack/*", 
 //		"/exhibition/toBeFilteredBack/*", 
 		"/member/toBeFilteredBack/*", 
-//		"/order/toBeFilteredBack/*", 
-//		"/prod/toBeFilteredBack/*",
+		"/order/toBeFilteredBack/*", 
+		"/prod/toBeFilteredBack/*",
 })
 public class FilterByEBack extends HttpFilter implements Filter {
 

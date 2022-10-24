@@ -54,8 +54,10 @@ fetch('/TGA103eagleMuseum/CartGet')
       //點擊按鈕結帳
       $(".buy").click(function(){
         let orderAmount = document.querySelector(".totalPrice").value;
-        let deliveryAddress = document.querySelector(".deliveryAddress").value;
+        let postalCode = document.querySelector("#postalCode").value;
+        let deliveryAddress = postalCode + document.querySelector(".deliveryAddress").value;
         let URL = '/TGA103eagleMuseum/OrderInsert';
+        
         $("#NAN").remove();
         if (deliveryAddress == ""){
           text="<div style='color: red;' id=NAN> 請輸入地址 </div>"
@@ -139,9 +141,7 @@ fetch('/TGA103eagleMuseum/CartGet')
         document.querySelector("#dist").addEventListener("change",function(){
           var city =  document.querySelector("#city").value;
           var dist =  document.querySelector("#dist").value;
-          var postalCode = document.querySelector("#postalCode").value;
 
-
-          document.querySelector("#deliveryAddress").value = (postalCode + city + dist  )
+          document.querySelector("#deliveryAddress").value = ( city + dist  )
 
         })

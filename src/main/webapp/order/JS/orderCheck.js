@@ -1,6 +1,6 @@
         //取得訂單資料
         let orderStatus = 1;
-        fetch('/TGA103eagleMuseum/OrderGetByStat',{
+        fetch('/TGA103eagleMuseum/OrdergetbyMemStat',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -47,7 +47,7 @@
                 })
              }
 
-             fetch('/TGA103eagleMuseum/OrderGetByStat',{
+             fetch('/TGA103eagleMuseum/OrdergetbyMemStat',{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({

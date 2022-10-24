@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>backorderdetail</title>
     <!-- 後臺模板Css -->
     <link rel="stylesheet" href="../CSS/backtemplete.css">
 
@@ -35,7 +35,7 @@
       <div class="header">
         <div>
           <img src="../img/eagle2.jpg" alt="" class="headImg" />
-          <span class="user">使用者</span>
+          <span id="memberName"></span>
         </div>
       </div>
     </header>
@@ -63,8 +63,8 @@
         </li>
         <li>
             <div class="sideBtn">商城管理</div>
-            <div class="Btn"><a href="#">訂單搜尋</a></div>
-            <div class="Btn"><a href="#">商品搜尋</a></div>
+            <div class="Btn"><a href="../../order/toBeFilteredBack/backordermenu.html">訂單搜尋</a></div>
+            <div class="Btn"><a href="./backprodmenu.html">商品搜尋</a></div>
         </li>
         <li>
             <div class="sideBtn">會員管理</div>
@@ -312,7 +312,7 @@
                 })
               } 
               alert("更新成功")
-
+              location.href = "./backprodmenu.html"
               }else{
                 alert("更新失敗，請檢視是否有項目未輸入")
               }

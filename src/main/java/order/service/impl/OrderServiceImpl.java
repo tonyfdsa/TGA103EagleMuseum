@@ -127,5 +127,14 @@ public class OrderServiceImpl implements OrderServiceinft{
 			return R.fail(e.toString());
 		}
 	}
+	@Override
+	public Result OrdergetbyMemStat(OrderVO orderVO) {
+		try {
+			return R.success(DAO.OrdergetbyMemStat(orderVO));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
 
 }
