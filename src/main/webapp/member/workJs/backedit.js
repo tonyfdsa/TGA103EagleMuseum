@@ -37,7 +37,13 @@
       document.querySelector("#ans").textContent = member.memberAns;
       document.querySelector("#update").textContent = member.modifyTime;
       document.querySelector("#lastlogin").textContent = member.lastEnterTime;
-      document.querySelector("#status").textContent = member.memberPermission;
+      if (member.memberPermission == "1") {
+        document.querySelector("#status").textContent = "會員";
+      } else if (member.memberPermission == "2") {
+        document.querySelector("#status").textContent = "管理員";
+      } else if (member.memberPermission == "3") {
+        document.querySelector("#status").textContent = "黑名單";
+      }
       console.log(1233);
 
       document.querySelector("#username-input").value = member.memberName;
