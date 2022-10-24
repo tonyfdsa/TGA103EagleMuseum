@@ -302,7 +302,7 @@ body {
 					// let periodDate =[];
 					//被選擇期間，9=> 10月,10 => 11月
 					let periodDate = [new Date(2022, 9, 31),new Date(2022,9,12),new Date(2022,4,12)];
-					
+
 
 					return periodDate ;
 				};
@@ -330,6 +330,8 @@ body {
 						respData.result.exhibitionImageBase64 = data.result.exhibitionImageBase64 ;
 						respData.result.exhibitionName = data.result.exhibitionName ;
 						// console.log(respData);
+
+				
 					}
 					});
 
@@ -373,7 +375,34 @@ body {
 					generateCalendar(curr_month.value, curr_year.value,periodDate);
 					cheangeYear(curr_month,curr_year,periodDate);
 					changeMonth(periodDate);
-				});
+					
+				
+					
+					
+			
+					//開始時間
+
+					 var Smonth = periodDate[1].getMonth();
+					 var SDate = periodDate[1].getDate();
+
+					 //結束時間
+
+					 var Emonth = periodDate[1].getMonth();
+					 var EDate = periodDate[0].getDate();
+
+					 //月份相減
+
+					 console.log(periodDate)
+					 console.log(SDate)
+						if((Emonth - Smonth) === 0){
+							console.log("123")
+							for(let i = SDate ; i < EDate ; i++){
+							$(".calendar-day-hover").eq(i).attr("class" , "calendar-day-hover curr-date");
+							}
+						}
+					});
+					// })
+
 				
 			</script>
 </body>

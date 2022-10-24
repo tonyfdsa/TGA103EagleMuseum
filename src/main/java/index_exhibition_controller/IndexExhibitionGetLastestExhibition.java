@@ -21,6 +21,7 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+import index_exhibition.vo.IndexExhibitionVo;
 import index_exhibition_dto.IndexExhibitionDto;
 import index_exhibition_service.IndexExhibitionService;
 import prod.common.Result;
