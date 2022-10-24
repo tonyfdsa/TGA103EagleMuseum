@@ -232,26 +232,48 @@ public class MemberDaoImpl implements MemberDao {
 		return rowCount != 0 ;
 	}
 	
+	// 更新時間
 	@Override
-	public boolean updateManage(Member member) {
-		final String sql = "update member set memberEmail = ?,memberPassword = ?,memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ?,memberPermission = ?,modifyTime = now() where memberEmail=?;";
+	public boolean updateLastLogin(Member member) {
+		final String sql = "update member set lastEnterTime =? where memberEmail=?;";
 		int rowCount = 0;
 		try (
 			Connection conn = dataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 				) {
-			pstmt.setString(1, member.getMemberEmail());
-			pstmt.setString(2, member.getMemberPassword());
-			pstmt.setString(3, member.getMemberName());
-			pstmt.setString(4, member.getMemberQA());
-			pstmt.setString(5, member.getMemberAns());
-			pstmt.setString(6, member.getMemberAddress());
-			pstmt.setInt(7, member.getMemberPhone());
-			pstmt.setInt(8, member.getMemberGender());
-			pstmt.setObject(9, member.getMemberBirthday());
-			pstmt.setInt(10, member.getMemberPermission());
+			System.out.println("連線成功");
+			
+			pstmt.setObject(1, member.getLastEnterTime());
+			pstmt.setString(2, member.getMemberEmail());
+			
+			rowCount = pstmt.executeUpdate();	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rowCount != 0;
+	}
+	
+	
+	@Override
+	public boolean updateManage(Member member) {
+		final String sql = "update member set memberName = ?,memberQA = ?,memberAns = ?,memberAddress = ?,memberPhone = ?,memberGender = ?,memberBirthday = ?,memberPermission = ?,modifyTime = now() where memberEmail=?;";
+		int rowCount = 0;
+		try (
+			Connection conn = dataSource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+				) {
+//			pstmt.setString(1, member.getMemberEmail());
+//			pstmt.setString(2, member.getMemberPassword());
+			pstmt.setString(1, member.getMemberName());
+			pstmt.setString(2, member.getMemberQA());
+			pstmt.setString(3, member.getMemberAns());
+			pstmt.setString(4, member.getMemberAddress());
+			pstmt.setInt(5, member.getMemberPhone());
+			pstmt.setInt(6, member.getMemberGender());
+			pstmt.setObject(7, member.getMemberBirthday());
+			pstmt.setInt(8, member.getMemberPermission());
 //			pstmt.setTimestamp(11, member.getModifyTime());
-			pstmt.setString(12, member.getMemberEmail());
+			pstmt.setString(9, member.getMemberEmail());
 			rowCount =pstmt.executeUpdate();
 				
 		} catch (Exception e) {
@@ -293,10 +315,10 @@ public class MemberDaoImpl implements MemberDao {
 			e.printStackTrace();
 			return null;
 		}
-		
 		return member;
 	}
 	
+//	暫時沒用到
 	@Override
 	public List<Member> serchAllMember() {
 		try (Connection conn = dataSource.getConnection();

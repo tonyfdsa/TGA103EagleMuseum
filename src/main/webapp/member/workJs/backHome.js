@@ -26,7 +26,7 @@
         let text = `
         <div class="container-fluid add" data-ID = ${member[i].memberID}>
           <div class="row d-flex  column">
-          <div class="col-1 " style="text-align:center">${i + 1}</div>
+          <div class="col-1 " style="text-align:center">${member[i].memberID}</div>
           <div class="col-2 " style="text-align:center">${member[i].memberName}</div>
           <div class="col-2" id="email" style="text-align:center">${member[i].memberEmail}</div>
 
@@ -46,9 +46,9 @@
                 </svg>
             </span>    
 
-            <span class="icon status"  data-value="0" data-ID = ${member[i].memberEmail}>
+            <span class="icon status"  data-value="0" data-ID = ${member[i].memberID}>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"
-                    width="25" height="25" class="down" data-ID = ${member[i].memberEmail}>
+                    width="25" height="25" class="down" data-ID = ${member[i].memberID}>
                     <path
                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8c0-1.85.63-3.55 1.69-4.9L16.9 18.31A7.902 7.902 0 0 1 12 20zm6.31-3.1L7.1 5.69A7.902 7.902 0 0 1 12 4c4.42 0 8 3.58 8 8c0 1.85-.63 3.55-1.69 4.9z"
                     fill="currentColor"></path>
@@ -76,7 +76,6 @@
   // 抓商品搜尋的資料回傳
   $(".searchBtn").click(function () {
     let memberEmail = document.querySelector("#prodName").value;
-    let serchname ="/TGA103_EagleMuseum//member/selectSelf";
 
     fetch("/TGA103eagleMuseum/member/selectSelf", {
       method: "POST",
@@ -134,9 +133,9 @@
                               </svg>
                           </span>    
 
-                          <span class="icon status"  data-value="0" data-ID = ${member.memberEmail}>
+                          <span class="icon status"  data-value="0" data-ID = ${member.memberID}>
                               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"
-                                  width="25" height="25" class="down" >
+                                  width="25" height="25" class="down" data-ID = ${member.memberID}>
                                   <path
                                   d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8c0-1.85.63-3.55 1.69-4.9L16.9 18.31A7.902 7.902 0 0 1 12 20zm6.31-3.1L7.1 5.69A7.902 7.902 0 0 1 12 4c4.42 0 8 3.58 8 8c0 1.85-.63 3.55-1.69 4.9z"
                                   fill="currentColor"></path>
@@ -154,26 +153,40 @@
 
 
 
-  //抓資料 
+// 更新狀態
+          $(document).on("click",".status" , function (){
+            let memberID = $(this).attr("data-id");
+  
+            console.log(memberID);
 
-//   fetch("/TGA103eagleMuseum/member/getAll")
-//     .then((resp) => resp.json())
-//     .then((member) => {
-//       for (i = 0; i < member["length"]; i++) {
-//         let text = `
-//           <option value="${member[i].memberEmail}">${member[i].memberEmail}</option>
-//           `;
-//         $(".prodTypeID").append(text);
-//       }
-//     });
+              fetch("/TGA103eagleMuseum/member/remove", {
+                  method: 'POST',
+                  headers: {'Content-Type': 'application/json'},
+                  body: JSON.stringify({
+                    memberID,
+                    
+                  }),
+                })
+                .then(resp => resp.json())
+                .then(member => {  
+	              console.log(member.successful === true);
+                console.log(typeof(member.successful));
+                  if(member.successful === true){
+                    alert("刪除成功")
+                    location = "backHome.html"
+                  }
+                })
+            
+          })
+
+
 
   $(document).on("click", ".fixed", function () {
-    var send_data = {};
 
-    send_data.productId = $(this).attr("data-id");
+   var send_data = $(this).attr("data-id");
     console.log(send_data);
 
-    sessionStorage.setItem("form_data", JSON.stringify(send_data));
+    sessionStorage.setItem("form_data", send_data);
     console.log(sessionStorage.getItem("form_data"));
     location.href = "backEdit.html";
   });
