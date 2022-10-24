@@ -1,3 +1,11 @@
+//登入後顯示使用者名字
+window.addEventListener("load", function() {
+	if(sessionStorage.getItem('memberName') != null){
+      document.querySelector('#memberName').textContent = 
+      sessionStorage.getItem('memberName') + "，您好！";
+    }
+  });
+
 //清空答覆內容
 function clear() {
 	$("#ansContent").val("");
@@ -11,7 +19,7 @@ $(document).on("click", ".replybtn", function () {
 	$("#quesId").val($(this).val());
 
 
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/getQContentServlet'
+	let TagInsertURL = '/TGA103eagleMuseum/getQContentServlet'
 	let questionContentID = document.querySelector("#quesId").value;
 
 	fetch(TagInsertURL, {
@@ -23,7 +31,7 @@ $(document).on("click", ".replybtn", function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式
 		.then(R => {
-//			console.log(R);
+			//			console.log(R);
 			let qContent = `${R}`;
 			$("#quesContent").html(qContent);
 		})
@@ -92,7 +100,7 @@ $(".searchByIAndD").click(function () {
 //fetch部分
 //列出全部問題
 $(".searchAllQs").click(function () {
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/quesSearchAllServlet'
+	let TagInsertURL = '/TGA103eagleMuseum/quesSearchAllServlet'
 
 	fetch(TagInsertURL, {
 		method: 'POST',
@@ -125,12 +133,13 @@ $(".searchAllQs").click(function () {
             `
 			}
 			$(".quesList").html(quesList);
+			$(".noResult").html("");
 		})
 })
 
 //館員SearchById
 $(".searchById").click(function () {
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/quesSearchByIdServlet'
+	let TagInsertURL = '/TGA103eagleMuseum/quesSearchByIdServlet'
 	let memberId = document.querySelector("#memberId").value;
 
 	fetch(TagInsertURL, {
@@ -142,16 +151,19 @@ $(".searchById").click(function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式	
 		.then(R => {
-		
-			let quesList = "";
-			
-			for (let i = 0; i < R.result.length; i++) {
+			if (R.code == 400) {
+				$(".quesList").html("");
+				$(".noResult").html("查無相關資訊！");
+			} else if (R.message == "Success") {
+				let quesList = "";
 
-				if (R.result[i].answerTime == null) {
-					R.result[i].answerTime = "";
-				}
+				for (let i = 0; i < R.result.length; i++) {
 
-				quesList += `
+					if (R.result[i].answerTime == null) {
+						R.result[i].answerTime = "";
+					}
+
+					quesList += `
                 <tr>
                 <td>${R.result[i].questionContentID}</td>
                 <td>${R.result[i].memberId}</td>
@@ -163,18 +175,20 @@ $(".searchById").click(function () {
                 <td>${R.result[i].answerTime}</td>
             </tr>
             `
+				}
+				$(".noResult").html("");
+				$(".quesList").html(quesList);
+				
 			}
-			$(".quesList").html(quesList);
 		})
 })
 
 //館員SearchByDate
 $(".searchByDate").click(function () {
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/quesSearchByDateServlet'
+	let TagInsertURL = '/TGA103eagleMuseum/quesSearchByDateServlet'
 	let quesTime = document.querySelector("#start_date").value;
 	let answerTime = document.querySelector("#end_date").value;
-//	console.log(quesTime);
-//	console.log(answerTime);
+
 	fetch(TagInsertURL, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -185,14 +199,18 @@ $(".searchByDate").click(function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式
 		.then(R => {
-			let quesList = "";
-			for (let i = 0; i < R.result.length; i++) {
+			if (R.code == 400) {
+				$(".quesList").html("");
+				$(".noResult").html("查無相關資訊！");
+			} else if (R.message == "Success") {
+				let quesList = "";
+				for (let i = 0; i < R.result.length; i++) {
 
-				if (R.result[i].answerTime == null) {
-					R.result[i].answerTime = "";
-				}
+					if (R.result[i].answerTime == null) {
+						R.result[i].answerTime = "";
+					}
 
-				quesList += `
+					quesList += `
                 <tr>
                 <td>${R.result[i].questionContentID}</td>
                 <td>${R.result[i].memberId}</td>
@@ -202,16 +220,18 @@ $(".searchByDate").click(function () {
                 <td>${R.result[i].answered}</td>
                 <td>${R.result[i].quesTime}</td>
                 <td>${R.result[i].answerTime}</td>
-            </tr>
-            `
+            	</tr>
+            	`
+				}
+				$(".noResult").html("");
+				$(".quesList").html(quesList);
 			}
-			$(".quesList").html(quesList);
 		})
 })
 
 //館員SearchByIAndD
 $(".searchByIAndD").click(function () {
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/quesSearchByIAndDServlet'
+	let TagInsertURL = '/TGA103eagleMuseum/quesSearchByIAndDServlet'
 	let memberId = document.querySelector("#memberId").value;
 	let quesTime = document.querySelector("#start_date").value;
 	let answerTime = document.querySelector("#end_date").value;
@@ -227,12 +247,16 @@ $(".searchByIAndD").click(function () {
 	})
 		.then(resp => resp.json())//後端傳給前端的格式
 		.then(R => {
-			let quesList = "";
-			for (let i = 0; i < R.result.length; i++) {
-				if (R.result[i].answerTime == null) {
-					R.result[i].answerTime = "";
-				}
-				quesList += `
+			if (R.code == 400) {
+				$(".quesList").html("");
+				$(".noResult").html("查無相關資訊！");
+			} else if (R.message == "Success") {
+				let quesList = "";
+				for (let i = 0; i < R.result.length; i++) {
+					if (R.result[i].answerTime == null) {
+						R.result[i].answerTime = "";
+					}
+					quesList += `
                 <tr>
                 <td>${R.result[i].questionContentID}</td>
                 <td>${R.result[i].memberId}</td>
@@ -244,8 +268,10 @@ $(".searchByIAndD").click(function () {
                 <td>${R.result[i].answerTime}</td>
             </tr>
             `
+				}
+				$(".noResult").html("");
+				$(".quesList").html(quesList);
 			}
-			$(".quesList").html(quesList);
 		})
 })
 
@@ -255,7 +281,7 @@ $(".searchByIAndD").click(function () {
 $(document).on("click", ".reply", function () {
 
 	// console.log("ok");
-	let TagInsertURL = 'http://localhost:8080/TGA103eagleMuseum/questionAns'
+	let TagInsertURL = '/TGA103eagleMuseum/questionAns'
 	let questionContentID = document.querySelector("#quesId").value;
 	let answerContent = document.querySelector("#ansContent").value;
 

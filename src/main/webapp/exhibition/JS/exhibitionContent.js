@@ -127,6 +127,50 @@ fetch('http://localhost:8080/TGA103eagleMuseum/ExhibitionGetByID', {
             }
         }
     });
+$(document).on("click", "#buyTicket", function () {
+    let memberId = 1;
+    let exhibitionID = sessionStorage.getItem("exhibitionID")
+    let ticketDate = "2022-10-23"
+    let aldultTicket = document.querySelector("#countAldult").value
+    let stuTicket = document.querySelector("#countStu").value
+    let oldTicket = document.querySelector("#countOld").value
+    let phyTicket = document.querySelector("#countPhy").value
+    let ticketTotal = document.querySelector("#total").value
+    fetch('http://localhost:8080/TGA103eagleMuseum/TicketInsert', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            memberId,
+            exhibitionID,
+            ticketDate,
+            aldultTicket,
+            stuTicket,
+            oldTicket,
+            phyTicket,
+            ticketTotal
+        })
+    })
+        .then(resp => resp.json())
+        .then(R => {
+            alert("新增訂單成功^_^!");
+            
+            sessionStorage.setItem("ticketID", ticketID)
+            console.log(sessionStorage.getItem("ticketID"))
+        })
+    sessionStorage.setItem("exhibitionID", exhibitionID)
+    sessionStorage.setItem("countAldult", countAldult.value)
+    sessionStorage.setItem("countStu", countStu.value)
+    sessionStorage.setItem("countOld", countOld.value)
+    sessionStorage.setItem("countPhy", countPhy.value)
+    sessionStorage.setItem("total", total.value)
+    console.log(sessionStorage.getItem("exhibitionID"))
+    console.log(sessionStorage.getItem("countAldult"))
+    console.log(sessionStorage.getItem("countStu"))
+    console.log(sessionStorage.getItem("countOld"))
+    console.log(sessionStorage.getItem("countPhy"))
+    console.log(sessionStorage.getItem("total"))
+    location.href = "./exhibitionTicket.html"
+})
 // const { createApp } = Vue;
 
 // createApp({

@@ -22,7 +22,7 @@ public class TagServiceImpl implements TagService {
 				tag.setSuccessful(false);
 				return tag;
 			}
-			
+
 			if (dao.insert(tag) != 1) {
 				tag.setMessage("新增發生錯誤!");
 				tag.setSuccessful(false);
@@ -52,6 +52,7 @@ public class TagServiceImpl implements TagService {
 			return null;
 		}
 	}
+
 	@Override
 	public TagVO findById(TagVO tag) {
 		try {
@@ -67,7 +68,7 @@ public class TagServiceImpl implements TagService {
 	@Override
 	public TagVO findByName(TagVO tag) {
 		try {
-			return  dao.selectByName(tag.getTag());
+			return dao.selectByName(tag.getTag());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -82,5 +83,17 @@ public class TagServiceImpl implements TagService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public TagVO deleteTag(TagVO tag) {
+		if (dao.deleteById(tag.getTagID()) != 1) {
+			tag.setMessage("刪除發生錯誤!");
+			tag.setSuccessful(false);
+			return tag;
+		}
+		tag.setMessage("刪除成功");
+		tag.setSuccessful(true);
+		return tag;
 	}
 }

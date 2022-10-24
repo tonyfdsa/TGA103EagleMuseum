@@ -24,10 +24,12 @@ public class MemberSelectSelf extends HttpServlet{
 		resp.setCharacterEncoding("UTF-8");
 		System.out.println("我有跑");
 		Member member = json2Pojo(req, Member.class);
+		System.out.println(member.getMemberEmail());
 		
 		member = SERVICE.selectByMember(member);
         
         writePojo2Json(resp, member);
+        System.out.println( member);
 		
 	}
 	

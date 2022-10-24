@@ -12,6 +12,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.hql.internal.ast.HqlASTFactory;
+
+import core.util.HibernateUtil;
 import prod.dao.intf.ProductDAO_interface;
 
 import prod.dao.sql.ProductSQL;
@@ -32,49 +36,65 @@ public class ProductDAO implements ProductDAO_interface {
 			e.printStackTrace();
 		}
 	}
+	
+	public Session getSession() {
+//		return session;
+		return HibernateUtil.getSessionFactory().getCurrentSession();
+	}
 
 	// 查詢商品
 	public List<productVO> getAll() throws Exception {
-		List<productVO> list = new ArrayList<productVO>();
-
-		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_ALL);) {
-			
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					productVO productVO = new productVO();
-					productVO.setProductID(rs.getInt("productID"));
-					productVO.setProdName(rs.getString("prodName"));
-					productVO.setProdTypeID(rs.getInt("prodTypeID"));
-					productVO.setProdPrice(rs.getInt("prodPrice"));
-					productVO.setDiscountID(rs.getInt("discountID"));
-					productVO.setProdDescription(rs.getString("prodDescription"));
-					productVO.setProdStatus(rs.getInt("prodStatus"));
-					productVO.setCreatTime(rs.getDate("creatTime"));
-					productVO.setLaunchTime(rs.getDate("launchTime"));
-					productVO.setSellQuantity(rs.getInt("sellQuantity"));
-					productVO.setProdInStock(rs.getInt("prodInStock"));
-					productVO.setBestSeller(rs.getInt("bestSeller"));
-					productVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
-					list.add(productVO); // Store the row in the list
-				}
-			}
-			return list;
-		}
+		
+		return getSession().createQuery("from productVO")
+					.getResultList();
+		
+		
+//		JDBC
+//		List<productVO> list = new ArrayList<productVO>();
+//
+//		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_ALL);) {
+//			
+//			try (ResultSet rs = pstmt.executeQuery()) {
+//				while (rs.next()) {
+//					productVO productVO = new productVO();
+//					productVO.setProductID(rs.getInt("productID"));
+//					productVO.setProdName(rs.getString("prodName"));
+//					productVO.setProdTypeID(rs.getInt("prodTypeID"));
+//					productVO.setProdPrice(rs.getInt("prodPrice"));
+//					productVO.setDiscountID(rs.getInt("discountID"));
+//					productVO.setProdDescription(rs.getString("prodDescription"));
+//					productVO.setProdStatus(rs.getInt("prodStatus"));
+//					productVO.setCreatTime(rs.getDate("creatTime"));
+//					productVO.setLaunchTime(rs.getDate("launchTime"));
+//					productVO.setSellQuantity(rs.getInt("sellQuantity"));
+//					productVO.setProdInStock(rs.getInt("prodInStock"));
+//					productVO.setBestSeller(rs.getInt("bestSeller"));
+//					productVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
+//					list.add(productVO); // Store the row in the list
+//				}
+//			}
+//			return list;
+//		}
 	}
 
-	// 新增商品 還沒加判斷
+	// 新增商品 
 	@Override
-	public productVO insert(productVO productVO) throws Exception {
-		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.Insert);) {
-			
-			pstmt.setString(1, productVO.getProdName());
-			pstmt.setInt(2, productVO.getProdTypeID());
-			pstmt.setInt(3, productVO.getProdPrice());
-			pstmt.setString(4, productVO.getProdDescription());
-			pstmt.setInt(5, productVO.getProdInStock());
-			pstmt.executeUpdate();
-		}
+	public Integer insert(productVO productVO) throws Exception {
+//		Hibernate
+		productVO.setBestSeller(0);
+		getSession().persist(productVO);
 		return null;
+//		JDBC
+//		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.Insert);) {
+//			
+//			pstmt.setString(1, productVO.getProdName());
+//			pstmt.setInt(2, productVO.getProdTypeID());
+//			pstmt.setInt(3, productVO.getProdPrice());
+//			pstmt.setString(4, productVO.getProdDescription());
+//			pstmt.setInt(5, productVO.getProdInStock());
+//			pstmt.executeUpdate();
+//		}
+//		return null;
 	}
 		
 	
@@ -103,6 +123,17 @@ public class ProductDAO implements ProductDAO_interface {
 	// 根據商品名稱查詢
 	@Override
 	public List<productVO> getByName(String productName) throws SQLException {
+		
+//		Hibernate
+		
+//		final String sql = "SELECT * FROM productlist where prodName like ?";
+//		return getSession().createNativeQuery(sql)
+//							.setParameter("prodName", productName)
+//							.getResultList();
+		
+		
+		
+//		JDBC
 		List<productVO> list = new ArrayList<productVO>();
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_BY_Name);) {
@@ -119,12 +150,10 @@ public class ProductDAO implements ProductDAO_interface {
 					productVO.setDiscountID(rs.getInt("discountID"));
 					productVO.setProdDescription(rs.getString("prodDescription"));
 					productVO.setProdStatus(rs.getInt("prodStatus"));
-					productVO.setCreatTime(rs.getDate("creatTime"));
-					productVO.setLaunchTime(rs.getDate("launchTime"));
 					productVO.setSellQuantity(rs.getInt("sellQuantity"));
 					productVO.setProdInStock(rs.getInt("prodInStock"));
 					productVO.setBestSeller(rs.getInt("bestSeller"));
-					productVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
+					productVO.setLastUpdateTime(rs.getTimestamp("lastUpdateTime"));
 					list.add(productVO); // Store the row in the list
 				}
 			}
@@ -137,8 +166,6 @@ public class ProductDAO implements ProductDAO_interface {
 	@Override
 	public Integer updateStatus(productVO productVO) throws Exception {
 		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.UpdateStatus);) {
-			
-//		"UPDATE productlist set prodStatus=? where prodTypeID=?";
 				pstmt.setInt(1, productVO.getProdStatus());
 				pstmt.setInt(2, productVO.getProductID());
 				pstmt.executeUpdate();
@@ -160,51 +187,65 @@ public class ProductDAO implements ProductDAO_interface {
 
 	@Override
 	public List<ProdTypeVO> prodTagGetAll() throws Exception {
-		List<ProdTypeVO> list = new ArrayList<ProdTypeVO>();
-		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.TagGET_ALL);) {
-			
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					ProdTypeVO prodTypeVO = new ProdTypeVO();
-					prodTypeVO.setProdTypeId(rs.getInt("prodTypeID"));
-					prodTypeVO.setProdType(rs.getString("prodType"));
-					prodTypeVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
-					
-					list.add(prodTypeVO); // Store the row in the list
-				}
-			}
-			return list;
-		}
+		
+//		Hibernate
+		final String hql ="from ProdTypeVO";
+		return getSession().createQuery(hql)
+						   .getResultList();
+		
+		
+//		JDBC
+//		List<ProdTypeVO> list = new ArrayList<ProdTypeVO>();
+//		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.TagGET_ALL);) {
+//			
+//			try (ResultSet rs = pstmt.executeQuery()) {
+//				while (rs.next()) {
+//					ProdTypeVO prodTypeVO = new ProdTypeVO();
+//					prodTypeVO.setProdTypeId(rs.getInt("prodTypeID"));
+//					prodTypeVO.setProdType(rs.getString("prodType"));
+//					prodTypeVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
+//					
+//					list.add(prodTypeVO); // Store the row in the list
+//				}
+//			}
+//			return list;
+//		}
 	}
 
 	@Override
 	public List<productVO> prodGetByID(Integer productID) throws Exception {
-		List<productVO> list = new ArrayList<productVO>();
-		try (Connection con = ds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_BY_ID);) {
-			
-			pstmt.setInt(1, productID);
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					productVO productVO = new productVO();
-					productVO.setProductID(rs.getInt("productID"));
-					productVO.setProdName(rs.getString("prodName"));
-					productVO.setProdTypeID(rs.getInt("prodTypeID"));
-					productVO.setProdPrice(rs.getInt("prodPrice"));
-					productVO.setDiscountID(rs.getInt("discountID"));
-					productVO.setProdDescription(rs.getString("prodDescription"));
-					productVO.setProdStatus(rs.getInt("prodStatus"));
-					productVO.setCreatTime(rs.getDate("creatTime"));
-					productVO.setLaunchTime(rs.getDate("launchTime"));
-					productVO.setSellQuantity(rs.getInt("sellQuantity"));
-					productVO.setProdInStock(rs.getInt("prodInStock"));
-					productVO.setBestSeller(rs.getInt("bestSeller"));
-					productVO.setLastUpdateTime(rs.getDate("lastUpdateTime"));
-					list.add(productVO); // Store the row in the list
-				}
-			}
-			return list;
-		}
+		
+//		Hibernate
+		final String hql ="from productVO where productID = :productID";
+		return getSession().createQuery(hql)
+						   .setParameter("productID", productID)
+						   .getResultList();
+		
+//		JDBC
+//		List<productVO> list = new ArrayList<productVO>();
+//		try (Connection con = ds.getConnection();
+//				PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_BY_ID);) {
+//			
+//			pstmt.setInt(1, productID);
+//			try (ResultSet rs = pstmt.executeQuery()) {
+//				while (rs.next()) {
+//					productVO productVO = new productVO();
+//					productVO.setProductID(rs.getInt("productID"));
+//					productVO.setProdName(rs.getString("prodName"));
+//					productVO.setProdTypeID(rs.getInt("prodTypeID"));
+//					productVO.setProdPrice(rs.getInt("prodPrice"));
+//					productVO.setDiscountID(rs.getInt("discountID"));
+//					productVO.setProdDescription(rs.getString("prodDescription"));
+//					productVO.setProdStatus(rs.getInt("prodStatus"));
+//					productVO.setSellQuantity(rs.getInt("sellQuantity"));
+//					productVO.setProdInStock(rs.getInt("prodInStock"));
+//					productVO.setBestSeller(rs.getInt("bestSeller"));
+//					productVO.setLastUpdateTime(rs.getTimestamp("lastUpdateTime"));
+//					list.add(productVO); // Store the row in the list
+//				}
+//			}
+//			return list;
+//		}
 	}
 
 	//圖片商品上傳
@@ -242,22 +283,34 @@ public class ProductDAO implements ProductDAO_interface {
 
 	@Override
 	public int prodUpdate(productVO productVO) throws Exception {
-		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.UpdateProd);) {
-			
-//			UpdateProd = "update productlist set prodName=? , 
-//			prodTypeID=?, prodPrice=?, prodDescription=?, 
-//			prodStatus=?, prodInStock=? lastUpdateTime=now()where productID=?";
-			pstmt.setString(1, productVO.getProdName());
-			pstmt.setInt(2, productVO.getProdTypeID());
-			pstmt.setInt(3, productVO.getProdPrice());
-			pstmt.setString(4, productVO.getProdDescription());
-			pstmt.setInt(5, productVO.getProdStatus());
-			pstmt.setInt(6, productVO.getProdInStock());
-			pstmt.setInt(7, productVO.getProductID());
-			pstmt.executeUpdate();
-			return 1;
 		
-		}
+//		Hibernate
+		final String hql = "update productlist set prodName= :prodName , prodTypeID= :prodTypeID, prodPrice= :prodPrice, prodDescription= :prodDescription, prodStatus= :prodStatus, prodInStock= :prodInStock, lastUpdateTime= NOW() where productID= :productID";
+		System.out.println(productVO.getProdName());
+		getSession().createNativeQuery(hql)
+					.setParameter("prodName", productVO.getProdName())
+					.setParameter("prodTypeID",  productVO.getProdTypeID())
+					.setParameter("prodPrice", productVO.getProdPrice())
+					.setParameter("prodDescription", productVO.getProdDescription())
+					.setParameter("prodStatus", productVO.getProdStatus())
+					.setParameter("prodInStock", productVO.getProdInStock())
+					.setParameter("productID", productVO.getProductID())
+					.executeUpdate();
+		return 1;
+//		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.UpdateProd);) {
+//			
+//
+//			pstmt.setString(1, productVO.getProdName());
+//			pstmt.setInt(2, productVO.getProdTypeID());
+//			pstmt.setInt(3, productVO.getProdPrice());
+//			pstmt.setString(4, productVO.getProdDescription());
+//			pstmt.setInt(5, productVO.getProdStatus());
+//			pstmt.setInt(6, productVO.getProdInStock());
+//			pstmt.setInt(7, productVO.getProductID());
+//			pstmt.executeUpdate();
+//			return 1;
+//		
+//		}
 	}
 
 	@Override
@@ -274,6 +327,10 @@ public class ProductDAO implements ProductDAO_interface {
 
 	@Override
 	public List<ProdImgVO> prodImgGetAll() throws Exception {
+//		Hibernate
+//		return getSession().createQuery("from ProdImgVO").getResultList();
+		
+		
 		List<ProdImgVO> list = new ArrayList<ProdImgVO>();
 		try (Connection con = ds.getConnection(); PreparedStatement pstmt = con.prepareStatement(ProductSQL.GetAllImg);) {
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -312,27 +369,37 @@ public class ProductDAO implements ProductDAO_interface {
 
 	@Override
 	public List<productVO> prodListed() throws Exception {
-		List<productVO> list = new ArrayList<productVO>();
-		try (Connection con = ds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_Listed);) {
-			
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					productVO productVO = new productVO();
-					productVO.setProductID(rs.getInt("productID"));
-					productVO.setProdName(rs.getString("prodName"));
-					productVO.setProdTypeID(rs.getInt("prodTypeID"));
-					productVO.setProdPrice(rs.getInt("prodPrice"));
-					productVO.setDiscountID(rs.getInt("discountID"));
-					productVO.setProdDescription(rs.getString("prodDescription"));
-					productVO.setProdStatus(rs.getInt("prodStatus"));
-					productVO.setSellQuantity(rs.getInt("sellQuantity"));
-					productVO.setProdInStock(rs.getInt("prodInStock"));
-					list.add(productVO); // Store the row in the list
-				}
-			}
-			return list;
-		}
+//		Hibernate
+		final String hql ="from productVO where prodStatus = :prodStatus";
+		return getSession().createQuery(hql)
+						   .setParameter("prodStatus", 1)
+					       .getResultList();
+					
+		
+		
+		
+//		JDBC
+//		List<productVO> list = new ArrayList<productVO>();
+//		try (Connection con = ds.getConnection();
+//				PreparedStatement pstmt = con.prepareStatement(ProductSQL.GET_Listed);) {
+//			
+//			try (ResultSet rs = pstmt.executeQuery()) {
+//				while (rs.next()) {
+//					productVO productVO = new productVO();
+//					productVO.setProductID(rs.getInt("productID"));
+//					productVO.setProdName(rs.getString("prodName"));
+//					productVO.setProdTypeID(rs.getInt("prodTypeID"));
+//					productVO.setProdPrice(rs.getInt("prodPrice"));
+//					productVO.setDiscountID(rs.getInt("discountID"));
+//					productVO.setProdDescription(rs.getString("prodDescription"));
+//					productVO.setProdStatus(rs.getInt("prodStatus"));
+//					productVO.setSellQuantity(rs.getInt("sellQuantity"));
+//					productVO.setProdInStock(rs.getInt("prodInStock"));
+//					list.add(productVO); // Store the row in the list
+//				}
+//			}
+//			return list;
+//		}
 	}
 	
 	

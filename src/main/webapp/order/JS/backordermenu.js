@@ -1,43 +1,6 @@
-      // 開啟彈跳視窗
-      $(".insertTag").on("click", function(){
-        $(".overlayTag").fadeIn();
-      });
-
-      $(".insertProd").on("click", function(){
-        $(".overlayProd").fadeIn();
-      });
-      
-
-      // 關閉 標籤
-      $(".btnClose, div.overlayTag, .tagSubmit").on("click", function(e){
-        $("div.overlayTag").fadeOut();
-      });
-
-      $(".btnClose, div.overlayProd , .prodSubmit").on("click", function(e){
-        $("div.overlayProd").fadeOut();
-      });
-
-
-      $("div.overlayTag > article").on("click", function(e){
-        e.stopPropagation();
-      });
-
-      $("div.overlayProd > article").on("click", function(e){
-        e.stopPropagation();
-      });
-
-      $(document).on("click", ".headerBtn", function (){
-        let val  = $(this).val()
-        // console.log($(this).val())
-        $(".head").css("display","none")
-        $(".head").eq(val).slideToggle("slow");
-        $(".head").eq(val).find(".searchbar").val("")
-        
-      })
-      
 
       //取得訂單資訊
-      fetch('http://localhost:8080/TGA103eagleMuseum/OrderGetAll')
+      fetch('/TGA103eagleMuseum/OrderGetAll')
       .then(resp => resp.json())
       .then(Data => {
         console.log(Data);
@@ -86,7 +49,7 @@
       })
 
       //取得出貨狀態
-      fetch('http://localhost:8080/TGA103eagleMuseum/OrderTagGetAll')
+      fetch('/TGA103eagleMuseum/OrderTagGetAll')
       .then(resp => resp.json())
       .then(Data => {
         console.log(Data);
@@ -105,7 +68,7 @@
       $(document).on("change",".orderTag",function(){
         let orderStatus = document.querySelector(".orderTag").value;
         if( orderStatus != "請選擇"){
-          fetch('http://localhost:8080/TGA103eagleMuseum/OrderGetByStat', {
+          fetch('/TGA103eagleMuseum/OrderGetByStat', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -176,7 +139,7 @@
       let memberId = document.querySelector(".searchbar").value
       console.log(memberId)
       if(typeof(memberId) != "undefined"){
-        fetch('http://localhost:8080/TGA103eagleMuseum/OrderGetByMem', {
+        fetch('/TGA103eagleMuseum/OrderGetByMem', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -231,4 +194,12 @@
       }
       
     })
+  
+    window.addEventListener("load", function() { 
+
+      if(sessionStorage.getItem('memberName') != null){
+        document.querySelector('#memberName').textContent = 
+        sessionStorage.getItem('memberName') + "，您好！";
+      }
+    });
   

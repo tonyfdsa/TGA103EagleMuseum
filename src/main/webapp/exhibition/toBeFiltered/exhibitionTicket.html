@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>templete</title>
+  <!-- /teleplete -->
+  <link rel="stylesheet" href="../workCss/templete.css" />
+  <link rel="stylesheet" href="../workCss/templete.css" />
+  <!-- bookstrapt -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="../workCss/exhibitionTicket.css">
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="../vendor/js/jquery3.6.0.js"></script>
+
+</head>
+
+
+<body>
+  <section id="app">
+    <!-- head -->
+    <div class="wrap">
+      <div class="row d-flex">
+        <div class="col-1" alt="大頭貼"><img src="../img/eagleIcon.jpg" class="min_picture"></IMG></div>
+        <div class="col-5">
+          <h1 style="text-align: center;">Eagle Museum</h1>
+        </div>
+        <div class="col-6 row d-flex menu btn-group" id="meau">
+          <ul class="drop-down-menu d-flex" style="justify-content: end;">
+            <li><a href="#" class="topTag">首頁</a></li>
+            <li><a href="../exhibition.html" class="topTag">展覽</a></li>
+            <li><a href="collectionSearch 3.0.html" class="topTag">館藏</a>
+              <ul>
+                <li class="dropMeau"><a href="collectionSearch 3.0.html">館藏資訊</a></li>
+                <li class="dropMeau"><a href="#">館藏地圖</a></li>
+              </ul>
+            </li>
+            <!-- <li><a href="#" class="topTag">活動</a></li> -->
+            <li><a href="#" class="topTag">商城</a>
+              <ul>
+                <li class="dropMeau"><a href="#">商品列表</a></li>
+                <li class="dropMeau"><a href="#">我的購物車</a></li>
+                <li class="dropMeau"><a href="./buyerCheck.html">訂單查詢</a></li>
+                <li class="dropMeau"><a href="#">最愛清單</a></li>
+              </ul>
+            </li>
+            <li><a href="#" class="topTag">會員中心</a>
+              <ul>
+                <li class="dropMeau"><a href="./memberboot.html">會員資料</a></li>
+                <li class="dropMeau"><a href="#">訂單資料</a></li>
+                <li class="dropMeau"><a href="#">我的收藏</a></li>
+              </ul>
+            </li>
+            <li><a href="./contactUs(bootstrap).html" class="topTag">聯絡我們</a>
+              <ul>
+                <li class="dropMeau"><a href="./trafic.html">交通資訊</a></li>
+                <li class="dropMeau"><a href="./memberJoin1.html">合作提案</a></li>
+                <li class="dropMeau"><a href="#">捐款</a></li>
+                <li class="dropMeau"><a href="#">問題回饋</a></li>
+                <li class="dropMeau"><a href="#">租借場地</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="upperColumn" id="topcontent">
+    </div>
+
+    <!-- </div> -->
+
+    <!-- main -->
+    <div class="main">
+      <div class="container-fulid">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4 ticket text-center">
+            <h1 class="card-title" style="margin-bottom: 20px; margin-top: 20px;">購票訂單資訊</h1>
+            <div class="card-body">
+              <div class="row mt-2">
+                <div class="col-3">
+                  <label for="" class="">票券編號：</label>
+                </div>
+                <div class="col-md-3">
+                  <label for="" class="control-label ticketID">票券ID</label>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-md-3">
+                  <label for="" class="">展覽主題：</label>
+                </div>
+                <div class="col-md-3">
+                  <label for="" class=" control-label exhibitionName">展覽標題</label>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-3">
+                  <label for="" class="">預約日期：</label>
+                </div>
+                <div class="col-md-3">
+                  <label for="" class="control-label ticketDate">預約日期</label>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-3">
+                  <label for="" class="">票種：</label>
+                </div>
+                <div class="col-3">
+                  <label for="" class="control-label">一般成人票</label>
+                </div>
+                <div class="col-md-2">
+                  <label for="" class="control-label aldultTicket">數量</label>
+                </div>
+                <div class="col-md-1">
+                  <label for="" class="control-label">張</label>
+                </div>
+                <div class="col-12 row ticketContent">
+                  <div class="col-3">
+                  </div>
+                  <div class="col-3">
+                    <label for="" class="control-label">學生票</label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="" class="control-label stuTicket">數量</label>
+                  </div>
+                  <div class="col-md-1">
+                    <label for="" class="control-label">張</label>
+                  </div>
+                </div>
+                <div class="col-12 row ticketContent">
+                  <div class="col-3">
+                  </div>
+                  <div class="col-3">
+                    <label for="" class="control-label">敬老票</label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="" class="control-label oldTicket">數量</label>
+                  </div>
+                  <div class="col-md-1">
+                    <label for="" class="control-label">張</label>
+                  </div>
+                </div>
+                <div class="col-12 row ticketContent">
+                  <div class="col-3">
+                  </div>
+                  <div class="col-3">
+                    <label for="" class="control-label">愛心票</label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="" class="control-label phyTicket">數量</label>
+                  </div>
+                  <div class="col-md-1">
+                    <label for="" class="control-label">張</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-3">
+                  <label for="" class="">總價：</label>
+                </div>
+                <div class="col-md-3">
+                  <label for="" class="control-label ticketTotal">總價</label>
+                </div>
+                <div class="col-md-1">
+                  <label for="" class="control-label ">元</label>
+                </div>
+              </div>
+
+
+              <div class="row mt-2">
+                <div class="col-md-4 offset-md-4">
+                  <div id="resultDescriptionDiv"></div>
+                  <div id="resultDiv"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <div class="row" style="height: 50px;">
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- footer -->
+ <div class="footer">
+    <div class="container">
+      <div class="row row-line"></div>
+      <div class="row d-flex">
+        <div class="col-1">
+          <img src="../img/profile.png" alt="" class="profile_picture">
+        </div>
+        <div class="col-3 profile-content">
+          <p style="margin: 0;">Yang Yu-Lou</p>
+          <p style="margin: 0;">yulou3988@gmail.com</p>
+        </div>
+        <div class="col-1">
+          <img src="../img/profile(1).png" alt="" class="profile_picture">
+        </div>
+        <div class="col-3 profile-content">
+          <p style="margin: 0;">Huang Shih-Syun</p>
+          <p style="margin: 0;">tonyfdsa@gmail.com</p>
+        </div>
+        <div class="col-1">
+          <img src="../img/profile(2).png" alt="" class="profile_picture">
+        </div>
+        <div class="col-3 profile-content">
+          <p style="margin: 0;">Li Wei-Huan</p>
+          <p style="margin: 0;">r98121010@gmail.com</p>
+        </div>
+      </div>
+      <div class="row row-line"></div>
+      <div class="row d-flex">
+        <div class="col-1">
+          <img src="../img/profile(3).png" alt="" class="profile_picture">
+        </div>
+        <div class="col-3 profile-content">
+          <p style="margin: 0;">Chang wei-chung</p>
+          <p style="margin: 0;">enjoylife0711@gmail.com</p>
+        </div>
+        <div class="col-1">
+          <img src="../img/profile(4).png" alt="" class="profile_picture">
+        </div>
+        <div class="col-3 profile-content">
+          <p style="margin: 0;">Ko Jean-You</p>
+          <p style="margin: 0;">f2675805@gmail.com</p>
+        </div>
+        <div class="col-1">
+          <img src="../img/profile(5).png" alt="" class="profile_picture">
+        </div>
+        <div class="col-3 profile-content">
+          <p style="margin: 0;">Wang Sin-Hang</p>
+          <p style="margin: 0;">mo85240@gmail.com</p>
+        </div>
+      </div>
+      <div class="row row-line"></div>
+      <div class="row copyright justify-content-center">
+        <a href="https://github.com/tonyfdsa/TGA103EagleMuseum">2022 Eagle Museum Co.
+          保留所有權利。</a>
+      </div>
+      <div class="row row-line"></div>
+    </div>
+  </div>
+
+  <!-- jQuery 位置 -->
+  <script src="../vendor/css/"></script>
+  <!-- 模板js匯入 位置 -->
+  <!-- <script src="./workJS/Template .js"></script> -->
+
+  <script type="text/javascript" src="../JS/exhibitionTicket.js"></script>
+  <script type="text/javascript" src="../vendor/js/jquery3.6.0.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+.input-file-button{
+    border: 1px black solid;
+    background-color: gray;
+    color: white;
+    padding: 0px 5px;
+    cursor: pointer;
+    position: relative;
+    left:247px;
+  }
+
+  .input-file-button:hover{
+    background-color: rgba(106, 241, 9, 0.482);
+    color: rgb(0, 0, 0);
+  }
+
+  .submit{
+    border: 1px black solid;
+    background-color: gray;
+    color: white;
+    padding: 0px 5px;
+    cursor: pointer;
+  }
+
+  .submit:hover{
+    background-color: rgba(106, 241, 9, 0.482);
+    color: rgb(0, 0, 0);
+  }
+
+  .clear{
+    border: 1px black solid;
+    background-color: gray;
+    color: white;
+    padding: 0px 5px;
+    cursor: pointer;
+    position: relative;
+    left:243px;
+  }
+
+  .clear:hover{
+    background-color: rgba(106, 241, 9, 0.482);
+    color: rgb(0, 0, 0);
+  }
+
+  .preview{
+    height: 250px;
+    max-width: 100%;
+    background-color: rgba(128, 128, 128, 0.268);
+   margin-left: 5px;
+  }
+
+  .preview img.preview_img{
+    width: 100%;
+    height: 100%;
+  }
+
+  /*  */
+  .uploadImage {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: 90px;
+    height: 90px;
+    background: url("../點選上傳.png") no-repeat;
+    background-size: cover;
+    text-align: center;
+    cursor: pointer;
+  }
+  .uploadImage p {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    font-size: 14px;
+    color: #999999;
+  }
+  .uploadImage input#file {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .smallpreview {
+    position: relative;
+    display:inline-block;
+    vertical-align: top;
+    border: solid 1px rgba(0, 0, 0, 0.138);
+    margin: 0px;
+    width: 96px;
+    height: 90px;
+    background: #e1e6ed;
+    
+  }
+  .smallpreview img {
+    /* position: relative; */
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  .smallpreview img[src=""] {
+    opacity: 0;
+    filter: Alpha(0); /* 相容IE8-9 */
+  }
+  .smallpreview img:not([src]) {
+    opacity: 0;
+    filter: Alpha(0); /* 相容IE8-9 */
+  }

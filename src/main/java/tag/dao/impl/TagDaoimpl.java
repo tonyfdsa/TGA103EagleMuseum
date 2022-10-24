@@ -3,6 +3,8 @@ package tag.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.PersistenceContext;
+
 import org.hibernate.query.Query;
 
 import tag.dao.intf.TagDaointf;
@@ -22,6 +24,7 @@ public class TagDaoimpl implements TagDaointf {
 		tag.setTagID(id);
 		getSession().remove(tag);
 		return 1;
+		
 	}
 
 	@Override

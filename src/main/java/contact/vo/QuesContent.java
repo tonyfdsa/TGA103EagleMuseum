@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "questionContent")
@@ -21,6 +22,9 @@ public class QuesContent {
 	private Integer questionTypeID;
 	private String questionContent;
 	private String answerContent;
+	@Transient
+	private String questImgStr;
+	private byte[] questImg;
 	@Column(insertable = false)
 	private Boolean answered;
 	@Column(insertable = false)
@@ -118,6 +122,29 @@ public class QuesContent {
 
 	public void setAnswerTime(Date answerTime) {
 		this.answerTime = answerTime;
+	}
+
+
+
+	public byte[] getQuestImg() {
+		return questImg;
+	}
+
+
+
+	public void setQuestImg(byte[] questImg) {
+		this.questImg = questImg;
+	}
+
+
+	public String getQuestImgStr() {
+		return questImgStr;
+	}
+
+
+
+	public void setQuestImgStr(String questImgStr) {
+		this.questImgStr = questImgStr;
 	}
 
 	

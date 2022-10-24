@@ -32,7 +32,6 @@ public class FindOneNameServlet extends HttpServlet {
 		setHeaders(response);
 		
 		CollectionVO collectionSerchName = json2Pojo(request, CollectionVO.class);
-//		collectionSerchName = service.findName(collectionSerchName);      
         writePojo2Json(response, service.findName(collectionSerchName));
 	}
 	

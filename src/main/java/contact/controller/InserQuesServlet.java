@@ -20,7 +20,6 @@ import contact.common.QuesConfirmMail;
 import contact.common.Result;
 import contact.service.QuesContentService;
 import contact.service.QuesContentServiceImpl;
-import contact.vo.Member;
 import contact.vo.QuesContent;
 
 @WebServlet("/inserQuesServlet")
@@ -54,17 +53,20 @@ public class InserQuesServlet extends HttpServlet {
 
 		QuesContent vo = json2Vo(req, QuesContent.class);
 
-		// 假裝從session取得memberid（要跟servlet一致）
-//			final Integer memberId = 3;
-
 		String getQuesContent = vo.getQuestionContent();
 		if (StringUtils.isNotBlank(getQuesContent)) {
-			final boolean result = service.submitQuestion(vo);
-			if (result) {
+			Result result = service.submitQuestion(vo);
+			//寄出確認信
+			if (result != null) {
 				String memberEmail = service.confirmQues(vo.getMemberId()).getMemberEmail();
 				new QuesConfirmMail(memberEmail).quesConfirmMail();
 			}
+//			resp.getWriter().print(gson.toJson(true));
+//			System.out.println(gson.toJson(result));
+			resp.getWriter().print(gson.toJson(result));
+			
+			
+		
 		}
-		resp.getWriter().print(gson.toJson(true));
 	}
 }

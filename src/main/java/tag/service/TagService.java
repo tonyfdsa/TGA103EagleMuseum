@@ -10,5 +10,6 @@ public interface TagService  extends CoreService {
 	TagVO editTag(TagVO tag);
 	TagVO findById(TagVO tag);
 	TagVO findByName(TagVO tag);
+	TagVO deleteTag(TagVO tag);
 	public List<TagVO> getAll();
 }

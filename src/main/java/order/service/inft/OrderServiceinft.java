@@ -3,6 +3,7 @@ package order.service.inft;
 
 import java.util.List;
 
+import order.vo.OrderVO;
 import prod.common.Result;
 import prod.vo.CartVO;
 
@@ -14,7 +15,7 @@ public interface OrderServiceinft {
 	public Result updateStatus(Integer orderID, Integer status);
 	
 	//結帳
-	public Result insertOrder(Integer amountPrice, String deliveryAddress,List<CartVO> map);
+	public Result insertOrder(OrderVO VO,List<CartVO> map);
 	
 	//取得所有訂單資訊
 	public Result orderGetAll();

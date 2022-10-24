@@ -18,6 +18,9 @@ public interface MemberService {
 //	忘記密碼
 	Member forgetpass (Member member);
 	
+//	忘記密碼更新
+	Member updateForPass (Member member);
+	
 //  移除	(後台)
 	boolean removeMember(Integer memberId);
 	

@@ -2,7 +2,7 @@
  
 
  //進入頁面立刻取得Session購物資訊
- fetch('http://localhost:8080/TGA103eagleMuseum/CartGet')
+ fetch('/TGA103eagleMuseum/CartGet')
  .then(resp => resp.json())
  .then(Data => {
    console.log(Data)
@@ -63,7 +63,7 @@
 
     
     //更新session購物車數量
-    fetch('http://localhost:8080/TGA103eagleMuseum/CartUpdate', {
+    fetch('/TGA103eagleMuseum/CartUpdate', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -87,7 +87,7 @@
       let productID = $(this).attr("data-id");
 
       //傳去session刪除
-      fetch('http://localhost:8080/TGA103eagleMuseum/CartDel', {
+      fetch('/TGA103eagleMuseum/CartDel', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -112,7 +112,7 @@
       if($(".price").length === 0  ){
         alert("請新增商品至購物車")
       }else{
-        location.href = "../order/OrderCheckOut.html";
+        location.href = "../order/toBeFiltered/OrderCheckOut.html";        
       }
       
      })

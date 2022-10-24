@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import member.vo.Member;
 import order.common.json2VO;
 import order.service.impl.OrderServiceImpl;
 import order.vo.OrderVO;
@@ -39,10 +40,12 @@ public class OrderInsert extends HttpServlet{
 		HttpSession session = request.getSession();
 		HashMap<Integer,CartVO> map = (HashMap)session.getAttribute("cart");
 		List<CartVO> valueList = new ArrayList<CartVO>(map.values());
+		Member member = (Member)session.getAttribute("member");
+		VO.setMemberId(member.getMemberID());
+		response.getWriter().print(gson.toJson(service.insertOrder(VO, valueList)));
+
+
 		
-		
-		response.getWriter().print(gson.toJson(service.
-				insertOrder(VO.getOrderAmount(),VO.getDeliveryAddress() ,valueList)));	
 	}
 
 	@Override

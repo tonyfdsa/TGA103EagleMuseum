@@ -81,16 +81,18 @@ div.confirm {
 
 
 .table_tit {
-	white-space: nowrap; /*禁止td換行*/
-	overflow: hidden; /*隱藏X,Y滾動條*/
-	text-overflow: ellipsis; /*將顯示不完的以...顯示*/
+	white-space: nowrap;
+	/*禁止td換行*/
+	overflow: hidden;
+	/*隱藏X,Y滾動條*/
+	text-overflow: ellipsis;
+	/*將顯示不完的以...顯示*/
 }
 
 .inputQues {
 	display: none;
 	color: red;
 	font-size: 18px;
-	/* margin-left: 4%; */
 }
 
 
@@ -103,4 +105,22 @@ div.confirm {
 	resize: none;
 	width: 450px;
 	height: 300px;
+}
+
+.input-file-button {
+	border: 1px black solid;
+	background-color: gray;
+	color: white;
+	padding: 0px 5px;
+	cursor: pointer;
+	position: relative;
+}
+
+.clear {
+	border: 1px black solid;
+	background-color: gray;
+	color: white;
+	padding: 0px 5px;
+	cursor: pointer;
+	position: relative;
 }

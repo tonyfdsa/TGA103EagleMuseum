@@ -12,7 +12,7 @@
       let orderStatus = $(".orderTag").val();
       // console.log(orderStatus)
       //更新狀態
-      fetch("http://localhost:8080/TGA103eagleMuseum/OrderStatUpdate",{
+      fetch("/TGA103eagleMuseum/OrderStatUpdate",{
         
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -40,7 +40,7 @@
 
 
     // console.log(orderStatus)
-      fetch("http://localhost:8080/TGA103eagleMuseum/OrderDetailGetByID",{
+      fetch("/TGA103eagleMuseum/OrderDetailGetByID",{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -59,8 +59,8 @@
               <div class="col-1 " style="text-align:center">${i+1}</div>
               <div class="col-2" style="text-align:center">${orderID}</div>
               <div class="col-2" style="text-align:center">${Data.result[i].productID}</div>
-              <div class="col-2" style="text-align:center" >${Data.result[i].prodQuantity}</div>
-              <div class="col-2"  style="text-align:center"></div>
+              <div class="col-2" style="text-align:center" >${Data.result[i].prodName}</div>
+              <div class="col-2"  style="text-align:center">${Data.result[i].prodQuantity}</div>
               <div class="col-2"  style="text-align:center"> </div>
               <div class="col-1"></div>
             </div>
@@ -72,7 +72,7 @@
       })
 
             //取得出貨狀態
-            fetch('http://localhost:8080/TGA103eagleMuseum/OrderTagGetAll')
+            fetch('/TGA103eagleMuseum/OrderTagGetAll')
             .then(resp => resp.json())
             .then(Data => {
               console.log(Data);

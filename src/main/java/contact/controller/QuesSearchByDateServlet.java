@@ -53,15 +53,11 @@ public class QuesSearchByDateServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		QuesContent vo = json2Vo(req, QuesContent.class);
-		System.out.println(vo);
 		
 		Date quesTime = vo.getQuesTime();
 		Date answerTime = vo.getAnswerTime();	
-		System.out.println(quesTime);
-		System.out.println(answerTime);
 		
 		final Result list = service.getByDate(quesTime, answerTime);
-		resp.getWriter().print(gson.toJson(list));
-
+		resp.getWriter().print(gson.toJson(list));			
 	}
 }//class

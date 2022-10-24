@@ -1,8 +1,9 @@
 (() => {
     
    let memberEmail = sessionStorage.getItem("Email")
+   console.log(memberEmail);
   // 一進來get member資料
-  fetch("http://localhost:8080/TGA103eagleMuseum/member/selectSelf",{
+  fetch("/TGA103eagleMuseum/member/selectSelf",{
     method: 'POST',
 	headers: { 'Content-Type': 'application/json' },
 	body: JSON.stringify({
@@ -13,16 +14,15 @@
     .then(resp => resp.json())
     .then(member => {
         console.log(member)
-      for (i = 0; i < member["length"]; i++) {
         let memberGender = "";
-        if (member[i].memberGender == "0") {
+        if (member.memberGender == "1") {
             memberGender = "男";
-        } else if (member[i].memberGender == "1") {
+        } else if (member.memberGender == "2") {
             memberGender = "女";
-        }else if (member[i].memberGender == "2") {
-            memberGender = "女";
-        }else if (member[i].memberGender == "3") {
-            memberGender = "女";
+        }else if (member.memberGender == "3") {
+            memberGender = "其他";
+        }else if (member.memberGender == "4") {
+            memberGender = "不透露";
         }
         let text = `
 
@@ -30,49 +30,42 @@
           <td>姓名 :</td>
         </tr>
         <tr>
-          <td${member[i].memberName}</td>
+          <td>${member.memberName}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td>帳號 :</td>
         </tr>
         <tr>
-          <td>${member[i].memberEmail}</td>
-        </tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr>
-          <td>密碼 :</td>
-        </tr>
-        <tr>
-          <td>${member[i].memberPasssword}</td>
+          <td>${member.memberEmail}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td>驗證問題 :</td>
         </tr>
         <tr>
-          <td>${member[i].memberQA}</td>
+          <td>${member.memberQA}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td>驗證回答 :</td>
         </tr>
         <tr>
-          <td>${member[i].memberAns}</td>
+          <td>${member.memberAns}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td>地址 :</td>
         </tr>
         <tr>
-          <td>${member[i].memberAddress}</td>
+          <td>${member.memberAddress}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td>手機 :</td>
         </tr>
         <tr>
-          <td>o${member[i].memberPhone}</td>
+          <td>0${member.memberPhone}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
@@ -86,14 +79,13 @@
           <td>生日 :</td>
         </tr>
         <tr>
-          <td>${member[i].memberBirthday}</td>
+          <td>${member.memberBirthday}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         `;
-
+        console.log(text);
         $(".gino").append(text);
         console.log(11);
-      }
 
     });
 })();

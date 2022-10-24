@@ -26,15 +26,7 @@ public class MemberLoginServlet extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 		
 		Member member = json2Pojo(req, Member.class);
-//		String password = member.getMemberPassword();
-//		System.out.println(password);
-		if (member == null) {
-			member = new Member();
-			member.setMessage("無會員資訊");
-			member.setSuccessful(false);
-			writePojo2Json(resp, member);
-			return;
-		}
+	
 		
 		member = SERVICE.loginMember(member);
 		if (member.isSuccessful()) {
@@ -44,6 +36,9 @@ public class MemberLoginServlet extends HttpServlet {
 			final HttpSession session = req.getSession();
 			session.setAttribute("loggedin", true);
 			session.setAttribute("member", member);
+			
+			resp.setHeader("url", (String)session.getAttribute("url"));
+
 		}
 		writePojo2Json(resp, member);
 	}

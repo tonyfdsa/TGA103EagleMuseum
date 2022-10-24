@@ -94,7 +94,7 @@
             <tr>
               <td>
                 <div class="input-group">
-                <input type="text" class="form-control" placeholder="請輸入E-mail" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input type="text" class="form-control" id="username" placeholder="請輸入E-mail" aria-label="Recipient's username" aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2">發送驗證碼</button>
                 </div>
               </td>
@@ -104,45 +104,46 @@
               <td>*驗證問題 :</td>
             </tr>
             <tr>
-              <td><input type="text" class="form-control" placeholder="請輸入驗證碼" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
+              <td><input type="text" class="form-control" id="memQA" placeholder="請輸入驗證碼" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
               <td>*驗證回答 :</td>
             </tr>
             <tr>
-              <td><input type="text" class="form-control" placeholder="請輸入驗證碼" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
+              <td><input type="text" class="form-control" id="memAns" placeholder="請輸入驗證碼" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
               <td>*E-mail驗證碼輸入 :</td>
             </tr>
             <tr>
-              <td><input type="text" class="form-control" placeholder="請輸入驗證碼" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
+              <td><input type="text" class="form-control" id="captcha" placeholder="請輸入驗證碼" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
               <td>*密碼 :</td>
             </tr>
             <tr>
-              <td><input type="text" class="form-control" placeholder="請輸入新密碼" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
+              <td><input type="password" class="form-control" id="password" placeholder="請輸入新密碼" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td><font color="red">請填寫5-20字元英文或數字, 但不可為空白鍵,「'」,「"」</font></td>
-            </tr>
+            </tr> -->
             <tr><td>&nbsp;</td></tr>
             <tr>
               <td>*請再輸入一次您的密碼 :</td>
             </tr>
             <tr>
-              <td><input type="text" class="form-control" placeholder="請輸入新密碼" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
+              <td><input type="password" class="form-control" id="confirm_password" placeholder="請輸入新密碼" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
           </table>
           <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-warning" type="button" id="into">登入</button>
+            <button class="btn btn-warning" type="button" id="into">修改密碼</button>
           </div>
           <div>&nbsp;</div>
+          <div id="errMsg" class="error" style="color: red;"></div>
         </div>
       </div>
     </div>
@@ -155,8 +156,8 @@
   <!-- jQuery 位置 -->
   <!-- <script src="../classJquery/practice/vendors/jquery/jquery3.6.0.js"></script> -->
   <!-- 模板js匯入 位置 -->
-  <script src="./workJS/template.js"></script>
-  <script src="./workJs/memberJoin1.js"></script>
+  <script src="./workJS/templatetest.js"></script>
+  <script src="./workJs/memberforget.js"></script>
 
 </body>
 
