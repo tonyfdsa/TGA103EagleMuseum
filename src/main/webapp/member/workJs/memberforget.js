@@ -27,6 +27,9 @@
 			});
 	});
 
+	
+
+
     // 驗證
     const password = document.querySelector('#password');
 	const confirm_password = document.querySelector('#confirm_password');
