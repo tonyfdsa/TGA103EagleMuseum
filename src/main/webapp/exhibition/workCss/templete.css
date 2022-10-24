@@ -1,6 +1,6 @@
-*{
-  padding: 0 ;
-  border: 0 ;
+* {
+  padding: 0;
+  border: 0;
   box-sizing: border-box;
   /* overflow-x: hidden; */
 }
@@ -10,24 +10,26 @@ html {
   font-size: 16px;
   -webkit-tap-highlight-color: transparent;
 }
+
 .wrap {
-  position : fixed;
+  position: fixed;
   z-index: 3;
   width: 100%;
   background-color: #fffbdd;
-    /* Ericæ–°å¢ž */
-    box-shadow: 1px 0.1px black;
+  /* Eric·s¼W */
+  box-shadow: 1px 0.1px black;
 }
 
 .header {
   display: flex;
-  position: fixed; 
+  position: fixed;
   box-sizing: border-box;
   height: 80px;
   z-index: 2;
   padding: 0 !important;
   border: 0 !important;
 }
+
 body {
   margin: 0;
 }
@@ -53,7 +55,7 @@ body {
   position: relative;
   /* top: 15px; */
   font-size: 20px;
-  
+
 }
 
 .select {
@@ -61,12 +63,12 @@ body {
   background-color: transparent;
 }
 
-.menu :hover{
+.menu :hover {
   color: #d16647;
   /* border-bottom: 8px solid #d16647; */
   /* height: 40px; */
   padding-bottom: 0px;
-  
+
   margin: 0;
 }
 
@@ -79,8 +81,29 @@ ul {
   justify-content: space-between;
   background-color: #2b5275;
   width: 100%;
-  height: 160px;
+  height: fit-content;
   clear: both;
+  position: relative;
+}
+
+.row-line {
+  height: 10px;
+}
+
+.profile_picture {
+  background-size: 60px auto;
+  height: 60px;
+  width: 60px;
+  border-radius: 50px;
+}
+
+.profile-content {
+  color: #bfbfbf;
+}
+
+.copyright {
+  font-size: smaller;
+  text-align: center;
 }
 
 .content {
@@ -89,8 +112,8 @@ ul {
   border-spacing: 0;
 }
 
-/* banneræ¨£å¼ */
-.upperColumn{
+/* banner¼Ë¦¡ */
+.upperColumn {
   background-image: url(../img/header.jpg);
   position: relative;
   top: 61px;
@@ -106,11 +129,11 @@ ul {
   background-color: transparent;
   border: 0px;
   font-size: 24px;
-  
+
   position: relative;
   top: 100px;
   margin-left: 5%;
-  
+
 }
 
 .exhibitionContent {
@@ -133,18 +156,22 @@ ul {
 .item h3 {
   margin: 0;
 }
+
 .item ul {
   padding-left: 10px;
   margin-bottom: 5px;
 }
+
 .item li {
   margin-top: 5px;
 }
+
 .itemPhoto {
   /* background-color: #fffbdd; */
   height: 150px;
   border-radius: 10px;
 }
+
 /*  */
 div img {
   width: 100%;
@@ -153,35 +180,37 @@ div img {
 }
 
 /* upperColumn CSS */
-.headbtn{
+.headbtn {
   border: 0px;
   position: relative;
   /* top: 100px; */
   font-size: 16px;
   background-color: rgba(201, 198, 198, 0.8);
-  color:  black;
- 
+  color: black;
+
   cursor: pointer;
 }
+
 .headbtn:hover {
   color: white;
   background: #d16647;
 }
 
-.main{
+.main {
   position: relative;
   top: 60px;
   background-color: #fffbdd;
 }
 
-.footer{
+.footer {
   position: relative;
   top: 60px;
 }
 
-/* 2022.08.23 æ–°å¢ž */
+/* 2022.08.23 ·s¼W */
 
-ul { /* å–æ¶ˆulé è¨­çš„å…§ç¸®åŠæ¨£å¼ */
+ul {
+  /* ¨ú®øul¹w³]ªº¤ºÁY¤Î¼Ë¦¡ */
   margin: 0;
   padding: 0;
   list-style: none;
@@ -198,12 +227,13 @@ ul.drop-down-menu li {
   white-space: nowrap;
 }
 
-ul.drop-down-menu > li:last-child {
+ul.drop-down-menu>li:last-child {
   border-right: none;
 }
 
-ul.drop-down-menu > li {
-  float: left; /* åªæœ‰ç¬¬ä¸€å±¤æ˜¯é å·¦å°é½Š*/
+ul.drop-down-menu>li {
+  float: left;
+  /* ¥u¦³²Ä¤@¼h¬O¾a¥ª¹ï»ô*/
 }
 
 ul.drop-down-menu a {
@@ -219,40 +249,45 @@ ul.drop-down-menu a {
 
 
 ul.drop-down-menu ul {
-  border: none ;
+  border: none;
   border-color: none;
   position: absolute;
   z-index: 99;
   left: -30px;
   top: 100%;
- min-width: 120px;
- text-align: center;
- /* border-radius: 50px; */
+  min-width: 120px;
+  text-align: center;
+  /* border-radius: 50px; */
 }
 
 
-ul.drop-down-menu ul { /*éš±è—æ¬¡é¸å–®*/
+ul.drop-down-menu ul {
+  /*ÁôÂÃ¦¸¿ï³æ*/
   display: none;
 }
 
-ul.drop-down-menu li:hover > ul { /* æ»‘é¼ æ»‘å…¥å±•é–‹æ¬¡é¸å–®*/
-  display: block;} 
-
-.dropMeau{
-   background-color: white;
+ul.drop-down-menu li:hover>ul {
+  /* ·Æ¹«·Æ¤J®i¶}¦¸¿ï³æ*/
+  display: block;
 }
 
-.dropMeau:hover{
-  
-   background-color: #d16647; 
+.dropMeau {
+  background-color: white;
 }
-.dropMeau a:hover{
-   color: white;
+
+.dropMeau:hover {
+
+  background-color: #d16647;
 }
-.topTag:hover{
-  
-   color: #d16647;
-   /* bottom: 1px; */
-   padding-bottom: 6px;
-   border-bottom: 6px solid #d16647;
+
+.dropMeau a:hover {
+  color: white;
+}
+
+.topTag:hover {
+
+  color: #d16647;
+  /* bottom: 1px; */
+  padding-bottom: 6px;
+  border-bottom: 6px solid #d16647;
 }
