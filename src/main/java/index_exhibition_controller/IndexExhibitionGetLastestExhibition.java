@@ -59,10 +59,24 @@ public class IndexExhibitionGetLastestExhibition extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 		setHeaders(resp);
-		IndexExhibitionDto dto = gson.fromJson(req.getReader(), IndexExhibitionDto.class);
+		String id = req.getParameter("exhibitionID");
+		String startDate = req.getParameter("exhibitionStartDate")  + " 00:00:00";
+		String endDate = req.getParameter("exhibitionEndDate")  + " 00:00:00";
+		String base64 = req.getParameter("exhibitionImageBase64");
+		String name = req.getParameter("exhibitionName");
+		String artical = req.getParameter("exhibitionArticle");
+		IndexExhibitionDto dto = new IndexExhibitionDto();
+		dto.setExhibitionID(Long.valueOf(id));
+		dto.setExhibitionStartDate(startDate);
+		dto.setExhibitionEndDate(endDate);
+		dto.setExhibitionImageBase64(base64);
+		dto.setExhibitionName(name);
+		dto.setExhibitionArticle(artical);
+//		IndexExhibitionDto dto = gson.fromJson(req.getReader(), IndexExhibitionDto.class);
 //        IndexExhibitionDto dto = json2Pojo(req, IndexExhibitionDto.class);
         System.out.println(dto);
-        Long id = service.insertExhibition(dto);
+//        service.insertExhibition(dto);
+        service.updateExhibition(dto);
         writePojo2Json(resp, id);
 	}
 
