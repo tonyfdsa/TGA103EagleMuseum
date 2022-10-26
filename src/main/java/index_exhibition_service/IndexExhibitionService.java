@@ -1,5 +1,7 @@
 package index_exhibition_service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
 import index_exhibition.dao.IndexExhibitionDao;
@@ -20,8 +22,8 @@ public class IndexExhibitionService {
 		dto.setExhibitionID(vo.getExhibitionID());
 		dto.setExhibitionName(vo.getExhibitionName());
 		dto.setExhibitionArticle(vo.getExhibitionArticle());
-		dto.setExhibitionStartDate(vo.getExhibitionStartDate());
-		dto.setExhibitionEndDate(vo.getExhibitionEndDate());
+		dto.setExhibitionStartDate(vo.getExhibitionStartDate().toString());
+		dto.setExhibitionEndDate(vo.getExhibitionEndDate().toString());
 		dto.setExhibitionImageBase64(getBase64(vo.getExhibitionImage()));
 		
 		return dto;
@@ -37,16 +39,40 @@ public class IndexExhibitionService {
 		}
 	}
 	
-	public void updateExhibition(IndexExhibitionVo update) {
-		dao.updateExhibition(update);
+	public void updateExhibition(IndexExhibitionDto update) {
+
+		IndexExhibitionVo vo = new IndexExhibitionVo();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		
+		vo.setExhibitionID(update.getExhibitionID());
+		vo.setExhibitionName(update.getExhibitionName());
+		vo.setExhibitionArticle(update.getExhibitionArticle());
+		vo.setExhibitionStartDate(LocalDateTime.parse(update.getExhibitionStartDate(), formatter));
+		vo.setExhibitionEndDate(LocalDateTime.parse(update.getExhibitionEndDate(), formatter));
+		vo.setExhibitionImage(toImage(update.getExhibitionImageBase64()));
+
+		dao.updateExhibition(vo);
 	}
 	
-	public Long insertExhibition(IndexExhibitionVo insert) {
-		return dao.insertExhibition(insert);
+	public Long insertExhibition(IndexExhibitionDto insert) {
+		IndexExhibitionVo vo = new IndexExhibitionVo();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		
+		vo.setExhibitionID(insert.getExhibitionID());
+		vo.setExhibitionName(insert.getExhibitionName());
+		vo.setExhibitionArticle(insert.getExhibitionArticle());
+		vo.setExhibitionStartDate(LocalDateTime.parse(insert.getExhibitionStartDate(), formatter));
+		vo.setExhibitionEndDate(LocalDateTime.parse(insert.getExhibitionEndDate(), formatter));
+		vo.setExhibitionImage(toImage(insert.getExhibitionImageBase64()));
+		return dao.insertExhibition(vo);
 	}
 	
 	private String getBase64(byte[] img) {
 		return Global.BASE64 + Base64.getEncoder().encodeToString(img);
+	}
+	
+	private byte[] toImage(String base64) {
+		return Base64.getDecoder().decode(base64);
 	}
 	
 	

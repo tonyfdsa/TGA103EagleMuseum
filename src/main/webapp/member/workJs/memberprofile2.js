@@ -21,14 +21,15 @@
 	  document.querySelector("#memAns").value = member.memberAns;
 	  document.querySelector("#address").value = member.memberAddress;
       document.querySelector('#phone').value = member.memberPhone;
+
       if (member.memberGender == "1") {
-      	document.querySelector('#inlineRadio').checked = "男";
+      	document.getElementById('#inlineRadio1').checked =  true;
       } else if (member.memGender == "2") {
-      	document.querySelector('#inlineRadio').checked = "女";
+      	document.getElementById('#inlineRadio2').checked =  true;
       } else if (member.memGender == "3") {
-      	document.querySelector('#inlineRadio').checked = "其他";
+      	document.getElementById('#inlineRadio3').checked =  true;
       } else if (member.memGender == "4") {
-      	document.querySelector('#inlineRadio').checked = "不透露";
+      	document.getElementById('#inlineRadio4').checked =  true;
       }
 	  console.log(member.memberGender);
       document.querySelector("#birth").value = member.memberBirthday;

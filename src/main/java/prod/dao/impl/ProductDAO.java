@@ -248,6 +248,7 @@ public class ProductDAO implements ProductDAO_interface {
 //		}
 	}
 
+	//圖片商品上傳
 	@Override
 	public Integer insertProdImg(byte[] img, Integer id) throws Exception {
 		List<ProdImgVO> list = new ArrayList<ProdImgVO>();

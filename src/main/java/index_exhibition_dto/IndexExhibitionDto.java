@@ -6,8 +6,8 @@ public class IndexExhibitionDto {
 	private Long exhibitionID;
 	private String exhibitionName;
 	private String exhibitionArticle;
-	private LocalDateTime exhibitionStartDate;
-	private LocalDateTime exhibitionEndDate;
+	private String exhibitionStartDate;
+	private String exhibitionEndDate;
 	private String exhibitionImageBase64;
 	
 	@Override
@@ -35,16 +35,16 @@ public class IndexExhibitionDto {
 	public void setExhibitionArticle(String exhibitionArticle) {
 		this.exhibitionArticle = exhibitionArticle;
 	}
-	public LocalDateTime getExhibitionStartDate() {
+	public String getExhibitionStartDate() {
 		return exhibitionStartDate;
 	}
-	public void setExhibitionStartDate(LocalDateTime exhibitionStartDate) {
+	public void setExhibitionStartDate(String exhibitionStartDate) {
 		this.exhibitionStartDate = exhibitionStartDate;
 	}
-	public LocalDateTime getExhibitionEndDate() {
+	public String getExhibitionEndDate() {
 		return exhibitionEndDate;
 	}
-	public void setExhibitionEndDate(LocalDateTime exhibitionEndDate) {
+	public void setExhibitionEndDate(String exhibitionEndDate) {
 		this.exhibitionEndDate = exhibitionEndDate;
 	}
 	public String getExhibitionImageBase64() {
